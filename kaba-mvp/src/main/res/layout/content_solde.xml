@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="tg.experta.kaba.activities.UserAcc.SoldeActivity"
+    tools:showIn="@layout/activity_solde">
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="@dimen/solde_top_height">
+
+            <TextView
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary_yellow"
+                android:text="XOF 19,005.00"
+                android:textAlignment="center"
+                android:layout_width="200dp"
+                android:layout_height="70dp"
+                android:maxLines="1"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="6sp"
+                app:autoSizeMaxTextSize="50sp"
+                app:autoSizeStepGranularity="1sp"
+                />
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:background="@drawable/solde_box_yellow_bg"
+                android:orientation="vertical"
+                android:layout_width="300dp"
+                android:layout_height="130dp"
+                android:padding="@dimen/activity_horizontal_margin"
+                android:layout_gravity="center_horizontal">
+
+                <android.support.v7.widget.LinearLayoutCompat
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:layout_alignParentLeft="true"
+                        android:text="Creédit Kaba"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:maxLines="1"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:layout_gravity="left"
+                        android:gravity="center|left"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:layout_alignParentRight="true"
+                        android:text="XOF 9.000"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:maxLines="1"
+                        android:textStyle="bold"
+                        app:autoSizeTextType="uniform"
+                        app:autoSizeMinTextSize="6sp"
+                        app:autoSizeMaxTextSize="50sp"
+                        app:autoSizeStepGranularity="1sp"
+                        android:layout_gravity="right"
+                        android:gravity="center|right"/>
+
+                </android.support.v7.widget.LinearLayoutCompat>
+
+                <android.support.v7.widget.LinearLayoutCompat
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:layout_alignParentLeft="true"
+                        android:text="Mode de Paiement"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:maxLines="1"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:layout_gravity="left"
+                        android:gravity="center|left"/>
+
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:layout_alignParentRight="true"
+                        android:text="VISA"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:maxLines="1"
+                        android:textStyle="bold"
+                        android:textSize="34sp"
+                        android:layout_gravity="right"
+                        android:gravity="center|right"/>
+
+
+                </android.support.v7.widget.LinearLayoutCompat>
+
+
+            </android.support.v7.widget.LinearLayoutCompat>
+
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+        <!-- bottom tabs -->
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/solde_fab_height">
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:foregroundGravity="center"
+                android:padding="@dimen/activity_horizontal_margin_half">
+                <android.support.design.widget.FloatingActionButton
+                    android:layout_width="100dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_user_account_solde_historic"
+                    android:layout_height="100dp"
+                    android:layout_margin="@dimen/activity_horizontal_margin"/>
+
+                <TextView
+                    android:textColor="@color/colorPrimary_yellow"
+                    android:text="@string/solde_payment_historic"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="30dp" />
+            </android.support.v7.widget.LinearLayoutCompat>
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:foregroundGravity="center"
+                android:padding="@dimen/activity_horizontal_margin_half">
+                <android.support.design.widget.FloatingActionButton
+                    android:layout_width="100dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_user_account_solde_recharge"
+                    android:layout_height="100dp"
+                    android:layout_margin="@dimen/activity_horizontal_margin"/>
+
+                <TextView
+                    android:textColor="@color/colorPrimary_yellow"
+                    android:text="@string/solde_recharge"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="30dp" />
+            </android.support.v7.widget.LinearLayoutCompat>
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:foregroundGravity="center"
+                android:padding="@dimen/activity_horizontal_margin_half">
+                <android.support.design.widget.FloatingActionButton
+                    android:layout_width="100dp"
+                    app:srcCompat="@drawable/ic_user_account_solde_transfert"
+                    android:layout_weight="1"
+                    android:layout_height="100dp"
+                    android:layout_margin="@dimen/activity_horizontal_margin"/>
+
+                <TextView
+                    android:textColor="@color/colorPrimary_yellow"
+                    android:text="@string/solde_transfert"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="30dp" />
+            </android.support.v7.widget.LinearLayoutCompat>
+
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+</android.support.v4.widget.NestedScrollView>

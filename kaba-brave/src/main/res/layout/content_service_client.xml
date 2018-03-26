@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="tg.experta.kaba.activities.UserAcc.ServiceClientActivity"
+    tools:showIn="@layout/activity_service_client">
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize" />
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:background="@drawable/ic_myaccount_client_service"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal|center_vertical">
+
+        <!--    <TextView
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:text="@string/call_customers"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:textAlignment="center"
+                android:maxLines="4"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="6sp"
+                app:autoSizeMaxTextSize="18sp"
+                app:autoSizeStepGranularity="1sp"
+                />-->
+            <TextView
+                android:maxLines="1"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="6sp"
+                app:autoSizeMaxTextSize="18sp"
+                app:autoSizeStepGranularity="1sp"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:text="@string/sav_call"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:maxLines="1"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="6sp"
+                app:autoSizeMaxTextSize="18sp"
+                app:autoSizeStepGranularity="1sp"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:text="@string/sav_customer"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:maxLines="1"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="6sp"
+                app:autoSizeMaxTextSize="18sp"
+                app:autoSizeStepGranularity="1sp"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:text="@string/sav_service"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content" />
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorPrimary"
+            android:layout_margin="@dimen/activity_horizontal_margin_4_3"
+            />
+
+        <TextView
+            android:gravity="center_horizontal"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:textSize="@dimen/actionbar_title_text_size"
+            android:text="OR ... LEAVE A SUGGESTION"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_vertical|left"
+            style="@style/TextStyle.LoginField"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:hint="@string/sav_name"
+            android:drawablePadding="15dp"
+            />
+
+        <EditText
+            android:layout_gravity="center_horizontal"
+            android:gravity="top|left"
+            style="@style/TextStyle.LoginField"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:lines="6"
+            android:hint="@string/sav_type_ur_message"
+            android:drawablePadding="15dp"
+            />
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/confirm"
+            android:layout_width="100dp"
+            android:background="#f8bf00"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize" />
+
+    </android.support.v7.widget.LinearLayoutCompat>
+</android.support.v4.widget.NestedScrollView>

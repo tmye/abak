@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ads_item_height">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:background="@drawable/cover_pub_01"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/cover_pub_02"
+                android:layout_height="match_parent" />
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rec_ads_lvl_1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ad_4_height"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rec_ads_lvl_2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ad_4_height"
+            android:layout_marginTop="1dp"/>
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+    <TextView
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:padding="@dimen/activity_horizontal_margin_half"
+        android:background="@color/selected_yellow"
+        android:text="TOGOTELECOM"
+        android:textStyle="bold"
+        android:height="40dp"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

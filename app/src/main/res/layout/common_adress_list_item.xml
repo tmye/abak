@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/activity_horizontal_margin"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_adress_image_width">
+        <ImageView
+            android:scaleType="centerCrop"
+            android:id="@+id/iv_head"
+            android:layout_width="@dimen/common_adress_image_width"
+            android:layout_height="@dimen/common_adress_image_width"
+            android:src="@drawable/frandroid"
+            android:background="@color/white"/>
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:id="@+id/lny_right_button"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical"
+            android:layout_width="48dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_edit"
+                android:background="@color/selected_yellow"
+                android:padding="@dimen/activity_horizontal_margin_half"
+                app:srcCompat="@drawable/myaccount_address_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:id="@+id/iv_delete"
+                android:background="@color/selected_yellow"
+                android:padding="@dimen/activity_horizontal_margin_half"
+                app:srcCompat="@drawable/myaccount_address_delete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_toLeftOf="@id/lny_right_button"
+            android:layout_toRightOf="@id/iv_head"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/light_gray"
+            android:padding="@dimen/activity_horizontal_margin_half">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:textAllCaps="true"
+                android:text="@string/home"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textColor="@color/selected_yellow"
+                android:maxLines="1"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="6sp"
+                app:autoSizeMaxTextSize="18sp"
+                app:autoSizeStepGranularity="1sp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_adress_title_height" />
+
+            <TextView
+                android:id="@+id/tv_adress_details"
+                android:text="@string/details_adress_sample"
+                android:fontFamily="sans-serif"
+                android:gravity="left|center_vertical"
+                android:textColor="@color/colorPrimary"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="6sp"
+                app:autoSizeMaxTextSize="18sp"
+                app:autoSizeStepGranularity="1sp"
+                android:layout_width="match_parent"
+                android:layout_weight="3"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_country_city"
+                android:text="@string/details_adress_country"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/colorPrimary"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="6sp"
+                app:autoSizeMaxTextSize="18sp"
+                android:gravity="left|center"
+                android:maxLines="2"
+                app:autoSizeStepGranularity="1sp"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+        </android.support.v7.widget.LinearLayoutCompat>
+    </RelativeLayout>
+</android.support.v7.widget.LinearLayoutCompat>

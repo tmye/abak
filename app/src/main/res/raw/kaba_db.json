@@ -1,0 +1,150 @@
+{
+  "error": 0,
+  "message" : "",
+  "data" :
+  {
+    "daily_restaurants": [
+      1,1,2,1,1,2
+    ],
+    "restaurants" : [
+      {
+        "_id": 1,
+        "restaurant_unique_id": "mami2017",
+        "restaurant_logo": "/sample/resto_icon/chicken_fork.png",
+        "restaurant_theme_image": "",
+        "restaurant_name": "Mami",
+        "restaurant_description": "Le Paradis du Watchi",
+        "restaurant_contact_id": 1
+      }
+    ],
+    "sub_menus": [
+      {
+        "_id": 1,
+        "restaurant_id": 1,
+        "title": "RIZ"
+      },
+      {
+        "_id": 2,
+        "restaurant_id": 1,
+        "title": "VIANDE"
+      },
+      {
+        "_id": 3,
+        "restaurant_id": 1,
+        "title": "POISSON"
+      }
+    ,
+      {
+        "_id": 4,
+        "restaurant_id": 1,
+        "title": "BOISSONS"
+      }
+    ,
+      {
+        "_id": 5,
+        "restaurant_id": 1,
+        "title": "GARI"
+      }
+    ] ,
+    "foods": [
+      {
+        "_id": 1,
+        "title": "ayimolou",
+        "price": "300",
+        "food_pic": "/sample/food_icon/burger.jpg",
+        "details": "",
+        "sub_menu_id" : 1,
+        "restaurant_id": 1,
+        "food_description": "Riz haricot",
+        "food_details_pictures": [
+          "/sample/food_description/burger_0.jpg",
+          "/sample/food_description/burger_1.jpg",
+          "/sample/food_description/burger_2.jpg"
+        ],
+        "stars": "3.5"
+      },
+      {
+        "_id": 2,
+        "title": "riz au gras",
+        "price": "300",
+        "food_pic": "/sample/food_icon/macaronis.jpg",
+        "details": "",
+        "sub_menu_id" : 1,
+        "restaurant_id": 1,
+        "food_description": "Jollof rice",
+        "food_details_pictures": [
+          "/sample/food_description/burger_0.jpg",
+          "/sample/food_description/burger_1.jpg",
+          "/sample/food_description/burger_2.jpg"
+        ],
+        "stars": "2.5"
+      },
+      {
+        "_id": 3,
+        "title": "riz cantonné",
+        "price": "300",
+        "food_pic": "/sample/food_icon/burger.jpg",
+        "details": "",
+        "sub_menu_id" : 2,
+        "restaurant_id": 1,
+        "food_description": "Jollof rice",
+        "food_details_pictures": [
+          "/sample/food_description/burger_0.jpg",
+          "/sample/food_description/burger_1.jpg",
+          "/sample/food_description/burger_2.jpg"
+        ],
+        "stars": "2.5"
+      },
+      {
+        "_id": 4,
+        "title": "riz blanc",
+        "price": "300",
+        "food_pic": "/sample/food_icon/burger.jpg",
+        "details": "",
+        "sub_menu_id" : 2,
+        "restaurant_id": 1,
+        "food_description": "Riz simple, blanc.",
+        "food_details_pictures": [
+          "/sample/food_description/burger_0.jpg",
+          "/sample/food_description/burger_1.jpg",
+          "/sample/food_description/burger_2.jpg"
+        ],
+        "stars": "2.5"
+      }
+    ] ,
+    "food_tags": [
+      {
+        "_id": 3,
+        "name": "onion",
+        "state": 1,
+        "food_id": 1
+      },
+      {
+        "_id": 4,
+        "name": "ketchup",
+        "state": 1,
+        "food_id": 2
+      },
+      {
+        "_id": 5,
+        "name": "moutarde",
+        "state": 1,
+        "food_id": 3
+      },
+      {
+        "_id": 6,
+        "name": "œuf",
+        "state": 1,
+        "food_id": 4
+      }
+    ],
+    "contacts": [
+      {
+        "_id": 1,
+        "restaurant_id": "1",
+        "phone": "90000212",
+        "address": "Agoe-Assiyeye"
+      }
+    ]
+  }
+}

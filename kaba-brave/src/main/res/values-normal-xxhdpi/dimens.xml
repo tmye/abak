@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="food_details_sliding_banner_height">280dp</dimen>
+    <dimen name="myaccount_settings_size">40dp</dimen>
+    <dimen name="sliding_banner_height">200dp</dimen>
+    <dimen name="account_top_height">290dp</dimen>
+</resources>

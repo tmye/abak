@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:fitsSystemWindows="true"
+    tools:context=".activities.Home.HomeActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarlayout"
+        android:fitsSystemWindows="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            app:contentScrim="?attr/colorPrimary"
+            android:fitsSystemWindows="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                app:navigationIcon="@drawable/ic_actionbar_scan_24dp"
+                android:layout_width="match_parent"
+                app:popupTheme="@style/AppTheme.AppBarOverlay"
+                android:theme="@style/AppTheme.MainToolbar"
+                android:layout_height="?actionBarSize">
+
+                <RelativeLayout
+                    android:id="@+id/rel_toolbar_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="@dimen/main_actionbar_padding_height" >
+
+                    <EditText
+                        android:id="@+id/ed_search_query"
+                        android:textSize="@dimen/search_bar_text_height"
+                        android:enabled="false"
+                        android:focusable="false"
+                        android:layout_width="match_parent"
+                        android:background="@color/transparent"
+                        android:layout_height="match_parent" />
+
+                    <ImageButton
+                        android:id="@+id/ib_search_bt"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@color/transparent"
+                        app:srcCompat="@drawable/ic_actionbar_search_24dp"/>
+
+                    <View
+                        android:layout_alignParentBottom="true"
+                        android:layout_width="match_parent"
+                        android:background="@color/white"
+                        android:layout_height="@dimen/search_bar_bottom_border_height"
+                        android:layout_marginBottom="@dimen/home_actionbar_downline_margin_bottom"
+                        />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+
+    <tg.experta.kaba._commons.cviews.HomeCustom_SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/swp_home_frg"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appbarlayout"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+        >
+            <LinearLayout
+                android:id="@+id/lny_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:padding="@dimen/activity_horizontal_margin">
+
+                <TextView
+                    android:layout_marginTop="?actionBarSize"
+                    android:id="@+id/tv_message"
+                    android:text="@string/network_error"
+                    android:layout_width="wrap_content"
+                    android:textAlignment="center"
+                    android:fontFamily="sans-serif"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/bt_action"
+                    android:text="@string/try_again"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/frame_main_layout_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </FrameLayout>
+    </tg.experta.kaba._commons.cviews.HomeCustom_SwipeRefreshLayout>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_chart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="@dimen/fab_margin"
+        app:backgroundTint="@color/colorPrimary_rm"
+        app:srcCompat="@drawable/ic_shopping_card_yellow_24dp"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="0dp"
+        android:layout_marginStart="0dp"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/navigation" />
+
+
+</android.support.constraint.ConstraintLayout>

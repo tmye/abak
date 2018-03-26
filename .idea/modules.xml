@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Kaba.iml" filepath="$PROJECT_DIR$/Kaba.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kaba-brave/kaba-brave.iml" filepath="$PROJECT_DIR$/kaba-brave/kaba-brave.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kaba-i_deliver/kaba-i_deliver.iml" filepath="$PROJECT_DIR$/kaba-i_deliver/kaba-i_deliver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kaba-restaurant/kaba-restaurant.iml" filepath="$PROJECT_DIR$/kaba-restaurant/kaba-restaurant.iml" />
+    </modules>
+  </component>
+</project>

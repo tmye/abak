@@ -1,0 +1,130 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <!-- Restaurant Menu Activity . -->
+    <style name="RestaurantMenu" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary_rm</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_rm</item>
+        <item name="colorAccent">@color/colorAccent_rm</item>
+    </style>
+
+
+    <style name="RestaurantMenu.TabStrip" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <style name="AppTheme.NoActionBar.Inverted">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colorPrimary_rm</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_rm</item>
+        <item name="colorAccent">@color/colorAccent_rm</item>
+    </style>
+
+
+    <style name="AppTheme.CheckBox">
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
+
+    <style name="RestaurantMenu.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.MainToolbar" parent="Base.ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textCursorDrawable">@drawable/white_text_cursor_drawable</item>
+        <item name="android:background">@color/transparent</item>
+    </style>
+    <!-- <style name="AppTheme.MainToolbar">
+        <item name="android:textCursorDrawable">@drawable/white_text_cursor_drawable</item>
+    </style>
+-->
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"></style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppTheme.NoActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="TextStyle" parent="TextAppearance.AppCompat"></style>
+
+    <style name="AppTheme.SearchActivity" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">#dbdbdb</item>
+    </style>
+
+    <style name="TextStyle.LoginTitle" parent="TextStyle">
+        <item name="android:textColor">@color/gray_login_title_color</item>
+        <item name="android:textSize">@dimen/login_title_text_size</item>
+    </style>
+
+    <style name="TextStyle.LoginField" parent="TextStyle">
+        <item name="android:layout_marginTop">@dimen/edittext_margintop_24</item>
+        <item name="android:background">@color/gray_login_field_background_color</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">@dimen/login_field_text_size</item>
+        <!--<item name="android:textColor">@color/gray_login_field_text_color</item>-->
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <!-- ToolBar transparent -->
+    <style name="Toolbar.Transparent" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:background">@color/transparent_white</item>
+        <!-- Support Library compability -->
+        <item name="windowActionBarOverlay">true</item>
+    </style>
+
+    <!-- ToolBar non-transparent + red text -->
+    <style name="Toolbar.WhiteRedText" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:gravity">center_horizontal</item>
+        <!-- Support Library compability -->
+        <item name="windowActionBarOverlay">true</item>
+    </style>
+
+    <style name="AppTheme.Button.Confirm" parent="AppTheme">
+        <item name="android:colorButtonNormal">@color/selected_yellow</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="AppTheme.Button.Cancel" parent="AppTheme">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="nice_showup_error_textstyle">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/nice_error_text_size</item>
+    </style>
+
+
+</resources>

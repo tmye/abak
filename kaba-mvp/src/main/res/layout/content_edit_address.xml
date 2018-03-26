@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="tg.experta.kaba.activities.UserAcc.EditAddressActivity"
+    tools:showIn="@layout/activity_edit_address">
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"/>
+
+        <!-- <de.hdodenhof.circleimageview.CircleImageView
+             android:layout_marginTop="@dimen/activity_vertical_margin"
+             android:src="@drawable/add_place_icon"
+             android:layout_gravity="center_horizontal"
+             android:layout_width="@dimen/common_adress_image_width"
+             app:border_color="@color/selected_yellow"
+             app:border_width="1px"
+             android:scaleType="centerCrop"
+             android:layout_height="@dimen/common_adress_image_width"
+             android:onClick="selectPhoto"/>-->
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:id="@+id/rc_address_images"
+            android:layout_width="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_vertical|left"
+            style="@style/TextStyle.LoginField"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:hint="@string/sav_location_name"
+            android:drawablePadding="15dp"
+            />
+
+
+        <EditText
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_vertical|left"
+            style="@style/TextStyle.LoginField"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:hint="@string/add_phone"
+            android:drawablePadding="15dp"
+            />
+
+        <EditText
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_vertical|left"
+            style="@style/TextStyle.LoginField"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:hint="@string/add_details"
+            android:drawablePadding="15dp"
+            />
+
+        <Button
+            android:id="@+id/bt_add_gps_address"
+            android:layout_marginTop="@dimen/edittext_margintop_24"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_gps_address"
+            android:drawablePadding="15dp"
+            android:drawableLeft="@drawable/ic_gps_fixed_black_24dp"
+            />
+        <!--
+
+                <fragment
+                    android:id="@+id/frg_map"
+                    android:layout_marginTop="@dimen/edittext_margintop_24"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    class="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"/>
+        -->
+        <android.support.v7.widget.CardView
+            android:id="@+id/map_cardview"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:layout_height="@dimen/edit_address_map_height"
+            app:cardBackgroundColor="@android:color/white">
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/swagishmap"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+        </android.support.v7.widget.CardView>
+
+        <!-- we can add a view stub to load the image in case -->
+
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_marginTop="@dimen/edittext_margintop_24"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                style="@style/AppTheme.Button.Cancel"
+                android:text="@string/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+
+            <Button
+                style="@style/AppTheme.Button.Confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save" />
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"/>
+
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+</ScrollView>

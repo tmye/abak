@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="tg.experta.kaba">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
+    <uses-feature android:name="android.hardware.location.gps" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <application
+        android:name=".syscore.MyKabaApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".activities.Home.HomeActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.Splash.SplashActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.Menu.RestaurantMenuActivity"
+            android:label="@string/title_activity_restaurant_menu"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.FoodDetails.FoodDetailsActivity"
+            android:label="@string/title_activity_food_details"
+            android:parentActivityName=".activities.Menu.RestaurantMenuActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.Web.WebActivity"
+            android:label="@string/title_activity_web"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.Geo.GeoActivity"
+            android:label="@string/title_activity_geo"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.scanner.ScannerActivity"
+            android:label="@string/scanner_activity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.Menu.RestaurantMenuActivity" />
+        </activity>
+        <activity android:name=".activities.UserAuth.RegisterActivity" />
+        <activity android:name=".activities.UserAuth.LoginActivity" />
+        <activity
+            android:name=".activities.UserAcc.ServiceClientActivity"
+            android:label="@string/title_activity_service_client" />
+        <activity
+            android:name=".activities.UserAcc.MyAdressesActivity"
+            android:label="@string/title_activity_my_adresses" />
+        <activity
+            android:name=".activities.UserAcc.EditAddressActivity"
+            android:label="@string/title_activity_edit_address" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBhDXLF0zLWJcjE4_9z_WkPQvq_drSUXyc" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".activities.UserAcc.PersonnalInfoActivity"
+            android:label="@string/title_activity_personnal_info"
+            android:theme="@style/AppTheme.NoActionBar.Inverted" />
+        <activity
+            android:name=".activities.UserAcc.NewsFeedActivity"
+            android:label="@string/title_activity_news_feed"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".activities.UserAcc.SoldeActivity"
+            android:label="@string/title_activity_solde"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <!-- notifications push services -->
+        <service
+            android:name=".services.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".services.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
+    </application>
+
+</manifest>

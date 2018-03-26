@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#cc1641</color>
+    <color name="colorPrimaryDark">#760f27</color>
+    <color name="colorAccent">#ffffff</color>
+
+    <color name="colorPrimary_rm">#ffffff</color>
+    <color name="colorPrimaryDark_rm">#aeaeae</color>
+    <color name="colorAccent_rm">#cc1641</color>
+
+    <color name="colorPrimary_yellow">#f8bf00</color>
+    <color name="colorPrimaryDark_yellow">#ff735f0b</color>
+
+    <color name="white">#ffffffff</color>
+    <color name="transparent">#00ffffff</color>
+    <color name="black">#000000</color>
+    <color name="restaurant_name">#aaaaaa</color>
+
+    <color name="sliding_banner_left_pad_transparent_bg">#30000000</color>
+    <color name="red">#ff0000</color>
+    <color name="restaurant_name_color">#f8bf00</color>
+    <color name="circular_view_border_yellow">#f8bf00</color>
+    <color name="unselected_gray">#7b777c</color>
+    <color name="selected_yellow">#f8bf00</color>
+
+    <color name="brown">#b1adad</color>
+    <color name="confirm_transaction_bt_background_gray">#d0ced1</color>
+    <color name="light_gray">#dadada</color>
+    <color name="facebook_blue">#2660b1</color>
+    <color name="green_">#16d457</color>
+    <color name="article_details_color">#499</color>
+    <color name="mini_list_date_text_color">#acacac</color>
+    <color name="black_overlay">#aa000000</color>
+    <color name="horoscope_blue">#499</color>
+
+    <color name="horoscope_sun_color">#f39f18</color>
+    <color name="horoscope_moon_color">#003366</color>
+
+    <color name="gray_login_title_color">#9d9b9c</color>
+    <color name="gray_login_field_text_color">#3e3e3e</color>
+    <color name="gray_login_field_background_color">#e2e1e1</color>
+
+    <color name="transparent_white">#99ffffff</color>
+    <color name="edit_image_transparent_black">#66000000</color>
+    <color name="dark_gray">#666666</color>
+
+</resources>

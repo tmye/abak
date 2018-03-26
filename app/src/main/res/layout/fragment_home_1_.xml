@@ -1,0 +1,78 @@
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="?actionBarSize"
+    android:layout_marginTop="?actionBarSize"
+    tools:context=".activities.Home.Fragmentz.Home_1_Fragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- viewpager sliding ... -->
+        <tg.experta.kaba._commons.cviews.SlidingBanner_LilRound
+            android:id="@+id/sliding_banner"
+            android:layout_width="match_parent"
+            android:background="@color/brown"
+            android:layout_height="@dimen/sliding_banner_height"
+            android:layout_gravity="center_vertical">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager_sliding_banner"
+                android:layout_width="match_parent"
+                android:background="@color/transparent"
+                android:layout_height="match_parent"/>
+
+            <LinearLayout
+                android:id="@+id/lny_lil_round"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="@dimen/home_slidingbanner_bottom_semicirlce_height"
+                android:orientation="horizontal" />
+
+            <!-- put a circular matching parent bottom white circle -->
+            <tg.experta.kaba._commons.cviews.SlidingBannerBottomHalfCircle
+                android:layout_gravity="bottom"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/home_slidingbanner_bottom_semicirlce_height" />
+
+        </tg.experta.kaba._commons.cviews.SlidingBanner_LilRound>
+
+        <!-- 6 main restaurant list -->
+        <android.support.v7.widget.RecyclerView
+            android:paddingTop="@dimen/restaurant_icon_padding"
+            android:id="@+id/recyclerview_home_restaurant_icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            />
+
+        <!-- advertising mainview -->
+        <!-- 4 main restaurant list -->
+        <tg.experta.kaba._commons.cviews.Ad_4_8_View
+            android:id="@+id/recyclerview_home_4_adspace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/light_gray"
+            android:layout_marginTop="@dimen/restaurant_icon_padding"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="@dimen/adgroup_bottom_space"
+            android:id="@+id/recyclerview_home_group_ads"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_home_feeds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/food_details_fab_margin_bottom"/>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

@@ -1,0 +1,53 @@
+{
+  "error": 0,
+  "message" : "",
+  "data" :
+  {
+    "standard_search_message" : "",
+    "daily_restaurant" : [
+      "332",
+      "923",
+      "101"
+    ],
+    "advert_banner" : [
+      {
+        "type": "t_4_6",
+        "ad" : [
+          {
+            "_id" : "",
+            "name": "",
+            "place_holder": "",
+            "image": "",
+            "link": "",
+            "date": ""
+          },
+          {
+            "_id" : "",
+            "name": "",
+            "place_holder": "",
+            "image": "",
+            "link": "",
+            "date": ""
+          },
+          {
+            "_id" : "",
+            "name": "",
+            "place_holder": "",
+            "image": "",
+            "link": "",
+            "date": ""
+          }
+        ]
+      },
+      {
+        "type": "t_banner",
+        "ad" : []
+      },
+      {
+        "type": "t_info_flux",
+        "ad" : [] // only one link to retrieve data that goes with it for the fragment
+      }
+
+    ]
+  }
+}

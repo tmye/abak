@@ -1,0 +1,3 @@
+//include ':app'
+//include ':kaba-mvp',
+include ':kaba-brave', ':kaba-restaurant', ':kaba-i_deliver'

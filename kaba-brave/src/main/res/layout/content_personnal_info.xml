@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="tg.experta.kaba.activities.UserAcc.PersonnalInfoActivity"
+    tools:showIn="@layout/activity_personnal_info">
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_gravity="center_horizontal"
+            android:background="@color/transparent"
+            android:layout_width="@dimen/personnal_info_image_box_size"
+            android:layout_height="@dimen/personnal_info_image_box_size"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin_4_3">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/cic_pic"
+                android:src="@drawable/placeholder_kaba"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="@dimen/personnal_info_image_size"
+                android:layout_height="@dimen/personnal_info_image_size" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/take_pic_fab"
+                android:layout_width="wrap_content"
+                app:fabSize="normal"
+                app:rippleColor="@color/white"
+                app:layout_constraintRight_toRightOf="@id/cic_pic"
+                app:layout_constraintBottom_toBottomOf="@id/cic_pic"
+                app:srcCompat="@drawable/ic_photo_camera_white_24dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <android.support.v7.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/activity_horizontal_margin"
+                    >
+
+                    <TextView
+                        android:text="@string/your_name"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_width="match_parent"
+                        android:textSize="@dimen/personnal_info_title_text_size"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_realname"
+                        android:background="@null"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/personnal_info_content_text_size"
+                        android:layout_width="match_parent"
+                        android:paddingLeft="@dimen/activity_horizontal_margin_half"
+                        android:paddingTop="@dimen/activity_horizontal_margin_half"
+                        android:paddingRight="@dimen/activity_horizontal_margin_half"
+                        android:layout_height="wrap_content" />
+
+                </android.support.v7.widget.LinearLayoutCompat>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_line_height"
+                    android:background="@color/unselected_gray"/>
+
+
+                <android.support.v7.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/activity_horizontal_margin"
+                    >
+
+                    <TextView
+                        android:text="@string/your_nick_name"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_width="match_parent"
+                        android:textSize="@dimen/personnal_info_title_text_size"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_nickname"
+                        android:background="@null"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/personnal_info_content_text_size"
+                        android:layout_width="match_parent"
+                        android:paddingLeft="@dimen/activity_horizontal_margin_half"
+                        android:paddingTop="@dimen/activity_horizontal_margin_half"
+                        android:paddingRight="@dimen/activity_horizontal_margin_half"
+                        android:layout_height="wrap_content" />
+
+                </android.support.v7.widget.LinearLayoutCompat>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_line_height"
+                    android:background="@color/unselected_gray"/>
+
+                <android.support.v7.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/activity_horizontal_margin"
+                    >
+
+                    <TextView
+                        android:text="@string/your_gender"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_width="match_parent"
+                        android:textSize="@dimen/personnal_info_title_text_size"
+                        android:layout_height="wrap_content" />
+
+                    <RadioGroup
+                        android:id="@+id/rd_gender_group"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:id="@+id/rd_bt_gender_female"
+                            android:text="Female"
+                            android:checked="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:id="@+id/rd_bt_gender_male"
+                            android:text="Male"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </RadioGroup>
+
+
+                </android.support.v7.widget.LinearLayoutCompat>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_line_height"
+                    android:background="@color/unselected_gray"/>
+
+                <android.support.v7.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/activity_horizontal_margin"
+                    >
+
+                    <TextView
+                        android:text="@string/your_birth_date"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_width="match_parent"
+                        android:textSize="@dimen/personnal_info_title_text_size"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_birth_date"
+                        android:background="@null"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/personnal_info_content_text_size"
+                        android:layout_width="match_parent"
+                        android:paddingLeft="@dimen/activity_horizontal_margin_half"
+                        android:paddingTop="@dimen/activity_horizontal_margin_half"
+                        android:paddingRight="@dimen/activity_horizontal_margin_half"
+                        android:layout_height="wrap_content"
+                        android:hint="01 - 10 - 1970"/>
+
+                </android.support.v7.widget.LinearLayoutCompat>
+
+            </android.support.v7.widget.LinearLayoutCompat>
+        </android.support.v7.widget.CardView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"/>
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+
+</android.support.v4.widget.NestedScrollView>
