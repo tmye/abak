@@ -79,7 +79,7 @@ public class FavoriteRepository {
             public void run() {
 
                 // load favorite list from database
-                FavoriteDao favoriteDao = ((MyKabaApp)context.getApplicationContext()).getDaoSession().getFavoriteDao();
+                FavoriteDao favoriteDao = ((MyKabaApp)context.getApplicationContext()).getDaoSession(MyKabaApp.personnal_db).getFavoriteDao();
                 List<Favorite> favoriteList = favoriteDao.loadAll();
                 yesOrNoWithResponse.yes(favoriteList, false);
             }

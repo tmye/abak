@@ -194,7 +194,7 @@ public class SearchResultItemFragment extends Fragment implements SearchResultCo
 
 
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
+        // TODO: Update argument type and restaurant_name
         void onSearchResultResultSelected(SearchResult searchResult);
     }
 

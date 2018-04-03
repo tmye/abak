@@ -4,10 +4,12 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import tg.tmye.kaba._commons.MultiThreading.DatabaseRequestThreadBase;
 import tg.tmye.kaba._commons.MultiThreading.NetworkRequestThreadBase;
 import tg.tmye.kaba.config.Config;
-import tg.tmye.kaba.data.Restaurant.source.RestaurantRepository;
 import tg.tmye.kaba.data._OtherEntities.DaoMaster;
 import tg.tmye.kaba.data._OtherEntities.DaoSession;
 
@@ -27,27 +29,32 @@ public class MyKabaApp extends Application {
     /* sys token */
     private String authToken = "";
 
+    /* personnal db restaurant_name */
+    public static String personnal_db = "personnal";
+
     @Override
     public void onCreate() {
         super.onCreate();
 
-        initDb();
+//        initDb();
+        daoSessionMap = new HashMap<>();
         networkRequestBase = new NetworkRequestThreadBase(this);
         databaseRequestThreadBase = new DatabaseRequestThreadBase(this);
         // load token inside the app
 
         /* update the whole database of the restaurants and everything */
-//        RestaurantRepository.RestaurantDbOnlineSource.update(this,networkRequestBase, databaseRequestThreadBase, null);
+//        RestaurantDbRepository.RestaurantDbOnlineSource.update(this,networkRequestBase, databaseRequestThreadBase, null);
     }
 
+    private void initDb(String restaurantCodeName) {
 
-    private void initDb() {
-
-        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "kaba-db", null);
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, restaurantCodeName+"-db", null);
         SQLiteDatabase db = helper.getWritableDatabase();
         DaoMaster daoMaster = new DaoMaster(db);
         daoSession = daoMaster.newSession();
+        daoSessionMap.put(restaurantCodeName, daoSession);
     }
+
 
     public NetworkRequestThreadBase getNetworkRequestBase() {
         if (networkRequestBase == null)
@@ -55,11 +62,15 @@ public class MyKabaApp extends Application {
         return networkRequestBase;
     }
 
-    public DaoSession getDaoSession() {
 
-        if (daoSession == null)
-            initDb();
-        return daoSession;
+    Map<String, DaoSession> daoSessionMap;
+
+
+    public DaoSession getDaoSession(String restaurantCodeName) {
+
+        if (daoSessionMap.get(restaurantCodeName) == null)
+            initDb(restaurantCodeName);
+        return daoSessionMap.get(restaurantCodeName);
     }
 
     public void setAuthToken(String authToken) {

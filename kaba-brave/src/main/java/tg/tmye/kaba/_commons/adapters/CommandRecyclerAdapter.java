@@ -58,9 +58,9 @@ public class CommandRecyclerAdapter extends RecyclerView.Adapter<CommandRecycler
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
         Command command = this.data.get(position);
-        /* set up restaurant name*/
+        /* set up restaurant restaurant_name*/
         holder.tv_header_resto_name.setText(command.restaurantEntity.restaurant_name);
-        /* set up restaurant pic */
+        /* set up restaurant restaurant_logo */
         GlideApp.with(ctx)
                 .load(Constant.SERVER_ADDRESS+command.restaurantEntity.restaurant_logo)
                 .placeholder(R.drawable.placeholder_kaba)
@@ -142,11 +142,11 @@ class CommandInnerFoodViewAdapter extends RecyclerView.Adapter<CommandInnerFoodV
 
         BasketFoodForDb basketFoodForDb = this.command_list.get(position);
 
-     /* set up restaurant name*/
+     /* set up restaurant restaurant_name*/
         holder.tv_food_name.setText(basketFoodForDb.foodEntity.title);
         holder.tv_quantity.setText(String.valueOf(basketFoodForDb.quantity));
         holder.tv_food_price.setText(String.valueOf(basketFoodForDb.foodEntity.price));
-      /* set up restaurant pic */
+      /* set up restaurant restaurant_logo */
         GlideApp.with(ctx)
                 .load(Constant.SERVER_ADDRESS+ basketFoodForDb.foodEntity.food_pic)
                 .placeholder(R.drawable.placeholder_kaba)

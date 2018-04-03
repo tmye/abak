@@ -168,7 +168,7 @@ public class SearchHistoryItemFragment extends Fragment implements SearchPageCon
 
 
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
+        // TODO: Update argument type and restaurant_name
 //        void onListFragmentInteraction(HistoricalItem item);
 //        void onQuerySent(String query);
         void suggest(String suggest);

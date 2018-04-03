@@ -16,6 +16,7 @@ public class Constant {
     //    public static final String SERVER_ADDRESS = "http://192.168.1.10:8000";
 //public static final String SERVER_ADDRESS = "http://192.168.0.107:8000";
     public static final String CHANNEL_ID = "kaba-notification-channel-id";
+    public static final String APP_SUPER_TAG = "APP_SUPER_TAG";
 
 
    /* public static String[] SAMPLE_IMAGES_BANNER = {

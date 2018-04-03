@@ -170,7 +170,7 @@ public class F_MyAccount_4_Fragment extends BaseFragment implements F_UserMeCont
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
+        // TODO: Update argument type and restaurant_name
         void onFragmentInteraction(Uri uri);
     }
 }

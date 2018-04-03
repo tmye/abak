@@ -47,8 +47,8 @@
         <ProgressBar
             android:id="@+id/progressbar"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_wi  android:layout_height="@dimen/webview_progressbar_height"dth="match_parent"
-
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/webview_progressbar_height"
         />
 
     </android.support.design.widget.AppBarLayout>

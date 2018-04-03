@@ -7,6 +7,7 @@ import tg.tmye.kaba.BasePresenter;
 import tg.tmye.kaba.BaseView;
 import tg.tmye.kaba.data.Feeds.NewsFeed;
 import tg.tmye.kaba.data.Restaurant.RestaurantEntity;
+import tg.tmye.kaba.data._OtherEntities.LightRestaurant;
 import tg.tmye.kaba.data._OtherEntities.SimplePicture;
 import tg.tmye.kaba.data.advert.AdsBanner;
 import tg.tmye.kaba.data.advert.Group10AdvertItem;
@@ -25,7 +26,7 @@ public interface F_HomeContract {
 
         /* passive actions of the view */
         void showMainSliding(List<AdsBanner> ads);
-        void inflateMainRestaurants(List<RestaurantEntity> restaurantEntityList);
+        void inflateMainRestaurants(List<LightRestaurant> restaurantEntityList);
 
         void inflateMain48(List<ProductAdvertItem> productAdvertItems);
         void inflateGroupsPubLongList(List<Group10AdvertItem> group10AdvertItems);
@@ -36,7 +37,7 @@ public interface F_HomeContract {
         void showErrorMessage(String message); // may create an action in case
 
         /* active actions from the view to the presenter */
-        void openRestaurant(RestaurantEntity restaurantEntity);
+        void openRestaurant(LightRestaurant restaurantEntity);
         void openKabaShowPicture(SimplePicture.KabaShowPic pic);
         void openProductAdvert(ProductAdvertItem productAdvertItem);
         void openAdBanner(AdsBanner ad); /* those that slide */

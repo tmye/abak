@@ -54,8 +54,8 @@
         <item name="android:textCursorDrawable">@drawable/white_text_cursor_drawable</item>
         <item name="android:background">@color/transparent</item>
     </style>
-    <!-- <style name="AppTheme.MainToolbar">
-        <item name="android:textCursorDrawable">@drawable/white_text_cursor_drawable</item>
+    <!-- <strestaurant_namename="AppTheme.MainToolbar">
+        <irestaurant_namename="android:textCursorDrawable">@drawable/white_text_cursor_drawable</item>
     </style>
 -->
 
@@ -85,7 +85,7 @@
         <item name="android:maxLines">1</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textSize">@dimen/login_field_text_size</item>
-        <!--<item name="android:textColor">@color/gray_login_field_text_color</item>-->
+        <!--<irestaurant_namename="android:textColor">@color/gray_login_field_text_color</item>-->
         <item name="android:paddingLeft">10dp</item>
         <item name="android:paddingRight">10dp</item>
         <item name="android:paddingTop">5dp</item>

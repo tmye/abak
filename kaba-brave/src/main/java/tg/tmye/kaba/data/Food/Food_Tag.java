@@ -24,7 +24,7 @@ public class Food_Tag implements Parcelable{
     /*
     *  {
         "_id": 0,
-        "name": "onion",
+        "restaurant_name": "onion",
         "state": 1,
         "food_id": 1
       }*/

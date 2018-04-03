@@ -45,6 +45,7 @@ import tg.tmye.kaba.activity.scanner.ScannerActivity;
 import tg.tmye.kaba.config.Constant;
 import tg.tmye.kaba.data.Feeds.NewsFeed;
 import tg.tmye.kaba.data.Restaurant.RestaurantEntity;
+import tg.tmye.kaba.data._OtherEntities.LightRestaurant;
 import tg.tmye.kaba.data._OtherEntities.SimplePicture;
 import tg.tmye.kaba.data.advert.AdsBanner;
 import tg.tmye.kaba.data.advert.Group10AdvertItem;
@@ -137,13 +138,13 @@ public class F_Home_1_Fragment extends BaseFragment implements F_HomeContract.Vi
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                slidingBanner_lilRound.load((ArrayList)ads);
+                slidingBanner_lilRound.load(ads);
             }
         });
     }
 
     @Override
-    public void inflateMainRestaurants(final List<RestaurantEntity> restaurantEntityList) {
+    public void inflateMainRestaurants(final List<LightRestaurant> restaurantEntityList) {
 
         getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -168,17 +169,24 @@ public class F_Home_1_Fragment extends BaseFragment implements F_HomeContract.Vi
     }
 
     @Override
-    public void inflateGroupsPubLongList(List<Group10AdvertItem> group10AdvertItems) {
+    public void inflateGroupsPubLongList(final List<Group10AdvertItem> group10AdvertItems) {
 
-        if (group10AdvertItems == null || group10AdvertItems.size() == 0) {
-            groupAds10.setVisibility(View.GONE);
-        } else {
-            groupAds10.setVisibility(View.VISIBLE);
-            groupAds10.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
-            groupAds10.addItemDecoration(new ListVerticalSpaceDecorator(getContext().getResources().getDimensionPixelSize(R.dimen.adgroup_bottom_space)));
-            groupAds10.setAdapter(new GroupAdsAdapter(getContext(), group10AdvertItems));
-        }
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                if (group10AdvertItems == null || group10AdvertItems.size() == 0) {
+                    groupAds10.setVisibility(View.GONE);
+                } else {
+                    groupAds10.setVisibility(View.VISIBLE);
+                    groupAds10.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                    groupAds10.addItemDecoration(new ListVerticalSpaceDecorator(getContext().getResources().getDimensionPixelSize(R.dimen.adgroup_bottom_space)));
+                    groupAds10.setAdapter(new GroupAdsAdapter(getContext(), group10AdvertItems));
+                }
+            }
+        });
     }
+
 
     @Override
     public void inflateFeedsList(List<NewsFeed> newsFeeds) {
@@ -211,7 +219,7 @@ public class F_Home_1_Fragment extends BaseFragment implements F_HomeContract.Vi
 
 
     @Override
-    public void openRestaurant(RestaurantEntity restaurantEntity) {
+    public void openRestaurant(LightRestaurant restaurantEntity) {
         mListener.onRestaurantInteraction(restaurantEntity);
     }
 
@@ -279,11 +287,11 @@ public class F_Home_1_Fragment extends BaseFragment implements F_HomeContract.Vi
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
+        // TODO: Update argument type and restaurant_name
         void onFragmentInteraction(Uri uri);
 
         /* when the restaurant is clicked */
-        void onRestaurantInteraction(RestaurantEntity restaurantEntity);
+        void onRestaurantInteraction(LightRestaurant restaurantEntity);
         void onAdsInteraction(AdsBanner ad);
 
         void onShowPic(SimplePicture.KabaShowPic pic);

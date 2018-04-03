@@ -76,7 +76,7 @@ public class BasketFoodRepository {
     public void offlineBasketLoad (YesOrNoWithResponse yesOrNoWithResponse) {
 
         // load favorite list from database
-        ShoppingBasketForDbDao shoppingBasketForDbDao = ((MyKabaApp)context.getApplicationContext()).getDaoSession().getShoppingBasketForDbDao();
+        ShoppingBasketForDbDao shoppingBasketForDbDao = ((MyKabaApp)context.getApplicationContext()).getDaoSession(MyKabaApp.personnal_db).getShoppingBasketForDbDao();
         List<ShoppingBasketForDb> shoppingBasketForDbDaoList = shoppingBasketForDbDao.loadAll();
         /* transform basket for db into basket for view */
         yesOrNoWithResponse.yes(/*shoppingBasketForDbDaoList*/ShoppingBasketForView.fakeList(3), false);

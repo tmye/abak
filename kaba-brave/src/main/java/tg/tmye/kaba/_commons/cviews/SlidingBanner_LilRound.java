@@ -58,7 +58,7 @@ public class SlidingBanner_LilRound extends FrameLayout implements Runnable, Vie
     private boolean vp_is_touched;
 
     // food details list
-    private List<Object> food_details_pictures;
+    private List<AdsBanner> food_details_pictures;
 
     // direction of the dragging
     private boolean leftToRight = true;
@@ -129,7 +129,7 @@ public class SlidingBanner_LilRound extends FrameLayout implements Runnable, Vie
     }
 
 
-    public void load(List<Object> food_details_pictures) {
+    public void load(List<AdsBanner> food_details_pictures) {
         // load pictures links into the viewpager -- and when we click, we are redirected to pages inside or outside
         // the application
         this.food_details_pictures = food_details_pictures;
@@ -241,11 +241,13 @@ public class SlidingBanner_LilRound extends FrameLayout implements Runnable, Vie
 
             // use picasso to compress the pictures  before getting them in the list
             String picPath = "";
-            if (food_details_pictures.get(position) instanceof AdsBanner) {
-                picPath = Constant.SERVER_ADDRESS+ ((AdsBanner)food_details_pictures.get(position)).adsBanner.path;
-            } else  if (food_details_pictures.get(position) instanceof SimplePicture) {
-                picPath = Constant.SERVER_ADDRESS+ ((SimplePicture)food_details_pictures.get(position)).path;
-            }
+//            if (food_details_pictures.get(position) instanceof AdsBanner) {
+//            picPath = Constant.SERVER_ADDRESS+ ((AdsBanner)food_details_pictures.get(position)).adsBanner.path;
+//            } else  if (food_details_pictures.get(position) instanceof SimplePicture) {
+//                picPath = Constant.SERVER_ADDRESS+ ((SimplePicture)food_details_pictures.get(position)).path;
+//            }
+
+            picPath = Constant.SERVER_ADDRESS + "/" + ((AdsBanner)food_details_pictures.get(position)).name;
 
             GlideApp.with(mContext)
                     .load(picPath)
@@ -255,8 +257,6 @@ public class SlidingBanner_LilRound extends FrameLayout implements Runnable, Vie
 
             /* when clicked */
             if (food_details_pictures.get(position) instanceof AdsBanner) {
-
-            } else  if (food_details_pictures.get(position) instanceof SimplePicture.KabaShowPic) {
 
             }
 
@@ -285,7 +285,7 @@ public class SlidingBanner_LilRound extends FrameLayout implements Runnable, Vie
 
 
     public interface OnViewpagerInteractionListener {
-        // TODO: Update argument type and name
+        // TODO: Update argument type and restaurant_name
         void onPageInteraction(Uri uri);
     }
 

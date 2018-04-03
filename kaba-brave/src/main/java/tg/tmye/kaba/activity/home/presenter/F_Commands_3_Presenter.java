@@ -1,15 +1,10 @@
 package tg.tmye.kaba.activity.home.presenter;
 
-import java.util.HashMap;
 import java.util.List;
 
 import tg.tmye.kaba._commons.intf.YesOrNoWithResponse;
 import tg.tmye.kaba.activity.home.contracts.F_CommandContract;
-import tg.tmye.kaba.activity.home.contracts.F_HomeContract;
-import tg.tmye.kaba.data.Restaurant.RestaurantEntity;
-import tg.tmye.kaba.data.Restaurant.source.RestaurantRepository;
 import tg.tmye.kaba.data._OtherEntities.Error;
-import tg.tmye.kaba.data.advert.source.AdvertRepository;
 import tg.tmye.kaba.data.command.Command;
 import tg.tmye.kaba.data.command.source.CommandRepository;
 

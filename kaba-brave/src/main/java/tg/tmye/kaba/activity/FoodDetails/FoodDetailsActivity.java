@@ -3,7 +3,6 @@ package tg.tmye.kaba.activity.FoodDetails;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -20,13 +19,14 @@ import java.util.List;
 import tg.tmye.kaba.R;
 import tg.tmye.kaba._commons.OnImageClickListener;
 import tg.tmye.kaba._commons.cviews.SlidingBanner_LilRound;
+import tg.tmye.kaba._commons.utils.UtilFunctions;
 import tg.tmye.kaba.activity.menu.RestaurantMenuActivity;
 import tg.tmye.kaba.config.Constant;
 import tg.tmye.kaba.data.Food.Food_Tag;
 import tg.tmye.kaba.data.Food.Restaurant_Menu_FoodEntity;
 import tg.tmye.kaba.data.Food.source.FoodTagRepository;
 import tg.tmye.kaba.data.Restaurant.RestaurantEntity;
-import tg.tmye.kaba.data.Restaurant.source.RestaurantRepository;
+import tg.tmye.kaba.data.Restaurant.source.RestaurantDbRepository;
 import tg.tmye.kaba.data._OtherEntities.DaoSession;
 import tg.tmye.kaba.data._OtherEntities.SimplePicture;
 import tg.tmye.kaba.syscore.GlideApp;
@@ -40,6 +40,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements OnImageCli
     public static final String FOOD_ID = "FOOD_ID_VALUE";
 
     private static final int TAG_SPAN_COUNT = 4;
+    public static final String RESTAURANT_ENTITY = "RESTAURANT_ENTITY";
 
 
     private RestaurantEntity resto;
@@ -89,12 +90,25 @@ public class FoodDetailsActivity extends AppCompatActivity implements OnImageCli
 
         long food_id = getIntent().getLongExtra(FOOD_ID, -1);
 
+        RestaurantEntity restaurantEntity = getIntent().getParcelableExtra(RESTAURANT_ENTITY);
+
+        /* check food id ? food entity */
         if (food_id == -1) {
             // show an error window because of the id that is wrong
-            food_id = 1;
+//            food_id = 1;
+            Toast.makeText(this, "No food id sent to this activity", Toast.LENGTH_LONG).show();
+            finish();
         }
 
-        daoSession = ((MyKabaApp) getApplication()).getDaoSession();
+        if (restaurantEntity == null) {
+
+            Toast.makeText(this, "No valid restaurant sent to this activity", Toast.LENGTH_LONG).show();
+            finish();
+        }
+
+        daoSession = ((MyKabaApp) getApplication()).getDaoSession(
+                   UtilFunctions.superTrim(restaurantEntity.restaurant_name)
+        );
 
         // get food entity
         foodEntity = daoSession.getRestaurant_Menu_FoodEntityDao().loadByRowId(food_id);
@@ -128,7 +142,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements OnImageCli
 
     private void initNameFood_N_RestaurantNames() {
 
-        resto =  RestaurantRepository.RestaurantLocalDataSource
+        resto =  RestaurantDbRepository.RestaurantLocalDataSource
                 .findRestoById(daoSession.getRestaurantEntityDao(), foodEntity.restaurant_id);
 
         if (resto == null)
@@ -249,7 +263,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements OnImageCli
     public void finishForResult() {
         // send back the current one
         Intent data = new Intent();
-        data.putExtra(RestaurantMenuActivity.RESTAURANT_VAL, resto);
+        data.putExtra(RestaurantMenuActivity.RESTAURANT, resto);
         setResult(RestaurantMenuActivity.RESTAURANT_ITEM_RESULT, data);
         finish();
     }

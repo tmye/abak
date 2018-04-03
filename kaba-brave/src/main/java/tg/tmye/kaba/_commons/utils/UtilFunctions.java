@@ -9,10 +9,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 
 import tg.tmye.kaba.data.customer.Customer;
 
@@ -88,7 +93,7 @@ public class UtilFunctions {
         String ret = "";
 
         try {
-            InputStream inputStream = context.openFileInput(filename);
+            InputStream inputStream = context.openFileInput(openInAppDir(context, filename));
 
             if ( inputStream != null ) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -111,6 +116,40 @@ public class UtilFunctions {
         }
 
         return ret;
+    }
+
+    private static String openInAppDir(Context context, String filename) {
+        String appPath = context.getApplicationContext().getFilesDir().getAbsolutePath();
+        // current dir
+        File fileDir = new File(appPath + "/" + "local_data");
+        if (!fileDir.exists()) {
+            fileDir.mkdirs();
+        }
+        return fileDir.getAbsolutePath()+"/"+filename;
+    }
+
+    public static void writeToFile(Context context, String filename, String data) {
+
+        try {
+            FileWriter out = new FileWriter(new File(openInAppDir(context, filename)));
+            out.write(data);
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String arrayToString(String[] subStrings) {
+
+        String res = "";
+        for (int i = 0; i < subStrings.length; i++) {
+            res += subStrings[i];
+        }
+        return res;
+    }
+
+    public static String superTrim(String restaurant_name) {
+        return arrayToString(restaurant_name.split(" "));
     }
 
     /*

@@ -19,7 +19,7 @@
     <string name="menu_food_item_name_sample">HAMBURGER STEAK</string>
     <string name="menu_food_item_price_sample">1500FCFA</string>
     <string name="title_activity_food_details"></string>
-    <!--<string name="title_activity_food_details">FoodDetailsActivity</string>-->
+    <!--<strrestaurant_namename="title_activity_food_details">FoodDetailsActivity</string>-->
     <string name="large_text">
         "Material is the metaphor.\n\n"
 

@@ -13,7 +13,7 @@ import java.util.List;
 import tg.tmye.kaba.R;
 import tg.tmye.kaba.activity.home.views.fragment.F_Home_1_Fragment;
 import tg.tmye.kaba.config.Constant;
-import tg.tmye.kaba.data.Restaurant.RestaurantEntity;
+import tg.tmye.kaba.data._OtherEntities.LightRestaurant;
 import tg.tmye.kaba.syscore.GlideApp;
 
 /**
@@ -25,10 +25,10 @@ public class Home_1_MainRestaurantAdapter extends RecyclerView.Adapter<Home_1_Ma
 
 
     private final F_Home_1_Fragment.OnFragmentInteractionListener mListener;
-    private List<RestaurantEntity> data;
+    private List<LightRestaurant> data;
     private final Context ctx;
 
-    public Home_1_MainRestaurantAdapter(Context context, List<RestaurantEntity> data,
+    public Home_1_MainRestaurantAdapter(Context context, List<LightRestaurant> data,
                                         F_Home_1_Fragment.OnFragmentInteractionListener mListener) {
 
         this.ctx = context;
@@ -45,7 +45,7 @@ public class Home_1_MainRestaurantAdapter extends RecyclerView.Adapter<Home_1_Ma
     public void onBindViewHolder(ViewHolder holder, int position) {
 
 
-        final RestaurantEntity item = data.get(position);
+        final LightRestaurant item = data.get(position);
 
         if (item == null)
             return;
@@ -54,7 +54,7 @@ public class Home_1_MainRestaurantAdapter extends RecyclerView.Adapter<Home_1_Ma
         holder.tv_resto_name.setText(item.restaurant_name);
 
         GlideApp.with(ctx)
-                .load(Constant.SERVER_ADDRESS+item.restaurant_logo)
+                .load(Constant.SERVER_ADDRESS + "/" +item.restaurant_logo)
                 .placeholder(R.drawable.kaba_pic)
                 .centerCrop()
                 .into(holder.iv_resto_icon);
@@ -76,7 +76,7 @@ public class Home_1_MainRestaurantAdapter extends RecyclerView.Adapter<Home_1_Ma
     }
 
 
-    public void updateData(List<RestaurantEntity> daily_restaurants) {
+    public void updateData(List<LightRestaurant> daily_restaurants) {
         this.data = daily_restaurants;
         notifyDataSetChanged();
     }

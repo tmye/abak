@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import tg.tmye.kaba._commons.MultiThreading.DatabaseRequestThreadBase;
@@ -34,6 +35,7 @@ import tg.tmye.kaba.data.Restaurant.RestaurantEntity;
 import tg.tmye.kaba.data.Restaurant.RestaurantEntityDao;
 import tg.tmye.kaba.data._OtherEntities.Contact;
 import tg.tmye.kaba.data._OtherEntities.DaoSession;
+import tg.tmye.kaba.data._OtherEntities.LightRestaurant;
 import tg.tmye.kaba.syscore.MyKabaApp;
 
 /**
@@ -45,7 +47,7 @@ import tg.tmye.kaba.syscore.MyKabaApp;
  *  saying it.
  *
  */
-public class RestaurantRepository {
+public class RestaurantDbRepository {
 
     private final Context context;
     RestaurantDbOnlineSource onlineSource;
@@ -57,7 +59,7 @@ public class RestaurantRepository {
 
     private static Gson gson = new Gson();
 
-    public RestaurantRepository (Context context) {
+    public RestaurantDbRepository(Context context) {
         this.context = context;
         this.onlineSource = new RestaurantDbOnlineSource();
         this.databaseRequestThreadBase = new DatabaseRequestThreadBase(context);
@@ -68,14 +70,17 @@ public class RestaurantRepository {
 
         /* get the array of ids from class */
         RestaurantEntityDao restaurantEntityDao = ((MyKabaApp)context.getApplicationContext()).getDaoSession().getRestaurantEntityDao();
-        int[] daily_restoz =
-                gson.fromJson(data.get("daily_restaurants"), new TypeToken<int[]>(){}.getType());
+     /*   int[] daily_restoz =
+                gson.fromJson(data.get("resto"), new TypeToken<int[]>(){}.getType());*/
+        LightRestaurant[] daily_restoz =
+                gson.fromJson(data.get("resto"), new TypeToken<LightRestaurant[]>(){}.getType());
         /* once we have them, look for them in the local db */
-        List<RestaurantEntity> restaurantEntities = new ArrayList<>();
-        for (int i = 0; i < daily_restoz.length; i++) {
-            restaurantEntities.add(RestaurantLocalDataSource.findRestoById(restaurantEntityDao, daily_restoz[i]));
-        }
-        yesOrNo.yes(restaurantEntities, false);
+        List<LightRestaurant> lightRestaurants = Arrays.asList(daily_restoz);
+//        List<RestaurantEntity> restaurantEntities = new ArrayList<>();
+//        for (int i = 0; i < daily_restoz.length; i++) {
+//            restaurantEntities.add(RestaurantLocalDataSource.findRestoById(restaurantEntityDao, daily_restoz[i]));
+//        }
+        yesOrNo.yes(lightRestaurants, false);
     }
 
     public void loadRestaurantList(YesOrNoWithResponse yesOrNoWithResponse) {
@@ -326,10 +331,8 @@ public class RestaurantRepository {
 
             DaoSession daoSession = ((MyKabaApp) ctx.getApplicationContext()).getDaoSession();
             RestaurantEntityDao restaurantEntityDao = daoSession.getRestaurantEntityDao();
-
             // all all restaurants
             List<RestaurantEntity> rs = restaurantEntityDao.loadAll();
-
             return rs;
         }
     }

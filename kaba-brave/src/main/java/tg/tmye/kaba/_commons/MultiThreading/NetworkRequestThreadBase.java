@@ -172,11 +172,11 @@ public class NetworkRequestThreadBase {
     }
 
 
-    public interface NetRequestIntf {
+    public interface NetRequestIntf<T> {
 
         void onNetworkError();
         void onSysError();
-        void onSuccess(String jsonResponse);
+        void onSuccess(T jsonResponse);
     }
 
     public interface OnNetworkAction extends Runnable {

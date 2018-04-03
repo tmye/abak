@@ -2,8 +2,12 @@ package tg.tmye.kaba.data.advert.source;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,6 +37,8 @@ public class AdvertRepository {
     DatabaseRequestThreadBase databaseRequestThreadBase;
     NetworkRequestThreadBase networkRequestThreadBase;
 
+    private Gson gson = new Gson();
+
     public AdvertRepository(Context context) {
         this.context = context;
         this.databaseRequestThreadBase = ((MyKabaApp)context.getApplicationContext()).getDatabaseRequestThreadBase();
@@ -43,14 +49,17 @@ public class AdvertRepository {
 
         /* if there is standard one stored locally, then get it and work with it */
         SharedPreferences preferences = context.getSharedPreferences(Config.HOMEPAGE_SP_VAL, Context.MODE_PRIVATE);
-        final String lastPageFileName = preferences.getString(Config.LAST_HOME_PAGE_JSON, "");
+        final int lastPageFileName = preferences.getInt(Config.LAST_HOME_PAGE_JSON, 0);
 
         /* read current file content */
         networkRequestThreadBase.run(new NetworkRequestThreadBase.OnNetworkAction() {
             @Override
             public void run() {
-                if (lastPageFileName.trim() != null) {
-                    String json = UtilFunctions.readFromFile(context, lastPageFileName);
+
+                Log.d(Constant.APP_SUPER_TAG, "lastpagefilename = "+lastPageFileName);
+
+                if (lastPageFileName != 0) {
+                    String json = UtilFunctions.readFromFile(context, ""+lastPageFileName);
                     if (!"".equals(json)) {
                         /* load it up */
                         netRequestIntf.onSuccess(json);
@@ -61,41 +70,32 @@ public class AdvertRepository {
         });
     }
 
-    public void loadHomeTopBanners(JsonObject data, final YesOrNoWithResponse yesOrNoWithResponse) {
+    public void loadHomeTopBanners(final JsonObject data, final YesOrNoWithResponse yesOrNoWithResponse) {
         databaseRequestThreadBase.run(new DatabaseRequestThreadBase.OnDbTrans() {
             @Override
             public void run() {
 
-                List<String> ls = Arrays.asList(Constant.SAMPLE_IMAGES_BANNER);
-                List<AdsBanner> adsBanners = new ArrayList<>();
-                for (String l : ls) {
-                    // inner object
-                    SimplePicture.Banner ad1 = new SimplePicture.Banner();
-                    ad1.path = l;
-                    // object
-                    AdsBanner adb = new AdsBanner();
-                    adb.adsBanner = ad1;
-                    adsBanners.add(adb);
-                }
-                yesOrNoWithResponse.yes(adsBanners, false);
+                AdsBanner[] home_banners =
+                        gson.fromJson(data.get("slider"), new TypeToken<AdsBanner[]>(){}.getType());
+                yesOrNoWithResponse.yes(Arrays.asList(home_banners), false);
             }
         });
     }
 
 
     public void load48MainAds(JsonObject data, final YesOrNoWithResponse yesOrNoWithResponse) {
-        databaseRequestThreadBase.run(new DatabaseRequestThreadBase.OnDbTrans() {
-            @Override
-            public void run() {
-                yesOrNoWithResponse.yes(ProductAdvertItem.fakeList(8), false);
-            }
-        });
+
+
+        ProductAdvertItem[] productAdvertItems =
+                gson.fromJson(data.get("fourtosix"), new TypeToken<ProductAdvertItem[]>(){}.getType());
+        yesOrNoWithResponse.yes(Arrays.asList(productAdvertItems), false);
     }
 
     public void loadGroup10Ads(JsonObject data, YesOrNoWithResponse yesOrNoWithResponse) {
 
-        List<Group10AdvertItem> group10AdvertItems = Group10AdvertItem.fakeList(5);
-        yesOrNoWithResponse.yes(group10AdvertItems, false);
+        Group10AdvertItem[] group10AdvertItems =
+                gson.fromJson(data.get("groupad"), new TypeToken<Group10AdvertItem[]>(){}.getType());
+        yesOrNoWithResponse.yes(Arrays.asList(group10AdvertItems), false);
     }
 
     public void loadSearchHint(final JsonObject data, final YesOrNoWithResponse yesOrNoWithResponse) {
@@ -115,4 +115,22 @@ public class AdvertRepository {
         });
     }
 
+    public boolean checkAndSave(String jsonResponse) {
+        JsonObject obj = new JsonParser().parse(jsonResponse).getAsJsonObject();
+        JsonObject data = obj.get("data").getAsJsonObject();
+
+        int serial_home = data.get("serial_home").getAsInt();
+        SharedPreferences preferences = context.getSharedPreferences(Config.HOMEPAGE_SP_VAL, Context.MODE_PRIVATE);
+          int local_serial = preferences.getInt(Config.LAST_HOME_PAGE_JSON, 0);
+
+        if (serial_home > local_serial) {
+            /* save current file */
+            UtilFunctions.writeToFile(context, ""+serial_home, jsonResponse);
+            SharedPreferences.Editor edit = preferences.edit();
+            edit.putInt(Config.LAST_HOME_PAGE_JSON, serial_home);
+            edit.commit();
+            return true;
+        }
+        return false;
+    }
 }

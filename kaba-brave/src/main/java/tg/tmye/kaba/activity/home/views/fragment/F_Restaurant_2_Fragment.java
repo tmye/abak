@@ -149,7 +149,7 @@ public class F_Restaurant_2_Fragment extends BaseFragment implements F_Restauran
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
+        // TODO: Update argument type and restaurant_name
         void onFragmentInteraction(Uri uri);
 
         void onRestaurantInteraction(RestaurantEntity resto);

@@ -1,10 +1,7 @@
 package tg.tmye.kaba.activity.home.presenter;
 
 import tg.tmye.kaba._commons.intf.YesOrNoWithResponse;
-import tg.tmye.kaba.activity.home.contracts.F_HomeContract;
 import tg.tmye.kaba.activity.home.contracts.F_UserMeContract;
-import tg.tmye.kaba.data.Restaurant.source.RestaurantRepository;
-import tg.tmye.kaba.data.advert.source.AdvertRepository;
 import tg.tmye.kaba.data.customer.Customer;
 import tg.tmye.kaba.data.customer.source.CustomerDataRepository;
 

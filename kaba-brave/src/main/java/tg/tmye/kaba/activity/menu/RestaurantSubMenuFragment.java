@@ -202,7 +202,7 @@ public class RestaurantSubMenuFragment extends Fragment {
 
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
+        // TODO: Update argument type and restaurant_name
         void onFoodInteraction(Restaurant_Menu_FoodEntity food);
     }
 

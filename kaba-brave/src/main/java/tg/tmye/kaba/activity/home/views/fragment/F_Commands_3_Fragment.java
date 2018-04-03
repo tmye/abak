@@ -201,7 +201,7 @@ public class F_Commands_3_Fragment extends BaseFragment implements F_CommandCont
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
+        // TODO: Update argument type and restaurant_name
         void onFragmentInteraction(Uri uri);
     }
 }

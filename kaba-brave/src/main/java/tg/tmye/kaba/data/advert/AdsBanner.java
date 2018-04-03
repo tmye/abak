@@ -9,12 +9,13 @@ import tg.tmye.kaba.data._OtherEntities.SimplePicture;
 
 public class AdsBanner {
 
-    public SimplePicture.Banner adsBanner;
+    /*"id": 3,
+             "restaurant_name": "slider/cropper.jpg",
+             "link": "www.google.tg",
+             "placeholder": "slider 1"*/
 
-    @Override
-    public String toString() {
-        return "AdsBanner{" +
-                "adsBanner=" + adsBanner +
-                '}';
-    }
+    public int id;
+    public String name;
+    public String link;
+    public String placeholder;
 }

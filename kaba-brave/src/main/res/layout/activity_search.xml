@@ -50,7 +50,7 @@
          android:id="@+id/player_fragment"
          android:tag="PlayerFragment"
          class="abiguime.tz.com.tzyoutube.main.fragment_player.PlayerFragment"
-         android:name="abiguime.tz.com.tzyoutube.main.fragment_player.PlayerFragment"
+         andrrestaurant_namename="abiguime.tz.com.tzyoutube.main.fragment_player.PlayerFragment"
          android:layout_width="match_parent"
          android:layout_height="match_parent"/>-->
 

@@ -1,7 +1,6 @@
 package tg.tmye.kaba.activity.menu;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -12,33 +11,28 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import tg.tmye.kaba.R;
 import tg.tmye.kaba.activity.FoodDetails.FoodDetailsActivity;
+import tg.tmye.kaba.activity.menu.contract.RestaurantMenuContract;
+import tg.tmye.kaba.activity.menu.presenter.RestaurantMenuPresenter;
 import tg.tmye.kaba.data.Food.Restaurant_Menu_FoodEntity;
-import tg.tmye.kaba.data.Food.Restaurant_Menu_FoodEntityDao;
-import tg.tmye.kaba.data.Food.source.FoodRepository;
 import tg.tmye.kaba.data.Menu.Restaurant_SubMenuEntity;
-import tg.tmye.kaba.data.Menu.Restaurant_SubMenuEntityDao;
-import tg.tmye.kaba.data.Menu.source.MenuRepository;
+import tg.tmye.kaba.data.Menu.source.MenuDb_OnlineRepository;
 import tg.tmye.kaba.data.Restaurant.RestaurantEntity;
-import tg.tmye.kaba.data._OtherEntities.DaoSession;
-import tg.tmye.kaba.syscore.MyKabaApp;
+import tg.tmye.kaba.data._OtherEntities.LightRestaurant;
 
-public class RestaurantMenuActivity extends AppCompatActivity implements RestaurantSubMenuFragment.OnFragmentInteractionListener{
+public class RestaurantMenuActivity extends AppCompatActivity implements
+        RestaurantMenuContract.View ,RestaurantSubMenuFragment.OnFragmentInteractionListener{
 
 
     // constants
-    public static final String RESTAURANT_VAL = "RESTAURANT_VAL";
+    public static final String RESTAURANT = "RESTAURANT";
     public static final int RESTAURANT_ITEM_RESULT = 5000;
-
 
     // views
     ViewPager vp_menus;
@@ -47,6 +41,10 @@ public class RestaurantMenuActivity extends AppCompatActivity implements Restaur
     FloatingActionButton cart_fab;
 
     RestaurantEntity restaurantEntity;
+
+    private RestaurantMenuContract.Presenter presenter;
+
+    private MenuDb_OnlineRepository menu_repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,29 +56,53 @@ public class RestaurantMenuActivity extends AppCompatActivity implements Restaur
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        restaurantEntity = getIntent().getParcelableExtra(RESTAURANT_VAL);
+        Object tmp_restaurant = getIntent().getParcelableExtra(RESTAURANT);
+
+        if (tmp_restaurant instanceof RestaurantEntity) {
+            restaurantEntity = (RestaurantEntity) tmp_restaurant;
+        } else if (tmp_restaurant instanceof LightRestaurant) {
+
+            // find the restaurant in the db that corresponds --
+            // -- if it doesnt
+        }
 
         initViews ();
-        initData ();
+//        initData ();
         initMenus ();
+
+        presenter = new RestaurantMenuPresenter(menu_repository,this);
+    }
+
+
+    @Override
+    public void inflateMenus (Map<Restaurant_SubMenuEntity, List<Restaurant_Menu_FoodEntity>> menu_food) {
+
+        /* send list of menus and foods list */
 
         tablelayout_title_strip.setupWithViewPager(vp_menus);
     }
 
-    private void initData() {
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.start();
+    }
+
+    /*  private void initData() {
 
         DaoSession daoSession = ((MyKabaApp) getApplication()).getDaoSession();
         Restaurant_Menu_FoodEntityDao restoDao = daoSession.getRestaurant_Menu_FoodEntityDao();
+*//*
 
-
-        menus = MenuRepository.loadAllSubMenusOfRestaurant(daoSession.getRestaurant_SubMenuEntityDao(), restaurantEntity);
+        menus = MenuDbOnRepository.loadAllSubMenusOfRestaurant(daoSession.getRestaurant_SubMenuEntityDao(), restaurantEntity);
+*//*
 
         if (menus != null)
             for (int i = 0; i < menus.size(); i++) {
                 Restaurant_SubMenuEntity subMenu = menus.get(i);
                 menus.get(i).foods = FoodRepository.findBySubMenuId(restoDao, subMenu.getId());
             }
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -109,9 +131,10 @@ public class RestaurantMenuActivity extends AppCompatActivity implements Restaur
     @Override
     public void onFoodInteraction(Restaurant_Menu_FoodEntity food) {
 
-                  Intent intent = new Intent(this, FoodDetailsActivity.class);
-                    intent.putExtra(FoodDetailsActivity.FOOD_ID, food.get_id());
-                   startActivityForResult(intent, RESTAURANT_ITEM_RESULT);
+        Intent intent = new Intent(this, FoodDetailsActivity.class);
+        intent.putExtra(FoodDetailsActivity.FOOD_ID, food.get_id());
+        intent.putExtra(FoodDetailsActivity.RESTAURANT_ENTITY, restaurantEntity);
+        startActivityForResult(intent, RESTAURANT_ITEM_RESULT);
     }
 
     @Override
@@ -122,9 +145,15 @@ public class RestaurantMenuActivity extends AppCompatActivity implements Restaur
         if (requestCode == RESTAURANT_ITEM_RESULT) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-              restaurantEntity = data.getParcelableExtra(RESTAURANT_VAL);
+                restaurantEntity = data.getParcelableExtra(RESTAURANT);
             }
         }
+    }
+
+    @Override
+    public void setPresenter(RestaurantMenuContract.Presenter presenter) {
+
+        this.presenter = presenter;
     }
 
     private class MenuViewpagerAdapter extends FragmentPagerAdapter {

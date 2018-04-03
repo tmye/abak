@@ -38,7 +38,8 @@ import tg.tmye.kaba.activity.search.SearchActivity;
 import tg.tmye.kaba.config.Config;
 import tg.tmye.kaba.config.Constant;
 import tg.tmye.kaba.data.Restaurant.RestaurantEntity;
-import tg.tmye.kaba.data.Restaurant.source.RestaurantRepository;
+import tg.tmye.kaba.data.Restaurant.source.RestaurantDbRepository;
+import tg.tmye.kaba.data._OtherEntities.LightRestaurant;
 import tg.tmye.kaba.data._OtherEntities.SimplePicture;
 import tg.tmye.kaba.data.advert.AdsBanner;
 import tg.tmye.kaba.data.advert.source.AdvertRepository;
@@ -72,7 +73,7 @@ public class HomeActivity extends AppCompatActivity implements
 
 
     /* models */
-    RestaurantRepository restaurantRepository;
+    RestaurantDbRepository restaurantDbRepository;
     CommandRepository commandRepository;
     AdvertRepository advertRepository;
     private CustomerDataRepository customerDataRepository;
@@ -157,15 +158,15 @@ public class HomeActivity extends AppCompatActivity implements
     }
 
     private void initPresenters() {
-        home_1_presenter = new F_Home_1_Presenter(restaurantRepository, advertRepository, frg_1_home);
-        restaurant_2_presenter = new F_Restaurant_2_Presenter(restaurantRepository, frg_2_restaurants);
+        home_1_presenter = new F_Home_1_Presenter(restaurantDbRepository, advertRepository, frg_1_home);
+        restaurant_2_presenter = new F_Restaurant_2_Presenter(restaurantDbRepository, frg_2_restaurants);
         command_3_presenter = new F_Commands_3_Presenter(commandRepository, frg_3_command_list);
         userAccount_4_presenter = new F_UserAccount_4_Presenter(customerDataRepository, frg_4_myaccount);
     }
 
     private void initRepos() {
 
-        restaurantRepository = new RestaurantRepository(this);
+        restaurantDbRepository = new RestaurantDbRepository(this);
         commandRepository = new CommandRepository(this);
         advertRepository = new AdvertRepository(this);
         customerDataRepository = new CustomerDataRepository(this);
@@ -177,9 +178,16 @@ public class HomeActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onRestaurantInteraction(RestaurantEntity restaurantEntity) {
+    public void onRestaurantInteraction(RestaurantEntity resto) {
         Intent intent = new Intent(this, RestaurantMenuActivity.class);
-        intent.putExtra(RestaurantMenuActivity.RESTAURANT_VAL, restaurantEntity);
+        intent.putExtra(RestaurantMenuActivity.RESTAURANT, resto);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onRestaurantInteraction(LightRestaurant restaurantEntity) {
+        Intent intent = new Intent(this, RestaurantMenuActivity.class);
+        intent.putExtra(RestaurantMenuActivity.RESTAURANT, restaurantEntity);
         startActivity(intent);
     }
 

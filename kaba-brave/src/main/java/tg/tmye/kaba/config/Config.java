@@ -19,6 +19,7 @@ public class Config {
     /* shared preferences */
     public static final String SYS_SHARED_PREFS = "kb.sp.2017";
     public static final String LAST_HOME_PAGE_JSON = "LAST_HOME_PAGE_JSON";
+    public static final String RESTAURANT_DB_SERIAL = "RESTAURANT_DB_SERIAL";
     public static String USER_SHARED_PREFS = "kb.user";
     public static final String DAILY_RESTAURANTS_SP_VAL = "DAILY_RESTAURANTS_SP_VAL";
     public static final String HOMEPAGE_SP_VAL = "HOMEPAGE_SP_VAL";
@@ -34,7 +35,7 @@ public class Config {
 
     /* update home */
     public static final String LINK_HOME_PAGE = Constant.SERVER_ADDRESS+
-            "/sample/home_page_sample.json";
+            "/api/home_screen";
 
     /* get restaurant db */
     public static final String LINK_RESTO_FOOD_DB = Constant.SERVER_ADDRESS+
