@@ -28,6 +28,7 @@
             android:layout_height="wrap_content" />
 
         <EditText
+            android:id="@+id/ed_phone"
             android:layout_gravity="center_horizontal"
             android:gravity="center_vertical|left"
             style="@style/TextStyle.LoginField"
@@ -35,23 +36,23 @@
             android:layout_height="40dp"
             android:drawablePadding="15dp"
             android:hint="@string/phone_number"
-            android:drawableStart="@drawable/myaccount_address_phone"
-            android:drawableLeft="@drawable/myaccount_address_phone"  />
+              />
 
         <EditText
+            android:id="@+id/ed_nickname"
             android:layout_gravity="center_horizontal"
             android:gravity="center_vertical|left"
             style="@style/TextStyle.LoginField"
             android:layout_width="250dp"
             android:layout_height="40dp"
-            android:hint="@string/full_name"
+            android:hint="@string/your_nick_name"
             android:drawablePadding="15dp"
-            android:drawableStart="@drawable/myaccount_address_userid"
-            android:drawableLeft="@drawable/myaccount_address_userid"
+
             />
 
 
         <EditText
+            android:id="@+id/ed_passwd"
             android:layout_gravity="center_horizontal"
             android:gravity="center_vertical|left"
             style="@style/TextStyle.LoginField"
@@ -59,12 +60,12 @@
             android:layout_height="40dp"
             android:hint="@string/password"
             android:drawablePadding="15dp"
-            android:drawableStart="@drawable/ic_myaccount_password_field"
-            android:drawableLeft="@drawable/ic_myaccount_password_field"
+
             />
 
 
         <EditText
+            android:id="@+id/ed_confirm_passwd"
             android:layout_gravity="center_horizontal"
             android:gravity="center_vertical|left"
             style="@style/TextStyle.LoginField"
@@ -72,11 +73,11 @@
             android:layout_height="40dp"
             android:hint="@string/confirm"
             android:drawablePadding="15dp"
-            android:drawableStart="@drawable/ic_myaccount_password_field"
-            android:drawableLeft="@drawable/ic_myaccount_password_field"
+
             />
 
         <Button
+            android:id="@+id/bt_register"
             android:layout_marginTop="40dp"
             android:layout_gravity="center_horizontal"
             android:text="@string/register"

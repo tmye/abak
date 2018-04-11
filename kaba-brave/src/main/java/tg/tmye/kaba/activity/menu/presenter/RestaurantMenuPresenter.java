@@ -38,16 +38,28 @@ public class RestaurantMenuPresenter implements RestaurantMenuContract.Presenter
     public void populateViews() {
 
         /* load restaurant menuz and food from locally or online -- */
-        menuDb_onlineRepository.loadAllSubMenusOfRestaurant(new NetworkRequestThreadBase.NetRequestIntf<Map<Restaurant_SubMenuEntity, List<Restaurant_Menu_FoodEntity>>>() {
+        view.showIsLoading(true);
+        menuDb_onlineRepository.loadAllSubMenusOfRestaurant(new NetworkRequestThreadBase.NetRequestIntf<List<Restaurant_SubMenuEntity>>() {
             @Override
-            public void onNetworkError() {}
+            public void onNetworkError() {
+                view.showIsLoading(false);
+            }
 
             @Override
-            public void onSysError() {}
+            public void onSysError() {
+                view.showIsLoading(false);
+            }
 
             @Override
-            public void onSuccess(Map<Restaurant_SubMenuEntity, List<Restaurant_Menu_FoodEntity>> menu_food_list) {
-                view.inflateMenus(menu_food_list);
+            public void onSuccess(List<Restaurant_SubMenuEntity> menu_food) {
+
+                if (menu_food == null || menu_food.size() == 0) {
+                    /* show error message*/
+                    view.showNoDataMessage();
+                } else {
+                    view.inflateMenus(menu_food);
+                    view.showIsLoading(false);
+                }
             }
 
         });

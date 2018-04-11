@@ -16,6 +16,9 @@ public interface F_UserMeContract {
     interface View extends BaseView<Presenter> {
 
         void inflateCustomerInfo(Customer data);
+
+        void logout();
+
     }
 
     interface Presenter extends BasePresenter {

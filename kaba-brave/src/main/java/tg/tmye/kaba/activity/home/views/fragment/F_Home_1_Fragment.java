@@ -14,25 +14,19 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import tg.tmye.kaba.R;
-import tg.tmye.kaba._commons.adapters.Grid48ViewAdapter;
 import tg.tmye.kaba._commons.adapters.GroupAdsAdapter;
 import tg.tmye.kaba._commons.adapters.Home_1_MainRestaurantAdapter;
 import tg.tmye.kaba._commons.cviews.Grid48View;
-import tg.tmye.kaba._commons.cviews.Group10AdsView;
 import tg.tmye.kaba._commons.cviews.HomeCustom_SwipeRefreshLayout;
 import tg.tmye.kaba._commons.cviews.HomeFeedsAdapter;
 import tg.tmye.kaba._commons.cviews.OffRecyclerview;
@@ -41,15 +35,14 @@ import tg.tmye.kaba._commons.decorator.CommandInnerFoodLineDecorator;
 import tg.tmye.kaba._commons.decorator.ListVerticalSpaceDecorator;
 import tg.tmye.kaba.activity.home.HomeActivity;
 import tg.tmye.kaba.activity.home.contracts.F_HomeContract;
+import tg.tmye.kaba.activity.home.presenter.F_Home_1_Presenter;
 import tg.tmye.kaba.activity.scanner.ScannerActivity;
 import tg.tmye.kaba.config.Constant;
 import tg.tmye.kaba.data.Feeds.NewsFeed;
-import tg.tmye.kaba.data.Restaurant.RestaurantEntity;
 import tg.tmye.kaba.data._OtherEntities.LightRestaurant;
 import tg.tmye.kaba.data._OtherEntities.SimplePicture;
 import tg.tmye.kaba.data.advert.AdsBanner;
 import tg.tmye.kaba.data.advert.Group10AdvertItem;
-import tg.tmye.kaba.data.advert.ProductAdvertItem;
 
 
 public class F_Home_1_Fragment extends BaseFragment implements F_HomeContract.View, Toolbar.OnMenuItemClickListener {
@@ -74,9 +67,9 @@ public class F_Home_1_Fragment extends BaseFragment implements F_HomeContract.Vi
     private OnFragmentInteractionListener mListener;
 
     /* home 1 presenter */
-    private F_HomeContract.Presenter presenter;
+    private F_Home_1_Presenter presenter;
     private Toolbar toolbar;
-    private String searchHint;
+    private String searchHint = null;
 
     public F_Home_1_Fragment() {
         // Required empty public constructor
@@ -85,7 +78,9 @@ public class F_Home_1_Fragment extends BaseFragment implements F_HomeContract.Vi
     @Override
     public void onResume() {
         super.onResume();
-        presenter.start();
+        /* if data was already loaded do nothing */
+        if (searchHint == null || searchHint.trim().length() == 0)
+            presenter.start();
     }
 
     // TODO: Rename and change types and number of parameters
@@ -138,7 +133,8 @@ public class F_Home_1_Fragment extends BaseFragment implements F_HomeContract.Vi
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                slidingBanner_lilRound.load(ads);
+                slidingBanner_lilRound.load(ads,
+                        ((F_Home_1_Fragment.OnFragmentInteractionListener)getActivity()), getChildFragmentManager());
             }
         });
     }
@@ -159,13 +155,19 @@ public class F_Home_1_Fragment extends BaseFragment implements F_HomeContract.Vi
     }
 
     @Override
-    public void inflateMain48(List<ProductAdvertItem> productAdvertItems) {
-        if (productAdvertItems == null || productAdvertItems.size() == 0)
-            grid48View.setVisibility(View.GONE);
-        else {
-            grid48View.setVisibility(View.VISIBLE);
-            grid48View.inflateAds(productAdvertItems);
-        }
+    public void inflateMain48(final List<AdsBanner> adsBanners) {
+
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (adsBanners == null || adsBanners.size() == 0)
+                    grid48View.setVisibility(View.GONE);
+                else {
+                    grid48View.setVisibility(View.VISIBLE);
+                    grid48View.inflateAds(adsBanners, mListener);
+                }
+            }
+        });
     }
 
     @Override
@@ -181,7 +183,8 @@ public class F_Home_1_Fragment extends BaseFragment implements F_HomeContract.Vi
                     groupAds10.setVisibility(View.VISIBLE);
                     groupAds10.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
                     groupAds10.addItemDecoration(new ListVerticalSpaceDecorator(getContext().getResources().getDimensionPixelSize(R.dimen.adgroup_bottom_space)));
-                    groupAds10.setAdapter(new GroupAdsAdapter(getContext(), group10AdvertItems));
+                    groupAds10.setAdapter(new GroupAdsAdapter(getContext(), group10AdvertItems,
+                            ((F_Home_1_Fragment.OnFragmentInteractionListener)getActivity())));
                 }
             }
         });
@@ -229,7 +232,7 @@ public class F_Home_1_Fragment extends BaseFragment implements F_HomeContract.Vi
     }
 
     @Override
-    public void openProductAdvert(ProductAdvertItem productAdvertItem) {
+    public void openProductAdvert(AdsBanner adsBanner) {
 
     }
 
@@ -254,7 +257,7 @@ public class F_Home_1_Fragment extends BaseFragment implements F_HomeContract.Vi
 
     @Override
     public void setPresenter(F_HomeContract.Presenter presenter) {
-        this.presenter = presenter;
+        this.presenter = (F_Home_1_Presenter) presenter;
     }
 
     @Override

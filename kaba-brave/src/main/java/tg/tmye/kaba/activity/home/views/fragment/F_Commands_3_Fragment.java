@@ -1,10 +1,12 @@
 package tg.tmye.kaba.activity.home.views.fragment;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -77,8 +79,16 @@ public class F_Commands_3_Fragment extends BaseFragment implements F_CommandCont
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
+        initDrawable();
         swiperefresh.setOnRefreshListener(this);
         bt_refresh.setOnClickListener(this);
+    }
+
+    private void initDrawable() {
+//        android:drawableStart="@drawable/ic_refresh_icon"
+        Drawable refresh_icon = VectorDrawableCompat.create(getResources(),
+                R.drawable.ic_refresh_icon, null);
+        bt_refresh.setCompoundDrawablesWithIntrinsicBounds (refresh_icon, null, null, null);
     }
 
     private void initViews(View rootView) {

@@ -230,5 +230,19 @@
     <string name="title_activity_favorite">FavoriteActivity</string>
     <string name="title_activity_edit_field">EditFieldActivity</string>
     <string name="restaurant_load_error">Sorry, There is no restaurant to show. Please Refresh The Application.</string>
+    <string name="no_data">This restaurant has no menu.</string>
+    <string name="content_on_loading">Please, Wait a moment!\n We are connecting to the satellite ...</string>
+    <string name="wait_for_address_creation">We are creating a new Adress for You!  Please Wait a moment...</string>
+    <string name="this_field_shouldnt_empty">This field shouldn\'t be empty</string>
+    <string name="please_choose_location">Please choose a location in the gps map</string>
+    <string name="please_choose_atleast_a_picture">Please choose a picture at least</string>
+    <string name="adress_creation_success">Address successfully created!</string>
+    <string name="adress_creation_failed">Address creation failed!</string>
+    <string name="map_coordonates_invalid">Coordinates of Map Invalid</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="are_you_sure_delete">You are going to delete an Address! Do you want to continue?</string>
+    <string name="bt_delete">Delete</string>
+    <string name="address_deleted_success">Address deleted Successfully</string>
+    <string name="a_problem_happenned">A problem happened</string>
 
 </resources>

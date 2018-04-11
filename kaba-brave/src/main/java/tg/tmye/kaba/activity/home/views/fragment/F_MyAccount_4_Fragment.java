@@ -89,6 +89,8 @@ public class F_MyAccount_4_Fragment extends BaseFragment implements F_UserMeCont
         lny_account_balance.setOnClickListener((HomeActivity)getActivity());
         lny_account_more.setOnClickListener((HomeActivity)getActivity());
         lny_account_topup.setOnClickListener((HomeActivity)getActivity());
+
+        presenter.start();
     }
 
 
@@ -122,6 +124,9 @@ public class F_MyAccount_4_Fragment extends BaseFragment implements F_UserMeCont
         lny_account_balance = rootView.findViewById(R.id.lny_account_balance);
         lny_account_more = rootView.findViewById(R.id.lny_account_more);
         lny_account_topup = rootView.findViewById(R.id.lny_account_topup);
+
+        tv_customer_nickname = rootView.findViewById(R.id.tv_nickname);
+        tv_customer_phonenumber = rootView.findViewById(R.id.tv_phone_number);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -156,7 +161,12 @@ public class F_MyAccount_4_Fragment extends BaseFragment implements F_UserMeCont
     @Override
     public void inflateCustomerInfo(Customer data) {
         tv_customer_nickname.setText(data.nickname);
-        tv_customer_phonenumber.setText("XXXX"+data.phone_number.substring(4));
+        tv_customer_phonenumber.setText("XXXX"+data.phone_number.substring(2));
+    }
+
+    @Override
+    public void logout() {
+        
     }
 
     /**

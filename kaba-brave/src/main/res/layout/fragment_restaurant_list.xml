@@ -9,6 +9,13 @@
     tools:context=".activity.home.HomeActivity"
     >
 
+    <ProgressBar
+        android:layout_gravity="center"
+        android:id="@+id/progress_bar"
+        android:indeterminateTint="@color/colorPrimary"
+        android:layout_width="@dimen/webview_circle_progressbar_size"
+        android:layout_height="@dimen/webview_circle_progressbar_size" />
+
     <TextView
         android:id="@+id/tv_messages"
         android:layout_margin="@dimen/activity_horizontal_margin"
@@ -25,5 +32,6 @@
         android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"
         tools:listitem="@layout/fragment_restaurant_list_item" />
+
 
 </FrameLayout>

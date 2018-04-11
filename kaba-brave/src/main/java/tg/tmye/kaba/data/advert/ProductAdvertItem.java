@@ -16,12 +16,10 @@ import tg.tmye.kaba.R;
  * By abiguime on 2017/12/8.
  * email: 2597434002@qq.com
  */
-@Entity(indexes = {
-        @Index(value = "id", unique = true)
-})
+
 public class ProductAdvertItem {
 
-    @Id
+
     public Long id;
 
     public String img_path;
@@ -42,21 +40,11 @@ public class ProductAdvertItem {
         this.img_path = img_path;
     }
 
-    @Generated(hash = 1773170857)
-    public ProductAdvertItem(Long id, String img_path, int cloo, String ad_code,
-                             String ad_hash, String expire_date) {
-        this.id = id;
-        this.img_path = img_path;
-        this.cloo = cloo;
-        this.ad_code = ad_code;
-        this.ad_hash = ad_hash;
-        this.expire_date = expire_date;
-    }
 
-    public static List<ProductAdvertItem> fakeList(int i) {
+   /* public static List<ProductAdvertItem> fakeList(int i) {
 
         return Group10AdvertItem.fakeproductItemList(i);
-    }
+    }*/
 
     public Long get_id() {
         return this.id;

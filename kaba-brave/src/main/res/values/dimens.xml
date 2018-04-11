@@ -75,7 +75,7 @@
     <dimen name="common_adress_image_width">110dp</dimen>
     <dimen name="common_adress_title_height">40dp</dimen>
     <dimen name="edittext_margintop_24">14dp</dimen>
-    <dimen name="edit_address_image_size">100dp</dimen>
+    <dimen name="edit_address_image_size">160dp</dimen>
     <dimen name="edit_image_layout_icon_size">25dp</dimen>
     <dimen name="edit_address_image_spacing">2dp</dimen>
     <dimen name="edit_address_map_height">220dp</dimen>
@@ -104,4 +104,6 @@
     <dimen name="account_appbar_addon_icon_size_half">25dp</dimen>
     <dimen name="account_appbar_addon_spacing">1px</dimen>
     <dimen name="user_account_icon_size">45dp</dimen>
+    <dimen name="dialog_box_text_size">17sp</dimen>
+    <dimen name="progress_dialog_circle_progressbar_size">65dp</dimen>
 </resources>

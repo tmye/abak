@@ -28,7 +28,7 @@ public interface F_HomeContract {
         void showMainSliding(List<AdsBanner> ads);
         void inflateMainRestaurants(List<LightRestaurant> restaurantEntityList);
 
-        void inflateMain48(List<ProductAdvertItem> productAdvertItems);
+        void inflateMain48(List<AdsBanner> productAdvertItems);
         void inflateGroupsPubLongList(List<Group10AdvertItem> group10AdvertItems);
         void inflateFeedsList(List<NewsFeed> newsFeeds);
 
@@ -39,7 +39,7 @@ public interface F_HomeContract {
         /* active actions from the view to the presenter */
         void openRestaurant(LightRestaurant restaurantEntity);
         void openKabaShowPicture(SimplePicture.KabaShowPic pic);
-        void openProductAdvert(ProductAdvertItem productAdvertItem);
+        void openProductAdvert(AdsBanner productAdvertItem);
         void openAdBanner(AdsBanner ad); /* those that slide */
 
         /*  */

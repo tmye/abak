@@ -42,7 +42,6 @@ public class PersonnalInfoActivity extends AppCompatActivity implements
     private List<String> images;
 
 
-
     private FloatingActionButton take_pic_fab;
     public static TextView tv_birth_date;
     private ImageView photoImageView;
@@ -164,16 +163,15 @@ public class PersonnalInfoActivity extends AppCompatActivity implements
 
     @Override
     public void inflateCustomerData(Customer customer) {
-        this.tv_nickname.setText(customer.nickname);
-        this.tv_realname.setText(customer.first_name + "" + customer.last_name);
+        this.tv_nickname.setText(customer.username);
         this.tv_birth_date.setText(customer.birthday);
 
         /*  show the image */
         GlideApp.with(PersonnalInfoActivity.this)
-                .load(Constant.SERVER_ADDRESS+customer.ppicture)
+                .load(Constant.SERVER_ADDRESS+customer.profile_picture)
                 .centerCrop()
                 .into(photoImageView);
-        if (!customer.is_gender_to_set) {
+        if (customer.is_gender_to_set == 0) {
             rd_gender_female.setEnabled(false);
             rd_gender_male.setEnabled(false);
         }

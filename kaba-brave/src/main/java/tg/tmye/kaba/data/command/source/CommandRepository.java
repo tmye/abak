@@ -15,10 +15,7 @@ import tg.tmye.kaba._commons.MultiThreading.NetworkRequestThreadBase;
 import tg.tmye.kaba._commons.intf.YesOrNoWithResponse;
 import tg.tmye.kaba.config.Config;
 import tg.tmye.kaba.config.Constant;
-import tg.tmye.kaba.data.Food.Food_TagDao;
 import tg.tmye.kaba.data.Food.Restaurant_Menu_FoodEntity;
-import tg.tmye.kaba.data.Food.Restaurant_Menu_FoodEntityDao;
-import tg.tmye.kaba.data.Restaurant.RestaurantEntityDao;
 import tg.tmye.kaba.data._OtherEntities.Error;
 import tg.tmye.kaba.data.command.Command;
 import tg.tmye.kaba.syscore.MyKabaApp;
@@ -42,7 +39,7 @@ public class CommandRepository {
 
         /* send back a map that contains restaurants as a key, and list of basketItem as value */
         ((MyKabaApp)context.getApplicationContext()).getNetworkRequestBase().run(
-                Config.LINK_MY_COMMANDS, new NetworkRequestThreadBase.NetRequestIntf() {
+                Config.LINK_MY_COMMANDS, new NetworkRequestThreadBase.NetRequestIntf<String>() {
                     @Override
                     public void onNetworkError() {
                         yesOrNoWithResponse.no(new Error.NetworkError(), true);
@@ -69,13 +66,13 @@ public class CommandRepository {
                             List<Command> commandList = Arrays.asList(commands);
 
                             /* complete whatever we  have to complete like fetching data from local database and so on */
-                            RestaurantEntityDao restaurantEntityDao = ((MyKabaApp)context.getApplicationContext()).getDaoSession().getRestaurantEntityDao();
-                            Restaurant_Menu_FoodEntityDao foodEntityDao = ((MyKabaApp)context.getApplicationContext()).getDaoSession().getRestaurant_Menu_FoodEntityDao();
+//                            RestaurantEntityDao restaurantEntityDao = ((MyKabaApp)context.getApplicationContext()).getDaoSession("").getRestaurantEntityDao();
+                        /*    Restaurant_Menu_FoodEntityDao foodEntityDao = ((MyKabaApp)context.getApplicationContext()).getDaoSession().getRestaurant_Menu_FoodEntityDao();
                             Food_TagDao foodTagDao = ((MyKabaApp)context.getApplicationContext()).getDaoSession().getFood_TagDao();
 
                             for (int i = 0; i < commandList.size(); i++) {
                                 commandList.set(i,commandList.get(i).fetchAll(restaurantEntityDao, foodEntityDao, foodTagDao));
-                            }
+                            }*/
 
                             yesOrNoWithResponse.yes(commandList, true);
                         } catch (Exception e){

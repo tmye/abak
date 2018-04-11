@@ -13,21 +13,24 @@ public class Group10AdvertItem {
 
     public String title;
     public String title_code_color;
-    public ProductAdvertItem adOne;
-    public ProductAdvertItem adOnePrime;
+
+
+    public AdsBanner big_pub;
+    public AdsBanner small_pub;
 
     /* content of first recyclerview */
-    public List<ProductAdvertItem> level1_ads;
-    public List<ProductAdvertItem> level2_ads;
+    public List<AdsBanner> level_one;
+    public List<AdsBanner> level_two;
 
-    public static List<Group10AdvertItem> fakeList(int indice) {
+
+   /* public static List<Group10AdvertItem> fakeList(int indice) {
 
         List<Group10AdvertItem> list = new ArrayList<>();
 
         for (int i = 0; i < indice; i++) {
             Group10AdvertItem ad = new Group10AdvertItem();
-            ad.adOne = new ProductAdvertItem(long_image_array[new Random().nextInt(long_image_array.length)], null);
-            ad.adOnePrime = new ProductAdvertItem(square_image_array[new Random().nextInt(square_image_array.length)], null);
+            ad.big_pub = new AdsBanner(long_image_array[new Random().nextInt(long_image_array.length)], null);
+            ad.small_pub = new AdsBanner(square_image_array[new Random().nextInt(square_image_array.length)], null);
             ad.level1_ads = fakeproductItemList(2);
             ad.level2_ads = fakeproductItemList(4);
             ad.title_code_color = groupAdTitleThemeColor[new Random().nextInt(groupAdTitleThemeColor.length)];
@@ -35,18 +38,18 @@ public class Group10AdvertItem {
             list.add(ad);
         }
         return list;
-    }
+    }*/
 
 
-    public static List<ProductAdvertItem> fakeproductItemList (int count) {
-        List<ProductAdvertItem> list = new ArrayList<>();
+  /*  public static List<AdsBanner> fakeproductItemList (int count) {
+        List<AdsBanner> list = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            ProductAdvertItem item = new ProductAdvertItem(image_no_background_array[new Random().nextInt(image_no_background_array.length)], null);
+            AdsBanner item = new AdsBanner(image_no_background_array[new Random().nextInt(image_no_background_array.length)], null);
             list.add(item);
         }
         return list;
     }
-
+*/
 
     /* fake database */
     public static  String[] long_image_array = {

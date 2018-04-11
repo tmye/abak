@@ -59,7 +59,7 @@ public class AdvertRepository {
                 Log.d(Constant.APP_SUPER_TAG, "lastpagefilename = "+lastPageFileName);
 
                 if (lastPageFileName != 0) {
-                    String json = UtilFunctions.readFromFile(context, ""+lastPageFileName);
+                    String json = UtilFunctions.readFromFile(context, "home-"+lastPageFileName);
                     if (!"".equals(json)) {
                         /* load it up */
                         netRequestIntf.onSuccess(json);
@@ -125,7 +125,7 @@ public class AdvertRepository {
 
         if (serial_home > local_serial) {
             /* save current file */
-            UtilFunctions.writeToFile(context, ""+serial_home, jsonResponse);
+            UtilFunctions.writeToFile(context, "home-"+serial_home, jsonResponse);
             SharedPreferences.Editor edit = preferences.edit();
             edit.putInt(Config.LAST_HOME_PAGE_JSON, serial_home);
             edit.commit();

@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.List;
@@ -34,6 +35,8 @@ public class F_Restaurant_2_Fragment extends BaseFragment implements F_Restauran
     RecyclerView restaurantRecyclerView;
 
     TextView tv_error_message;
+
+    ProgressBar progressBar;
 
     /* presenter */
     private F_RestaurantContract.Presenter presenter;
@@ -82,6 +85,7 @@ public class F_Restaurant_2_Fragment extends BaseFragment implements F_Restauran
     private void initViews(View rootView) {
         tv_error_message = rootView.findViewById(R.id.tv_messages);
         restaurantRecyclerView = rootView.findViewById(R.id.list);
+        progressBar = rootView.findViewById(R.id.progress_bar);
     }
 
     /*public void updateRestoz (List<RestaurantEntity> restoz) {
@@ -122,20 +126,61 @@ public class F_Restaurant_2_Fragment extends BaseFragment implements F_Restauran
     }
 
     @Override
-    public void inflateRestaurantList(List<RestaurantEntity> restaurantEntities) {
+    public void inflateRestaurantList(final List<RestaurantEntity> restaurantEntities) {
 
-        if (restaurantEntities == null || restaurantEntities.size() == 0) {
-            restaurantRecyclerView.setVisibility(View.GONE);
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                if (restaurantEntities == null || restaurantEntities.size() == 0) {
+                    restaurantRecyclerView.setVisibility(View.GONE);
             /* show error message */
-            tv_error_message.setVisibility(View.VISIBLE);
-        } else {
-            tv_error_message.setVisibility(View.GONE);
-            restaurantRecyclerView.setVisibility(View.VISIBLE);
-            restaurantRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            restaurantRecyclerView.addItemDecoration(new LastItemListSpaceDecoration(getContext().getResources().getDimensionPixelSize(R.dimen.menu_food_item_height)));
-            resListAdapter = new RestaurantRecyclerAdapter(getContext(), restaurantEntities, mListener);
-            restaurantRecyclerView.setAdapter(resListAdapter);
-        }
+                    tv_error_message.setVisibility(View.VISIBLE);
+                } else {
+                    tv_error_message.setVisibility(View.GONE);
+                    restaurantRecyclerView.setVisibility(View.VISIBLE);
+                    restaurantRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    restaurantRecyclerView.addItemDecoration(new LastItemListSpaceDecoration(getContext().getResources().getDimensionPixelSize(R.dimen.menu_food_item_height)));
+                    resListAdapter = new RestaurantRecyclerAdapter(getContext(), restaurantEntities, mListener);
+                    restaurantRecyclerView.setAdapter(resListAdapter);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void showLoading(final boolean isLoading) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
+            }
+        });
+    }
+
+    @Override
+    public void showNetworkError() {
+
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                tv_error_message.setText(getResources().getString(R.string.network_error));
+        /* hide everything else */
+                restaurantRecyclerView.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    @Override
+    public void showSysError() {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                tv_error_message.setText(getResources().getString(R.string.sys_error));
+                restaurantRecyclerView.setVisibility(View.GONE);
+            }
+        });
     }
 
     /**

@@ -17,7 +17,10 @@ public interface RestaurantMenuContract {
 
     public interface View extends BaseView<Presenter> {
 
-        public void inflateMenus(Map<Restaurant_SubMenuEntity, List<Restaurant_Menu_FoodEntity>> menu_food);
+        public void inflateMenus(List<Restaurant_SubMenuEntity> menu_food);
+        public void showIsLoading (boolean isLoading);
+
+        void showNoDataMessage();
     }
 
     public interface Presenter extends BasePresenter {

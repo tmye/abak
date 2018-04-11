@@ -47,7 +47,7 @@ public class BasketFoodRepository {
 
         /* loading failure*/
            /* check network and launch request, if there is a pblem, launch local data */
-        networkRequestBase.run(Config.LINK_MY_BASKET, new NetworkRequestThreadBase.NetRequestIntf() {
+        networkRequestBase.run(Config.LINK_MY_BASKET, new NetworkRequestThreadBase.NetRequestIntf<String>() {
 
             @Override
             public void onNetworkError() {

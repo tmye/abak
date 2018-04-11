@@ -32,14 +32,14 @@ public class NotificationBuilder {
      */
 
     /**
-     *  open webpage with link and title
+     *  open webpage with link and name
      */
-    public static void sendOpenWebpageNotification (Context ctx, String title, String content, String link) {
+    public static void sendOpenWebpageNotification (Context ctx, String name, String content, String link) {
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(ctx, Constant.CHANNEL_ID)
                         .setSmallIcon(android.R.drawable.stat_notify_voicemail)
-                        .setContentTitle(title)
+                        .setContentTitle(name)
                         .setContentText(content);
 
         /* define notification action */
@@ -67,14 +67,14 @@ public class NotificationBuilder {
 
 
     /**
-     *  open webpage with link and title
+     *  open webpage with link and name
      */
-    public static void sendFoodDetailsNotification (Context ctx, String title, String content, long food_id) {
+    public static void sendFoodDetailsNotification (Context ctx, String name, String content, long food_id) {
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(ctx)
                         .setSmallIcon(android.R.drawable.stat_notify_voicemail)
-                        .setContentTitle(title)
+                        .setContentTitle(name)
                         .setContentText(content);
 
         Intent resultIntent = new Intent(ctx, FoodDetailsActivity.class);
@@ -95,12 +95,12 @@ public class NotificationBuilder {
     }
 
     /* restaurant home page */
-    public static void sendShowRestaurantPageNotification (Context ctx, String title, String content, int restaurant_id) {
+    public static void sendShowRestaurantPageNotification (Context ctx, String name, String content, int restaurant_id) {
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(ctx)
                         .setSmallIcon(android.R.drawable.stat_notify_voicemail)
-                        .setContentTitle(title)
+                        .setContentTitle(name)
                         .setContentText(content);
 
         /* define notification action */

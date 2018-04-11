@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:theme="@style/Toolbar.WhiteRedText"
-            app:title="@string/my_news_feed"
+            app:name="@string/my_news_feed"
             app:titleTextColor="@color/colorPrimary"
             android:textSize="@dimen/actionbar_title_text_size"
             android:textStyle="bold"

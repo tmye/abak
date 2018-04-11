@@ -45,7 +45,7 @@ public class FavoriteRepository {
 
         /* check network and launch request, if there is a pblem, launch local data */
 
-        networkRequestBase.run(Config.LINK_MY_FAVORITE, new NetworkRequestThreadBase.NetRequestIntf() {
+        networkRequestBase.run(Config.LINK_MY_FAVORITE, new NetworkRequestThreadBase.NetRequestIntf<String>() {
 
             @Override
             public void onNetworkError() {

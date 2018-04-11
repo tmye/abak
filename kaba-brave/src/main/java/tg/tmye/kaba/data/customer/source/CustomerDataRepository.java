@@ -2,7 +2,7 @@ package tg.tmye.kaba.data.customer.source;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.session.MediaSession;
+import android.os.CpuUsageInfo;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -10,7 +10,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
-import java.net.NetworkInterface;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,12 +18,10 @@ import tg.tmye.kaba._commons.MultiThreading.DatabaseRequestThreadBase;
 import tg.tmye.kaba._commons.MultiThreading.NetworkRequestThreadBase;
 import tg.tmye.kaba._commons.intf.YesOrNoWithResponse;
 import tg.tmye.kaba._commons.utils.UtilFunctions;
-import tg.tmye.kaba.activity.UserAuth.LoginPresenter;
-import tg.tmye.kaba.activity.home.contracts.F_UserMeContract;
-import tg.tmye.kaba.activity.home.presenter.F_UserAccount_4_Presenter;
+import tg.tmye.kaba.activity.UserAuth.login.LoginPresenter;
+import tg.tmye.kaba.activity.UserAuth.register.RegisterPresenter;
 import tg.tmye.kaba.config.Config;
 import tg.tmye.kaba.config.Constant;
-import tg.tmye.kaba.data.Food.Restaurant_Menu_FoodEntity;
 import tg.tmye.kaba.data.customer.Customer;
 import tg.tmye.kaba.syscore.MyKabaApp;
 
@@ -52,13 +49,24 @@ public class CustomerDataRepository {
     public void getCustomerInfo(YesOrNoWithResponse yesOrNoWithResponse) {
 
         /* get customer id into shared preference */
-//        SharedPreferences preferences = context.getSharedPreferences()
 
-        /* load data from local*/
+        Customer customer = new Customer();
+        SharedPreferences sharedPreferences = context.getSharedPreferences(Config.USER_SHARED_PREFS, Context.MODE_PRIVATE);
+        String username = sharedPreferences.getString(Config.CUSTOMER_USERNAME, "");
+        int c_id = sharedPreferences.getInt(Config.CUSTOMER_ID, -1);
 
-        /* load from online also, when online is here, we update local one */
+        if (c_id == -1 || "".equals(username.trim())) {
+            yesOrNoWithResponse.no("logout", false);
+        }
 
-        yesOrNoWithResponse.yes(Customer.fakeCustomer(), false);
+        customer.username = username;
+        customer.phone_number = sharedPreferences.getString(Config.CUSTOMER_PHONE_NUMBER, "");
+        customer.birthday = sharedPreferences.getString(Config.CUSTOMER_BIRTHDAY, "");
+        customer.nickname = sharedPreferences.getString(Config.CUSTOMER_NICKNAME, "");
+        customer.profile_picture = sharedPreferences.getString(Config.CUSTOMER_PROFILE_PICTURE, "");
+        customer.theme_picture = sharedPreferences.getString(Config.CUSTOMER_THEME_PICTURE, "");
+
+        yesOrNoWithResponse.yes(customer, false);
     }
 
 
@@ -66,7 +74,7 @@ public class CustomerDataRepository {
 
         /* using http to push it to the server */
         String jsonData = UtilFunctions.toJsonData(customer);
-        networkRequestHandler.postJsonData(Config.LINK_MY_ACCOUNT_INFO, jsonData, new NetworkRequestThreadBase.NetRequestIntf() {
+        networkRequestHandler.postJsonData(Config.LINK_MY_ACCOUNT_INFO, jsonData, new NetworkRequestThreadBase.NetRequestIntf<String>() {
 
             @Override
             public void onNetworkError() {
@@ -85,7 +93,49 @@ public class CustomerDataRepository {
         });
     }
 
+    /* register */
+    public void register(String phonecode, String password, String nickname, final RegisterPresenter.RegisterImpl register) {
 
+        Map<String,Object> params = new HashMap<>();
+        params.put("nickname", nickname);
+        params.put("password", password);
+        params.put("phone_number", phonecode);
+
+        networkRequestHandler.postJsonData(Config.LINK_USER_REGISTER, params, new NetworkRequestThreadBase.NetRequestIntf<String>() {
+
+            @Override
+            public void onNetworkError() {
+            }
+
+            @Override
+            public void onSysError() {
+            }
+
+            @Override
+            public void onSuccess(String jsonResponse) {
+
+                Log.d(Constant.APP_TAG, jsonResponse);
+                /* if ok, analyse and manage. */
+                JsonObject obj = new JsonParser().parse(jsonResponse).getAsJsonObject();
+
+                int errorCode = obj.get("error").getAsInt();
+
+                switch (errorCode) {
+                    case RegisterPresenter.SUCCESS:
+                        JsonObject data = obj.get("data").getAsJsonObject();
+
+                        /* register token */
+                        /* register username */
+                        /* register phone */
+
+                        break;
+                    default:
+                        register.no(obj.get("message").getAsString(), true);
+                        break;
+                }
+            }
+        });
+    }
 
     /* login */
     public void login (String username, String password, final LoginPresenter.LoginImpl loginImpl) {
@@ -95,7 +145,7 @@ public class CustomerDataRepository {
         params.put("_password", password);
 
            /* send login params by post */
-        networkRequestHandler.postWithParams (Config.LINK_LOGIN_USER, params, new NetworkRequestThreadBase.NetRequestIntf(){
+        networkRequestHandler.postWithParams (Config.LINK_USER_LOGIN, params, new NetworkRequestThreadBase.NetRequestIntf<String>(){
 
             @Override
             public void onNetworkError() {
@@ -110,47 +160,41 @@ public class CustomerDataRepository {
             @Override
             public void onSuccess(String jsonResponse) {
 
-                /* work on the network thread, and do what is there to do */
-                    /* message
-                    *
-                    * {
-                    * error : 0 (success) / 1 error
-                    * message : "",
-                    * data : {"token": "XXXKIAJFAJFKAJFAL",
-                     * "customer" : {
-                    *       "id" : 3,
-                    *       "phone" : 906297XX,
-                    *       "firstname" : "Ulrich",
-                    *       "surname" : "Abiguime",
-                    *       "nickname" : "geeky"
-                    *  }
-                    * }
-                    * }
-                    * */
-
                 Log.d(Constant.APP_TAG, jsonResponse);
-
                 JsonObject obj = new JsonParser().parse(jsonResponse).getAsJsonObject();
                 int errorCode = obj.get("error").getAsInt();
-                String message = obj.get("message").getAsString();
                 if (errorCode == 0) {
-                    /* get token */
-                    String token = obj.get("data").getAsJsonObject().get("token").getAsString();
-                    /* get customer */
+                    String token = obj.get("data").getAsJsonObject().get("payload").getAsJsonObject().get("token").getAsString();
                     Customer customer =
                             gson.fromJson(obj.get("data").getAsJsonObject().get("customer"), new TypeToken<Customer>(){}.getType());
-                    /* save it locally */
                     saveToken(token);
-                    /* */
+                    saveCustomer(customer);
                     loginImpl.yes(token, customer, true);
                 } else {
+                    String message = obj.get("message").getAsString();
                     loginImpl.no(message, true);
                 }
             }
         });
-
-
     }
+
+
+    private void saveCustomer(Customer customer) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(Config.USER_SHARED_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+        edit.putInt(Config.CUSTOMER_ID, customer.id);
+        edit.putString(Config.CUSTOMER_USERNAME, customer.username);
+        edit.putString(Config.CUSTOMER_NICKNAME, customer.nickname);
+        edit.putString(Config.CUSTOMER_PHONE_NUMBER, customer.phone_number);
+        edit.putString(Config.CUSTOMER_BIRTHDAY, customer.birthday);
+        edit.putString(Config.CUSTOMER_PROFILE_PICTURE, customer.profile_picture);
+        edit.putString(Config.CUSTOMER_THEME_PICTURE, customer.theme_picture);
+        edit.putInt(Config.CUSTOMER_GENDER, customer.gender);
+        edit.putInt(Config.CUSTOMER_IS_GENDER_TO_SET, customer.is_gender_to_set);
+
+        edit.commit();
+    }
+
 
     public void saveToken(String token) {
 
@@ -158,5 +202,10 @@ public class CustomerDataRepository {
         SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putString(Config.SYSTOKEN, token);
         edit.commit();
+    }
+
+    public void saveToApp(String token) {
+
+        ((MyKabaApp)context.getApplicationContext()).setAuthToken(token);
     }
 }

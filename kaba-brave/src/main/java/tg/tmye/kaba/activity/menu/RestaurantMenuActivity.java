@@ -11,6 +11,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +40,7 @@ public class RestaurantMenuActivity extends AppCompatActivity implements
     // views
     ViewPager vp_menus;
     TabLayout tablelayout_title_strip;
-    private List<Restaurant_SubMenuEntity> menus;
+
     FloatingActionButton cart_fab;
 
     RestaurantEntity restaurantEntity;
@@ -45,6 +48,12 @@ public class RestaurantMenuActivity extends AppCompatActivity implements
     private RestaurantMenuContract.Presenter presenter;
 
     private MenuDb_OnlineRepository menu_repository;
+
+    private List<Restaurant_SubMenuEntity> menu_food;
+
+    private ProgressBar progressBar;
+
+    private TextView tv_no_food_message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,22 +73,63 @@ public class RestaurantMenuActivity extends AppCompatActivity implements
 
             // find the restaurant in the db that corresponds --
             // -- if it doesnt
+            restaurantEntity = RestaurantEntity.fromLightRestaurant((LightRestaurant) tmp_restaurant);
         }
 
         initViews ();
 //        initData ();
-        initMenus ();
+//        initMenus ();
 
+        menu_repository = new MenuDb_OnlineRepository(this, restaurantEntity);
         presenter = new RestaurantMenuPresenter(menu_repository,this);
     }
 
 
     @Override
-    public void inflateMenus (Map<Restaurant_SubMenuEntity, List<Restaurant_Menu_FoodEntity>> menu_food) {
+    public void inflateMenus (List<Restaurant_SubMenuEntity> menu_food) {
 
         /* send list of menus and foods list */
 
-        tablelayout_title_strip.setupWithViewPager(vp_menus);
+        /* init pages */
+        this.menu_food = menu_food;
+        /* set strip together with viewpager */
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                tablelayout_title_strip.setupWithViewPager(vp_menus);
+                /* init adapter and create the view */
+                initMenus();
+            }
+        });
+    }
+
+    @Override
+    public void showIsLoading(final boolean isLoading) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
+                vp_menus.setVisibility(isLoading ? View.GONE : View.VISIBLE);
+                tv_no_food_message.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    @Override
+    public void showNoDataMessage() {
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                String message = getResources().getString(R.string.no_data);
+                tv_no_food_message.setText(message);
+
+                progressBar.setVisibility(View.GONE);
+                vp_menus.setVisibility(View.GONE);
+                tv_no_food_message.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     @Override
@@ -87,22 +137,6 @@ public class RestaurantMenuActivity extends AppCompatActivity implements
         super.onResume();
         presenter.start();
     }
-
-    /*  private void initData() {
-
-        DaoSession daoSession = ((MyKabaApp) getApplication()).getDaoSession();
-        Restaurant_Menu_FoodEntityDao restoDao = daoSession.getRestaurant_Menu_FoodEntityDao();
-*//*
-
-        menus = MenuDbOnRepository.loadAllSubMenusOfRestaurant(daoSession.getRestaurant_SubMenuEntityDao(), restaurantEntity);
-*//*
-
-        if (menus != null)
-            for (int i = 0; i < menus.size(); i++) {
-                Restaurant_SubMenuEntity subMenu = menus.get(i);
-                menus.get(i).foods = FoodRepository.findBySubMenuId(restoDao, subMenu.getId());
-            }
-    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -126,6 +160,8 @@ public class RestaurantMenuActivity extends AppCompatActivity implements
 
         vp_menus = findViewById(R.id.viewpager_menus);
         tablelayout_title_strip = findViewById(R.id.tablayout_vp_strip);
+        progressBar = findViewById(R.id.progress_bar);
+        tv_no_food_message = findViewById(R.id.tv_no_food_message);
     }
 
     @Override
@@ -173,19 +209,19 @@ public class RestaurantMenuActivity extends AppCompatActivity implements
 
             if (frg_map.get(position) == null) {
                 frg_map.put(position, RestaurantSubMenuFragment.instantiate(RestaurantMenuActivity.this,
-                        menus.get(position)));
+                        menu_food.get(position)));
             }
             return frg_map.get(position);
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return menus.get(position).getTitle().toUpperCase();
+            return menu_food.get(position).getName().toUpperCase();
         }
 
         @Override
         public int getCount() {
-            return menus.size();
+            return menu_food.size();
         }
     }
 

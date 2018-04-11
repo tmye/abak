@@ -60,12 +60,12 @@ public class RestaurantRecyclerAdapter extends RecyclerView.Adapter<RestaurantRe
 
         final RestaurantEntity resto = data.get(position);
 
-        holder.tv_resto_name.setText(resto.restaurant_name.toUpperCase());
-        holder.tv_resto_address.setText(resto.getContact().address);
-        holder.tv_resto_contact.setText(resto.getContact().phone);
+        holder.tv_resto_name.setText(resto.name.toUpperCase());
+        holder.tv_resto_address.setText(resto.address);
+        holder.tv_resto_contact.setText(resto.main_contact);
 
         GlideApp.with(ctx)
-                .load(Constant.SERVER_ADDRESS+resto.restaurant_logo)
+                .load(Constant.SERVER_ADDRESS +"/"+ resto.pic)
                 .placeholder(R.drawable.placeholder_kaba)
                 .centerCrop()
                 .into(holder.cic_resto);

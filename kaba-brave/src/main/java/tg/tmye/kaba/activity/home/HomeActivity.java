@@ -22,7 +22,8 @@ import android.widget.Toast;
 import tg.tmye.kaba.R;
 import tg.tmye.kaba._commons.intf.YesOrNo;
 import tg.tmye.kaba.activity.UserAcc.SoldeActivity;
-import tg.tmye.kaba.activity.UserAuth.LoginActivity;
+import tg.tmye.kaba.activity.UserAuth.login.LoginActivity;
+import tg.tmye.kaba.activity.Web.WebActivity;
 import tg.tmye.kaba.activity.cart.ShoppingCartActivity;
 import tg.tmye.kaba.activity.home.presenter.F_Commands_3_Presenter;
 import tg.tmye.kaba.activity.home.presenter.F_Home_1_Presenter;
@@ -193,7 +194,9 @@ public class HomeActivity extends AppCompatActivity implements
 
     @Override
     public void onAdsInteraction(AdsBanner ad) {
-        Log.d(Constant.APP_TAG, ad.toString());
+        Intent intent = new Intent(this, WebActivity.class);
+        intent.putExtra(WebActivity.DATA, ad.link);
+        startActivity(intent);
     }
 
     @Override

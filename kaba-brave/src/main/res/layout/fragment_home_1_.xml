@@ -109,7 +109,7 @@
                     android:layout_gravity="center_vertical"
                     android:background="@color/brown">
 
-                    <android.support.v4.view.ViewPager
+                    <tg.tmye.kaba._commons.cviews.AutoScrollViewPager
                         android:id="@+id/viewpager_sliding_banner"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

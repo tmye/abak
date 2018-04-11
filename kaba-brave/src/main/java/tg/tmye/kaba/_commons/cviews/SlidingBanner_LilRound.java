@@ -1,18 +1,23 @@
 package tg.tmye.kaba._commons.cviews;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -23,8 +28,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tg.tmye.kaba.R;
+import tg.tmye.kaba.activity.home.views.fragment.F_Home_1_Fragment;
 import tg.tmye.kaba.config.Constant;
-import tg.tmye.kaba.data._OtherEntities.SimplePicture;
 import tg.tmye.kaba.data.advert.AdsBanner;
 import tg.tmye.kaba.syscore.GlideApp;
 
@@ -34,8 +39,7 @@ import tg.tmye.kaba.syscore.GlideApp;
  * email: 2597434002@qq.com
  */
 
-public class SlidingBanner_LilRound extends FrameLayout implements Runnable, View.OnTouchListener {
-
+public class SlidingBanner_LilRound extends FrameLayout implements Runnable  {
 
     // slidingbanner_sliding_lapse
     private static final long SLIDING_LAPSE = 4000;
@@ -55,13 +59,17 @@ public class SlidingBanner_LilRound extends FrameLayout implements Runnable, Vie
     };
 
     // is viewpager touched
-    private boolean vp_is_touched;
+    private boolean vp_is_touched = false;
 
     // food details list
     private List<AdsBanner> food_details_pictures;
 
     // direction of the dragging
     private boolean leftToRight = true;
+    private static F_Home_1_Fragment.OnFragmentInteractionListener adsListener;
+
+
+    private FragmentManager ourFragmentManager;
 
 
     public SlidingBanner_LilRound(@NonNull Context context) {
@@ -84,7 +92,7 @@ public class SlidingBanner_LilRound extends FrameLayout implements Runnable, Vie
     /* get size of the rounds */
 
 
-    ViewPager vp;
+    AutoScrollViewPager autoScrollViewpager;
 
     LinearLayout lny_lil_round;
 
@@ -95,7 +103,7 @@ public class SlidingBanner_LilRound extends FrameLayout implements Runnable, Vie
     protected void onFinishInflate() {
         super.onFinishInflate();
         // get every items and get them safe
-        vp = findViewById(R.id.viewpager_sliding_banner);
+        autoScrollViewpager = findViewById(R.id.viewpager_sliding_banner);
         lny_lil_round = findViewById(R.id.lny_lil_round);
 
         food_details_pictures = new ArrayList<>();
@@ -121,7 +129,6 @@ public class SlidingBanner_LilRound extends FrameLayout implements Runnable, Vie
             if (i == 0)
                 v.setImageResource(roundDrawableResources[0]);
 
-
             iv_rounds[i] = (ImageView) v;
             v.setTag("lil_round"+i);
             lny.addView(v, params);
@@ -129,14 +136,19 @@ public class SlidingBanner_LilRound extends FrameLayout implements Runnable, Vie
     }
 
 
-    public void load(List<AdsBanner> food_details_pictures) {
+    public void load(List<AdsBanner> food_details_pictures, F_Home_1_Fragment.OnFragmentInteractionListener listener, FragmentManager childFragmentManager) {
         // load pictures links into the viewpager -- and when we click, we are redirected to pages inside or outside
         // the application
+        if (childFragmentManager != null)
+            this.ourFragmentManager = childFragmentManager;
+        else
+            this.ourFragmentManager = ((AppCompatActivity)getContext()).getSupportFragmentManager();
         this.food_details_pictures = food_details_pictures;
+        this.adsListener = listener;
         adapter = new VpPageAdapter(getContext());
-        vp.setAdapter(adapter);
+        autoScrollViewpager.setAdapter(adapter);
         inflateLilRonds(lny_lil_round, adapter.getCount());
-        vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        autoScrollViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -170,10 +182,9 @@ public class SlidingBanner_LilRound extends FrameLayout implements Runnable, Vie
             }
 
         });
-        vp.setOnTouchListener(this);
-        Log.d("xxx", "loading slidingbanner");
         run();
     }
+
 
     Handler mHandler = new Handler();
 
@@ -181,7 +192,7 @@ public class SlidingBanner_LilRound extends FrameLayout implements Runnable, Vie
     public void run() {
 
 
-        int newScrolledPosition = vp.getCurrentItem();
+        int newScrolledPosition = autoScrollViewpager.getCurrentItem();
 
         /* change direction */
         if (leftToRight && newScrolledPosition+1>=adapter.getCount()
@@ -196,9 +207,13 @@ public class SlidingBanner_LilRound extends FrameLayout implements Runnable, Vie
 
         if (!vp_is_touched) {
             // slide once
-            vp.setCurrentItem(
+
+            Log.d("sliding", "sliding from "+ autoScrollViewpager.getCurrentItem()+" -- to "+newScrolledPosition);
+            autoScrollViewpager.setCurrentItem(
                     newScrolledPosition
                     , true);
+        } else {
+            Log.d("sliding", "sliding is touched. NOT SCROLL!! ");
         }
 
         /* if we are settling or have an idle state, we should not scroll */
@@ -208,74 +223,23 @@ public class SlidingBanner_LilRound extends FrameLayout implements Runnable, Vie
         // if the thread is killed, he must be created again!
     }
 
-    @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-
-
-        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN
-                || motionEvent.getAction() == MotionEvent.ACTION_POINTER_DOWN) {
-            vp_is_touched = true;
-        }
-        else if (motionEvent.getAction() == MotionEvent.ACTION_UP ||
-                motionEvent.getAction() == MotionEvent.ACTION_POINTER_UP) {
-            vp_is_touched = false;
-        }
-        return false;
-    }
-
-
-    class VpPageAdapter extends PagerAdapter {
+    class VpPageAdapter extends FragmentPagerAdapter {
 
         private Context mContext;
 
         public VpPageAdapter(Context context) {
-            mContext = context;
+            super(ourFragmentManager);
+            this.mContext = context;
         }
 
         @Override
-        public Object instantiateItem(ViewGroup collection, int position) {
-
-            LayoutInflater inflater = LayoutInflater.from(mContext);
-            ImageView iv = (ImageView) inflater.inflate(R.layout.sliding_banner_iv, collection, false);
-            collection.addView(iv);
-
-            // use picasso to compress the pictures  before getting them in the list
-            String picPath = "";
-//            if (food_details_pictures.get(position) instanceof AdsBanner) {
-//            picPath = Constant.SERVER_ADDRESS+ ((AdsBanner)food_details_pictures.get(position)).adsBanner.path;
-//            } else  if (food_details_pictures.get(position) instanceof SimplePicture) {
-//                picPath = Constant.SERVER_ADDRESS+ ((SimplePicture)food_details_pictures.get(position)).path;
-//            }
-
-            picPath = Constant.SERVER_ADDRESS + "/" + ((AdsBanner)food_details_pictures.get(position)).name;
-
-            GlideApp.with(mContext)
-                    .load(picPath)
-                    .placeholder(R.drawable.placeholder_kaba)
-                    .centerCrop()
-                    .into(iv);
-
-            /* when clicked */
-            if (food_details_pictures.get(position) instanceof AdsBanner) {
-
-            }
-
-            return iv;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup collection, int position, Object view) {
-            collection.removeView((View) view);
+        public Fragment getItem(int position) {
+            return ImageFragment.newInstance(food_details_pictures.get(position));
         }
 
         @Override
         public int getCount() {
             return food_details_pictures.size();
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;
         }
 
     }
@@ -289,4 +253,56 @@ public class SlidingBanner_LilRound extends FrameLayout implements Runnable, Vie
         void onPageInteraction(Uri uri);
     }
 
+
+    @SuppressLint("ValidFragment")
+    public static class ImageFragment extends Fragment {
+
+        private AdsBanner ad;
+
+        public static ImageFragment newInstance(AdsBanner adsBanner) {
+
+            ImageFragment imageFragment = new ImageFragment();
+            Bundle args = new Bundle();
+            args.putParcelable("ad", adsBanner);
+            imageFragment.setArguments(args);
+            return imageFragment;
+        }
+
+        @Override
+        public void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            ad = getArguments().getParcelable("ad");
+        }
+
+        @Nullable
+        @Override
+        public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            return inflater.inflate(R.layout.sliding_banner_iv, container, false);
+        }
+
+        ImageView imageView;
+
+        @Override
+        public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
+
+            imageView = view.findViewById(R.id.iv_image);
+            String picPath = "";
+
+            picPath = Constant.SERVER_ADDRESS + "/" + ad.name;
+
+            GlideApp.with(getContext())
+                    .load(picPath)
+                    .placeholder(R.drawable.placeholder_kaba)
+                    .centerCrop()
+                    .into(imageView);
+
+            imageView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    adsListener.onAdsInteraction((ad));
+                }
+            });
+        }
+    }
 }

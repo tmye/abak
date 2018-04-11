@@ -15,13 +15,13 @@ public class LightRestaurant implements Parcelable {
                 "restaurant_logo": "restaurant_pic/restaurant_11522062266.jpg"*/
 
     public int id;
-    public String restaurant_name;
-    public String restaurant_logo;
+    public String name;
+    public String pic;
 
     protected LightRestaurant(Parcel in) {
         id = in.readInt();
-        restaurant_name = in.readString();
-        restaurant_logo = in.readString();
+        name = in.readString();
+        pic = in.readString();
     }
 
     public static final Creator<LightRestaurant> CREATOR = new Creator<LightRestaurant>() {
@@ -44,7 +44,7 @@ public class LightRestaurant implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(id);
-        parcel.writeString(restaurant_name);
-        parcel.writeString(restaurant_logo);
+        parcel.writeString(name);
+        parcel.writeString(pic);
     }
 }

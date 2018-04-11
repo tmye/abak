@@ -1,9 +1,16 @@
 package tg.tmye.kaba.activity.home.presenter;
 
+import android.util.Log;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import java.util.List;
 
+import tg.tmye.kaba._commons.MultiThreading.NetworkRequestThreadBase;
 import tg.tmye.kaba._commons.intf.YesOrNoWithResponse;
 import tg.tmye.kaba.activity.home.contracts.F_RestaurantContract;
+import tg.tmye.kaba.config.Constant;
 import tg.tmye.kaba.data.Restaurant.RestaurantEntity;
 import tg.tmye.kaba.data.Restaurant.source.RestaurantDbRepository;
 
@@ -37,10 +44,48 @@ public class F_Restaurant_2_Presenter implements F_RestaurantContract.Presenter 
     private void populateViews() {
 
         /* populate restaurant list */
-        restaurantDbRepository.loadRestaurantList(new YesOrNoWithResponse(){
+        restaurant2View.showLoading(true);
+        restaurantDbRepository.loadRestaurantList(new NetworkRequestThreadBase.NetRequestIntf<String>(){
             @Override
-            public void yes(Object data, boolean isFromOnline) {
-                restaurant2View.inflateRestaurantList((List<RestaurantEntity>) data);
+            public void onNetworkError() {
+                restaurant2View.showNetworkError();
+                restaurant2View.showLoading(false);
+            }
+
+            @Override
+            public void onSysError() {
+                restaurant2View.showSysError();
+                restaurant2View.showLoading(false);
+            }
+
+            @Override
+            public void onSuccess(String jsonResponse) {
+
+                /* string*/
+                Log.d(Constant.APP_TAG, jsonResponse);
+//                restaurant2View.inflateRestaurantList(data);
+                /* use the current json string and squeeze out all the need data */
+                JsonObject obj = new JsonParser().parse(jsonResponse).getAsJsonObject();
+                JsonObject data = obj.get("data").getAsJsonObject();
+
+                /* check and save */
+                restaurantDbRepository.checkAndSaveRestaurantList(data, jsonResponse);
+
+                /* load restaurant into a list */
+                loadRestaurantList (data);
+
+                restaurant2View.showLoading(false);
+            }
+
+        });
+    }
+
+    private void loadRestaurantList(JsonObject data) {
+
+        restaurantDbRepository.loadRestaurantList(data, new YesOrNoWithResponse<List<RestaurantEntity>>(){
+            @Override
+            public void yes(List<RestaurantEntity> data, boolean isFromOnline) {
+                restaurant2View.inflateRestaurantList(data);
             }
 
             @Override

@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tg.tmye.kaba.data.Food.Food_Tag;
-import tg.tmye.kaba.data.Food.Food_TagDao;
-import tg.tmye.kaba.data.Food.Restaurant_Menu_FoodEntityDao;
 import tg.tmye.kaba.data.Restaurant.RestaurantEntity;
-import tg.tmye.kaba.data.Restaurant.RestaurantEntityDao;
 import tg.tmye.kaba.data.shoppingcart.BasketFoodForDb;
 
 /**
@@ -56,18 +53,4 @@ public class Command {
         return commands;
     }
 
-    public Command fetchAll(RestaurantEntityDao restaurantDao, Restaurant_Menu_FoodEntityDao foodDao, Food_TagDao foodTagDao) {
-
-        restaurantEntity = restaurantDao.loadByRowId(restaurant_id);
-        for (int i = 0; i < command_list.size(); i++) {
-            command_list.get(i).foodEntity = foodDao.loadByRowId(command_list.get(i).food_id);
-
-            List<Food_Tag> food_tags = new ArrayList<>();
-            for (int j = 0; j < command_list.get(i).etags_id.length; j++) {
-                food_tags.add(foodTagDao.loadByRowId(command_list.get(i).etags_id[j]));
-            }
-            command_list.get(i).etags = food_tags;
-        }
-        return this;
-    }
 }

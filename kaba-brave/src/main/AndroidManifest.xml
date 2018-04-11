@@ -34,7 +34,6 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -69,16 +68,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.menu.RestaurantMenuActivity" />
         </activity>
-        <activity android:name=".activity.UserAuth.RegisterActivity" />
-        <activity android:name=".activity.UserAuth.LoginActivity" />
+        <activity android:name=".activity.UserAuth.register.RegisterActivity" />
+        <activity android:name=".activity.UserAuth.login.LoginActivity" >
+        </activity>
         <activity
             android:name=".activity.UserAcc.ServiceClientActivity"
             android:label="@string/title_activity_service_client" />
         <activity
             android:name=".activity.UserAcc.MyAdressesActivity"
-            android:label="@string/title_activity_my_adresses" />
+            android:label="@string/title_activity_my_adresses">
+        </activity>
         <activity
-            android:name=".activity.UserAcc.EditAddressActivity"
+            android:name=".activity.UserAcc.adresses.EditAddressActivity"
             android:label="@string/title_activity_edit_address" />
 
         <meta-data

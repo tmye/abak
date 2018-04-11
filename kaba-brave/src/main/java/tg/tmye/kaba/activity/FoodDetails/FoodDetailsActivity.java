@@ -20,13 +20,11 @@ import tg.tmye.kaba.R;
 import tg.tmye.kaba._commons.OnImageClickListener;
 import tg.tmye.kaba._commons.cviews.SlidingBanner_LilRound;
 import tg.tmye.kaba._commons.utils.UtilFunctions;
+import tg.tmye.kaba.activity.home.views.fragment.F_Home_1_Fragment;
 import tg.tmye.kaba.activity.menu.RestaurantMenuActivity;
 import tg.tmye.kaba.config.Constant;
-import tg.tmye.kaba.data.Food.Food_Tag;
 import tg.tmye.kaba.data.Food.Restaurant_Menu_FoodEntity;
-import tg.tmye.kaba.data.Food.source.FoodTagRepository;
 import tg.tmye.kaba.data.Restaurant.RestaurantEntity;
-import tg.tmye.kaba.data.Restaurant.source.RestaurantDbRepository;
 import tg.tmye.kaba.data._OtherEntities.DaoSession;
 import tg.tmye.kaba.data._OtherEntities.SimplePicture;
 import tg.tmye.kaba.syscore.GlideApp;
@@ -107,11 +105,11 @@ public class FoodDetailsActivity extends AppCompatActivity implements OnImageCli
         }
 
         daoSession = ((MyKabaApp) getApplication()).getDaoSession(
-                   UtilFunctions.superTrim(restaurantEntity.restaurant_name)
+                   UtilFunctions.superTrim(restaurantEntity.name)
         );
 
         // get food entity
-        foodEntity = daoSession.getRestaurant_Menu_FoodEntityDao().loadByRowId(food_id);
+     /*   foodEntity = daoSession.getRestaurant_Menu_FoodEntityDao().loadByRowId(food_id);
 
         // get food_tags
         List<Food_Tag> tags = FoodTagRepository.findByFoodId(daoSession.getFood_TagDao(), foodEntity.id);
@@ -137,26 +135,27 @@ public class FoodDetailsActivity extends AppCompatActivity implements OnImageCli
             public void onClick(View view) {
                 ConfirmTransactionDialogFragment.newInstance().show(getSupportFragmentManager(), "confirm_dialog");
             }
-        });
+        });*/
     }
 
     private void initNameFood_N_RestaurantNames() {
 
-        resto =  RestaurantDbRepository.RestaurantLocalDataSource
-                .findRestoById(daoSession.getRestaurantEntityDao(), foodEntity.restaurant_id);
+        resto = null;
+//                RestaurantDbRepository.RestaurantLocalDataSource
+//                .findRestoById(daoSession.getRestaurantEntityDao(), foodEntity.restaurant_id);
 
         if (resto == null)
             return;
 
-        holder.tv_food_name.setText(foodEntity.title.toUpperCase());
+        holder.tv_food_name.setText(foodEntity.name.toUpperCase());
         holder.tv_food_price.setText(foodEntity.price.toUpperCase());
         holder.tv_restaurant_name.setText(
-                resto.restaurant_name.toUpperCase()
+                resto.name.toUpperCase()
         );
 
         // load resto image
         GlideApp.with(FoodDetailsActivity.this)
-                .load(Constant.SERVER_ADDRESS+resto.restaurant_logo)
+                .load(Constant.SERVER_ADDRESS+resto.pic)
                 .placeholder(R.drawable.placeholder_kaba)
                 .centerCrop()
                 .into(holder.iv_resto_pic);
@@ -239,7 +238,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements OnImageCli
             SimplePicture.KabaShowPic kb = new SimplePicture.KabaShowPic(foodEntity.food_details_pictures.get(i));
             kabaShowPics.add(kb);
         }
-        holder.slidingBanner.load((ArrayList)kabaShowPics);
+//        holder.slidingBanner.load((ArrayList)kabaShowPics, ((F_Home_1_Fragment.OnFragmentInteractionListener) getActivity()));
     }
 
 

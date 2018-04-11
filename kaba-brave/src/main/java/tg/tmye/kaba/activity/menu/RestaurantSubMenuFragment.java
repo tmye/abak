@@ -138,11 +138,13 @@ public class RestaurantSubMenuFragment extends Fragment {
 
 
             final Restaurant_Menu_FoodEntity item = data.get(position);
-            holder.tv_food_title.setText(item.title.toUpperCase());
-            holder.tv_food_price.setText(item.price.toUpperCase());
+            if (item.name != null)
+                holder.tv_food_title.setText(item.name.toUpperCase());
+            if (item.price != null)
+                holder.tv_food_price.setText(item.price.toUpperCase());
 
             GlideApp.with(ctx)
-                    .load(Constant.SERVER_ADDRESS+item.food_pic)
+                    .load(Constant.SERVER_ADDRESS +"/"+ item.pic)
                     .placeholder(R.drawable.placeholder_kaba)
                     .centerCrop()
                     .into(holder.iv_pic);

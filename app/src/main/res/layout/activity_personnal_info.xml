@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:theme="@style/Toolbar.WhiteRedText"
-            app:title="@string/title_activity_personnal_info"
+            app:name="@string/title_activity_personnal_info"
             app:titleTextColor="@color/colorPrimary"
             android:textSize="@dimen/actionbar_title_text_size"
             android:textStyle="bold"

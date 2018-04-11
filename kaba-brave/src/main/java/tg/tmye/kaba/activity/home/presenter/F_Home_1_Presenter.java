@@ -88,83 +88,6 @@ public class F_Home_1_Presenter implements F_HomeContract.Presenter {
                 home1View.showLoadingProgress(false);
             }
         });
-
-        /* the solution is to check whether there is file.. if yes, work on it when downloading the newest
-         otherwise, just, stay up there...
-          * once the file is downloaded, just get the jsonObject that goes with it and inflate the view
-          */
-
-
-        /* update the restaurant DB right after checking the serial code */
-
-        /* load top search hint */
-//        advertRepository.loadSearchHint(new YesOrNoWithResponse(){
-//            @Override
-//            public void yes(Object data, boolean isFromOnline) {
-//                home1View.showMainHint((String)data);
-//            }
-//
-//            @Override
-//            public void no(Object data, boolean isFromOnline) {
-//
-//            }
-//        });
-
-        /* 0 - stage */
-//        advertRepository.loadHomeTopBanners(new YesOrNoWithResponse(){
-//
-//            @Override
-//            public void yes(Object data, boolean isFromOnline) {
-//                home1View.showMainSliding((List<AdsBanner>) data);
-//            }
-//
-//            @Override
-//            public void no(Object data, boolean isFromOnline) {
-//
-//            }
-//        });
-
-        /* 1- populate 6 main restaurants */
-//        restaurantDbRepository.loadMainRestaurants(new YesOrNoWithResponse() {
-//
-//            @Override
-//            public void yes(Object data, boolean isFromOnline) {
-//                checkNotNull(data);
-//                home1View.inflateMainRestaurants((List<RestaurantEntity>) data);
-//                home1View.showLoadingProgress(false);
-//            }
-//
-//            @Override
-//            public void no(Object data, boolean isFromOnline) {
-//
-//            }
-//        });
-
-        /* 2- populate Group48 views */
-//        advertRepository.load48MainAds(new YesOrNoWithResponse(){
-//            @Override
-//            public void yes(Object data, boolean isFromOnline) {
-//                home1View.inflateMain48((List<ProductAdvertItem>) data);
-//            }
-//
-//            @Override
-//            public void no(Object data, boolean isFromOnline) {}
-//        });
-
-        /* 3- populate Group10 views */
-//        advertRepository.loadGroup10Ads(new YesOrNoWithResponse(){
-//            @Override
-//            public void yes(Object data, boolean isFromOnline) {
-//                home1View.inflateGroupsPubLongList((List<Group10AdvertItem>) data);
-//            }
-//
-//            @Override
-//            public void no(Object data, boolean isFromOnline) {
-//
-//            }
-//        });
-
-        // load previous data from the database
     }
 
     private boolean checkAndSaveLast_Home_Page(String jsonResponse) {
@@ -192,7 +115,7 @@ public class F_Home_1_Presenter implements F_HomeContract.Presenter {
         advertRepository.load48MainAds(data, new YesOrNoWithResponse(){
             @Override
             public void yes(Object data, boolean isFromOnline) {
-                home1View.inflateMain48((List<ProductAdvertItem>) data);
+                home1View.inflateMain48((List<AdsBanner>) data);
             }
 
             @Override

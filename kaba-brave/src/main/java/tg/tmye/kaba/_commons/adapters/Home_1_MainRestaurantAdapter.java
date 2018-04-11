@@ -51,10 +51,10 @@ public class Home_1_MainRestaurantAdapter extends RecyclerView.Adapter<Home_1_Ma
             return;
 
         // bind the data.
-        holder.tv_resto_name.setText(item.restaurant_name);
+        holder.tv_resto_name.setText(item.name);
 
         GlideApp.with(ctx)
-                .load(Constant.SERVER_ADDRESS + "/" +item.restaurant_logo)
+                .load(Constant.SERVER_ADDRESS + "/" +item.pic)
                 .placeholder(R.drawable.kaba_pic)
                 .centerCrop()
                 .into(holder.iv_resto_icon);

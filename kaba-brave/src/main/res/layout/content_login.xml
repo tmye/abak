@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="tg.experta.kaba.activities.UserAuth.LoginActivity">
+    tools:context=".activity.UserAuth.login.LoginActivity">
 
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -36,8 +36,7 @@
             android:layout_height="40dp"
             android:drawablePadding="15dp"
             android:hint="@string/phone_number"
-            android:drawableStart="@drawable/myaccount_address_phone"
-            android:drawableLeft="@drawable/myaccount_address_phone"  />
+            />
 
         <EditText
             android:id="@+id/ed_password"
@@ -48,12 +47,10 @@
             android:layout_height="40dp"
             android:hint="@string/password"
             android:drawablePadding="15dp"
-            android:drawableStart="@drawable/ic_myaccount_password_field"
-            android:drawableLeft="@drawable/ic_myaccount_password_field"
             />
 
         <Button
-            android:onClick="iLogin"
+            android:id="@+id/bt_login"
             android:layout_marginTop="40dp"
             android:layout_gravity="center_horizontal"
             android:text="@string/i_login"

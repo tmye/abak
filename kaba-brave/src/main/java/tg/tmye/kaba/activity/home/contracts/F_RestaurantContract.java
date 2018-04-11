@@ -19,7 +19,11 @@ public interface F_RestaurantContract {
     interface View extends BaseView<F_RestaurantContract.Presenter> {
 
         void inflateRestaurantList(List<RestaurantEntity> restaurantEntities);
+        void showLoading (boolean isLoading);
 
+        void showNetworkError();
+
+        void showSysError();
     }
 
     interface Presenter extends BasePresenter {

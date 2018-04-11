@@ -5,8 +5,8 @@ package tg.tmye.kaba._commons.intf;
  * email: 2597434002@qq.com
  */
 
-public interface YesOrNoWithResponse {
+public interface YesOrNoWithResponse<T> {
 
-    void yes(Object data, boolean isFromOnline);
+    void yes(T data, boolean isFromOnline);
     void no(Object data, boolean isFromOnline);
 }

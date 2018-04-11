@@ -1,15 +1,21 @@
 package tg.tmye.kaba._commons.utils;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.util.Log;
 
 import com.google.gson.JsonObject;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -76,12 +82,21 @@ public class UtilFunctions {
                 object.put("id", ""+((Customer)dataObject).id);
                 object.put("gender", ""+((Customer)dataObject).gender);
                 object.put("birthday", ""+((Customer)dataObject).birthday);
-                object.put("nickname", ""+((Customer)dataObject).nickname);
+                object.put("nickname", ""+((Customer)dataObject).username);
                 object.put("phone_number", ""+((Customer)dataObject).phone_number);
-                object.put("last_name", ""+((Customer)dataObject).last_name);
-                object.put("first_name", ""+((Customer)dataObject).first_name);
                 jsonData = object.toString();
             } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        } else if (dataObject instanceof String[]) {
+
+            JSONArray array = new JSONArray();
+            try {
+                for (int i = 0; i < ((String[]) dataObject).length; i++) {
+                    array.put( ((String[]) dataObject)[i]  );
+                }
+                jsonData = array.toString();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -93,8 +108,7 @@ public class UtilFunctions {
         String ret = "";
 
         try {
-            InputStream inputStream = context.openFileInput(openInAppDir(context, filename));
-
+            FileInputStream inputStream = new FileInputStream(openInAppDir(context, filename));
             if ( inputStream != null ) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
@@ -150,6 +164,29 @@ public class UtilFunctions {
 
     public static String superTrim(String restaurant_name) {
         return arrayToString(restaurant_name.split(" "));
+    }
+
+    public static String changePathToBase64(String path) {
+
+        Bitmap bitmap = BitmapFactory.decodeFile(path);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+        byte[] byteFormat = stream.toByteArray();
+        // get the base 64 string
+        String imgString = Base64.encodeToString(byteFormat, Base64.NO_WRAP);
+        return imgString;
+    }
+
+
+    public static boolean isBase64(String tmp) {
+        if (tmp != null && tmp.length() > 100)
+            return true;
+        return false;
+    }
+
+    public static boolean checkFileExistsLocally(String path) {
+        File file = new File(path);
+        return file.exists();
     }
 
     /*

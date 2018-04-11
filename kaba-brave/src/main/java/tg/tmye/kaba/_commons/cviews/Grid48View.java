@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
 import java.util.List;
@@ -12,7 +11,8 @@ import java.util.List;
 import tg.tmye.kaba.R;
 import tg.tmye.kaba._commons.adapters.Grid48ViewAdapter;
 import tg.tmye.kaba._commons.decorator.Grid48Decoration;
-import tg.tmye.kaba.data.advert.ProductAdvertItem;
+import tg.tmye.kaba.activity.home.views.fragment.F_Home_1_Fragment;
+import tg.tmye.kaba.data.advert.AdsBanner;
 
 
 /**
@@ -42,7 +42,7 @@ public class Grid48View extends OffRecyclerview {
         super.onFinishInflate();
     }
 
-    public void inflateAds(final List<ProductAdvertItem> ads) {
+    public void inflateAds(final List<AdsBanner> ads, final F_Home_1_Fragment.OnFragmentInteractionListener listener) {
 
         ((AppCompatActivity)getContext()).runOnUiThread(new Runnable() {
             @Override
@@ -50,7 +50,7 @@ public class Grid48View extends OffRecyclerview {
 
                 GridLayoutManager grdLm = new GridLayoutManager(getContext(), AD_SPACE_4_COUNT);
 
-                Grid48ViewAdapter adp = new Grid48ViewAdapter(getContext(), ads);
+                Grid48ViewAdapter adp = new Grid48ViewAdapter(getContext(), ads, listener);
                 setLayoutManager(grdLm);
                 setAdapter(adp);
                 int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.ad_4_spacing);

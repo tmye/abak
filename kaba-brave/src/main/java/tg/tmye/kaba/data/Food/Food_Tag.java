@@ -15,9 +15,7 @@ import java.util.List;
  * By abiguime on 2017/12/4.
  * email: 2597434002@qq.com
  */
-@Entity(indexes = {
-        @Index(value = "id", unique = true)
-})
+
 public class Food_Tag implements Parcelable{
 
 
@@ -29,7 +27,7 @@ public class Food_Tag implements Parcelable{
         "food_id": 1
       }*/
 
-    @Id
+
     public Long id;
 
     public Long food_id;
@@ -61,13 +59,6 @@ public class Food_Tag implements Parcelable{
     public Food_Tag() {
     }
 
-    @Generated(hash = 2067146641)
-    public Food_Tag(Long id, Long food_id, String name, int state) {
-        this.id = id;
-        this.food_id = food_id;
-        this.name = name;
-        this.state = state;
-    }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {

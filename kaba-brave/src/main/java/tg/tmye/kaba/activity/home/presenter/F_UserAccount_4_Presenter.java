@@ -36,12 +36,15 @@ public class F_UserAccount_4_Presenter implements F_UserMeContract.Presenter {
         customerDataRepository.getCustomerInfo(new YesOrNoWithResponse() {
             @Override
             public void yes(Object data, boolean isFromOnline) {
-account4View.inflateCustomerInfo((Customer)data);
+                account4View.inflateCustomerInfo((Customer)data);
             }
 
             @Override
             public void no(Object data, boolean isFromOnline) {
-
+                if ("logout".equals(data)) {
+                    logout();
+                    account4View.logout();
+                }
             }
         });
 
@@ -51,6 +54,9 @@ account4View.inflateCustomerInfo((Customer)data);
         /* 3- horoscope */
     }
 
+    private void logout() {
+
+    }
 
 
 }
