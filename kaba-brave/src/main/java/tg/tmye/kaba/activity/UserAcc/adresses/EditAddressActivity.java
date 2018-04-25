@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.GenericTransitionOptions;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
@@ -52,6 +53,7 @@ import tg.tmye.kaba.config.Constant;
 import tg.tmye.kaba.data.delivery.DeliveryAddress;
 import tg.tmye.kaba.data.delivery.source.DeliveryAdresseRepo;
 import tg.tmye.kaba.syscore.GlideApp;
+import tg.tmye.kaba.syscore.MyKabaApp;
 
 
 public class EditAddressActivity extends AppCompatActivity implements OnMapReadyCallback, View.OnClickListener, AdressesContract.View {
@@ -67,10 +69,10 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
     private SupportMapFragment mapFragment;
     private MapView mapView;
 
-    private LatLng location = new LatLng(33.919434,-118.35399);
+    private LatLng location = new LatLng(6.217675, 1.188539);
     private GoogleMap gMap;
 
-    CardView map_cardview;
+    //    CardView map_cardview;
     Button bt_confirm;
 
     /* repository */
@@ -146,15 +148,12 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
         }
-        /*mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.frg_map);*/
-        mapView = findViewById(R.id.swagishmap);
-        mapView.onCreate(mapViewBundle);
 
         repo = new DeliveryAdresseRepo(this);
         presenter = new AdressesPresenter((AdressesContract.View) this, repo);
 
-
+        mapView = findViewById(R.id.swagishmap);
+        mapView.onCreate(mapViewBundle);
 
          /* check if there is some data sent from the precedent view.
          * - in the case, there is something,
@@ -166,6 +165,8 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
         } else {
             presenter.start();
         }
+
+
     }
 
 
@@ -195,7 +196,7 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
 
         rc_address_images = findViewById(R.id.rc_address_images);
         bt_add_gps_address = findViewById(R.id.bt_add_gps_address);
-        map_cardview = findViewById(R.id.map_cardview);
+//        map_cardview = findViewById(R.id.map_cardview);
         bt_confirm = findViewById(R.id.bt_confirm);
     }
 
@@ -223,11 +224,16 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
 
     public void selectPhoto() {
 
-        FilePickerBuilder.getInstance().setMaxCount(5)
-                .setSelectedFiles(null)
-                .setActivityTheme(R.style.AppTheme)
+        int count = 5 - (adapter.getItemCount()-1);
+        if (count > 0)
+            FilePickerBuilder.getInstance().setMaxCount(count)
+                    .setSelectedFiles(null)
+                    .setActivityTheme(R.style.AppTheme)
 //                .setCameraPlaceholder(R.drawable.ic_round_white_full_24dp)
-                .pickPhoto(this);
+                    .pickPhoto(this);
+        else {
+            mToast(getResources().getString(R.string.delete_before_adding_more));
+        }
     }
 
     @Override
@@ -250,7 +256,7 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
                     Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
                     location = place.getLatLng();
                     mapView.getMapAsync(this);
-                    map_cardview.setVisibility(View.VISIBLE);
+                    mapView.setVisibility(View.VISIBLE);
                     // Get the SupportMapFragment and request notification
                     // when the map is ready to be used.
                 }
@@ -309,9 +315,9 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
         /* inflate the map */
             String[] lat_long = waitingForInflatingAddress.location.split(":");
             if (lat_long != null && lat_long.length == 2) {
-                map_cardview.setVisibility(View.VISIBLE);
+                mapView.setVisibility(View.VISIBLE);
                 LatLng coordinate = new LatLng(Double.valueOf(lat_long[0]), Double.valueOf(lat_long[1]));
-                CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(coordinate, 5);
+                CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(coordinate, 18.0f);
                 gMap.animateCamera(yourLocation);
             } else {
                 mSnack(getResources().getString(R.string.map_coordonates_invalid));
@@ -512,6 +518,11 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
     public void addressDeletedSuccess() {}
 
     @Override
+    public void onAddressInteraction(DeliveryAddress address) {
+
+    }
+
+    @Override
     public void setPresenter(AdressesContract.Presenter presenter) {
         this.presenter = presenter;
     }
@@ -565,6 +576,7 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
                 GlideApp.with(EditAddressActivity.this)
                         .load(item)
                         .placeholder(R.drawable.placeholder_kaba)
+                        .transition(GenericTransitionOptions.with(  ((MyKabaApp)getApplicationContext()).getGlideAnimation()  ))
                         .centerCrop()
                         .into(holder.imageView);
             }

@@ -1,11 +1,9 @@
 package tg.tmye.kaba.data.command;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import tg.tmye.kaba.data.Food.Food_Tag;
 import tg.tmye.kaba.data.Restaurant.RestaurantEntity;
-import tg.tmye.kaba.data.shoppingcart.BasketFoodForDb;
+import tg.tmye.kaba.data.shoppingcart.BasketInItem;
 
 /**
  * By abiguime on 2017/12/15.
@@ -14,30 +12,13 @@ import tg.tmye.kaba.data.shoppingcart.BasketFoodForDb;
 
 public class Command {
 
-       /*{
-        "id" : 89,
-        "restaurant_id": 3,
-        "command_list" : [
-          {
-            "food_id" : 8,
-            "quantity" : 1,
-            "etags_id": [1,2]
-          },
-          {
-            "food_id" : 6,
-            "quantity" : 2,
-            "etags_id": []
-          }
-        ]
-      }*/
-
     public Long id;
     public int restaurant_id;
     public int state;
     public RestaurantEntity restaurantEntity;
-    public List<BasketFoodForDb> command_list;
+    public List<BasketInItem> command_list;
 
-
+/*
     public static List<Command> fakeList(int count) {
 
         List<Command> commands = new ArrayList<>();
@@ -46,11 +27,11 @@ public class Command {
             Command command = new Command();
             command.id = Long.valueOf(i);
             command.restaurantEntity = RestaurantEntity.fakeList(1).get(0);
-            command.command_list = BasketFoodForDb.fakeBasketFoodFromRestaurantId(command.restaurantEntity.id, count);
+            command.command_list = BasketInItem.fakeBasketFoodFromRestaurantId(command.restaurantEntity.id, count);
             commands.add(command);
         }
 
         return commands;
-    }
+    }*/
 
 }

@@ -28,6 +28,8 @@ public interface AdressesContract {
         void addressDeletedFailure();
 
         void addressDeletedSuccess();
+
+        void onAddressInteraction(DeliveryAddress address);
     }
 
     public interface Presenter extends BasePresenter {

@@ -23,6 +23,15 @@ public class AdsBanner implements Parcelable {
     public String image;
     public String placeholder;
 
+    public String food_json = "";
+
+// id ... ad ? food ?
+
+    public AdsBanner() {
+
+    }
+
+
     protected AdsBanner(Parcel in) {
         id = in.readInt();
         name = in.readString();

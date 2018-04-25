@@ -97,6 +97,7 @@
                 />
 
             <TextView
+                android:id="@+id/tv_quantity"
                 android:text="2"
                 android:textSize="@dimen/x_times_count_text_height"
                 android:textStyle="bold"
@@ -111,12 +112,12 @@
 
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <!--<android.support.v7.widget.RecyclerView
         android:id="@+id/rc_food_tags"
         android:layout_below="@id/lny_name_infos"
         android:padding="@dimen/activity_horizontal_margin_half"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        />-->
 
 </LinearLayout>

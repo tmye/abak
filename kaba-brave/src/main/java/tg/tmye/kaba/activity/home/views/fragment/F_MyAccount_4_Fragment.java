@@ -33,14 +33,14 @@ public class F_MyAccount_4_Fragment extends BaseFragment implements F_UserMeCont
 
     /* views */
     private RecyclerView homeOptionsRecyclerView;
-    private TextView tv_horoscope_date;
-    private ImageView iv_horoscope_moon_sun;
-    private LinearLayoutCompat lny_account_topup, lny_account_more, lny_account_balance;
+    public TextView tv_customer_balance;
     private TextView tv_customer_nickname;
     public TextView tv_customer_phonenumber;
-    public TextView tv_customer_balance;
 
-    public TextView tv_customer_horoscope;
+    // private TextView tv_horoscope_date;
+    //    private LinearLayoutCompat lny_account_topup, lny_account_more, lny_account_balance;
+    // private ImageView iv_horoscope_moon_sun;
+//    public TextView tv_customer_horoscope;
 
 
     /* presenter */
@@ -84,17 +84,17 @@ public class F_MyAccount_4_Fragment extends BaseFragment implements F_UserMeCont
 
         homeOptionsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), ROW_COUNT));
         homeOptionsRecyclerView.setAdapter(new UserAccountAdapter(getContext()));
-        initDate();
+//        initDate();
 
-        lny_account_balance.setOnClickListener((HomeActivity)getActivity());
-        lny_account_more.setOnClickListener((HomeActivity)getActivity());
-        lny_account_topup.setOnClickListener((HomeActivity)getActivity());
+//        lny_account_balance.setOnClickListener((HomeActivity)getActivity());
+//        lny_account_more.setOnClickListener((HomeActivity)getActivity());
+//        lny_account_topup.setOnClickListener((HomeActivity)getActivity());
 
         presenter.start();
     }
 
 
-    private void initDate () {
+   /* private void initDate () {
 
         Calendar instance = Calendar.getInstance();
         int day_of_week = instance.getTime().getDay();
@@ -114,19 +114,19 @@ public class F_MyAccount_4_Fragment extends BaseFragment implements F_UserMeCont
         } else {
             iv_horoscope_moon_sun.setImageResource(R.drawable.ic_myaccount_horoscope_moon);
         }
-    }
+    }*/
 
     private void initViews(View rootView) {
         toolbar = rootView.findViewById(R.id.toolbar);
         homeOptionsRecyclerView = rootView.findViewById(R.id.rec_myaccount);
-        tv_horoscope_date = rootView.findViewById(R.id.tv_myaccount_horoscope_date);
-        iv_horoscope_moon_sun = rootView.findViewById(R.id.iv_myaccount_horoscope_sun_moon);
-        lny_account_balance = rootView.findViewById(R.id.lny_account_balance);
-        lny_account_more = rootView.findViewById(R.id.lny_account_more);
-        lny_account_topup = rootView.findViewById(R.id.lny_account_topup);
+//        lny_account_balance = rootView.findViewById(R.id.lny_account_balance);
+//        lny_account_more = rootView.findViewById(R.id.lny_account_more);
 
         tv_customer_nickname = rootView.findViewById(R.id.tv_nickname);
         tv_customer_phonenumber = rootView.findViewById(R.id.tv_phone_number);
+
+        //        tv_horoscope_date = rootView.findViewById(R.id.tv_myaccount_horoscope_date);
+        //        iv_horoscope_moon_sun = rootView.findViewById(R.id.iv_myaccount_horoscope_sun_moon);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -166,7 +166,7 @@ public class F_MyAccount_4_Fragment extends BaseFragment implements F_UserMeCont
 
     @Override
     public void logout() {
-        
+
     }
 
     /**

@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.GenericTransitionOptions;
+
 import java.util.List;
 import java.util.Random;
 
@@ -19,6 +21,7 @@ import tg.tmye.kaba.config.Constant;
 import tg.tmye.kaba.data.advert.AdsBanner;
 import tg.tmye.kaba.data.advert.Group10AdvertItem;
 import tg.tmye.kaba.syscore.GlideApp;
+import tg.tmye.kaba.syscore.MyKabaApp;
 
 
 /**
@@ -52,6 +55,7 @@ public class GroupAdsAdapter extends RecyclerView.Adapter<GroupAdsAdapter.ViewHo
         /* rectangle */
         GlideApp.with(ctx)
                 .load(Constant.SERVER_ADDRESS + "/" + item.big_pub.image)
+                .transition(GenericTransitionOptions.with(  ((MyKabaApp)ctx.getApplicationContext()).getGlideAnimation()  ))
                 .placeholder(R.drawable.white_placeholder)
                 .centerCrop()
                 .into(holder.iv_rectangle);
@@ -59,6 +63,7 @@ public class GroupAdsAdapter extends RecyclerView.Adapter<GroupAdsAdapter.ViewHo
          /* square */
         GlideApp.with(ctx)
                 .load(Constant.SERVER_ADDRESS + "/" + item.small_pub.image)
+                .transition(GenericTransitionOptions.with(  ((MyKabaApp)ctx.getApplicationContext()).getGlideAnimation()  ))
                 .placeholder(R.drawable.white_placeholder)
                 .centerCrop()
                 .into(holder.iv_square);

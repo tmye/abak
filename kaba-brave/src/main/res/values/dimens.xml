@@ -104,6 +104,7 @@
     <dimen name="account_appbar_addon_icon_size_half">25dp</dimen>
     <dimen name="account_appbar_addon_spacing">1px</dimen>
     <dimen name="user_account_icon_size">45dp</dimen>
-    <dimen name="dialog_box_text_size">17sp</dimen>
+    <dimen name="dialog_box_text_size">13sp</dimen>
     <dimen name="progress_dialog_circle_progressbar_size">65dp</dimen>
+    <dimen name="edittext_margintop_8">4dp</dimen>
 </resources>

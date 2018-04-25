@@ -1,70 +1,52 @@
 package tg.tmye.kaba.data.favorite;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Index;
-import org.greenrobot.greendao.annotation.Generated;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.List;
+
+import tg.tmye.kaba.data.Food.Restaurant_Menu_FoodEntity;
+import tg.tmye.kaba.data.Restaurant.RestaurantEntity;
 
 /**
  * By abiguime on 27/02/2018.
  * email: 2597434002@qq.com
  */
-@Entity(indexes = {
-        @Index(value = "id", unique = true)
-})
-public class Favorite {
 
-    @Id
-    public long id;
+public class Favorite implements Parcelable {
 
-    public long food_id;
+    public int restaurant_id;
+    public RestaurantEntity restaurant_entity;
+    public List<Restaurant_Menu_FoodEntity> food_list;
 
-    public long restaurant_id;
 
-    public long bought_times; /* how many times did i buy these */
+    protected Favorite(Parcel in) {
+        restaurant_id = in.readInt();
+        restaurant_entity = in.readParcelable(RestaurantEntity.class.getClassLoader());
+        food_list = in.createTypedArrayList(Restaurant_Menu_FoodEntity.CREATOR);
+    }
 
-@Generated(hash = 880053116)
-public Favorite(long id, long food_id, long restaurant_id, long bought_times) {
-    this.id = id;
-    this.food_id = food_id;
-    this.restaurant_id = restaurant_id;
-    this.bought_times = bought_times;
-}
+    public static final Creator<Favorite> CREATOR = new Creator<Favorite>() {
+        @Override
+        public Favorite createFromParcel(Parcel in) {
+            return new Favorite(in);
+        }
 
-@Generated(hash = 459811785)
-public Favorite() {
-}
+        @Override
+        public Favorite[] newArray(int size) {
+            return new Favorite[size];
+        }
+    };
 
-public long getId() {
-    return this.id;
-}
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
-public void setId(long id) {
-    this.id = id;
-}
-
-public long getFood_id() {
-    return this.food_id;
-}
-
-public void setFood_id(long food_id) {
-    this.food_id = food_id;
-}
-
-public long getRestaurant_id() {
-    return this.restaurant_id;
-}
-
-public void setRestaurant_id(long restaurant_id) {
-    this.restaurant_id = restaurant_id;
-}
-
-public long getBought_times() {
-    return this.bought_times;
-}
-
-public void setBought_times(long bought_times) {
-    this.bought_times = bought_times;
-}
-
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(restaurant_id);
+        parcel.writeParcelable(restaurant_entity, i);
+        parcel.writeTypedList(food_list);
+    }
 }

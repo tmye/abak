@@ -1,88 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.LinearLayoutCompat
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/activity_horizontal_margin"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:padding="@dimen/activity_horizontal_margin_half">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_adress_image_width">
+
         <ImageView
             android:scaleType="centerCrop"
             android:id="@+id/iv_head"
             android:layout_width="@dimen/common_adress_image_width"
             android:layout_height="@dimen/common_adress_image_width"
-            android:src="@drawable/frandroid"
+            android:src="@null"
             android:background="@color/white"/>
 
         <android.support.v7.widget.LinearLayoutCompat
-            android:id="@+id/lny_right_button"
-            android:layout_alignParentRight="true"
-            android:orientation="vertical"
-            android:layout_width="48dp"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/iv_edit"
-                android:background="@color/selected_yellow"
-                android:padding="@dimen/activity_horizontal_margin_half"
-                app:srcCompat="@drawable/myaccount_address_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-
-            <ImageView
-                android:id="@+id/iv_delete"
-                android:background="@color/selected_yellow"
-                android:padding="@dimen/activity_horizontal_margin_half"
-                app:srcCompat="@drawable/myaccount_address_delete"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-
-        </android.support.v7.widget.LinearLayoutCompat>
-
-        <android.support.v7.widget.LinearLayoutCompat
-            android:layout_toLeftOf="@id/lny_right_button"
             android:layout_toRightOf="@id/iv_head"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="@color/light_gray"
+            android:background="@color/very_light_gray"
             android:padding="@dimen/activity_horizontal_margin_half">
 
             <TextView
                 android:id="@+id/tv_title"
-                android:textAllCaps="true"
                 android:text="@string/home"
-                android:textAlignment="center"
+                android:textAlignment="gravity"
                 android:textStyle="bold"
-                android:textColor="@color/selected_yellow"
+                android:textColor="@color/black_overlay"
                 android:maxLines="2"
-                app:autoSizeTextType="uniform"
-                app:autoSizeMinTextSize="6sp"
-                app:autoSizeMaxTextSize="18sp"
-                app:autoSizeStepGranularity="1sp"
+                android:textSize="17sp"
+                android:gravity="left"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/common_adress_title_height" />
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_adress_date"
+                android:text="@string/details_adress_date"
+                android:fontFamily="sans-serif"
+                android:gravity="left|center_vertical"
+                android:textColor="@color/unselected_gray"
+                android:layout_width="match_parent"
+                android:textSize="13sp"
+                android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/tv_adress_details"
                 android:text="@string/details_adress_sample"
                 android:fontFamily="sans-serif"
                 android:gravity="left|center_vertical"
-                android:textColor="@color/colorPrimary"
-                app:autoSizeTextType="uniform"
-                app:autoSizeMinTextSize="6sp"
-                app:autoSizeMaxTextSize="18sp"
-                app:autoSizeStepGranularity="1sp"
+                android:textColor="@color/dark_gray"
+                android:textSize="14sp"
+                android:maxLines="2"
                 android:layout_width="match_parent"
                 android:layout_weight="3"
                 android:layout_height="wrap_content" />
 
         </android.support.v7.widget.LinearLayoutCompat>
+
+        <ImageButton
+            android:id="@+id/ib_edit_address"
+            android:background="@drawable/ic_address_edit_blue_24dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="@dimen/food_details_share_button_size"
+            android:layout_height="@dimen/food_details_share_button_size" />
     </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_address_details_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+        android:id="@+id/bottomdivider"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/cic_newsfeed_image"
+        android:background="@color/light_gray"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_line_height"/>
+
 </android.support.v7.widget.LinearLayoutCompat>

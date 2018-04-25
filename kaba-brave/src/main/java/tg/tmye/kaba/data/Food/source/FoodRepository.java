@@ -1,8 +1,18 @@
 package tg.tmye.kaba.data.Food.source;
 
-import java.util.List;
+import android.content.Context;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import tg.tmye.kaba._commons.MultiThreading.DatabaseRequestThreadBase;
+import tg.tmye.kaba._commons.MultiThreading.NetworkRequestThreadBase;
+import tg.tmye.kaba._commons.utils.UtilFunctions;
+import tg.tmye.kaba.config.Config;
 import tg.tmye.kaba.data.Food.Restaurant_Menu_FoodEntity;
+import tg.tmye.kaba.syscore.MyKabaApp;
 
 /**
  * By abiguime on 20/12/2017.
@@ -11,23 +21,37 @@ import tg.tmye.kaba.data.Food.Restaurant_Menu_FoodEntity;
 
 public class FoodRepository {
 
-   /* public static List<Restaurant_Menu_FoodEntity> findById (Restaurant_Menu_FoodEntityDao dao, long Id) {
+    private final Context context;
+    private final DatabaseRequestThreadBase databaseRequestThreadBase;
+    private final NetworkRequestThreadBase networkRequestBase;
 
-        List<Restaurant_Menu_FoodEntity> foods = dao.queryBuilder()
-                .where(Restaurant_Menu_FoodEntityDao.Properties.Id.eq(Id))
-                .orderAsc(Restaurant_Menu_FoodEntityDao.Properties.Id)
-                .list();
+    public FoodRepository (Context context) {
 
-        return foods;
-    }*/
+        this.context = context;
+        this.databaseRequestThreadBase = new DatabaseRequestThreadBase(context);
+        this.networkRequestBase = ((MyKabaApp) context.getApplicationContext()).getNetworkRequestBase();
+    }
 
-  /*  public static List<Restaurant_Menu_FoodEntity> findBySubMenuId (Restaurant_Menu_FoodEntityDao dao, long subMenuId) {
+    public void setFavorite(Restaurant_Menu_FoodEntity foodEntity, NetworkRequestThreadBase.NetRequestIntf<String> netRequestIntf) {
 
-        List<Restaurant_Menu_FoodEntity> foods = dao.queryBuilder()
-                .where(Restaurant_Menu_FoodEntityDao.Properties.Sub_menu_id.eq(subMenuId))
-                .orderAsc(Restaurant_Menu_FoodEntityDao.Properties.Id)
-                .list();
-        return foods;
-    }*/
+        String token = ((MyKabaApp)context.getApplicationContext()).getAuthToken();
 
+        /*  */
+        Map<String, Object> data = new HashMap<>();
+        data.put("food_id", foodEntity.id);
+
+        networkRequestBase.postMapDataWithToken(Config.LINK_SET_FAVORITE, data, token, netRequestIntf);
+    }
+
+    public static List<Restaurant_Menu_FoodEntity> fakeSimpleDrinks(int count) {
+
+        List<Restaurant_Menu_FoodEntity> foodEntities = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            Restaurant_Menu_FoodEntity foodEntity = new Restaurant_Menu_FoodEntity();
+            foodEntity.id = 1900+i;
+            foodEntity.name = "GOOD _ "+i;
+            foodEntities.add(foodEntity);
+        }
+        return  foodEntities;
+    }
 }

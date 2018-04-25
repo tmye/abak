@@ -12,9 +12,9 @@ import tg.tmye.kaba.data.favorite.Favorite;
  * email: 2597434002@qq.com
  */
 
-public class FavoriteContract {
+public interface FavoriteContract {
 
-    public interface View extends BaseView<F_CommandContract.Presenter> {
+    public interface View extends BaseView<FavoriteContract.Presenter> {
 
         void networkError();
 

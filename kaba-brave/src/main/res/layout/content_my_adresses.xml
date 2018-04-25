@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.UserAcc.MyAdressesActivity"
-    tools:showIn="@layout/activity_my_adresses">
+    tools:showIn="@layout/activity_my_adresses"
+    android:background="@color/white">
 
     <LinearLayout
         android:orientation="vertical"

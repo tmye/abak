@@ -20,7 +20,7 @@
     <color name="red">#ff0000</color>
     <color name="restaurant_name_color">#f8bf00</color>
     <color name="circular_view_border_yellow">#f8bf00</color>
-    <color name="unselected_gray">#7b777c</color>
+    <color name="unselected_gray">#a1a0a1</color>
     <color name="selected_yellow">#f8bf00</color>
 
     <color name="brown">#b1adad</color>
@@ -43,5 +43,7 @@
     <color name="transparent_white">#99ffffff</color>
     <color name="edit_image_transparent_black">#66000000</color>
     <color name="dark_gray">#666666</color>
+    <color name="very_light_gray">#ffffff</color>
+    <color name="map_green">#32CD32</color>
 
 </resources>

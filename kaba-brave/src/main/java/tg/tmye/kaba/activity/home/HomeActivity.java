@@ -11,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import tg.tmye.kaba.R;
 import tg.tmye.kaba._commons.intf.YesOrNo;
+import tg.tmye.kaba._commons.utils.PhoneUtils;
 import tg.tmye.kaba.activity.UserAcc.SoldeActivity;
 import tg.tmye.kaba.activity.UserAuth.login.LoginActivity;
 import tg.tmye.kaba.activity.Web.WebActivity;
@@ -88,7 +90,7 @@ public class HomeActivity extends AppCompatActivity implements
 
 
     /* variables */
-    private int previousFragmentCode;
+    private int previousFragmentCode = -1;
     private String daily_query;
 
 
@@ -145,6 +147,7 @@ public class HomeActivity extends AppCompatActivity implements
          * */
         cartFab.setOnClickListener(this);
 
+        Log.d(Constant.APP_TAG, PhoneUtils.getPhoneData());
     }
 
     private void initViews() {
@@ -380,11 +383,28 @@ public class HomeActivity extends AppCompatActivity implements
 
         anim_Out = R.anim.exit_to_void;
 
-        fragmentManager.beginTransaction()
-                .setCustomAnimations(anim_In, anim_Out)
-                .replace(R.id.frame_main_layout_content, fragment, tag)
-                .addToBackStack(tag)
-                .commit();
+        /* replace destoys the fragment */
+
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                .setCustomAnimations(anim_In, anim_Out);
+
+        Fragment previsouFragment = getFragmentByCode(previousFragmentCode);
+
+         /* hide fragment if it is there, and showed */
+        if (previsouFragment != null)
+            fragmentTransaction = fragmentTransaction.hide(previsouFragment);
+
+        /* add fragment that doesnt exist yet */
+        if (getSupportFragmentManager().findFragmentByTag(getFragmentTagByCode(fragmentIndex)) == null) {
+            fragmentTransaction = fragmentTransaction.add(R.id.frame_main_layout_content, fragment, getFragmentTagByCode(fragmentIndex));
+        }
+
+        /* show fragment */
+        fragmentTransaction = fragmentTransaction.show(fragment);
+
+        /* commit change */
+//        if (!onSaveInstanceState)
+            fragmentTransaction.addToBackStack(tag).commitAllowingStateLoss();
 
         fragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
             @Override
@@ -409,6 +429,37 @@ public class HomeActivity extends AppCompatActivity implements
         if (previousFragmentCode < 3 && fragmentIndex == 3) {
             revealFabCart(false);
         }
+    }
+
+
+    private String getFragmentTagByCode(int previousFragmentCode) {
+
+        switch (previousFragmentCode) {
+            case HOME:
+                return getResources().getString(R.string.title_home);
+            case RESTAURANT:
+                return getResources().getString(R.string.title_restaurant);
+            case COMMAND_LIST:
+                return getResources().getString(R.string.title_command_list);
+            case MY_ACCOUNT:
+                return getResources().getString(R.string.title_myaccount);
+        }
+        return null;
+    }
+
+    private Fragment getFragmentByCode(int previousFragmentCode) {
+
+        switch (previousFragmentCode) {
+            case HOME:
+                return frg_1_home;
+            case RESTAURANT:
+                return frg_2_restaurants;
+            case COMMAND_LIST:
+                return frg_3_command_list;
+            case MY_ACCOUNT:
+                return frg_4_myaccount;
+        }
+        return null;
     }
 
     private void revealFabCart(boolean isFabCartVisible) {
@@ -445,9 +496,9 @@ public class HomeActivity extends AppCompatActivity implements
             mToast("action_mymessages home");
             return true;
         } else if (id == android.R.id.home) {
-            mToast("home home");
-            Intent intent = new Intent(this, ScannerActivity.class);
-            startActivity(intent);
+            mToast(getResources().getString(R.string.feature_not_yet_available));
+//            Intent intent = new Intent(this, ScannerActivity.class);
+//            startActivity(intent);
         }
         return false;
     }

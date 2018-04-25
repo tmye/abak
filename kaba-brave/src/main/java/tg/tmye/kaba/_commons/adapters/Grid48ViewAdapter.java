@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.GenericTransitionOptions;
+
 import java.util.List;
 
 import tg.tmye.kaba.R;
@@ -15,6 +17,7 @@ import tg.tmye.kaba.activity.home.views.fragment.F_Home_1_Fragment;
 import tg.tmye.kaba.config.Constant;
 import tg.tmye.kaba.data.advert.AdsBanner;
 import tg.tmye.kaba.syscore.GlideApp;
+import tg.tmye.kaba.syscore.MyKabaApp;
 
 
 /**
@@ -61,6 +64,7 @@ public class Grid48ViewAdapter extends RecyclerView.Adapter<Grid48ViewAdapter.Vi
 
         GlideApp.with(ctx)
                 .load(Constant.SERVER_ADDRESS +"/"+item.image)
+                .transition(GenericTransitionOptions.with(  ((MyKabaApp)ctx.getApplicationContext()).getGlideAnimation()  ))
                 .placeholder(R.drawable.white_placeholder)
                 .into(holder.iv_add_pic);
 

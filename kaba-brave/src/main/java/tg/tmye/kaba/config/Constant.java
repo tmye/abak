@@ -1,20 +1,18 @@
 package tg.tmye.kaba.config;
 
-/**hq
+/**
  * By abiguime on 2017/11/24.
  * email: 2597434002@qq.com
  */
 
 public class Constant {
 
-
     public static final String APP_TAG = "XX_KABA";
 
-
     //    public static final String SERVER_ADDRESS = "http://192.168.0.199:8000";
-//    public static final String SERVER_ADDRESS = "http://10.0.2.2:8000";
+    public static final String SERVER_ADDRESS = "http://10.0.2.2:8000";
     //    public static final String SERVER_ADDRESS = "http://192.168.1.10:8000";
-    public static final String SERVER_ADDRESS = "http://192.168.0.94:8000";
+//    public static final String SERVER_ADDRESS = "http://192.168.0.94:8000";
     public static final String CHANNEL_ID = "kaba-notification-channel-id";
     public static final String APP_SUPER_TAG = "APP_SUPER_TAG";
 

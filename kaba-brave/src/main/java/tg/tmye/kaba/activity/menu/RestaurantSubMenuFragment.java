@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.GenericTransitionOptions;
+
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -20,6 +22,7 @@ import tg.tmye.kaba.config.Constant;
 import tg.tmye.kaba.data.Food.Restaurant_Menu_FoodEntity;
 import tg.tmye.kaba.data.Menu.Restaurant_SubMenuEntity;
 import tg.tmye.kaba.syscore.GlideApp;
+import tg.tmye.kaba.syscore.MyKabaApp;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -145,6 +148,7 @@ public class RestaurantSubMenuFragment extends Fragment {
 
             GlideApp.with(ctx)
                     .load(Constant.SERVER_ADDRESS +"/"+ item.pic)
+                    .transition(GenericTransitionOptions.with(  ((MyKabaApp)ctx.getApplicationContext()).getGlideAnimation()  ))
                     .placeholder(R.drawable.placeholder_kaba)
                     .centerCrop()
                     .into(holder.iv_pic);

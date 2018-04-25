@@ -1,5 +1,6 @@
 package tg.tmye.kaba.activity.UserAcc;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,9 +16,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.GenericTransitionOptions;
 
 import java.util.List;
 
@@ -29,11 +33,17 @@ import tg.tmye.kaba.config.Constant;
 import tg.tmye.kaba.data.delivery.DeliveryAddress;
 import tg.tmye.kaba.data.delivery.source.DeliveryAdresseRepo;
 import tg.tmye.kaba.syscore.GlideApp;
+import tg.tmye.kaba.syscore.MyKabaApp;
 
 
-public class MyAdressesActivity extends AppCompatActivity implements AdressesContract.View, SwipeRefreshLayout.OnRefreshListener {
+public class MyAdressesActivity extends AppCompatActivity implements
+        AdressesContract.View,
+        SwipeRefreshLayout.OnRefreshListener {
 
     private static final int EDIT_ACTIVITY_RESULT = 1;
+
+    /* start activity for result code */
+    public static final int CHOOSEN_ADDRESS = 90;
 
     /* presenter */
     AdressesContract.Presenter presenter;
@@ -45,6 +55,8 @@ public class MyAdressesActivity extends AppCompatActivity implements AdressesCon
     SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView rc;
 
+    /* */
+    boolean returnChoosenAddress = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +73,9 @@ public class MyAdressesActivity extends AppCompatActivity implements AdressesCon
         /* request api to get the common addresses of the client */
         repo = new DeliveryAdresseRepo(this);
         presenter = new AdressesPresenter(this, repo);
+
+        /* if we get here for selecting the address only, then the listener should also be different */
+        returnChoosenAddress = getIntent().getBooleanExtra("choose_address", false);
     }
 
 
@@ -89,7 +104,7 @@ public class MyAdressesActivity extends AppCompatActivity implements AdressesCon
             public void run() {
 
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MyAdressesActivity.this);
-                MyCommonAdressRecyclerAdapter adap = new MyCommonAdressRecyclerAdapter(MyAdressesActivity.this, address);
+                MyCommonAdressRecyclerAdapter adap = new MyCommonAdressRecyclerAdapter(MyAdressesActivity.this, address, MyAdressesActivity.this);
                 rc.setLayoutManager(linearLayoutManager);
                 rc.setAdapter(adap);
             }
@@ -143,13 +158,18 @@ public class MyAdressesActivity extends AppCompatActivity implements AdressesCon
         presenter.populateViews();
     }
 
+    @Override
+    public void onAddressInteraction(DeliveryAddress address) {
+
+    }
+
 
     public class MyCommonAdressRecyclerAdapter extends RecyclerView.Adapter<MyCommonAdressRecyclerAdapter.ViewHolder> {
 
         private final Context context;
         private final List<DeliveryAddress> data;
 
-        public MyCommonAdressRecyclerAdapter (Context context, List<DeliveryAddress> data) {
+        public MyCommonAdressRecyclerAdapter (Context context, List<DeliveryAddress> data, AdressesContract.View mListener) {
             this.context = context;
             this.data = data;
         }
@@ -165,23 +185,37 @@ public class MyAdressesActivity extends AppCompatActivity implements AdressesCon
             DeliveryAddress address = data.get(position);
             holder.tv_title.setText(address.name);
             holder.tv_description.setText(address.description);
-            holder.iv_edit.setOnClickListener(new AddressDetailsEditOnClickListener(null));
+//            holder.iv_edit.setOnClickListener(new AddressDetailsEditOnClickListener(null));
 
             if (address.picture.length > 0)
                 GlideApp.with(context)
                         .load(Constant.SERVER_ADDRESS +"/"+ address.picture[0])
-                        .placeholder(R.drawable.placeholder_kaba)
+                        .transition(GenericTransitionOptions.with(  ((MyKabaApp)getApplicationContext()).getGlideAnimation()  ))
+                        .placeholder(R.drawable.white_placeholder)
                         .centerCrop()
                         .into(holder.iv_main_pic);
             else
                 GlideApp.with(context)
-                        .load(R.drawable.placeholder_kaba)
+                        .load(R.drawable.white_placeholder)
+                        .transition(GenericTransitionOptions.with(  ((MyKabaApp)getApplicationContext()).getGlideAnimation()  ))
                         .centerCrop()
                         .into(holder.iv_main_pic);
 
-            holder.itemView.setOnClickListener(new PreviewAdressOnClickListener(address));
-            holder.iv_delete.setOnClickListener(new DeleteAdressOnClickListener(address));
-            holder.iv_edit.setOnClickListener(new EditAdressOnClickListener(address));
+            /* inflate the little images of the bottom */
+
+            /*
+            *
+            *
+            * */
+            if (returnChoosenAddress) {
+                holder.itemView.setOnClickListener(new SelectAddressOnClickListener(address));
+            }
+//            else {
+            /* preview address */
+            holder.ib_edit_address.setOnClickListener(new AddressDetailsEditOnClickListener(address));
+            /* delete address */
+            holder.itemView.setOnLongClickListener(new DeleteAdressOnClickListener(address));
+//            }
         }
 
 
@@ -193,17 +227,19 @@ public class MyAdressesActivity extends AppCompatActivity implements AdressesCon
 
         public class ViewHolder extends RecyclerView.ViewHolder {
 
-            private final View rootview;
-            ImageView iv_edit, iv_delete;
+            private final ImageButton ib_edit_address;
+            RecyclerView recyclerview_address_details_image;
+            //            ImageView iv_edit, iv_delete;
             ImageView iv_main_pic;
             TextView tv_title, tv_description, tv_country_city;
 
             public ViewHolder(View itemView) {
                 super(itemView);
-                this.rootview = itemView;
                 this.iv_main_pic = itemView.findViewById(R.id.iv_head);
-                this.iv_edit = itemView.findViewById(R.id.iv_edit);
-                this.iv_delete = itemView.findViewById(R.id.iv_delete);
+                this.ib_edit_address = itemView.findViewById(R.id.ib_edit_address);
+                this.recyclerview_address_details_image = itemView.findViewById(R.id.recyclerview_address_details_image);
+//                this.iv_edit = itemView.findViewById(R.id.iv_edit);
+//                this.iv_delete = itemView.findViewById(R.id.iv_delete);
 //                this.tv_country_city = itemView.findViewById(R.id.tv_country_city);
                 this.tv_description = itemView.findViewById(R.id.tv_adress_details);
                 this.tv_title = itemView.findViewById(R.id.tv_title);
@@ -261,15 +297,19 @@ public class MyAdressesActivity extends AppCompatActivity implements AdressesCon
 
     private class AddressDetailsEditOnClickListener implements View.OnClickListener {
 
+        private final DeliveryAddress address;
+
         public AddressDetailsEditOnClickListener(DeliveryAddress address) {
+            this.address = address;
         }
 
         @Override
         public void onClick(View view) {
             Intent in = new Intent(view.getContext(), EditAddressActivity.class);
+            /* preview address */
+            in.putExtra("address", address);
             view.getContext().startActivity(in);
         }
-
     }
 
     private class PreviewAdressOnClickListener implements View.OnClickListener {
@@ -285,7 +325,7 @@ public class MyAdressesActivity extends AppCompatActivity implements AdressesCon
         }
     }
 
-    private class DeleteAdressOnClickListener implements View.OnClickListener, DialogInterface.OnClickListener {
+    private class DeleteAdressOnClickListener implements View.OnClickListener, DialogInterface.OnClickListener, View.OnLongClickListener {
         private final DeliveryAddress address;
 
         public DeleteAdressOnClickListener(DeliveryAddress address) {
@@ -294,6 +334,23 @@ public class MyAdressesActivity extends AppCompatActivity implements AdressesCon
 
         @Override
         public void onClick(View view) {
+            action();
+        }
+
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+
+            /*  */
+            presenter.deleteAddress(address);
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            action();
+            return true;
+        }
+
+        private void action() {
             AlertDialog.Builder builder = new AlertDialog.Builder(MyAdressesActivity.this
             )
                     .setTitle(R.string.confirmation)
@@ -314,13 +371,6 @@ public class MyAdressesActivity extends AppCompatActivity implements AdressesCon
             });
             dialog.show();
         }
-
-        @Override
-        public void onClick(DialogInterface dialogInterface, int i) {
-
-            /*  */
-            presenter.deleteAddress(address);
-        }
     }
 
     private class EditAdressOnClickListener implements View.OnClickListener {
@@ -335,6 +385,24 @@ public class MyAdressesActivity extends AppCompatActivity implements AdressesCon
             Intent intent = new Intent(MyAdressesActivity.this, EditAddressActivity.class);
             intent.putExtra("address", this.address);
             startActivity(intent);
+        }
+    }
+
+    private class SelectAddressOnClickListener implements View.OnClickListener {
+        private final DeliveryAddress address;
+
+        public SelectAddressOnClickListener(DeliveryAddress address) {
+            this.address = address;
+        }
+
+        @Override
+        public void onClick(View view) {
+            /* send back as a response the current selection */
+//            CHOOSEN_ADDRESS
+            Intent intent = new Intent();
+            intent.putExtra("data", address);
+            setResult(Activity.RESULT_OK, intent);
+            finish();
         }
     }
 }

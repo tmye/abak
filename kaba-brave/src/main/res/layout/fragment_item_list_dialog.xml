@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.FoodDetails.AddDrinkDialogFragment"
+    tools:context=".activity.FoodDetails.frag.AddDrinkDialogFragment"
     >
 
     <android.support.v7.widget.RecyclerView
@@ -16,9 +16,9 @@
         android:paddingTop="@dimen/list_item_spacing_half"
         tools:listitem="@layout/fragment_add_drink_list_dialog_item" />
 
-    <Button
+  <Button
         android:background="@drawable/add_drink_button_drawable"
-        android:text="Done"
+        android:text="@string/action_cancel"
         android:textAllCaps="true"
         android:textStyle="bold"
         android:textColor="@color/white"

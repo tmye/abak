@@ -9,15 +9,17 @@
     tools:context=".activity.home.HomeActivity"
     >
 
-    <ProgressBar
+    <tg.tmye.kaba._commons.cviews.CustomProgressbar
         android:layout_gravity="center"
         android:id="@+id/progress_bar"
-        android:indeterminateTint="@color/colorPrimary"
         android:layout_width="@dimen/webview_circle_progressbar_size"
-        android:layout_height="@dimen/webview_circle_progressbar_size" />
+        android:layout_height="@dimen/webview_circle_progressbar_size"
+        android:visibility="gone"
+         />
 
     <TextView
         android:id="@+id/tv_messages"
+        android:visibility="gone"
         android:layout_margin="@dimen/activity_horizontal_margin"
         android:text="@string/restaurant_load_error"
         android:layout_width="match_parent"

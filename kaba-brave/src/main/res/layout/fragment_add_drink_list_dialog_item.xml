@@ -10,14 +10,14 @@
     android:padding="@dimen/restaurant_icon_padding">
 
     <ImageView
-        android:id="@+id/iv_restaurant_icon"
+        android:id="@+id/iv_drink_icon"
         android:layout_width="@dimen/restaurant_icon_height"
         android:adjustViewBounds="true"
         app:srcCompat="@drawable/ic_boisson_black_24dp"
         android:layout_height="@dimen/restaurant_icon_height" />
 
     <TextView
-        android:id="@+id/tv_restaurant_name"
+        android:id="@+id/tv_drink_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

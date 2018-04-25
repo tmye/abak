@@ -167,7 +167,7 @@
     <string name="sav_type_ur_message">Type your message</string>
     <string name="title_activity_my_adresses">MyAdressesActivity</string>
     <string name="my_adresses">MY ADDRESSES</string>
-    <string name="home">Home Agoè</string>
+    <string name="home">Maison Agoè</string>
     <string name="details_adress_sample">Agbalépédogan, En face de la Gare Routière</string>
     <string name="details_adress_country">Lomé (TOGO)</string>
     <string name="title_activity_edit_address">EditAddressActivity</string>
@@ -217,7 +217,7 @@
     <string name="storage_permission_require">Storage Permission Required</string>
     <string name="storage_permission_denied">Write Storage Permission Denied</string>
     <string name="location_permission_denied">Location Permissions Denied</string>
-    <string name="title_activity_shopping_cart">ShoppingCartActivity</string>
+    <string name="title_activity_shopping_cart">Cart</string>
     <string name="ed_search_query_text">Pizza - Tous Au GreenField ce soir!</string>
     <string name="please_connect_and_retry">Please connect to Internet then,Try Again</string>
     <string name="retry">Try Again</string>
@@ -244,5 +244,19 @@
     <string name="bt_delete">Delete</string>
     <string name="address_deleted_success">Address deleted Successfully</string>
     <string name="a_problem_happenned">A problem happened</string>
+    <string name="add_remove_favorite">+- Favorite</string>
+    <string name="action_cancel">CANCEL</string>
+    <string name="no_additionnal_drinks">There is no additionnal drinks</string>
+    <string name="quantity_cannot_less">Quantity cannot go less</string>
+    <string name="quantity_to_much">Quantity Too Much</string>
+    <string name="title_activity_confirm_command_details">Confirm</string>
+    <string name="details_adress_date">02 Fev 2016</string>
+    <string name="delete_before_adding_more">Max Count 5 reached</string>
+    <string name="press_to_add_to_basket">Press to add to basket</string>
+    <string name="add_to_basket_successfull">Add to basket successful</string>
+    <string name="please_choose_delivery_address">Please, select the delivery location</string>
+    <string name="feature_not_yet_available">This feature will be available in a later version.</string>
+    <string name="default_notification_channel_id">default_notifaction_channel_id</string>
+    <string name="title_activity_test__notification">Test_NotificationActivity</string>
 
 </resources>

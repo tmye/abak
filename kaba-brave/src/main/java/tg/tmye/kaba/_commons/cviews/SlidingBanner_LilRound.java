@@ -24,6 +24,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.GenericTransitionOptions;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +34,7 @@ import tg.tmye.kaba.activity.home.views.fragment.F_Home_1_Fragment;
 import tg.tmye.kaba.config.Constant;
 import tg.tmye.kaba.data.advert.AdsBanner;
 import tg.tmye.kaba.syscore.GlideApp;
+import tg.tmye.kaba.syscore.MyKabaApp;
 
 
 /**
@@ -70,6 +73,9 @@ public class SlidingBanner_LilRound extends FrameLayout implements Runnable  {
 
 
     private FragmentManager ourFragmentManager;
+
+    /* is thread running */
+    private boolean isRunning = false;
 
 
     public SlidingBanner_LilRound(@NonNull Context context) {
@@ -182,7 +188,9 @@ public class SlidingBanner_LilRound extends FrameLayout implements Runnable  {
             }
 
         });
-        run();
+        /* if there is no thread for this, we should just */
+        if (!isRunning)
+            run();
     }
 
 
@@ -191,6 +199,7 @@ public class SlidingBanner_LilRound extends FrameLayout implements Runnable  {
     @Override
     public void run() {
 
+        isRunning = true;
 
         int newScrolledPosition = autoScrollViewpager.getCurrentItem();
 
@@ -208,12 +217,12 @@ public class SlidingBanner_LilRound extends FrameLayout implements Runnable  {
         if (!vp_is_touched) {
             // slide once
 
-            Log.d("sliding", "sliding from "+ autoScrollViewpager.getCurrentItem()+" -- to "+newScrolledPosition);
+//            Log.d("sliding", "sliding from "+ autoScrollViewpager.getCurrentItem()+" -- to "+newScrolledPosition);
             autoScrollViewpager.setCurrentItem(
                     newScrolledPosition
                     , true);
         } else {
-            Log.d("sliding", "sliding is touched. NOT SCROLL!! ");
+//            Log.d("sliding", "sliding is touched. NOT SCROLL!! ");
         }
 
         /* if we are settling or have an idle state, we should not scroll */
@@ -293,7 +302,8 @@ public class SlidingBanner_LilRound extends FrameLayout implements Runnable  {
 
             GlideApp.with(getContext())
                     .load(picPath)
-                    .placeholder(R.drawable.placeholder_kaba)
+                    .transition(GenericTransitionOptions.with(  ((MyKabaApp)getContext().getApplicationContext()).getGlideAnimation()  ))
+//                    .placeholder(R.drawable.placeholder_kaba)
                     .centerCrop()
                     .into(imageView);
 

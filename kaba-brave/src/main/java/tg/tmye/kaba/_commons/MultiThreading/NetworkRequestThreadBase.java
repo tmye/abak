@@ -10,9 +10,7 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -108,7 +106,46 @@ public class NetworkRequestThreadBase {
         });
     }
 
-    public void postJsonDataWithToken (final String url, final Map<String, Object> data, final String token, final NetRequestIntf intf) {
+    public void postJsonDataWithToken (final String url, final String jsonData, final String token, final NetRequestIntf intf) {
+
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+
+                    OkHttpClient okHttpClient = new OkHttpClient();
+                    MediaType MEDIA_TYPE = MediaType.parse("application/json");
+
+                    RequestBody body = RequestBody.create(MEDIA_TYPE, jsonData);
+
+                    final Request request = new Request.Builder()
+                            .url(url)
+                            .post(body)
+                            .addHeader("Content-Type", "application/json")
+                            .addHeader("Authorization", "Bearer "+token)
+                            .addHeader("cache-control", "no-cache")
+                            .build();
+
+                    try {
+                        Response response = okHttpClient.newCall(request).execute();
+                        String bodyString = response.body().string();
+                        intf.onSuccess(bodyString);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+            /* in case there is network exception or whatsoever */
+                        intf.onNetworkError();
+                    }
+
+                } catch(Exception e){
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void postMapDataWithToken (final String url, final Map<String, Object> data, final String token, final NetRequestIntf intf) {
 
         mHandler.post(new Runnable() {
             @Override
@@ -149,6 +186,48 @@ public class NetworkRequestThreadBase {
                 } catch(JSONException e){
                     // TODO Auto-generated catch block
                     e.printStackTrace();
+                }
+            }
+        });
+    }
+
+
+    public void getDataWithToken (final String url, final Map<String, Object> data, final String token, final NetRequestIntf intf) {
+
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+
+                String params = "";
+
+                if (data != null) {
+                    Object[] d = data.keySet().toArray();
+                    for (int i = 0; i < data.keySet().toArray().length; i++) {
+                        String s = (String) d[i];
+                        params += (s + "=" + data.get(s));
+                        if (i + 1 < data.keySet().toArray().length) {
+                            params += "&";
+                        }
+                    }
+                }
+
+                OkHttpClient okHttpClient = new OkHttpClient();
+
+                final Request request = new Request.Builder()
+                        .url(url+"?"+params)
+                        .get()
+                        .addHeader("Content-Type", "application/json")
+                        .addHeader("Authorization", "Bearer "+token)
+                        .addHeader("cache-control", "no-cache")
+                        .build();
+
+                try {
+                    Response response = okHttpClient.newCall(request).execute();
+                    String bodyString = response.body().string();
+                    intf.onSuccess(bodyString);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    intf.onNetworkError();
                 }
             }
         });

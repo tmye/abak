@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import tg.tmye.kaba.R;
+import tg.tmye.kaba._commons.cviews.CustomProgressbar;
 import tg.tmye.kaba.activity.FoodDetails.FoodDetailsActivity;
 import tg.tmye.kaba.activity.menu.contract.RestaurantMenuContract;
 import tg.tmye.kaba.activity.menu.presenter.RestaurantMenuPresenter;
@@ -51,7 +52,7 @@ public class RestaurantMenuActivity extends AppCompatActivity implements
 
     private List<Restaurant_SubMenuEntity> menu_food;
 
-    private ProgressBar progressBar;
+    private CustomProgressbar progressBar;
 
     private TextView tv_no_food_message;
 
@@ -82,6 +83,8 @@ public class RestaurantMenuActivity extends AppCompatActivity implements
 
         menu_repository = new MenuDb_OnlineRepository(this, restaurantEntity);
         presenter = new RestaurantMenuPresenter(menu_repository,this);
+
+        presenter.start();
     }
 
 
@@ -135,7 +138,6 @@ public class RestaurantMenuActivity extends AppCompatActivity implements
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.start();
     }
 
     @Override
@@ -168,7 +170,8 @@ public class RestaurantMenuActivity extends AppCompatActivity implements
     public void onFoodInteraction(Restaurant_Menu_FoodEntity food) {
 
         Intent intent = new Intent(this, FoodDetailsActivity.class);
-        intent.putExtra(FoodDetailsActivity.FOOD_ID, food.get_id());
+        intent.putExtra(FoodDetailsActivity.FOOD
+                , food);
         intent.putExtra(FoodDetailsActivity.RESTAURANT_ENTITY, restaurantEntity);
         startActivityForResult(intent, RESTAURANT_ITEM_RESULT);
     }

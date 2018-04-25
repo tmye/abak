@@ -89,6 +89,9 @@ public class WebActivity extends AppCompatActivity {
         wbHolder.main_webview.setWebViewClient(new KabaWebClient());
         wbHolder.main_webview.setWebChromeClient(new KabaWebChromeClient());
 
+//
+        wbHolder.main_webview.setScrollContainer(false);
+
         // load a link into the webview
         String tmpLink = getIntent().getStringExtra(DATA);
         if (tmpLink != null && tmpLink.trim().length() > 0 && UtilFunctions.checkLink(tmpLink))

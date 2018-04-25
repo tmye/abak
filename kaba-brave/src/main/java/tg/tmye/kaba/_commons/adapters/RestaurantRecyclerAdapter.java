@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.GenericTransitionOptions;
+
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -15,6 +17,7 @@ import tg.tmye.kaba.activity.home.views.fragment.F_Restaurant_2_Fragment;
 import tg.tmye.kaba.config.Constant;
 import tg.tmye.kaba.data.Restaurant.RestaurantEntity;
 import tg.tmye.kaba.syscore.GlideApp;
+import tg.tmye.kaba.syscore.MyKabaApp;
 
 /**
  * By abiguime on 21/02/2018.
@@ -66,6 +69,7 @@ public class RestaurantRecyclerAdapter extends RecyclerView.Adapter<RestaurantRe
 
         GlideApp.with(ctx)
                 .load(Constant.SERVER_ADDRESS +"/"+ resto.pic)
+                .transition(GenericTransitionOptions.with(  ((MyKabaApp)ctx.getApplicationContext()).getGlideAnimation()  ))
                 .placeholder(R.drawable.placeholder_kaba)
                 .centerCrop()
                 .into(holder.cic_resto);

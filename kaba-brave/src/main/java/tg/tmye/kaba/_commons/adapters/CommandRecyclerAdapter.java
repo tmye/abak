@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.GenericTransitionOptions;
+
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -19,9 +21,10 @@ import tg.tmye.kaba.R;
 import tg.tmye.kaba._commons.decorator.CommandInnerFoodLineDecorator;
 import tg.tmye.kaba.config.Constant;
 import tg.tmye.kaba.data.Food.Food_Tag;
-import tg.tmye.kaba.data.shoppingcart.BasketFoodForDb;
+import tg.tmye.kaba.data.shoppingcart.BasketInItem;
 import tg.tmye.kaba.data.command.Command;
 import tg.tmye.kaba.syscore.GlideApp;
+import tg.tmye.kaba.syscore.MyKabaApp;
 
 /**
  * By abiguime on 21/02/2018.
@@ -63,6 +66,7 @@ public class CommandRecyclerAdapter extends RecyclerView.Adapter<CommandRecycler
         /* set up restaurant restaurant_logo */
         GlideApp.with(ctx)
                 .load(Constant.SERVER_ADDRESS+command.restaurantEntity.pic)
+                .transition(GenericTransitionOptions.with(  ((MyKabaApp)ctx.getApplicationContext()).getGlideAnimation()  ))
                 .placeholder(R.drawable.placeholder_kaba)
                 .centerCrop()
                 .into(holder.header_resto_cic);
@@ -119,10 +123,10 @@ public class CommandRecyclerAdapter extends RecyclerView.Adapter<CommandRecycler
 class CommandInnerFoodViewAdapter extends RecyclerView.Adapter<CommandInnerFoodViewAdapter.ViewHolder> {
 
     private final Context ctx;
-    private final List<BasketFoodForDb> command_list;
+    private final List<BasketInItem> command_list;
     private int COMMAND_FOOD_COUNT = 4;
 
-    public CommandInnerFoodViewAdapter(Context ctx, List<BasketFoodForDb> command_list) {
+    public CommandInnerFoodViewAdapter(Context ctx, List<BasketInItem> command_list) {
         this.ctx = ctx;
         this.command_list = command_list;
     }
@@ -138,17 +142,18 @@ class CommandInnerFoodViewAdapter extends RecyclerView.Adapter<CommandInnerFoodV
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         Log.d(Constant.APP_TAG, "binding inner objects -- position : "+position);
-        initFoodAdapter (command_list.get(position).etags, holder.rc_food_tags);
+//        initFoodAdapter (command_list.get(position).etags, holder.rc_food_tags);
 
-        BasketFoodForDb basketFoodForDb = this.command_list.get(position);
+        BasketInItem basketInItem = this.command_list.get(position);
 
      /* set up restaurant restaurant_name*/
-        holder.tv_food_name.setText(basketFoodForDb.foodEntity.name);
-        holder.tv_quantity.setText(String.valueOf(basketFoodForDb.quantity));
-        holder.tv_food_price.setText(String.valueOf(basketFoodForDb.foodEntity.price));
+        holder.tv_food_name.setText(basketInItem.name);
+        holder.tv_quantity.setText(String.valueOf(basketInItem.quantity));
+        holder.tv_food_price.setText(String.valueOf(basketInItem.price));
       /* set up restaurant restaurant_logo */
         GlideApp.with(ctx)
-                .load(Constant.SERVER_ADDRESS+ basketFoodForDb.foodEntity.pic)
+                .load(Constant.SERVER_ADDRESS+ basketInItem.pic)
+                .transition(GenericTransitionOptions.with(  ((MyKabaApp)ctx.getApplicationContext()).getGlideAnimation()  ))
                 .placeholder(R.drawable.placeholder_kaba)
                 .centerCrop()
                 .into(holder.iv_food_pic);

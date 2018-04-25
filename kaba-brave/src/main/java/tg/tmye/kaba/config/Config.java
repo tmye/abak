@@ -23,6 +23,7 @@ public class Config {
     public static final String RESTAURANT_DB_SERIAL = "RESTAURANT_DB_SERIAL";
 
 
+
     public static String USER_SHARED_PREFS = "kb.user";
     public static final String RESTAURANT_LIST_SP_VAL = "RESTAURANT_LIST_SP_VAL";
     public static final String DAILY_RESTAURANTS_SP_VAL = "DAILY_RESTAURANTS_SP_VAL";
@@ -59,9 +60,18 @@ public class Config {
     public static final String LINK_MY_COMMANDS = Constant.SERVER_ADDRESS+
             "/sample/commands.json";
 
+    /* create command db */
+    public static final String LINK_CREATE_COMMAND = Constant.SERVER_ADDRESS+
+            "/mobile/api/command/create";
+
+
     /* get current basket content */
-    public static final String LINK_MY_BASKET = Constant.SERVER_ADDRESS+
-            "/sample/shoppingcart.json";
+    public static final String LINK_MY_BASKET_GET = Constant.SERVER_ADDRESS+
+            "/mobile/api/basket/get";
+
+    /* get current basket content */
+    public static final String LINK_MY_BASKET_CREATE = Constant.SERVER_ADDRESS+
+            "/mobile/api/basket/create";
 
     /* get current horoscope content */
     public static final String LINK_MY_HOROSCOPE = Constant.SERVER_ADDRESS+
@@ -69,7 +79,10 @@ public class Config {
 
     /* get current favorite content */
     public static final String LINK_MY_FAVORITE = Constant.SERVER_ADDRESS+
-            "/sample/favorite.json";
+            "/mobile/api/getFavorites";
+
+    /* set favorite */
+    public static final String LINK_SET_FAVORITE = Constant.SERVER_ADDRESS + "/mobile/api/setFavorite";
 
     /* get current adresses content */
     public static final String LINK_GET_ADRESSES = Constant.SERVER_ADDRESS+
@@ -105,5 +118,9 @@ public class Config {
     /* user register */
     public static final String LINK_USER_REGISTER =  Constant.SERVER_ADDRESS+
             "/api/user/register";
+
+    /* register push token */
+    public static final String LINK_REGISTER_PUSH_TOKEN = Constant.SERVER_ADDRESS+
+            "/api/device/add";
 
 }

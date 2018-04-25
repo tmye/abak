@@ -5,6 +5,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -14,8 +16,8 @@ import tg.tmye.kaba._commons.cviews.OffRecyclerview;
 import tg.tmye.kaba._commons.decorator.CommandListSpacesItemDecoration;
 import tg.tmye.kaba.activity.cart.contract.ShoppingContract;
 import tg.tmye.kaba.activity.cart.presenter.ShoppingCartPresenter;
-import tg.tmye.kaba.data.shoppingcart.ShoppingBasketForView;
-import tg.tmye.kaba.data.shoppingcart.source.BasketFoodRepository;
+import tg.tmye.kaba.data.shoppingcart.ShoppingBasketGroupItem;
+import tg.tmye.kaba.data.shoppingcart.source.BasketRepository;
 
 
 public class ShoppingCartActivity extends AppCompatActivity implements ShoppingContract.View, SwipeRefreshLayout.OnRefreshListener {
@@ -25,7 +27,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
     ShoppingCartPresenter presenter;
     /* contract */
     /* model */
-    BasketFoodRepository basketFoodRepository;
+    BasketRepository basketRepository;
 
     /* views */
     OffRecyclerview shoppingBasketRecyclerview;
@@ -43,10 +45,14 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_yellow_upward_navigation_24dp);
+
+
         initViews();
 
-        basketFoodRepository = new BasketFoodRepository(this);
-        presenter = new ShoppingCartPresenter(basketFoodRepository, this);
+        basketRepository = new BasketRepository(this);
+        presenter = new ShoppingCartPresenter(basketRepository, this);
         swipeRefreshLayout.setOnRefreshListener(this);
     }
 
@@ -63,18 +69,18 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
     }
 
     @Override
-    public void showBasketList(final List<ShoppingBasketForView> shoppingbasketContent) {
+    public void showBasketList(final List<ShoppingBasketGroupItem> shoppingbasketContent) {
         if (shoppingbasketContent == null)
             return;
 
-         runOnUiThread(new Runnable() {
+        runOnUiThread(new Runnable() {
             @Override
             public void run() {
 
                 if (shoppingBasketListDecorator == null) {
                     shoppingBasketListDecorator = new CommandListSpacesItemDecoration(
                             getResources().getDimensionPixelSize(R.dimen.list_item_spacing),
-                        getResources().getDimensionPixelSize(R.dimen.food_details_fab_margin_bottom)
+                            getResources().getDimensionPixelSize(R.dimen.food_details_fab_margin_bottom)
                     );
                 }
                 if (shoppingBasketRecyclerview.getItemDecorationCount() == 0)
@@ -100,9 +106,14 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
     }
 
     @Override
-    public void showLoading(boolean isLoading) {
-        if (swipeRefreshLayout.isRefreshing() == isLoading) return;
-        swipeRefreshLayout.setRefreshing(isLoading);
+    public void showLoading(final boolean isLoading) {
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(isLoading);
+            }
+        });
     }
 
     @Override
@@ -118,5 +129,21 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
     @Override
     public void onRefresh() {
         presenter.updateBasket();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            this.finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void mToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

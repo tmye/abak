@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="@dimen/article_list_item_height"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:layout_gravity="center_vertical"
+    android:animateLayoutChanges="true"
+    android:background="?selectableItemBackground">
+
+    <ImageView
+        android:id="@+id/iv_pic"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:src="@drawable/placeholder_kaba"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_drink_name"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary_yellow"
+        android:text="COCA-COLA"
+        android:layout_weight="6"
+        android:layout_width="0dp"
+        android:textSize="@dimen/actionbar_title_text_size"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_drink_count"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:text="X 1"
+        android:textColor="@color/black"
+        android:textSize="@dimen/actionbar_title_text_size"
+        android:layout_weight="1"
+        android:textStyle="bold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+
+</android.support.v7.widget.LinearLayoutCompat>

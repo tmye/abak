@@ -1,8 +1,12 @@
 package tg.tmye.kaba.syscore;
 
+import android.animation.ObjectAnimator;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.view.View;
+
+import com.bumptech.glide.request.transition.ViewPropertyTransition;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +35,9 @@ public class MyKabaApp extends Application {
 
     /* personnal db restaurant_name */
     public static String personnal_db = "personnal";
+
+
+    private ViewPropertyTransition.Animator animationObject;
 
     @Override
     public void onCreate() {
@@ -90,5 +97,25 @@ public class MyKabaApp extends Application {
 
     public DatabaseRequestThreadBase getDatabaseRequestThreadBase() {
         return databaseRequestThreadBase;
+    }
+
+    public ViewPropertyTransition.Animator getGlideAnimation() {
+
+        if (animationObject == null) {
+            animationObject = new ViewPropertyTransition.Animator() {
+                @Override
+                public void animate(View view) {
+                    // if it's a custom view class, cast it here
+                    // then find subviews and do the animations
+                    // here, we just use the entire view for the fade animation
+                    view.setAlpha(0f);
+
+                    ObjectAnimator fadeAnim = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);
+                    fadeAnim.setDuration(300);
+                    fadeAnim.start();
+                }
+            };
+        }
+        return animationObject;
     }
 }

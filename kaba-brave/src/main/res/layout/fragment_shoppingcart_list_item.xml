@@ -64,7 +64,7 @@
                 android:id="@+id/iv_edit"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                app:srcCompat="@drawable/ic_basket_content_edit_white_24dp"
+                app:srcCompat="@drawable/ic_delete_forever_white_24dp"
                 android:layout_width="@dimen/command_item_header_pic"
                 android:layout_height="@dimen/command_item_header_pic" />
 
@@ -97,6 +97,7 @@
                     android:layout_marginRight="@dimen/command_total_bottom_item_spacing"/>
 
                 <TextView
+                    android:id="@+id/tv_total"
                     android:text="29.500F"
                     android:background="@color/colorPrimary"
                     android:gravity="center"

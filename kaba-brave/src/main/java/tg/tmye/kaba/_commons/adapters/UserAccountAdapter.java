@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import tg.tmye.kaba.R;
+import tg.tmye.kaba.activity.cart.ShoppingCartActivity;
 import tg.tmye.kaba.activity.favorite.FavoriteActivity;
 import tg.tmye.kaba.activity.UserAcc.MyAdressesActivity;
 import tg.tmye.kaba.activity.UserAcc.NewsFeedActivity;
@@ -46,46 +47,47 @@ public class UserAccountAdapter extends RecyclerView.Adapter<UserAccountAdapter.
                 holder.iv_menu_icon.setImageResource(R.drawable.ic_myaccount_infos);
                 holder.rootview.setOnClickListener(new OpenSubActivity(PersonnalInfoActivity.class));
                 break;
+//            case 1:
+//                holder.tv_menu_title.setText(ctx.getResources().getText(R.string.myaccount_bon_dachat));
+//                holder.tv_menu_title.setTextColor(ctx.getResources().getColor(R.color.colorPrimary));
+//                holder.iv_menu_icon.setImageResource(R.drawable.ic_myaccount_bon_dachat);
+//                break;
             case 1:
-                holder.tv_menu_title.setText(ctx.getResources().getText(R.string.myaccount_bon_dachat));
-                holder.tv_menu_title.setTextColor(ctx.getResources().getColor(R.color.colorPrimary));
-                holder.iv_menu_icon.setImageResource(R.drawable.ic_myaccount_bon_dachat);
-                break;
-            case 2:
                 holder.tv_menu_title.setText(ctx.getResources().getText(R.string.myaccount_favorite_plat));
                 holder.tv_menu_title.setTextColor(ctx.getResources().getColor(R.color.colorPrimary_yellow));
                 holder.iv_menu_icon.setImageResource(R.drawable.ic_myaccount_favorite_food);
                 holder.rootview.setOnClickListener(new OpenSubActivity(FavoriteActivity.class));
                 break;
-            case 3:
+            case 2:
                 holder.tv_menu_title.setText(ctx.getResources().getText(R.string.myaccount_delivery_address));
                 holder.tv_menu_title.setTextColor(ctx.getResources().getColor(R.color.colorPrimary));
                 holder.iv_menu_icon.setImageResource(R.drawable.ic_myaccount_addresses);
                 holder.rootview.setOnClickListener(new OpenSubActivity(MyAdressesActivity.class));
                 break;
-            case 4:
+            case 3:
                 holder.tv_menu_title.setText(ctx.getResources().getText(R.string.myaccount_client_service));
                 holder.tv_menu_title.setTextColor(ctx.getResources().getColor(R.color.colorPrimary_yellow));
                 holder.iv_menu_icon.setImageResource(R.drawable.ic_myaccount_client_service);
                 holder.rootview.setOnClickListener(new OpenSubActivity(ServiceClientActivity.class));
                 break;
-            case 5:
+            case 4:
                 holder.tv_menu_title.setText(ctx.getResources().getText(R.string.myaccount_newsletter));
                 holder.tv_menu_title.setTextColor(ctx.getResources().getColor(R.color.colorPrimary));
                 holder.iv_menu_icon.setImageResource(R.drawable.ic_myaccount_newsletter);
                 holder.rootview.setOnClickListener(new OpenSubActivity(NewsFeedActivity.class));
                 break;
-            case 6:
+            case 5:
                 holder.tv_menu_title.setText(ctx.getResources().getText(R.string.myaccount_shopping_card));
                 holder.tv_menu_title.setTextColor(ctx.getResources().getColor(R.color.colorPrimary_yellow));
                 holder.iv_menu_icon.setImageResource(R.drawable.ic_shopping_card_yellow_24dp);
+                holder.rootview.setOnClickListener(new OpenSubActivity(ShoppingCartActivity.class));
                 break;
-            case 7:
+            case 6:
                 holder.tv_menu_title.setText(ctx.getResources().getText(R.string.myaccount_commands));
                 holder.tv_menu_title.setTextColor(ctx.getResources().getColor(R.color.colorPrimary_yellow));
                 holder.iv_menu_icon.setImageResource(R.drawable.ic_myaccount_list_command);
                 break;
-            case 8:
+            case 7:
                 holder.tv_menu_title.setText(ctx.getResources().getText(R.string.myaccount_settings));
                 holder.tv_menu_title.setTextColor(ctx.getResources().getColor(R.color.colorPrimary));
                 holder.iv_menu_icon.setImageResource(R.drawable.ic_myaccount_settings);
@@ -95,7 +97,7 @@ public class UserAccountAdapter extends RecyclerView.Adapter<UserAccountAdapter.
 
     @Override
     public int getItemCount() {
-        return 9;
+        return 8;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

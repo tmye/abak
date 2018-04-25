@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -15,9 +16,16 @@
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-feature android:name="android.hardware.camera.front" android:required="false" />
-    <uses-feature android:name="android.hardware.camera.back" android:required="false" />
 
+    <!-- wave lock -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.back"
+        android:required="false" />
 
     <application
         android:name=".syscore.MyKabaApp"
@@ -34,6 +42,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -69,15 +78,13 @@
                 android:value=".activity.menu.RestaurantMenuActivity" />
         </activity>
         <activity android:name=".activity.UserAuth.register.RegisterActivity" />
-        <activity android:name=".activity.UserAuth.login.LoginActivity" >
-        </activity>
+        <activity android:name=".activity.UserAuth.login.LoginActivity" />
         <activity
             android:name=".activity.UserAcc.ServiceClientActivity"
             android:label="@string/title_activity_service_client" />
         <activity
             android:name=".activity.UserAcc.MyAdressesActivity"
-            android:label="@string/title_activity_my_adresses">
-        </activity>
+            android:label="@string/title_activity_my_adresses" />
         <activity
             android:name=".activity.UserAcc.adresses.EditAddressActivity"
             android:label="@string/title_activity_edit_address" />
@@ -101,24 +108,6 @@
             android:name=".activity.UserAcc.SoldeActivity"
             android:label="@string/title_activity_solde"
             android:theme="@style/AppTheme.NoActionBar" />
-
-        <!-- notifications push services -->
-        <!--
-        <service
-            andrrestaurant_namename=".services.MyFirebaseMessagingService">
-            <intent-filter>
-                <action andrrestaurant_namename="com.google.firebase.MESSAGING_EVENT"/>
-            </intent-filter>
-        </service>
-
-        <service
-            andrrestaurant_namename=".services.MyFirebaseInstanceIDService">
-            <intent-filter>
-                <action andrrestaurant_namename="com.google.firebase.INSTANCE_ID_EVENT"/>
-            </intent-filter>
-        </service>
-        -->
-
         <activity
             android:name=".activity.cart.ShoppingCartActivity"
             android:label="@string/title_activity_shopping_cart"
@@ -134,7 +123,38 @@
         <activity
             android:name=".activity.UserAcc.EditFieldActivity"
             android:label="@string/title_activity_edit_field"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.trans.ConfirmCommandDetailsActivity"
+            android:label="@string/title_activity_confirm_command_details"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <!-- notifications push services -->
+
+        <service android:name=".service.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".service.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name=".activity.test.Test_NotificationActivity"
+            android:label="@string/title_activity_test__notification"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+
+        <!-- notification job service -->
+        <service android:name="._commons.notification.KabaNotificationJobService"
+            />
+
+
     </application>
 
 </manifest>

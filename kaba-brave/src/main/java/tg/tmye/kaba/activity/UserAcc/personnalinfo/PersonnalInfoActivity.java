@@ -21,6 +21,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.bumptech.glide.GenericTransitionOptions;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -34,6 +36,7 @@ import tg.tmye.kaba.config.Constant;
 import tg.tmye.kaba.data.customer.Customer;
 import tg.tmye.kaba.data.customer.source.CustomerDataRepository;
 import tg.tmye.kaba.syscore.GlideApp;
+import tg.tmye.kaba.syscore.MyKabaApp;
 
 
 public class PersonnalInfoActivity extends AppCompatActivity implements
@@ -148,6 +151,7 @@ public class PersonnalInfoActivity extends AppCompatActivity implements
 
                     GlideApp.with(PersonnalInfoActivity.this)
                             .load(images.get(0))
+                            .transition(GenericTransitionOptions.with(  ((MyKabaApp)getApplicationContext()).getGlideAnimation()  ))
                             .centerCrop()
                             .into(photoImageView);
                     activityResultSuccess = true;
@@ -169,6 +173,7 @@ public class PersonnalInfoActivity extends AppCompatActivity implements
         /*  show the image */
         GlideApp.with(PersonnalInfoActivity.this)
                 .load(Constant.SERVER_ADDRESS+customer.profile_picture)
+                .transition(GenericTransitionOptions.with(  ((MyKabaApp)getApplicationContext()).getGlideAnimation()  ))
                 .centerCrop()
                 .into(photoImageView);
         if (customer.is_gender_to_set == 0) {

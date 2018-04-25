@@ -176,14 +176,15 @@ public class F_Commands_3_Fragment extends BaseFragment implements F_CommandCont
 
     @Override
     public void showErrorPage(final boolean isShowed) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
+        if (getActivity() != null)
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
 
-                lny.setVisibility(isShowed ? View.VISIBLE : View.GONE);
-                commandRecyclerview.setVisibility(isShowed ? View.GONE : View.VISIBLE);
-            }
-        });
+                    lny.setVisibility(isShowed ? View.VISIBLE : View.GONE);
+                    commandRecyclerview.setVisibility(isShowed ? View.GONE : View.VISIBLE);
+                }
+            });
     }
 
     @Override

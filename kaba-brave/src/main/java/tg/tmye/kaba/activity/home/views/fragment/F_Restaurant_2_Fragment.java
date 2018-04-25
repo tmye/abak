@@ -17,6 +17,7 @@ import java.util.List;
 
 import tg.tmye.kaba.R;
 import tg.tmye.kaba._commons.adapters.RestaurantRecyclerAdapter;
+import tg.tmye.kaba._commons.cviews.CustomProgressbar;
 import tg.tmye.kaba._commons.cviews.OffRecyclerview;
 import tg.tmye.kaba._commons.decorator.LastItemListSpaceDecoration;
 import tg.tmye.kaba.activity.home.contracts.F_RestaurantContract;
@@ -36,7 +37,7 @@ public class F_Restaurant_2_Fragment extends BaseFragment implements F_Restauran
 
     TextView tv_error_message;
 
-    ProgressBar progressBar;
+    CustomProgressbar progressBar;
 
     /* presenter */
     private F_RestaurantContract.Presenter presenter;
@@ -51,7 +52,8 @@ public class F_Restaurant_2_Fragment extends BaseFragment implements F_Restauran
     @Override
     public void onResume() {
         super.onResume();
-        presenter.start();
+        if (resListAdapter == null)
+            presenter.start();
     }
 
     // TODO: Rename and change types and number of parameters
@@ -165,8 +167,12 @@ public class F_Restaurant_2_Fragment extends BaseFragment implements F_Restauran
             @Override
             public void run() {
                 tv_error_message.setText(getResources().getString(R.string.network_error));
+                tv_error_message.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
         /* hide everything else */
                 restaurantRecyclerView.setVisibility(View.GONE);
+
+                /* add a button try again */
             }
         });
     }

@@ -12,24 +12,6 @@ import java.util.List;
 
 public class Restaurant_Menu_FoodEntity implements Parcelable {
 
-
-    /* {
-        "_id": "1",
-        "name": "ayimolou",
-        "price": "300",
-        "food_pic": "/sample/food_icon/burger.jpg",
-        "details": "",
-        "sub_menu_id" : 1,
-        "restaurant_id": 1,
-        "food_description": "Riz haricot",
-        "food_details_pictures": [
-          "/sample/food_description/burger_0.jpg",
-          "/sample/food_description/burger_1.jpg",
-          "/sample/food_description/burger_2.jpg"
-        ],
-        "stars": "3.5"
-      },*/
-
     public long id;
 
     public String name;

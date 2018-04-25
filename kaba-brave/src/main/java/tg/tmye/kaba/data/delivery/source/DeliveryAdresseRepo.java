@@ -58,7 +58,7 @@ public class DeliveryAdresseRepo {
         data.put("description", address.description);
         data.put("picture", UtilFunctions.toJsonData(address.picture));
 
-        networkRequestThreadBase.postJsonDataWithToken(Config.LINK_CREATE_NEW_ADRESS, data, token, new NetworkRequestThreadBase.NetRequestIntf<String>() {
+        networkRequestThreadBase.postMapDataWithToken(Config.LINK_CREATE_NEW_ADRESS, data, token, new NetworkRequestThreadBase.NetRequestIntf<String>() {
 
             @Override
             public void onNetworkError() {
@@ -85,7 +85,7 @@ public class DeliveryAdresseRepo {
         Map<String, Object> data = new HashMap<>();
         data.put("id", address.id);
 
-        networkRequestThreadBase.postJsonDataWithToken(Config.LINK_DELETE_ADRESS, data, token, new NetworkRequestThreadBase.NetRequestIntf<String>() {
+        networkRequestThreadBase.postMapDataWithToken(Config.LINK_DELETE_ADRESS, data, token, new NetworkRequestThreadBase.NetRequestIntf<String>() {
 
             @Override
             public void onNetworkError() {
