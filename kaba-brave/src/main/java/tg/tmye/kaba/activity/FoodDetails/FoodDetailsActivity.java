@@ -247,11 +247,12 @@ public class FoodDetailsActivity extends AppCompatActivity implements OnImageCli
         /* restaurant entity also */
         foodEntity = getIntent().getParcelableExtra(FOOD);
         resto = getIntent().getParcelableExtra(RESTAURANT_ENTITY);
+
         restaurant_menu_drinks = getIntent().getParcelableArrayListExtra(RESTAURANT_SIMPLE_DRINKS);
 
-        if (restaurant_menu_drinks == null || restaurant_menu_drinks.size() == 0) {
-            restaurant_menu_drinks = FoodRepository.fakeSimpleDrinks(3);
-        }
+//        if (restaurant_menu_drinks == null || restaurant_menu_drinks.size() == 0) {
+//            restaurant_menu_drinks = FoodRepository.fakeSimpleDrinks(3);
+//        }
 
         /* check food id ? food entity */
         if (foodEntity == null) {
@@ -399,7 +400,11 @@ public class FoodDetailsActivity extends AppCompatActivity implements OnImageCli
                 break;
             case R.id.iv_add_a_drink:
                 /* launch fragment to define how much */
-                addDrinks(restaurant_menu_drinks);
+                if (restaurant_menu_drinks == null || restaurant_menu_drinks.size() == 0) {
+                    mToast(getResources().getString(R.string.restaurant_no_drinks));
+                } else {
+                    addDrinks(restaurant_menu_drinks);
+                }
                 break;
             case R.id.ib_quantity_add:
                 quantity = (Integer.valueOf(holder.ed_quantity.getText().toString()));

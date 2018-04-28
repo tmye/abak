@@ -137,7 +137,99 @@
     <favorites_list name="Kaba" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="ShoppingCartActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/cart/ShoppingCartActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="227">
+              <caret line="90" column="64" lean-forward="false" selection-start-line="90" selection-start-column="64" selection-end-line="90" selection-end-column="64" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ShoppingCartRecyclerAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/adapters/ShoppingCartRecyclerAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="78">
+              <caret line="151" column="79" lean-forward="true" selection-start-line="151" selection-start-column="79" selection-end-line="151" selection-end-column="79" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rc_command_inner_food_layout.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/res/layout/rc_command_inner_food_layout.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="336">
+              <caret line="130" column="49" lean-forward="false" selection-start-line="130" selection-start-column="49" selection-end-line="130" selection-end-column="49" />
+              <folding>
+                <element signature="e#459#978#0" expanded="false" />
+                <element signature="e#988#3410#0" expanded="false" />
+                <element signature="e#3420#4721#0" expanded="false" />
+                <element signature="e#4966#4998#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="myaccount_address_edit.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/res/drawable/myaccount_address_edit.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="17" column="34" lean-forward="true" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="basket_edit_modify_bt_background.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/res/drawable/basket_edit_modify_bt_background.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="64" lean-forward="true" selection-start-line="1" selection-start-column="64" selection-end-line="1" selection-end-column="64" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fragment_shoppingcart_list_item.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/res/layout/fragment_shoppingcart_list_item.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-668">
+              <caret line="39" column="41" lean-forward="false" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/AndroidManifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="322">
+              <caret line="114" column="28" lean-forward="false" selection-start-line="114" selection-start-column="28" selection-end-line="114" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-manifest">
+            <state />
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -146,29 +238,17 @@
         <option value="valueResourceFile" />
         <option value="layoutResourceFile" />
         <option value="Interface" />
-        <option value="resourceFile" />
         <option value="Class" />
+        <option value="resourceFile" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>R.id.</find>
-      <find>onclicklis</find>
-      <find>onclick</find>
-      <find>onclick(</find>
-      <find>start</find>
-      <find>quanti</find>
-      <find>showlodin</find>
-      <find>lide</find>
-      <find>price</find>
-      <find>placeho</find>
       <find>home</find>
       <find>shopp</find>
       <find>shoppingca</find>
       <find>Scanner</find>
-      <find>adapter</find>
-      <find>shopping</find>
       <find>basket</find>
       <find>food_list</find>
       <find>total</find>
@@ -182,10 +262,21 @@
       <find>onre</find>
       <find>service</find>
       <find>core</find>
+      <find>commandRepository</find>
+      <find>PHONE_FIREBASE_PUSH_TOKEN</find>
+      <find>applicationContext</find>
+      <find>getintent</find>
+      <find>restaurant_menu_drinks</find>
+      <find>fake</find>
+      <find>startactiv</find>
+      <find>bearer</find>
+      <find>inthread</find>
       <find>glide</find>
+      <find>shopping</find>
+      <find>adapter</find>
+      <find>visi`</find>
     </findStrings>
     <replaceStrings>
-      <replace>@color/colorPrimary</replace>
       <replace>@color/selected_yellow</replace>
       <replace>@color/white</replace>
       <replace>mapView</replace>
@@ -215,6 +306,7 @@
       <replace>favorite_item</replace>
       <replace />
       <replace>15.0.0</replace>
+      <replace>ctx</replace>
     </replaceStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -3733,23 +3825,14 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/UserAcc/SelectAddressOnClickListener.java" />
-        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/UserAcc/MyAdressesActivity.java" />
-        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/MultiThreading/NetworkRequestThreadBase.java" />
-        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/data/Food/source/FoodRepository.java" />
-        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/data/delivery/source/DeliveryAdresseRepo.java" />
-        <option value="$PROJECT_DIR$/kaba-brave/src/main/res/drawable/custom_loading_drawable.xml" />
         <option value="$PROJECT_DIR$/kaba-brave/src/main/res/layout/fragment_restaurant_list.xml" />
         <option value="$PROJECT_DIR$/kaba-brave/src/main/res/layout/activity_restaurant_menu.xml" />
         <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/menu/RestaurantMenuActivity.java" />
         <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/cviews/CustomProgressbar.java" />
         <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/home/views/fragment/F_Restaurant_2_Fragment.java" />
         <option value="$PROJECT_DIR$/kaba-brave/src/main/res/values/dimens.xml" />
-        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/trans/presenter/CommandDetailsPresenter.java" />
         <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/trans/contract/CommandDetailsContract.java" />
         <option value="$PROJECT_DIR$/kaba-brave/src/main/res/layout/content_confirm_command_details.xml" />
-        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/trans/ConfirmCommandDetailsActivity.java" />
-        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/data/command/source/CommandRepository.java" />
         <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/data/shoppingcart/source/BasketRepository.java" />
         <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/data/Food/Restaurant_Menu_FoodEntity.java" />
         <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/data/Food/Restaurant_Menu_FoodEntity_WithQuantity.java" />
@@ -3766,29 +3849,38 @@
         <option value="$PROJECT_DIR$/kaba-brave/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/kaba-brave/src/main/res/drawable/ic_delete_forever_white_24dp.xml" />
         <option value="$PROJECT_DIR$/kaba-brave/src/main/res/layout/fragment_shoppingcart_list_item.xml" />
-        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/cart/ShoppingCartActivity.java" />
         <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/cviews/SlidingBanner_LilRound.java" />
         <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/home/HomeActivity.java" />
         <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/utils/PhoneUtils.java" />
-        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/service/MyFirebaseInstanceIDService.java" />
         <option value="$PROJECT_DIR$/kaba-brave/build.gradle" />
         <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/config/Config.java" />
-        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/service/MyFirebaseMessagingService.java" />
-        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/notification/NotificationBuilder.java" />
         <option value="$PROJECT_DIR$/kaba-brave/src/main/res/layout/activity_test__notification.xml" />
         <option value="$PROJECT_DIR$/kaba-brave/src/main/res/layout/content_test__notification.xml" />
         <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/adapters/ShoppingCartRecyclerAdapter.java" />
         <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/test/Test_NotificationActivity.java" />
-        <option value="$PROJECT_DIR$/kaba-brave/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/UserAuth/login/LoginPresenter.java" />
+        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/data/command/source/CommandRepository.java" />
+        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/trans/ConfirmCommandDetailsActivity.java" />
+        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/trans/presenter/CommandDetailsPresenter.java" />
+        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/data/customer/source/CustomerDataRepository.java" />
+        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/service/MyFirebaseInstanceIDService.java" />
+        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/FoodDetails/FoodDetailsActivity.java" />
+        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/config/Config.java" />
+        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/MultiThreading/NetworkRequestThreadBase.java" />
+        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/notification/NotificationItem.java" />
+        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/service/MyFirebaseMessagingService.java" />
         <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/config/Constant.java" />
         <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/notification/KabaNotificationJobService.java" />
-        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/notification/NotificationItem.java" />
+        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/notification/NotificationBuilder.java" />
+        <option value="$PROJECT_DIR$/kaba-brave/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/cart/ShoppingCartActivity.java" />
+        <option value="$PROJECT_DIR$/kaba-brave/src/main/res/drawable/basket_edit_modify_bt_background.xml" />
+        <option value="$PROJECT_DIR$/kaba-brave/src/main/res/layout/rc_command_inner_food_layout.xml" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="4" />
+    <option name="x" value="3" />
     <option name="y" value="23" />
     <option name="width" value="1276" />
     <option name="height" value="745" />
@@ -3826,40 +3918,8 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="kaba-restaurant" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Kaba" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="kaba-brave" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Kaba" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kaba-brave" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -3892,28 +3952,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="kaba" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Kaba" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kaba-brave" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kaba" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -3935,54 +3973,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="activity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Kaba" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kaba-brave" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kaba" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="_commons" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Kaba" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kaba-brave" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kaba" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="_commons" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="notification" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -4042,7 +4032,7 @@
     <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="device.picker.selection" value="Nexus_5_API_23" />
-    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/test/Test_NotificationActivity.java&#10;cons&#9;PSI&#9;JAVA://tg.tmye.kaba.config.Constant&#10;Adapter&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/_commons/adapters/ShoppingCartRecyclerAdapter.java&#10;build&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/build.gradle&#10;buil&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/build.gradle&#10;manife&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/AndroidManifest.xml&#10;homa&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/home/HomeActivity.java&#10;slid&#9;PSI&#9;JAVA://tg.tmye.kaba._commons.cviews.SlidingBanner_LilRound&#10;homea&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/home/HomeActivity.java&#10;MyFire&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/app/build/intermediates/classes/debug/tg/experta/kaba/services/MyFirebaseInstanceIDService.class&#10;shop&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/_commons/adapters/ShoppingCartRecyclerAdapter.java&#10;sho&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/cart/ShoppingCartActivity.java&#10;myad&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/UserAcc/MyAdressesActivity.java&#10;address&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/res/layout/activity_edit_address.xml&#10;usera&#9;PSI&#9;JAVA://tg.tmye.kaba._commons.adapters.UserAccountAdapter&#10;homeac&#9;PSI&#9;JAVA://tg.tmye.kaba.activity.home.HomeActivity&#10;favora&#9;PSI&#9;JAVA://tg.tmye.kaba.activity.favorite.FavoriteActivity&#10;shoppre&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/cart/presenter/ShoppingCartPresenter.java&#10;Favorad&#9;PSI&#9;JAVA://tg.tmye.kaba._commons.adapters.FavoriteRecyclerAdapter&#10;shoca&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/cart/ShoppingCartActivity.java&#10;favori&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/data/favorite/Favorite.java&#10;Favor&#9;PSI&#9;JAVA://tg.tmye.kaba.data.favorite.Favorite&#10;shoa&#9;PSI&#9;JAVA://tg.tmye.kaba.activity.cart.ShoppingCartActivity&#10;bask&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/data/shoppingcart/source/BasketRepository.java&#10;pres&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/trans/presenter/CommandDetailsPresenter.java&#10;confi&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/config/Config.java&#10;prese&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/UserAcc/adresses/presenter/AdressesPresenter.java&#10;menua&#9;PSI&#9;JAVA://tg.tmye.kaba.activity.menu.RestaurantMenuActivity.MenuViewpagerAdapter&#10;menu&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/res/layout/fragment_restaurant_submenu.xml&#10;Menuf&#9;PSI&#9;JAVA://tg.tmye.kaba.activity.menu.RestaurantSubMenuFragment&#10;editad&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/UserAcc/adresses/EditAddressActivity.java&#10;edit&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/UserAcc/adresses/EditAddressActivity.java&#10;COnfirm&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/trans/ConfirmCommandDetailsActivity.java&#10;addre&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/res/layout/activity_edit_address.xml&#10;confirm&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/trans/ConfirmCommandDetailsActivity.java&#10;fragmen&#9;PSI&#9;JAVA://tg.tmye.kaba.activity.FoodDetails.frag.AddDrinkDialogFragment&#10;person&#9;PSI&#9;JAVA://tg.tmye.kaba.activity.UserAcc.personnalinfo.PersonnalInfoActivity&#10;add&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/UserAcc/adresses/EditAddressActivity.java&#10;fooddetail&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/FoodDetails/FoodDetailsActivity.java&#10;basket&#9;PSI&#9;JAVA://tg.tmye.kaba.data.shoppingcart.ShoppingBasketGroupItem&#10;groupa&#9;PSI&#9;JAVA://tg.tmye.kaba.data.advert.Group10AdvertItem&#10;comm&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/res/layout/common_adress_list_item.xml&#10;config&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/config/Config.java&#10;const&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/config/Constant.java&#10;news&#9;PSI&#9;JAVA://tg.tmye.kaba.activity.UserAcc.NewsFeedActivity&#10;frag&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/home/views/fragment/F_Restaurant_2_Fragment.java&#10;contenfo&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/res/layout/content_food_details.xml&#10;group&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/_commons/adapters/GroupAdsAdapter.java&#10;menuitem&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/app/src/main/res/layout/menu_food_item_left.xml&#10;Fodetail&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/FoodDetails/FoodDetailsActivity.java" />
+    <property name="SearchEverywhereHistoryKey" value="listitem&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/res/layout/fragment_command_list_item.xml&#10;mani&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/AndroidManifest.xml&#10;sho&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/cart/ShoppingCartActivity.java&#10;Cons&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/config/Constant.java&#10;notif&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/_commons/notification/NotificationItem.java&#10;ser&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/_commons/notification/KabaNotificationJobService.java&#10;mes&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/service/MyFirebaseMessagingService.java&#10;id&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/service/MyFirebaseInstanceIDService.java&#10;COnfi&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/config/Config.java&#10;Menua&#9;PSI&#9;JAVA://tg.tmye.kaba.activity.menu.RestaurantMenuActivity&#10;Foodde&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/FoodDetails/FoodDetailsActivity.java&#10;presen&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/cart/presenter/ShoppingCartPresenter.java&#10;string&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/res/values/strings.xml&#10;Fooddetail&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/FoodDetails/FoodDetailsActivity.java&#10;customer&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/data/customer/source/CustomerDataRepository.java&#10;command&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/trans/presenter/CommandDetailsPresenter.java&#10;LoginPre&#9;PSI&#9;JAVA://tg.tmye.kaba.activity.UserAuth.login.LoginPresenter&#10;Foodetail&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/FoodDetails/FoodDetailsActivity.java&#10;notifi&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/test/Test_NotificationActivity.java&#10;cons&#9;PSI&#9;JAVA://tg.tmye.kaba.config.Constant&#10;Adapter&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/_commons/adapters/ShoppingCartRecyclerAdapter.java&#10;build&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/build.gradle&#10;buil&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/build.gradle&#10;manife&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/AndroidManifest.xml&#10;homa&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/home/HomeActivity.java&#10;slid&#9;PSI&#9;JAVA://tg.tmye.kaba._commons.cviews.SlidingBanner_LilRound&#10;homea&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/home/HomeActivity.java&#10;MyFire&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/app/build/intermediates/classes/debug/tg/experta/kaba/services/MyFirebaseInstanceIDService.class&#10;shop&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/_commons/adapters/ShoppingCartRecyclerAdapter.java&#10;myad&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/UserAcc/MyAdressesActivity.java&#10;address&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/res/layout/activity_edit_address.xml&#10;usera&#9;PSI&#9;JAVA://tg.tmye.kaba._commons.adapters.UserAccountAdapter&#10;homeac&#9;PSI&#9;JAVA://tg.tmye.kaba.activity.home.HomeActivity&#10;favora&#9;PSI&#9;JAVA://tg.tmye.kaba.activity.favorite.FavoriteActivity&#10;shoppre&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/cart/presenter/ShoppingCartPresenter.java&#10;Favorad&#9;PSI&#9;JAVA://tg.tmye.kaba._commons.adapters.FavoriteRecyclerAdapter&#10;shoca&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/cart/ShoppingCartActivity.java&#10;favori&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/data/favorite/Favorite.java&#10;Favor&#9;PSI&#9;JAVA://tg.tmye.kaba.data.favorite.Favorite&#10;shoa&#9;PSI&#9;JAVA://tg.tmye.kaba.activity.cart.ShoppingCartActivity&#10;bask&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/data/shoppingcart/source/BasketRepository.java&#10;pres&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/trans/presenter/CommandDetailsPresenter.java&#10;confi&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/config/Config.java&#10;prese&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/UserAcc/adresses/presenter/AdressesPresenter.java&#10;menua&#9;PSI&#9;JAVA://tg.tmye.kaba.activity.menu.RestaurantMenuActivity.MenuViewpagerAdapter&#10;menu&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/res/layout/fragment_restaurant_submenu.xml&#10;Menuf&#9;PSI&#9;JAVA://tg.tmye.kaba.activity.menu.RestaurantSubMenuFragment&#10;editad&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/UserAcc/adresses/EditAddressActivity.java&#10;edit&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/UserAcc/adresses/EditAddressActivity.java&#10;COnfirm&#9;FILE&#9;file:///Users/abiguime/Documents/dev/devspace/android/Kaba/kaba-brave/src/main/java/tg/tmye/kaba/activity/trans/ConfirmCommandDetailsActivity.java" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/kaba-brave/src/main/res/drawable-xhdpi" />
     <property name="android.profiler.active" value="true" />
@@ -4206,7 +4196,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1524673025051" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1524919439629" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -4254,7 +4244,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1524673025051" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1524919439629" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -4437,7 +4427,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1524673025051" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1524919439629" />
       </method>
     </configuration>
     <configuration default="false" name="kaba-i_deliver" type="AndroidRunConfigurationType" factoryName="Android App">
@@ -4486,7 +4476,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1524673025051" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1524919439629" />
       </method>
     </configuration>
     <configuration default="false" name="kaba-brave" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
@@ -4535,7 +4525,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1524673025051" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1524919439629" />
       </method>
     </configuration>
     <list size="5">
@@ -4597,17 +4587,18 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="4" y="23" width="1276" height="745" extended-state="0" />
+    <frame x="3" y="23" width="1276" height="745" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.57256776" sideWeight="0.49675852" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26337114" sideWeight="0.5073069" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5566188" sideWeight="0.51944894" order="13" side_tool="true" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5566188" sideWeight="0.48055106" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32535884" sideWeight="0.51944894" order="13" side_tool="true" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.68421054" sideWeight="0.48055106" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24959481" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2471637" sideWeight="0.76076555" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4784689" sideWeight="0.49675852" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.51863855" sideWeight="0.76076555" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31738436" sideWeight="0.49675852" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6650718" sideWeight="0.6280389" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26953748" sideWeight="0.4878444" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -4619,7 +4610,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32695374" sideWeight="0.70097244" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24959481" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27092847" sideWeight="0.5089141" order="12" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3119935" sideWeight="0.4926931" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3119935" sideWeight="0.4926931" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Android WiFi ADB" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17747164" sideWeight="0.23923445" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32695374" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15153971" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -4739,7 +4730,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/cart/ShoppingCartActivity.java</url>
-          <line>72</line>
+          <line>71</line>
           <properties />
           <option name="timeStamp" value="183" />
         </line-breakpoint>
@@ -4760,12 +4751,6 @@
           <line>272</line>
           <properties />
           <option name="timeStamp" value="205" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/data/Restaurant/source/RestaurantDbRepository.java</url>
-          <line>109</line>
-          <properties />
-          <option name="timeStamp" value="282" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/UserAcc/adresses/presenter/AdressesPresenter.java</url>
@@ -4847,13 +4832,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/trans/ConfirmCommandDetailsActivity.java</url>
-          <line>268</line>
+          <line>271</line>
           <properties />
           <option name="timeStamp" value="366" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/trans/ConfirmCommandDetailsActivity.java</url>
-          <line>263</line>
+          <line>266</line>
           <properties />
           <option name="timeStamp" value="367" />
         </line-breakpoint>
@@ -4865,25 +4850,25 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/trans/ConfirmCommandDetailsActivity.java</url>
-          <line>261</line>
+          <line>264</line>
           <properties />
           <option name="timeStamp" value="369" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/trans/ConfirmCommandDetailsActivity.java</url>
-          <line>264</line>
+          <line>267</line>
           <properties />
           <option name="timeStamp" value="370" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/trans/ConfirmCommandDetailsActivity.java</url>
-          <line>295</line>
+          <line>298</line>
           <properties />
           <option name="timeStamp" value="371" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/data/command/source/CommandRepository.java</url>
-          <line>122</line>
+          <line>123</line>
           <properties />
           <option name="timeStamp" value="372" />
         </line-breakpoint>
@@ -4895,15 +4880,51 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/cart/ShoppingCartActivity.java</url>
-          <line>113</line>
+          <line>112</line>
           <properties />
           <option name="timeStamp" value="375" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/service/MyFirebaseInstanceIDService.java</url>
-          <line>40</line>
+          <line>49</line>
           <properties />
           <option name="timeStamp" value="377" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/test/Test_NotificationActivity.java</url>
+          <line>102</line>
+          <properties />
+          <option name="timeStamp" value="380" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/notification/NotificationBuilder.java</url>
+          <line>166</line>
+          <properties />
+          <option name="timeStamp" value="381" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/notification/NotificationBuilder.java</url>
+          <line>187</line>
+          <properties />
+          <option name="timeStamp" value="382" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/notification/KabaNotificationJobService.java</url>
+          <line>67</line>
+          <properties />
+          <option name="timeStamp" value="388" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/notification/KabaNotificationJobService.java</url>
+          <line>129</line>
+          <properties />
+          <option name="timeStamp" value="406" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/notification/KabaNotificationJobService.java</url>
+          <line>81</line>
+          <properties />
+          <option name="timeStamp" value="409" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/favorite/FavoriteActivity.java</url>
@@ -4913,332 +4934,31 @@
           </properties>
           <option name="timeStamp" value="190" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/notification/KabaNotificationJobService.java</url>
+          <line>116</line>
+          <properties method="onNetworkError">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="407" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/notification/KabaNotificationJobService.java</url>
+          <line>121</line>
+          <properties method="onSysError">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="408" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="378" />
+      <option name="time" value="410" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/trans/ConfirmCommandDetailsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-580">
-          <caret line="230" column="22" lean-forward="false" selection-start-line="230" selection-start-column="22" selection-end-line="230" selection-end-column="22" />
-          <folding>
-            <element signature="class#SelectedFoodsAdapter#0;class#ConfirmCommandDetailsActivity#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/data/command/source/CommandRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="60" column="21" lean-forward="false" selection-start-line="60" selection-start-column="21" selection-end-line="60" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/data/shoppingcart/source/BasketRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/data/favorite/Favorite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="19" column="47" lean-forward="false" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/data/Food/Restaurant_Menu_FoodEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/data/Food/Restaurant_Menu_FoodEntity_WithQuantity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="36" column="24" lean-forward="true" selection-start-line="14" selection-start-column="3" selection-end-line="36" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/data/shoppingcart/BasketInItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="14" column="22" lean-forward="false" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
-          <folding>
-            <element signature="e#1745#1746#0" expanded="true" />
-            <element signature="e#1769#1770#0" expanded="true" />
-            <element signature="e#1932#1933#0" expanded="true" />
-            <element signature="e#1983#1984#0" expanded="true" />
-            <element signature="e#2053#2054#0" expanded="true" />
-            <element signature="e#2106#2107#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/adapters/CommandRecyclerAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="157" column="29" lean-forward="true" selection-start-line="157" selection-start-column="29" selection-end-line="157" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/favorite/presenter/FavoritePresenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="68" column="38" lean-forward="true" selection-start-line="68" selection-start-column="38" selection-end-line="68" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/res/layout/rc_shoppingcart_inner_food_layout.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="48" column="50" lean-forward="false" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="50" />
-          <folding>
-            <element signature="e#575#602#0" expanded="true" />
-            <marker date="1524506565000" expanded="false" signature="4907:4947" ph="&quot;8dp&quot;" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/adapters/FavoriteRecyclerAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="69" column="6" lean-forward="false" selection-start-line="69" selection-start-column="6" selection-end-line="74" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/res/layout/rc_command_inner_food_layout.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="48" column="50" lean-forward="false" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/res/layout/fragment_command_list_item.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="20" column="28" lean-forward="false" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/cart/presenter/ShoppingCartPresenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
-          <caret line="71" column="50" lean-forward="false" selection-start-line="71" selection-start-column="50" selection-end-line="71" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/favorite/FavoriteActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1665">
-          <caret line="144" column="9" lean-forward="false" selection-start-line="144" selection-start-column="9" selection-end-line="144" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-i_deliver/src/main/java/tg/tmye/kaba_i_deliver/HomeActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/adapters/UserAccountAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="59" column="22" lean-forward="true" selection-start-line="59" selection-start-column="22" selection-end-line="59" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/res/layout/activity_edit_address.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="37" lean-forward="false" selection-start-line="14" selection-start-column="37" selection-end-line="14" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/res/layout/common_adress_list_item.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="24" column="55" lean-forward="false" selection-start-line="24" selection-start-column="55" selection-end-line="24" selection-end-column="55" />
-          <folding>
-            <element signature="e#417#451#0" expanded="true" />
-            <element signature="e#462#770#0" expanded="false" />
-            <element signature="e#2250#2281#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/home/views/fragment/F_Commands_3_Fragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="187" column="5" lean-forward="true" selection-start-line="187" selection-start-column="5" selection-end-line="187" selection-end-column="5" />
-          <folding>
-            <element signature="e#6043#6322#0" expanded="false" />
-            <element signature="e#6321#6322#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/UserAcc/MyAdressesActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="186" column="44" lean-forward="false" selection-start-line="186" selection-start-column="44" selection-end-line="186" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="class#DeleteAdressOnClickListener#0;class#MyAdressesActivity#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="219" column="48" lean-forward="false" selection-start-line="219" selection-start-column="48" selection-end-line="219" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/data/shoppingcart/ShoppingBasketGroupItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="18" column="21" lean-forward="false" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/build/intermediates/manifests/full/debug/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2190">
-          <caret line="146" column="58" lean-forward="false" selection-start-line="146" selection-start-column="58" selection-end-line="146" selection-end-column="58" />
-          <folding>
-            <marker date="1524664055000" expanded="true" signature="6785:6975" ph="..." />
-            <marker date="1524664055000" expanded="true" signature="6994:7187" ph="..." />
-            <marker date="1524664055000" expanded="true" signature="7206:7401" ph="..." />
-            <marker date="1524664055000" expanded="true" signature="7420:7638" ph="..." />
-            <marker date="1524664055000" expanded="true" signature="7652:7806" ph="..." />
-            <marker date="1524664055000" expanded="true" signature="7826:8124" ph="..." />
-            <marker date="1524664055000" expanded="true" signature="7997:8105" ph="..." />
-            <marker date="1524664055000" expanded="true" signature="8144:8273" ph="..." />
-            <marker date="1524664055000" expanded="true" signature="8292:8423" ph="..." />
-            <marker date="1524664055000" expanded="true" signature="8443:8858" ph="..." />
-            <marker date="1524664055000" expanded="true" signature="8714:8838" ph="..." />
-            <marker date="1524664055000" expanded="true" signature="10634:10637" ph="..." />
-            <marker date="1524664055000" expanded="true" signature="10657:11071" ph="..." />
-            <marker date="1524664055000" expanded="true" signature="10873:11051" ph="..." />
-            <marker date="1524664055000" expanded="true" signature="11085:11240" ph="..." />
-            <marker date="1524664055000" expanded="true" signature="11260:11555" ph="..." />
-            <marker date="1524664055000" expanded="true" signature="11426:11536" ph="..." />
-            <marker date="1524664055000" expanded="true" signature="11575:11805" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/res/drawable/ic_delete_forever_red_24dp.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/res/drawable/ic_delete_forever_white_24dp.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="39" lean-forward="false" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/res/layout/fragment_shoppingcart_list_item.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="63" column="40" lean-forward="false" selection-start-line="63" selection-start-column="33" selection-end-line="63" selection-end-column="40" />
-          <folding>
-            <element signature="e#3862#3901#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/cart/ShoppingCartActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="146" column="65" lean-forward="false" selection-start-line="146" selection-start-column="65" selection-end-line="146" selection-end-column="65" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4409#4410#0" expanded="true" />
-            <element signature="e#4481#4482#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build/intermediates/classes/debug/tg/experta/kaba/services/MyFirebaseInstanceIDService.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#587#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/home/HomeActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret line="149" column="5" lean-forward="false" selection-start-line="149" selection-start-column="5" selection-end-line="149" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/trans/presenter/CommandDetailsPresenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="115" column="0" lean-forward="false" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/cviews/SlidingBanner_LilRound.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
@@ -5289,47 +5009,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/service/MyFirebaseInstanceIDService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="48" column="56" lean-forward="false" selection-start-line="48" selection-start-column="56" selection-end-line="48" selection-end-column="56" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/config/Config.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="109" column="22" lean-forward="false" selection-start-line="109" selection-start-column="22" selection-end-line="109" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/FoodDetails/FoodDetailsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="59" column="35" lean-forward="false" selection-start-line="59" selection-start-column="31" selection-end-line="59" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#onRestaurantInteraction#0;class#FoodDetailsActivity#0" expanded="false" />
-            <element signature="method#onAdsInteraction#0;class#FoodDetailsActivity#0" expanded="false" />
-            <element signature="method#initFoodRankingStars#0;class#FoodDetailsActivity#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/service/MyFirebaseMessagingService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="43" column="24" lean-forward="false" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/res/layout/activity_test__notification.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -5354,67 +5033,155 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/kaba-restaurant/proguard-rules.pro">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaba-i_deliver/proguard-rules.pro">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaba-brave/proguard-rules.pro">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../../../androidDevSoft/adt-bundle-mac-x86_64-20140702/sdk/platforms/android-27/android.jar!/org/json/JSONObject.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="3" column="2" lean-forward="false" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.2/b2da9f8444128651758719856de579eacff7f387/gson-2.8.2-sources.jar!/com/google/gson/JsonElement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="32" column="27" lean-forward="false" selection-start-line="32" selection-start-column="27" selection-end-line="32" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.2/b2da9f8444128651758719856de579eacff7f387/gson-2.8.2-sources.jar!/com/google/gson/JsonObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="31" column="40" lean-forward="false" selection-start-line="31" selection-start-column="40" selection-end-line="31" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/support-compat/27.0.2/80acc64f280831f05960ede2cd87237e8d097ed2/support-compat-27.0.2-sources.jar!/android/support/v4/app/JobIntentService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="90" column="36" lean-forward="true" selection-start-line="90" selection-start-column="36" selection-end-line="90" selection-end-column="36" />
+        <state relative-caret-position="199">
+          <caret line="497" column="23" lean-forward="false" selection-start-line="497" selection-start-column="23" selection-end-line="497" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/adapters/ShoppingCartRecyclerAdapter.java">
+    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/trans/ConfirmCommandDetailsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="67" column="8" lean-forward="false" selection-start-line="67" selection-start-column="8" selection-end-line="67" selection-end-column="8" />
+        <state relative-caret-position="173">
+          <caret line="114" column="66" lean-forward="false" selection-start-line="114" selection-start-column="66" selection-end-line="114" selection-end-column="66" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="class#SelectedFoodsAdapter#0;class#ConfirmCommandDetailsActivity#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/config/Constant.java">
+    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/data/command/source/CommandRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="63" lean-forward="true" selection-start-line="16" selection-start-column="63" selection-end-line="16" selection-end-column="63" />
+        <state relative-caret-position="227">
+          <caret line="45" column="28" lean-forward="false" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/AndroidManifest.xml">
+    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/data/customer/source/CustomerDataRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="40" column="37" lean-forward="false" selection-start-line="40" selection-start-column="37" selection-end-line="40" selection-end-column="37" />
+        <state relative-caret-position="425">
+          <caret line="264" column="54" lean-forward="false" selection-start-line="264" selection-start-column="54" selection-end-line="264" selection-end-column="54" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="257" column="32" lean-forward="true" selection-start-line="257" selection-start-column="32" selection-end-line="257" selection-end-column="32" />
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/notification/KabaNotificationJobService.java">
+    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/trans/presenter/CommandDetailsPresenter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+        <state relative-caret-position="1290">
+          <caret line="103" column="46" lean-forward="false" selection-start-line="103" selection-start-column="46" selection-end-line="103" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/UserAuth/login/LoginPresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="33" column="21" lean-forward="false" selection-start-line="33" selection-start-column="21" selection-end-line="33" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/cart/presenter/ShoppingCartPresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="366">
+          <caret line="69" column="10" lean-forward="false" selection-start-line="65" selection-start-column="10" selection-end-line="69" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/FoodDetails/FoodDetailsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1077">
+          <caret line="245" column="30" lean-forward="false" selection-start-line="245" selection-start-column="30" selection-end-line="245" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#onRestaurantInteraction#0;class#FoodDetailsActivity#0" expanded="false" />
+            <element signature="method#onAdsInteraction#0;class#FoodDetailsActivity#0" expanded="false" />
+            <element signature="method#initFoodRankingStars#0;class#FoodDetailsActivity#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/notification/NotificationBuilder.java">
+    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/menu/RestaurantMenuActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="50" column="43" lean-forward="true" selection-start-line="50" selection-start-column="43" selection-end-line="50" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="167">
+          <caret line="171" column="4" lean-forward="false" selection-start-line="171" selection-start-column="4" selection-end-line="175" selection-end-column="63" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/test/Test_NotificationActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="73" column="0" lean-forward="true" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+        <state relative-caret-position="146">
+          <caret line="115" column="59" lean-forward="false" selection-start-line="114" selection-start-column="8" selection-end-line="115" selection-end-column="59" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/service/MyFirebaseInstanceIDService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="502">
+          <caret line="43" column="13" lean-forward="false" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -5423,9 +5190,213 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/notification/NotificationItem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+        <state relative-caret-position="186">
+          <caret line="38" column="50" lean-forward="false" selection-start-line="38" selection-start-column="47" selection-end-line="38" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/4.5.0/118d48d702114278de5af81fb21844cf91666d3d/glide-4.5.0-sources.jar!/com/bumptech/glide/RequestBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="799" column="40" lean-forward="false" selection-start-line="799" selection-start-column="40" selection-end-line="799" selection-end-column="40" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/4.5.0/118d48d702114278de5af81fb21844cf91666d3d/glide-4.5.0-sources.jar!/com/bumptech/glide/RequestManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="49" column="44" lean-forward="false" selection-start-line="49" selection-start-column="44" selection-end-line="49" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/config/Constant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="82" lean-forward="false" selection-start-line="21" selection-start-column="82" selection-end-line="21" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/data/Restaurant/source/RestaurantDbRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="109" column="0" lean-forward="false" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/config/Config.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="136" column="14" lean-forward="false" selection-start-line="136" selection-start-column="14" selection-end-line="136" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/MultiThreading/NetworkRequestThreadBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="564">
+          <caret line="332" column="0" lean-forward="false" selection-start-line="332" selection-start-column="0" selection-end-line="332" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/service/MyFirebaseMessagingService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="703">
+          <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/notification/NotificationBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="187" column="0" lean-forward="false" selection-start-line="187" selection-start-column="0" selection-end-line="187" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#sendShowRestaurantPageNotification#0;class#NotificationBuilder#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../AndroidStudio/DeviceExplorer/lemobile-le_x822-5d9bb7f4/data/data/tg.tmye.kaba.brave.one/cache/kbCache/ff9fe5908b251b0e5d7e585fd59d21e3c718cf22ad060a9f6454234d153794b4.0">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../AndroidStudio/DeviceExplorer/lemobile-le_x822-5d9bb7f4/data/data/tg.tmye.kaba.brave.one/cache/kbCache/0ada948a28b5d500a6bbbf0e20c4426e6a78e335ef35a64d56e9092c19d559e0.0">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../AndroidStudio/DeviceExplorer/lemobile-le_x822-5d9bb7f4/data/data/tg.tmye.kaba.brave.one/cache/kbCache/16802e8aa139e34722a53b450a19e4901aaf6f097871454c8f2e72d6e1e7360e.0">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../AndroidStudio/DeviceExplorer/lemobile-le_x822-5d9bb7f4/data/data/tg.tmye.kaba.brave.one/cache/kbCache/26cbc5a2be9a8019b46f99c68b99ec6dcbe27eb50bf63cb6411ce39a1a9fc002.0">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../AndroidStudio/DeviceExplorer/lemobile-le_x822-5d9bb7f4/data/data/tg.tmye.kaba.brave.one/cache/kbCache/3ee78e429e5df7495c33bf9616b6869b835d72252e5fb160775a0a9930843745.0">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../AndroidStudio/DeviceExplorer/lemobile-le_x822-5d9bb7f4/data/data/tg.tmye.kaba.brave.one/cache/kbCache/60324932357e88c41f35c5fb889a547aaf1a1d40d94cd85dfa55bee50ae58c2b.0">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../AndroidStudio/DeviceExplorer/lemobile-le_x822-5d9bb7f4/data/data/tg.tmye.kaba.brave.one/cache/kbCache/34b4c2f6e7d9eed37d17dbc208e9c862e4807c11b76a6068f18d6aa20e9a9f82.0">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/notification/KabaNotificationJobService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="72" column="30" lean-forward="true" selection-start-line="72" selection-start-column="30" selection-end-line="72" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="114" column="28" lean-forward="false" selection-start-line="114" selection-start-column="28" selection-end-line="114" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/activity/cart/ShoppingCartActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="90" column="64" lean-forward="false" selection-start-line="90" selection-start-column="64" selection-end-line="90" selection-end-column="64" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/res/layout/fragment_command_list_item.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/res/layout/fragment_shoppingcart_list_item.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-668">
+          <caret line="39" column="41" lean-forward="false" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/_commons/adapters/ShoppingCartRecyclerAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="151" column="79" lean-forward="true" selection-start-line="151" selection-start-column="79" selection-end-line="151" selection-end-column="79" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/res/drawable/basket_edit_modify_bt_background.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="64" lean-forward="true" selection-start-line="1" selection-start-column="64" selection-end-line="1" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/res/drawable/myaccount_address_edit.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="34" lean-forward="true" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kaba-brave/src/main/res/layout/rc_command_inner_food_layout.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="130" column="49" lean-forward="false" selection-start-line="130" selection-start-column="49" selection-end-line="130" selection-end-column="49" />
+          <folding>
+            <element signature="e#459#978#0" expanded="false" />
+            <element signature="e#988#3410#0" expanded="false" />
+            <element signature="e#3420#4721#0" expanded="false" />
+            <element signature="e#4966#4998#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

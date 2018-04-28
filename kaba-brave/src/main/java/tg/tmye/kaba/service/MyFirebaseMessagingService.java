@@ -13,9 +13,16 @@ import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import tg.tmye.kaba.R;
+import tg.tmye.kaba._commons.notification.KabaNotificationJobService;
+import tg.tmye.kaba._commons.notification.NotificationItem;
 import tg.tmye.kaba.activity.home.HomeActivity;
+import tg.tmye.kaba.data.Restaurant.RestaurantEntity;
 
 /**
  * By abiguime on 24/04/2018.
@@ -26,6 +33,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
     private static final String TAG = "MyFirebaseMsgService";
+    private Gson gson = new Gson();
 
     /**
      * Called when message is received.
@@ -35,6 +43,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     // [START receive_message]
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
+
+
+        /*
+        *
+        *
+        * */
 
         // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
@@ -50,18 +64,20 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
         }
 
-        /* contains informations for appz */
+        /* create notification item - and make him handle it */
 
-        /* discount -- */
+        JsonObject obj = new JsonParser().parse(remoteMessage.getNotification().getBody()).getAsJsonObject();
 
-        /* nouveau restaurant */
+        JsonObject data = obj.get("data").getAsJsonObject();
 
-        /* nouveau menu */
+        NotificationItem notificationItem =
+                gson.fromJson(data.get("notification"), new TypeToken<NotificationItem>(){}.getType());
 
-        /* notification about command state */
+        Intent intent = new Intent();
+        intent.putExtra("data", notificationItem);
 
-        /* app qui fait sonner l'app Kaba */
-
+        KabaNotificationJobService.enqueueWork(this, KabaNotificationJobService.class,
+                KabaNotificationJobService.JOB_ID, intent);
     }
     // [END receive_message]
 

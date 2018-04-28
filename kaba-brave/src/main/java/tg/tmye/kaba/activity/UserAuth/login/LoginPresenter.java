@@ -38,6 +38,10 @@ public class LoginPresenter implements LoginContract.Presenter {
                 /* load token into the app */
                 customerDataRepository.saveToApp(token);
                 loginView.loginSuccess();
+                /* active updating data with server */
+                customerDataRepository.setIsNotOkWithServer();
+                /* send push token and user id to server */
+                customerDataRepository.sendPushData ();
                 loginView.showLoading(false);
             }
 

@@ -35,6 +35,7 @@ import tg.tmye.kaba.activity.trans.presenter.CommandDetailsPresenter;
 import tg.tmye.kaba.config.Constant;
 import tg.tmye.kaba.data.Food.Restaurant_Menu_FoodEntity;
 import tg.tmye.kaba.data.command.source.CommandRepository;
+import tg.tmye.kaba.data.customer.source.CustomerDataRepository;
 import tg.tmye.kaba.data.delivery.DeliveryAddress;
 import tg.tmye.kaba.data.shoppingcart.source.BasketRepository;
 import tg.tmye.kaba.syscore.GlideApp;
@@ -70,6 +71,7 @@ public class ConfirmCommandDetailsActivity extends AppCompatActivity implements 
     /* repositories */
     private BasketRepository basketRepository;
     private CommandRepository commandRepository;
+    private CustomerDataRepository customerDataRepository;
 
 
     /* presenter */
@@ -110,6 +112,7 @@ public class ConfirmCommandDetailsActivity extends AppCompatActivity implements 
 
         basketRepository = new BasketRepository(this);
         commandRepository = new CommandRepository(this);
+        customerDataRepository = new CustomerDataRepository(this);
         presenter = new CommandDetailsPresenter(basketRepository, commandRepository, this);
     }
 

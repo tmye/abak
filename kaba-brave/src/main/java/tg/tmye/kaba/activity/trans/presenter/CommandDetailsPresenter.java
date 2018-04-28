@@ -15,6 +15,7 @@ import tg.tmye.kaba.activity.trans.contract.CommandDetailsContract;
 import tg.tmye.kaba.config.Constant;
 import tg.tmye.kaba.data.Food.Restaurant_Menu_FoodEntity;
 import tg.tmye.kaba.data.command.source.CommandRepository;
+import tg.tmye.kaba.data.customer.source.CustomerDataRepository;
 import tg.tmye.kaba.data.delivery.DeliveryAddress;
 import tg.tmye.kaba.data.shoppingcart.source.BasketRepository;
 
@@ -30,13 +31,15 @@ public class CommandDetailsPresenter implements CommandDetailsContract.Presenter
 
     private final CommandRepository commandRepository;
     private final BasketRepository basketRepository;
+    CustomerDataRepository customerDataRepository;
 
-    public CommandDetailsPresenter (CommandDetailsContract.View view, CommandRepository commandRepository) {
+    public CommandDetailsPresenter (CommandDetailsContract.View view, CommandRepository commandRepository, CustomerDataRepository customerDataRepository) {
 
         this.view = view;
         this.commandRepository = commandRepository;
         /* repo, and view */
         basketRepository = null;
+        this.customerDataRepository = customerDataRepository;
     }
 
     public CommandDetailsPresenter(BasketRepository basketRepository, CommandRepository commandRepository, CommandDetailsContract.View view) {
@@ -55,6 +58,8 @@ public class CommandDetailsPresenter implements CommandDetailsContract.Presenter
 
         /* add command to basket */
         view.showLoading(true);
+
+        customerDataRepository.sendPushData();
 
         if (basketRepository != null) {
 
@@ -96,7 +101,9 @@ public class CommandDetailsPresenter implements CommandDetailsContract.Presenter
     @Override
     public void purchaseNow(boolean payAtArrival, HashMap<Restaurant_Menu_FoodEntity, Integer> food_quantity, DeliveryAddress deliveryAddress) {
 
+        customerDataRepository.sendPushData();
         /*  */
+
         commandRepository.purchaseNow(payAtArrival, food_quantity, deliveryAddress, new NetworkRequestThreadBase.NetRequestIntf<String>() {
             @Override
             public void onNetworkError() {

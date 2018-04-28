@@ -110,14 +110,32 @@
 
         </LinearLayout>
 
-    </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/lny_item_modify_delete"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/restaurant_icon_padding"
+            android:orientation="vertical"
+            >
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rc_food_tags"
-        android:layout_below="@id/lny_name_infos"
-        android:padding="@dimen/activity_horizontal_margin_half"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+            <ImageButton
+                android:id="@+id/ib_basket_delete"
+                android:background="@drawable/basket_edit_modify_bt_background"
+                app:srcCompat="@drawable/myaccount_address_delete"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ImageButton
+                android:id="@+id/ib_basket_modify"
+                android:background="@drawable/basket_edit_modify_bt_background"
+                app:srcCompat="@drawable/myaccount_address_edit"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

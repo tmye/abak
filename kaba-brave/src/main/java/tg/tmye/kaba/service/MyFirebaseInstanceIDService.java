@@ -1,5 +1,7 @@
 package tg.tmye.kaba.service;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.util.Log;
 
@@ -30,6 +32,13 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
     public void onTokenRefresh() {
 
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+
+        /* save token locally */
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Config.FIREBASE_PUSH_SHPF, Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+        edit.putBoolean(Config.PHONE_IS_OK_WITH_SERVER, false);
+        edit.commit();
+
 
         JSONObject object = new JSONObject();
         try {

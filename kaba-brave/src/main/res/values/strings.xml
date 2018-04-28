@@ -258,5 +258,6 @@
     <string name="feature_not_yet_available">This feature will be available in a later version.</string>
     <string name="default_notification_channel_id">default_notifaction_channel_id</string>
     <string name="title_activity_test__notification">Test_NotificationActivity</string>
+    <string name="restaurant_no_drinks">Sorry, This restaurant has no drinks to offer.</string>
 
 </resources>

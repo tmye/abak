@@ -23,6 +23,11 @@ public class Config {
     public static final String RESTAURANT_DB_SERIAL = "RESTAURANT_DB_SERIAL";
 
 
+    public static final String PHONE_FIREBASE_PUSH_TOKEN = "PHONE_FIREBASE_PUSH_TOKEN";
+    public static final String FIREBASE_PUSH_SHPF = "FIREBASE_PUSH_SHPF";
+    public static final String PHONE_IS_OK_WITH_SERVER = "PHONE_IS_OK_WITH_SERVER";
+
+
 
     public static String USER_SHARED_PREFS = "kb.user";
     public static final String RESTAURANT_LIST_SP_VAL = "RESTAURANT_LIST_SP_VAL";
@@ -122,5 +127,14 @@ public class Config {
     /* register push token */
     public static final String LINK_REGISTER_PUSH_TOKEN = Constant.SERVER_ADDRESS+
             "/api/device/add";
+
+    /* update phone / user push_token */
+    public static final String LINK_PHONE_UPDATE_SERVER_PUSH_TOKEN = "";
+
+
+    /* get notification food data */
+    public static final String LINK_NOTIFICATION_FOOD_DATA =  Constant.SERVER_ADDRESS+
+            "/notification/food";
+
 
 }

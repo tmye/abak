@@ -12,14 +12,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import tg.tmye.kaba.R;
 import tg.tmye.kaba._commons.notification.KabaNotificationJobService;
+import tg.tmye.kaba._commons.notification.NotificationItem;
 import tg.tmye.kaba.activity.FoodDetails.FoodDetailsActivity;
+import tg.tmye.kaba.data.shoppingcart.ShoppingBasketGroupItem;
 import tg.tmye.kaba.syscore.GlideApp;
 
 
 public class Test_NotificationActivity extends AppCompatActivity {
+
+    private Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +75,39 @@ public class Test_NotificationActivity extends AppCompatActivity {
 
         /* parse the json text */
 
-        Intent intent =  new Intent();
-        /* title text */
-        intent.putExtra("title", "Astalavi...");
-        /* picture link */
-        intent.putExtra("pic_link", "");
-        /* body text */
-        intent.putExtra("body", "");
+        JSONObject destinationObject = new JSONObject();
+        JSONObject object = new JSONObject();
+        JSONObject resp = new JSONObject();
+        try {
+
+
+            destinationObject.put("type", 373);
+            destinationObject.put("product_id", 331);
+
+            object.put("title", "Alleluia");
+            object.put("image_link", "/menu_pic/menu_591524743606.jpg");
+            object.put("body", "Here comes the news of the century!");
+            object.put("destination", destinationObject);
+
+
+            resp.put("message", "no message for you.");
+            resp.put("error", 0);
+            resp.put("data", object);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String jsonResponse = resp.toString();
+
+        /* deserialize object and add it to the intent */
+        JsonObject obj = new JsonParser().parse(jsonResponse).getAsJsonObject();
+        JsonObject data = obj.get("data").getAsJsonObject();
+        NotificationItem notificationItem =
+                gson.fromJson(data, new TypeToken<NotificationItem>(){}.getType());
+
+
+        Intent intent = new Intent();
+        intent.putExtra("data", notificationItem);
 
         /* try to put a destination activity */
         /* create an action item that brings to a different acitivty */
@@ -78,30 +115,6 @@ public class Test_NotificationActivity extends AppCompatActivity {
         KabaNotificationJobService.enqueueWork(this, KabaNotificationJobService.class,
                 KabaNotificationJobService.JOB_ID, intent);
 
-
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(this)
-                        .setSmallIcon(android.R.drawable.stat_notify_voicemail)
-                        .setContentTitle("W'nShake got you twisted")
-                        .setContentText("Innoubliable evenement. A ne surtout pas manquer!");
-
-        Intent resultIntent = new Intent(this, FoodDetailsActivity.class);
-
-//        resultIntent.putExtra(FoodDetailsActivity.FOOD, food_id);
-//        PendingIntent resultPendingIntent =
-//                PendingIntent.getActivity(
-//                        ctx,
-//                        0,
-//                        resultIntent,
-//                        PendingIntent.FLAG_UPDATE_CURRENT
-//                );
-//
-//        mBuilder.setContentIntent(resultPendingIntent);
-//        int mNotificationId = 102;
-
-        NotificationManager mNotifyMgr =
-                (NotificationManager) this.getSystemService(NOTIFICATION_SERVICE);
-        mNotifyMgr.notify(1994, mBuilder.build());
     }
 
 

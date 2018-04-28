@@ -10,6 +10,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +35,8 @@ import tg.tmye.kaba.syscore.MyKabaApp;
 
 public class CustomerDataRepository {
 
+
+    public String TAG = "CustomerDataRepository";
 
     private final Context context;
     private final DatabaseRequestThreadBase databaseRequestHandler;
@@ -207,5 +212,57 @@ public class CustomerDataRepository {
     public void saveToApp(String token) {
 
         ((MyKabaApp)context.getApplicationContext()).setAuthToken(token);
+    }
+
+    public void sendPushData() {
+
+        /*  */
+        final SharedPreferences sharedPreferences = context.getSharedPreferences(Config.FIREBASE_PUSH_SHPF, Context.MODE_PRIVATE);
+
+        if (sharedPreferences.getBoolean(Config.PHONE_IS_OK_WITH_SERVER, false)) {
+            return;
+        }
+
+        String push_token = sharedPreferences.getString(Config.PHONE_FIREBASE_PUSH_TOKEN, "");
+        if ("".equals("")) return;
+
+        JSONObject object = new JSONObject();
+        try {
+            object.put("push_token", push_token);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String token = ((MyKabaApp)context.getApplicationContext()).getAuthToken();
+
+        networkRequestHandler.postJsonDataWithToken(Config.LINK_PHONE_UPDATE_SERVER_PUSH_TOKEN, object.toString(), token, new NetworkRequestThreadBase.NetRequestIntf() {
+            @Override
+            public void onNetworkError() {
+                Log.d(TAG, "posting firebase push token - failure");
+            }
+
+            @Override
+            public void onSysError() {
+                Log.d(TAG, "posting firebase push token - failure");
+            }
+
+            @Override
+            public void onSuccess(Object jsonResponse) {
+                Log.d(TAG, "posting firebase push token - success");
+
+                /* set success into the sharedprefs */
+                SharedPreferences.Editor edit = sharedPreferences.edit();
+                edit.putBoolean(Config.PHONE_IS_OK_WITH_SERVER, true);
+                edit.commit();
+            }
+        });
+    }
+
+    public void setIsNotOkWithServer() {
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences(Config.FIREBASE_PUSH_SHPF, Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+        edit.putBoolean(Config.PHONE_IS_OK_WITH_SERVER, false);
+        edit.commit();
     }
 }
