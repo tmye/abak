@@ -1,7 +1,6 @@
 package tg.tmye.kaba.data.Menu.source;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -17,13 +16,12 @@ import java.util.Map;
 
 import tg.tmye.kaba._commons.MultiThreading.DatabaseRequestThreadBase;
 import tg.tmye.kaba._commons.MultiThreading.NetworkRequestThreadBase;
-import tg.tmye.kaba._commons.utils.UtilFunctions;
+import tg.tmye.kaba._commons.utils.SimpleObjectHolder;
 import tg.tmye.kaba.config.Config;
 import tg.tmye.kaba.config.Constant;
 import tg.tmye.kaba.data.Food.Restaurant_Menu_FoodEntity;
 import tg.tmye.kaba.data.Menu.Restaurant_SubMenuEntity;
 import tg.tmye.kaba.data.Restaurant.RestaurantEntity;
-import tg.tmye.kaba.data._OtherEntities.LightRestaurant;
 import tg.tmye.kaba.syscore.MyKabaApp;
 
 /**
@@ -36,9 +34,11 @@ public class MenuDb_OnlineRepository {
     /* i should be knowing which restaurant im working with */
 
     private final Context context;
-    private final RestaurantEntity restaurantEntity;
+    public final RestaurantEntity restaurantEntity;
     private final DatabaseRequestThreadBase databaseRequestThreadBase;
     private final NetworkRequestThreadBase networkRequestThreadBase;
+    private int main_menu_id;
+
 
     public MenuDb_OnlineRepository (Context context, RestaurantEntity restaurantEntity) {
 
@@ -49,6 +49,28 @@ public class MenuDb_OnlineRepository {
         this.restaurantEntity = restaurantEntity;
     }
 
+    public MenuDb_OnlineRepository(int menu_id, Context context) {
+
+        this.context = context;
+        this.databaseRequestThreadBase = ((MyKabaApp)context.getApplicationContext()).getDatabaseRequestThreadBase();
+        this.networkRequestThreadBase =  ((MyKabaApp)context.getApplicationContext()).getNetworkRequestBase();
+
+        this.restaurantEntity = null;
+        this.main_menu_id = menu_id;
+    }
+
+    public void loadAllDataFromMenuId (final NetworkRequestThreadBase.NetRequestIntf intf) {
+
+        /* we need to get menus list, so that the first be the one we are looking for */
+
+        /* we need also all the restaurant informations. */
+        Map<String, Object> data = new HashMap<>();
+        data.put("menu_id", ""+main_menu_id);
+
+        networkRequestThreadBase.postJsonData(Config.LINK_MENU_BY_ID, data, intf);
+    }
+
+
     public void loadAllSubMenusOfRestaurant(final NetworkRequestThreadBase.NetRequestIntf intf) {
 
         /* also get the serial of the restaurant database right now */
@@ -57,7 +79,7 @@ public class MenuDb_OnlineRepository {
 
         // put restaurant id, and you send me back everything that is in the db
         // so that i can have a list of menus including their foods at the same time.
-        networkRequestThreadBase.postJsonData(Config.LINK_MENU_BY_ID, data, new NetworkRequestThreadBase.NetRequestIntf<String>() {
+        networkRequestThreadBase.postJsonData(Config.LINK_MENU_BY_RESTAURANT_ID, data, new NetworkRequestThreadBase.NetRequestIntf<String>() {
             @Override
             public void onNetworkError() {
                 intf.onNetworkError();
@@ -75,19 +97,23 @@ public class MenuDb_OnlineRepository {
                 /* conver to json objects */
 
                 Gson gson = new Gson();
-                JsonObject obj = new JsonParser().parse(jsonResponse).getAsJsonObject();
-                JsonArray data = obj.get("data").getAsJsonArray();
+                JsonObject data = new JsonParser().parse(jsonResponse).getAsJsonObject().get("data").getAsJsonObject();
+//                Jsono data = data.get("data").getAsJsonArray();
+
+                /* get submenus and -- drinks */
+
+                JsonArray menuJsonArray = data.get("menus").getAsJsonArray();
 
                 List<Restaurant_SubMenuEntity> subMenuEntities = new ArrayList<>();
 
-                for (int i = 0; i < data.size(); i++) {
+                for (int i = 0; i < menuJsonArray.size(); i++) {
 
                     Restaurant_SubMenuEntity subMenuEntity =
-                            gson.fromJson(data.get(i).getAsJsonObject(), new TypeToken<Restaurant_SubMenuEntity>(){}.getType());
+                            gson.fromJson(menuJsonArray.get(i).getAsJsonObject(), new TypeToken<Restaurant_SubMenuEntity>(){}.getType());
 
                     List<Restaurant_Menu_FoodEntity> foods =
                             gson.fromJson(
-                                    data.get(i).getAsJsonObject().getAsJsonArray("foods"),
+                                    menuJsonArray.get(i).getAsJsonObject().getAsJsonArray("foods"),
                                     new TypeToken<List<Restaurant_Menu_FoodEntity>>(){}.getType()
                             );
 
@@ -95,7 +121,20 @@ public class MenuDb_OnlineRepository {
 
                     subMenuEntities.add(subMenuEntity);
                 }
-                intf.onSuccess(subMenuEntities);
+
+                /* get drinks */
+                JsonArray drinksJsonArray = data.get("drinks").getAsJsonArray();
+                List<Restaurant_Menu_FoodEntity> drinks =
+                        gson.fromJson(
+                                drinksJsonArray,
+                                new TypeToken<List<Restaurant_Menu_FoodEntity>>(){}.getType()
+                        );
+
+                SimpleObjectHolder simpleObjectHolder = new SimpleObjectHolder();
+                simpleObjectHolder.arg1 = subMenuEntities;
+                simpleObjectHolder.arg2 = drinks;
+
+                intf.onSuccess(simpleObjectHolder);
             }
         });
     }

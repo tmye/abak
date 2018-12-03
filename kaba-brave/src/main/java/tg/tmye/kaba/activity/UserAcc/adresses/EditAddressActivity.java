@@ -9,22 +9,25 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.GenericTransitionOptions;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
@@ -32,10 +35,10 @@ import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -44,8 +47,8 @@ import java.util.List;
 import droidninja.filepicker.FilePickerBuilder;
 import droidninja.filepicker.FilePickerConst;
 import tg.tmye.kaba.R;
+import tg.tmye.kaba._commons.cviews.dialog.ForceLogoutDialogFragment;
 import tg.tmye.kaba._commons.cviews.dialog.LoadingDialogFragment;
-import tg.tmye.kaba._commons.decorator.GridRecyclerViewDecorator;
 import tg.tmye.kaba._commons.utils.UtilFunctions;
 import tg.tmye.kaba.activity.UserAcc.adresses.contract.AdressesContract;
 import tg.tmye.kaba.activity.UserAcc.adresses.presenter.AdressesPresenter;
@@ -58,16 +61,16 @@ import tg.tmye.kaba.syscore.MyKabaApp;
 
 public class EditAddressActivity extends AppCompatActivity implements OnMapReadyCallback, View.OnClickListener, AdressesContract.View {
 
-    private static final int MY_PERMISSION_LOCATION_STORAGE = 9;
+    private static final int MY_PERMISSION_LOCATION_PERMISSION = 9;
     private List<String> images;
     private EditAddressImagesAdapter adapter;
 
     public static final int PLACE_PICKER_REQUEST = 1;
 
     private RecyclerView rc_address_images;
-    private View bt_add_gps_address;
+    private TextView tv_select_address;
+    private LinearLayoutCompat lny_pick_address;
     private SupportMapFragment mapFragment;
-    private MapView mapView;
 
     private LatLng location = new LatLng(6.217675, 1.188539);
     private GoogleMap gMap;
@@ -84,6 +87,7 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
 
     private DeliveryAddress waitingForInflatingAddress = null;
     private int current_address_id = 0;
+    private int WIDTH = 0;
 
 
     @Override
@@ -108,17 +112,17 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
             ActivityCompat.requestPermissions(EditAddressActivity.this, new String[] {
                     Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION
-            }, MY_PERMISSION_LOCATION_STORAGE);
+            }, MY_PERMISSION_LOCATION_PERMISSION);
         } else {
             ActivityCompat.requestPermissions(this, new String[] {
                     Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION
-            }, MY_PERMISSION_LOCATION_STORAGE);
+            }, MY_PERMISSION_LOCATION_PERMISSION);
         }
     }
 
     @Override public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                                      @NonNull int[] grantResults) {
-        if (requestCode != MY_PERMISSION_LOCATION_STORAGE) {
+        if (requestCode != MY_PERMISSION_LOCATION_PERMISSION) {
             return;
         }
 
@@ -137,13 +141,14 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_yellow_upward_navigation_24dp);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_redprimary_upward_navigation_24dp);
 
         initVars();
         initViews();
         initRecyclerView();
-        bt_add_gps_address.setOnClickListener(this);
         bt_confirm.setOnClickListener(this);
+        tv_select_address.setOnClickListener(this);
+        lny_pick_address.setOnClickListener(this);
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
@@ -152,21 +157,14 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
         repo = new DeliveryAdresseRepo(this);
         presenter = new AdressesPresenter((AdressesContract.View) this, repo);
 
-        mapView = findViewById(R.id.swagishmap);
-        mapView.onCreate(mapViewBundle);
-
-         /* check if there is some data sent from the precedent view.
+        /* check if there is some data sent from the precedent view.
          * - in the case, there is something,
          * */
         DeliveryAddress address = getIntent().getParcelableExtra("address");
         if (address != null) {
             presenter.presentAddress(address);
             getIntent().putExtra("address", 0);
-        } else {
-            presenter.start();
         }
-
-
     }
 
 
@@ -179,25 +177,34 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
 
     private void initRecyclerView() {
 
-        rc_address_images.setLayoutManager(new GridLayoutManager(this, 2));
-        rc_address_images.addItemDecoration(new GridRecyclerViewDecorator(
+        /* according to screen size, size is different */
+//        int width = UtilFunctions.getScreenSize(this)[0];
+//        int item_size = getResources().getDimensionPixelSize(R.dimen.edit_address_image_size);
+//        int count = (width/item_size); count = count > 3 ? count : 3;
+
+        rc_address_images.setLayoutManager(new GridLayoutManager(this, 3));
+       /* rc_address_images.addItemDecoration(new GridRecyclerViewDecorator(
                 getResources().getDimensionPixelSize(R.dimen.edit_address_image_spacing)
-        ));
+        ));*/
         rc_address_images.setAdapter(adapter);
     }
 
-    private EditText ed_title_of_location, ed_phone_number, ed_address_details;
+    private EditText ed_title_of_location, ed_phone_number;
+    private EditText ed_address_details, ed_address_non_loin;
+    private TextView tv_address_quartier;
 
     private void initViews() {
 
         ed_title_of_location = findViewById(R.id.ed_title_of_location);
         ed_phone_number = findViewById(R.id.ed_phone_number);
         ed_address_details = findViewById(R.id.ed_address_details);
+        ed_address_non_loin = findViewById(R.id.ed_address_non_loin);
+        tv_address_quartier = findViewById(R.id.tv_address_quartier);
 
         rc_address_images = findViewById(R.id.rc_address_images);
-        bt_add_gps_address = findViewById(R.id.bt_add_gps_address);
-//        map_cardview = findViewById(R.id.map_cardview);
+        tv_select_address = findViewById(R.id.tv_select_address);
         bt_confirm = findViewById(R.id.bt_confirm);
+        lny_pick_address = findViewById(R.id.lny_pick_address);
     }
 
 
@@ -250,15 +257,12 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
             case PLACE_PICKER_REQUEST:
                 if (resultCode == RESULT_OK) {
                     Place place = PlacePicker.getPlace(this, data);
-                    String toastMsg = String.format("Address: %s ;; Place: %s", place.getAddress(), place.getName());
-                    toastMsg += String.format(" ;; Long: %s ;; Lat: %s", place.getLatLng().longitude, place.getLatLng().latitude);
+//                    String toastMsg = String.format("Address: %s ;; Place: %s", place.getAddress(), place.getName());
+//                    toastMsg += String.format(" ;; Long: %s ;; Lat: %s", place.getLatLng().longitude, place.getLatLng().latitude);
                     // add viewport
-                    Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
+//                    Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
                     location = place.getLatLng();
-                    mapView.getMapAsync(this);
-                    mapView.setVisibility(View.VISIBLE);
-                    // Get the SupportMapFragment and request notification
-                    // when the map is ready to be used.
+                    presenter.inflateLocation(location);
                 }
                 break;
         }
@@ -267,9 +271,16 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
 
     private void addGPSLocation() {
 
+        /* empty everything we have here */
+        location = null;
+//        ed_address_details.setText("");
+        tv_address_quartier.setText("");
+
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+        builder.setLatLngBounds(new LatLngBounds(new LatLng(6.1135, 1.1121), new LatLng(6.2510,1.3812)));
         try {
             startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
+            overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_void);
         } catch (GooglePlayServicesRepairableException e) {
             e.printStackTrace();
         } catch (GooglePlayServicesNotAvailableException e) {
@@ -304,18 +315,17 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
 
         if (waitingForInflatingAddress != null) {
 
-             /* inflate images into the recyclerview */
+            /* inflate images into the recyclerview */
             adapter.setData(waitingForInflatingAddress.picture);
 
-        /* inflate content into the other views */
+            /* inflate content into the other views */
             ed_address_details.setText(waitingForInflatingAddress.description);
             ed_title_of_location.setText(waitingForInflatingAddress.name);
             ed_phone_number.setText(waitingForInflatingAddress.phone_number);
 
-        /* inflate the map */
+            /* inflate the map */
             String[] lat_long = waitingForInflatingAddress.location.split(":");
             if (lat_long != null && lat_long.length == 2) {
-                mapView.setVisibility(View.VISIBLE);
                 LatLng coordinate = new LatLng(Double.valueOf(lat_long[0]), Double.valueOf(lat_long[1]));
                 CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(coordinate, 18.0f);
                 gMap.animateCamera(yourLocation);
@@ -326,79 +336,57 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
         }
     }
 
+
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        Bundle mapViewBundle = outState.getBundle(MAP_VIEW_BUNDLE_KEY);
-        if (mapViewBundle == null) {
-            mapViewBundle = new Bundle();
-            outState.putBundle(MAP_VIEW_BUNDLE_KEY, mapViewBundle);
-        }
-
-        if (mapView != null)
-            mapView.onSaveInstanceState(mapViewBundle);
+    protected void onPause() {
+        super.onPause();
+        showLoading(false);
+        Glide.with(this).pauseRequestsRecursive();
     }
+
     @Override
     protected void onResume() {
         super.onResume();
-        if (mapView != null)
-            mapView.onResume();
-
-        if (presenter != null)
-            presenter.start();
+        Glide.with(this).resumeRequestsRecursive();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        if (mapView != null)
-            mapView.onStart();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        if (mapView != null)
-            mapView.onStop();
-    }
-
-    @Override
-    protected void onPause() {
-        if (mapView != null)
-            mapView.onPause();
-        super.onPause();
     }
 
     @Override
     protected void onDestroy() {
-        if (mapView != null)
-            mapView.onDestroy();
         super.onDestroy();
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        if (mapView != null)
-            mapView.onLowMemory();
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.bt_add_gps_address:
-                addGPSLocation();
-                break;
+
             case R.id.bt_confirm:
                 upCreateNewAdress();
+                break;
+            case R.id.tv_select_address:
+                addGPSLocation();
+                break;
+            case R.id.lny_pick_address:
+                addGPSLocation();
                 break;
         }
     }
 
     LoadingDialogFragment loadingDialogFragment;
-
-
 
     private void upCreateNewAdress() {
 
@@ -406,12 +394,32 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
         String[] pictures = {};
 
         if (!checkEmptyness(ed_title_of_location)) {
+            mSnack(getResources().getString(R.string.title_this_field_shouldnt_empty));
             return;
         }
         if (!checkEmptyness(ed_phone_number)) {
+            mSnack(getResources().getString(R.string.phone_number_this_field_shouldnt_empty));
             return;
         }
+
+        /* check whether phone number is valid */
+        if (!UtilFunctions.isPhoneNumber_TGO(ed_phone_number.getText().toString())) {
+            mSnack(getString(R.string.enter_togolese_no));
+            ed_phone_number.requestFocus();
+            return;
+        }
+
+        if (!checkEmptyness(ed_address_non_loin)) {
+            mSnack(getResources().getString(R.string.non_loin_this_field_shouldnt_empty));
+            return;
+        }
+
         if (!checkEmptyness(ed_address_details)) {
+            mSnack(getResources().getString(R.string.address_this_field_shouldnt_empty));
+            return;
+        }
+        if (!checkEmptyness(tv_address_quartier)) {
+            mSnack(getResources().getString(R.string.quartier_this_field_shouldnt_empty));
             return;
         }
 
@@ -420,21 +428,22 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
             return;
         }
 
-        List<String> data = adapter.getData();
-        if (!(data != null && data.size() > 1 && !"".equals(data.get(1).trim()))) {
-            mSnack(getResources().getString(R.string.please_choose_atleast_a_picture));
-            return;
-        }
 
-        /* change images list to image array */
-        String[] tmp = new String[data.size()-1];
-        for (int i = 1; i < data.size(); i++) {
-            tmp[i-1] = data.get(i);
+        String[] tmp = null;
+        List<String> data = adapter.getData();
+        if (data != null && data.size() > 1) {
+            /* change images list to image array */
+            tmp = new String[data.size()-1];
+            for (int i = 1; i < data.size(); i++) {
+                tmp[i-1] = data.get(i);
+            }
         }
 
         DeliveryAddress adress = new DeliveryAddress();
         adress.id = current_address_id;
         adress.picture = tmp;
+        adress.quartier = tv_address_quartier.getText().toString();
+        adress.near = ed_address_non_loin.getText().toString();
         adress.description = ed_address_details.getText().toString();
         adress.name = ed_title_of_location.getText().toString();
         adress.phone_number = ed_phone_number.getText().toString();
@@ -449,8 +458,20 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
             String content = ed.getText().toString();
             if ("".equals(content)) {
                 /* we should not */
-                mSnack(getResources().getString(R.string.this_field_shouldnt_empty));
                 ed.requestFocus();
+                return false;
+            }
+        }
+        return true;
+    }
+    private boolean checkEmptyness(TextView tv) {
+
+        if (tv != null) {
+            String content = tv.getText().toString();
+            if ("".equals(content)) {
+                /* we should not */
+                mSnack(getResources().getString(R.string.this_field_shouldnt_empty));
+                tv.requestFocus();
                 return false;
             }
         }
@@ -466,29 +487,62 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
 
         this.waitingForInflatingAddress = address;
         this.current_address_id = address.id;
-        mapView.getMapAsync(this);
+
+        ed_phone_number.setText(address.phone_number);
+        ed_title_of_location.setText(address.name);
+        tv_address_quartier.setText(address.quartier);
+        ed_address_details.setText(address.description);
+        ed_address_non_loin.setText(address.near);
+
+        /* for the pictures ?? */
+        adapter.setData(address.picture);
+        adapter.notifyDataSetChanged();
+        showLoading(false);
     }
 
     @Override
     public void inflateAdresses(List<DeliveryAddress> deliveryAddressList) {
-
     }
 
+
     @Override
-    public void showLoading(boolean isLoading) {
+    public void showLoading(final boolean isLoading) {
 
-        if (loadingDialogFragment == null) {
-            if (isLoading) {
-                loadingDialogFragment = LoadingDialogFragment.newInstance(getString(R.string.wait_for_address_creation));
-                loadingDialogFragment.show(getSupportFragmentManager(), "loadingbox");
-            } else {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (loadingDialogFragment == null) {
+                    if (isLoading) {
+                        loadingDialogFragment = LoadingDialogFragment.newInstance(getString(R.string.content_on_loading));
+                        showFragment(loadingDialogFragment, "loadingbox", true);
+                    }
+                } else {
+                    if (isLoading) {
+                        showFragment(loadingDialogFragment, "loadingbox",false);
+                    } else {
+                        hideFragment();
+                    }
+                }
+            }
+        });
+    }
 
-            }
-        } else {
-            if (!isLoading) {
-                loadingDialogFragment.dismiss();
-            }
+    private void hideFragment() {
+        if (loadingDialogFragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.remove(loadingDialogFragment);
+            loadingDialogFragment = null;
+            ft.commitAllowingStateLoss();
         }
+    }
+
+    private void showFragment(LoadingDialogFragment loadingDialogFragment, String tag, boolean justCreated) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        if (justCreated == true)
+            ft.add(loadingDialogFragment, tag);
+        else
+            ft.show(loadingDialogFragment);
+        ft.commitAllowingStateLoss();
     }
 
     @Override
@@ -507,11 +561,6 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
     }
 
     @Override
-    public void showDeletingSuspendedLoadingBox() {
-
-    }
-
-    @Override
     public void addressDeletedFailure() {}
 
     @Override
@@ -523,8 +572,51 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
     }
 
     @Override
+    public void showCurrentAddressDetails(final String quartier, final String description_details) {
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                tv_address_quartier.setText(quartier);
+                ed_address_details.setText(description_details);
+            }
+        });
+    }
+
+    @Override
+    public void onNetworkError() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mToast(getResources().getString(R.string.network_error));
+            }
+        });
+    }
+
+    @Override
+    public void onSysError() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mToast(getResources().getString(R.string.sys_error));
+            }
+        });
+    }
+
+    @Override
     public void setPresenter(AdressesContract.Presenter presenter) {
         this.presenter = presenter;
+    }
+
+    public void exitActivity(View view) {
+        finish();
+    }
+
+    @Override
+    public void onLoggingTimeout() {
+        ForceLogoutDialogFragment forceLogoutDialogFragment = ForceLogoutDialogFragment.newInstance();
+        forceLogoutDialogFragment.show(getSupportFragmentManager(), ForceLogoutDialogFragment.TAG);
     }
 
 
@@ -534,6 +626,7 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
 
         public EditAddressImagesAdapter (Context ctx, List<String> data) {
             this.data = data;
+            WIDTH = UtilFunctions.getScreenSize(ctx)[0]/3;
         }
 
         @Override
@@ -555,6 +648,13 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
 
             String item = data.get(position);
 
+//            int width = UtilFunctions.getScreenSize(this)[0];
+//            frame_container
+            RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) holder.itemView.getLayoutParams();
+            params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            params.height = WIDTH;
+            holder.itemView.setLayoutParams(params);
+
             if (item.equals("1")) {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -566,7 +666,7 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
             }
 
             /* if local, show it,
-            * if link, add server address */
+             * if link, add server address */
 
             if (holder.imageView != null) {
 
@@ -575,7 +675,7 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
                 }
                 GlideApp.with(EditAddressActivity.this)
                         .load(item)
-                        .placeholder(R.drawable.placeholder_kaba)
+                        .placeholder(R.drawable.white_placeholder)
                         .transition(GenericTransitionOptions.with(  ((MyKabaApp)getApplicationContext()).getGlideAnimation()  ))
                         .centerCrop()
                         .into(holder.imageView);
@@ -621,6 +721,7 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
             View itemView;
             ImageView iv_delete;
             ImageView iv_preview;
+            FrameLayout frame_container;
 
             public ViewHolder(View itemView) {
                 super(itemView);
@@ -628,6 +729,7 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
                 this.itemView = itemView;
                 this.iv_preview = itemView.findViewById(R.id.iv_preview);
                 this.iv_delete = itemView.findViewById(R.id.iv_remove);
+                this.frame_container = itemView.findViewById(R.id.frame_container);
             }
         }
 
@@ -645,4 +747,17 @@ public class EditAddressActivity extends AppCompatActivity implements OnMapReady
             }
         }
     }
+
+    @Override
+    public void startActivity(Intent intent) {
+        super.startActivity(intent);
+        overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_void);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.enter_from_left, R.anim.fade_out);
+    }
+
 }

@@ -2,8 +2,8 @@ package tg.tmye.kaba.activity.search.fragment_search_result;
 
 import java.util.List;
 
-import tg.tmye.kaba.BasePresenter;
-import tg.tmye.kaba.BaseView;
+import tg.tmye.kaba.syscore.baseobj.BasePresenter;
+import tg.tmye.kaba.syscore.baseobj.BaseView;
 import tg.tmye.kaba.data.search.SearchResult;
 
 /**

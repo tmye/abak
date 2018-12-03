@@ -15,11 +15,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.GenericTransitionOptions;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import tg.tmye.kaba.R;
+import tg.tmye.kaba._commons.utils.UtilFunctions;
+import tg.tmye.kaba.config.Constant;
 import tg.tmye.kaba.data.Food.Restaurant_Menu_FoodEntity;
+import tg.tmye.kaba.syscore.GlideApp;
+import tg.tmye.kaba.syscore.MyKabaApp;
 
 
 public class AddDrinkDialogFragment extends BottomSheetDialogFragment {
@@ -38,10 +44,10 @@ public class AddDrinkDialogFragment extends BottomSheetDialogFragment {
     public static AddDrinkDialogFragment newInstance(List<Restaurant_Menu_FoodEntity> drinks) {
         final AddDrinkDialogFragment fragment = new AddDrinkDialogFragment();
         final Bundle args = new Bundle();
-        args.putParcelableArrayList(ARG_ITEM_COUNT, (ArrayList<? extends Parcelable>) drinks);
-
+        if (drinks != null){
+            args.putParcelableArrayList(ARG_ITEM_COUNT, (ArrayList<? extends Parcelable>) drinks);
+        }
         /* send list of drinks items for */
-
         fragment.setArguments(args);
         return fragment;
     }
@@ -118,6 +124,13 @@ public class AddDrinkDialogFragment extends BottomSheetDialogFragment {
             Restaurant_Menu_FoodEntity drink = drinks.get(position);
 
             holder.tv_drink_name.setText(drink.name);
+            holder.tv_drink_price.setText(UtilFunctions.intToMoney(drink.price));
+
+            GlideApp.with(getContext())
+                    .load(Constant.SERVER_ADDRESS +"/"+drink.pic)
+                    .transition(GenericTransitionOptions.with(  ((MyKabaApp)getContext().getApplicationContext()).getGlideAnimation()  ))
+                    .placeholder(R.drawable.ic_boisson_black_24dp)
+                    .into(holder.iv_drink_icon);
 
             holder.itemView.setOnClickListener(new OnAddDrinkClickListener(drink));
         }
@@ -131,12 +144,13 @@ public class AddDrinkDialogFragment extends BottomSheetDialogFragment {
         public class ViewHolder extends RecyclerView.ViewHolder {
 
             private final View rootView;
-            TextView tv_drink_name;
+            TextView tv_drink_name, tv_drink_price;
             ImageView iv_drink_icon;
 
             public ViewHolder(View itemView) {
                 super(itemView);
                 this.rootView = itemView;
+                tv_drink_price = itemView.findViewById(R.id.tv_drink_price);
                 tv_drink_name = itemView.findViewById(R.id.tv_drink_name);
                 iv_drink_icon = itemView.findViewById(R.id.iv_drink_icon);
             }

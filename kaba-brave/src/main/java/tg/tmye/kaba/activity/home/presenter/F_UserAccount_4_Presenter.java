@@ -46,6 +46,10 @@ public class F_UserAccount_4_Presenter implements F_UserMeContract.Presenter {
                     account4View.logout();
                 }
             }
+
+            @Override
+            public void onLoggingTimeout() {
+            }
         });
 
         /* 2- useraccountinformations */

@@ -15,6 +15,7 @@ import tg.tmye.kaba._commons.intf.YesOrNoWithResponse;
 import tg.tmye.kaba.activity.cart.contract.ShoppingContract;
 import tg.tmye.kaba.config.Constant;
 import tg.tmye.kaba.data.favorite.Favorite;
+import tg.tmye.kaba.data.shoppingcart.BasketInItem;
 import tg.tmye.kaba.data.shoppingcart.ShoppingBasketGroupItem;
 import tg.tmye.kaba.data.shoppingcart.source.BasketRepository;
 
@@ -45,7 +46,7 @@ public class ShoppingCartPresenter implements ShoppingContract.Presenter {
 
         shoppingCartView.showLoading(true);
 //        basketRepository.onlineBasketLoad();
-        basketRepository.loadBasketItems (new NetworkRequestThreadBase.NetRequestIntf<String>() {
+        basketRepository.loadBasketItems (new NetworkRequestThreadBase.AuthNetRequestIntf<String>() {
             @Override
             public void onNetworkError() {
                 shoppingCartView.showLoading(false);
@@ -59,6 +60,8 @@ public class ShoppingCartPresenter implements ShoppingContract.Presenter {
             @Override
             public void onSuccess(String jsonResponse) {
 
+                shoppingCartView.showLoading(false);
+
                 Gson gson = new Gson();
 
                 Log.d(Constant.APP_TAG, " - - "+jsonResponse);
@@ -69,7 +72,11 @@ public class ShoppingCartPresenter implements ShoppingContract.Presenter {
                         gson.fromJson(data.get("basket"), new TypeToken<ShoppingBasketGroupItem[]>(){}.getType());
                 List<ShoppingBasketGroupItem> shoppingBasketGroupItems = Arrays.asList(shoppingGroupItems);
                 shoppingCartView.showBasketList(shoppingBasketGroupItems);
-                shoppingCartView.showLoading(false);
+            }
+
+            @Override
+            public void onLoggingTimeout() {
+                shoppingCartView.onLoggingTimeout();
             }
         });
     }
@@ -79,8 +86,38 @@ public class ShoppingCartPresenter implements ShoppingContract.Presenter {
         populateBasket();
     }
 
+
     @Override
-    public void deleteBasketItem() {
+    public void deleteBasketItem(BasketInItem basketInItem, final int groupPosition, final int itemPosition) {
+
+        /**/
+        shoppingCartView.showLoading(true);
+        basketRepository.deleteBasketItem (basketInItem, new NetworkRequestThreadBase.AuthNetRequestIntf<String>() {
+            @Override
+            public void onNetworkError() {
+                shoppingCartView.showLoading(false);
+            }
+
+            @Override
+            public void onSysError() {
+                shoppingCartView.showLoading(false);
+            }
+
+            @Override
+            public void onSuccess(String jsonResponse) {
+                Log.d(Constant.APP_TAG, jsonResponse);
+                shoppingCartView.showLoading(false);
+                shoppingCartView.removeItemAt(groupPosition, itemPosition);
+                /* remove the one that was initially supposed to be deleted */
+            }
+
+            @Override
+            public void onLoggingTimeout() {
+                shoppingCartView.showLoading(false);
+                shoppingCartView.onLoggingTimeout();
+            }
+
+        });
 
     }
 

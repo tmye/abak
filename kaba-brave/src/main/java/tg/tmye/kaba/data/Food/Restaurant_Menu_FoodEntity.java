@@ -5,6 +5,9 @@ import android.os.Parcelable;
 
 import java.util.List;
 
+import tg.tmye.kaba.activity.menu.RestaurantMenuActivity;
+import tg.tmye.kaba.data.Restaurant.RestaurantEntity;
+
 /**
  * By abiguime on 2017/11/25.
  * email: 2597434002@qq.com
@@ -26,13 +29,18 @@ public class Restaurant_Menu_FoodEntity implements Parcelable {
 
     public long restaurant_id;
 
-    public String food_description;
+    public String description;
 
     public List<String> food_details_pictures;
 
     public List<Food_Tag> food_tags;
 
+    public int is_favorite = 0;
+
     public double stars;
+
+    /* restaurant entity */
+    public RestaurantEntity restaurant_entity;
 
     public Restaurant_Menu_FoodEntity () {
 
@@ -46,7 +54,7 @@ public class Restaurant_Menu_FoodEntity implements Parcelable {
         details = in.readString();
         menu_id = in.readLong();
         restaurant_id = in.readLong();
-        food_description = in.readString();
+        description = in.readString();
         food_details_pictures = in.createStringArrayList();
         stars = in.readDouble();
     }
@@ -72,7 +80,7 @@ public class Restaurant_Menu_FoodEntity implements Parcelable {
         dest.writeString(details);
         dest.writeLong(menu_id);
         dest.writeLong(restaurant_id);
-        dest.writeString(food_description);
+        dest.writeString(description);
         dest.writeStringList(food_details_pictures);
         dest.writeDouble(stars);
     }
@@ -138,12 +146,12 @@ public class Restaurant_Menu_FoodEntity implements Parcelable {
         this.restaurant_id = restaurant_id;
     }
 
-    public String getFood_description() {
-        return this.food_description;
+    public String getDescription() {
+        return this.description;
     }
 
-    public void setFood_description(String food_description) {
-        this.food_description = food_description;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public List<String> getFood_details_pictures() {

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tg.tmye.kaba._commons.cviews.custom_swipe.HomeCustom_SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/swiperefresh"
+    android:layout_marginTop="?actionBarSize"
+    tools:context="tg.tmye.kaba.activity.command.CommandHistoryActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- recyclerview -->
+        <android.support.v7.widget.RecyclerView
+            android:visibility="gone"
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <!-- error page -->
+        <LinearLayout
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/lny_error_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_message"
+                android:gravity="center_horizontal"
+                android:textColor="@color/dark_gray"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:text="@string/restaurant_load_error"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+            <Button
+                android:id="@+id/bt_tryagain"
+                android:text="@string/retry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_red_cornered"
+                android:textColor="@color/white"
+                android:padding="@dimen/activity_horizontal_margin_half"
+                />
+
+        </LinearLayout>
+    </FrameLayout>
+
+</tg.tmye.kaba._commons.cviews.custom_swipe.HomeCustom_SwipeRefreshLayout>

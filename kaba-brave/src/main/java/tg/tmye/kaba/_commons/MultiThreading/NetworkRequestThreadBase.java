@@ -7,10 +7,15 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.util.Log;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -20,6 +25,8 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import tg.tmye.kaba.config.Config;
 import tg.tmye.kaba.config.Constant;
+import tg.tmye.kaba.data.Food.Restaurant_Menu_FoodEntity;
+import tg.tmye.kaba.data.Menu.Restaurant_SubMenuEntity;
 
 /**
  * By abiguime on 21/12/2017.
@@ -28,7 +35,10 @@ import tg.tmye.kaba.config.Constant;
 
 public class NetworkRequestThreadBase {
 
-    static OkHttpClient okHttpClient = new OkHttpClient();
+    private static final long READ_TIME_OUT = 30;
+    private static final long WRITE_TIME_OUT = 30;
+    private static final long CONNECT_TIME_OUT = 30;
+
 
     Context ctx;
 
@@ -54,23 +64,30 @@ public class NetworkRequestThreadBase {
 
     private void runThread(String url, NetRequestIntf intf) {
 
-        Request request = new Request.Builder()
-                .url(url)
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(CONNECT_TIME_OUT, TimeUnit.SECONDS)
+                .writeTimeout(WRITE_TIME_OUT, TimeUnit.SECONDS)
+                .readTimeout(READ_TIME_OUT, TimeUnit.SECONDS)
                 .build();
 
-        Response response = null;
+        try {
+            Request request = new Request.Builder()
+                    .url(url)
+                    .build();
 
-        if (IsNetwork_On()) {
-            try {
-                response = okHttpClient.newCall(request).execute();
-                intf.onSuccess(response.body().string());
-            } catch (Exception e) {
-                e.printStackTrace();
-                intf.onSysError();
-            }
-        } else {
-            intf.onNetworkError();
+            Response response = null;
+
+//        if (IsNetwork_On()) {
+
+            response = okHttpClient.newCall(request).execute();
+            intf.onSuccess(response.body().string());
+        } catch (Exception e) {
+            e.printStackTrace();
+            intf.onSysError();
         }
+     /*   } else {
+            intf.onNetworkError();
+        }*/
     }
 
     public void run(final OnNetworkAction networkAction) {
@@ -114,29 +131,82 @@ public class NetworkRequestThreadBase {
 
                 try {
 
-                    OkHttpClient okHttpClient = new OkHttpClient();
-                    MediaType MEDIA_TYPE = MediaType.parse("application/json");
-
-                    RequestBody body = RequestBody.create(MEDIA_TYPE, jsonData);
-
-                    final Request request = new Request.Builder()
-                            .url(url)
-                            .post(body)
-                            .addHeader("Content-Type", "application/json")
-                            .addHeader("Authorization", "Bearer "+token)
-                            .addHeader("cache-control", "no-cache")
+                    OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                            .connectTimeout(CONNECT_TIME_OUT, TimeUnit.SECONDS)
+                            .writeTimeout(WRITE_TIME_OUT, TimeUnit.SECONDS)
+                            .readTimeout(READ_TIME_OUT, TimeUnit.SECONDS)
                             .build();
 
                     try {
+                        // new OkHttpClient();
+                        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+
+                        RequestBody body = RequestBody.create(MEDIA_TYPE, jsonData);
+
+                        final Request request = new Request.Builder()
+                                .url(url)
+                                .post(body)
+                                .addHeader("Content-Type", "application/json")
+                                .addHeader("Authorization", "Bearer "+token)
+                                .addHeader("cache-control", "no-cache")
+//                    .setConnectTimeout(15, TimeUnit.SECONDS); // connect timeout
+//                    client.setReadTimeout(15, TimeUnit.SECONDS);    // socket timeout
+                                .build();
+
                         Response response = okHttpClient.newCall(request).execute();
                         String bodyString = response.body().string();
                         intf.onSuccess(bodyString);
                     } catch (Exception e) {
                         e.printStackTrace();
-            /* in case there is network exception or whatsoever */
+                        /* in case there is network exception or whatsoever */
                         intf.onNetworkError();
                     }
+                } catch(Exception e){
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
+    public void postJsonDataWithToken (final String url, final String jsonData, final String token, final AuthNetRequestIntf intf) {
+
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+
+                    OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                            .connectTimeout(CONNECT_TIME_OUT, TimeUnit.SECONDS)
+                            .writeTimeout(WRITE_TIME_OUT, TimeUnit.SECONDS)
+                            .readTimeout(READ_TIME_OUT, TimeUnit.SECONDS)
+                            .build();
+
+                    try {
+                        // new OkHttpClient();
+                        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+
+                        RequestBody body = RequestBody.create(MEDIA_TYPE, jsonData);
+
+                        final Request request = new Request.Builder()
+                                .url(url)
+                                .post(body)
+                                .addHeader("Content-Type", "application/json")
+                                .addHeader("Authorization", "Bearer "+token)
+                                .addHeader("cache-control", "no-cache")
+//                    .setConnectTimeout(15, TimeUnit.SECONDS); // connect timeout
+//                    client.setReadTimeout(15, TimeUnit.SECONDS);    // socket timeout
+                                .build();
+
+                        Response response = okHttpClient.newCall(request).execute();
+                        String bodyString = response.body().string();
+                        check401Response(bodyString, intf);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        /* in case there is network exception or whatsoever */
+                        intf.onNetworkError();
+                    }
                 } catch(Exception e){
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -160,7 +230,12 @@ public class NetworkRequestThreadBase {
                         postdata.put(s, data.get(s));
                     }
 
-                    OkHttpClient okHttpClient = new OkHttpClient();
+                    OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                            .connectTimeout(CONNECT_TIME_OUT, TimeUnit.SECONDS)
+                            .writeTimeout(WRITE_TIME_OUT, TimeUnit.SECONDS)
+                            .readTimeout(READ_TIME_OUT, TimeUnit.SECONDS)
+                            .build();
+
                     MediaType MEDIA_TYPE = MediaType.parse("application/json");
 
                     RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
@@ -179,7 +254,58 @@ public class NetworkRequestThreadBase {
                         intf.onSuccess(bodyString);
                     } catch (Exception e) {
                         e.printStackTrace();
-            /* in case there is network exception or whatsoever */
+                        /* in case there is network exception or whatsoever */
+                        intf.onNetworkError();
+                    }
+
+                } catch(JSONException e){
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void postMapDataWithToken (final String url, final Map<String, Object> data, final String token, final AuthNetRequestIntf intf) {
+
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+
+                JSONObject postdata = new JSONObject();
+
+                Object[] d = data.keySet().toArray();
+                try {
+                    for (int i = 0; i < data.keySet().toArray().length; i++) {
+                        String s = (String) d[i];
+                        postdata.put(s, data.get(s));
+                    }
+
+                    OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                            .connectTimeout(CONNECT_TIME_OUT, TimeUnit.SECONDS)
+                            .writeTimeout(WRITE_TIME_OUT, TimeUnit.SECONDS)
+                            .readTimeout(READ_TIME_OUT, TimeUnit.SECONDS)
+                            .build();
+
+                    MediaType MEDIA_TYPE = MediaType.parse("application/json");
+
+                    RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+                    final Request request = new Request.Builder()
+                            .url(url)
+                            .post(body)
+                            .addHeader("Content-Type", "application/json")
+                            .addHeader("Authorization", "Bearer "+token)
+                            .addHeader("cache-control", "no-cache")
+                            .build();
+
+                    try {
+                        Response response = okHttpClient.newCall(request).execute();
+                        String bodyString = response.body().string();
+                        check401Response(bodyString, intf);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        /* in case there is network exception or whatsoever */
                         intf.onNetworkError();
                     }
 
@@ -211,10 +337,14 @@ public class NetworkRequestThreadBase {
                     }
                 }
 
-                OkHttpClient okHttpClient = new OkHttpClient();
+                OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                        .connectTimeout(CONNECT_TIME_OUT, TimeUnit.SECONDS)
+                        .writeTimeout(WRITE_TIME_OUT, TimeUnit.SECONDS)
+                        .readTimeout(READ_TIME_OUT, TimeUnit.SECONDS)
+                        .build();
 
                 final Request request = new Request.Builder()
-                        .url(url+"?"+params)
+                        .url(url+   ("".equals(params) ? params : ("?"+params)))
                         .get()
                         .addHeader("Content-Type", "application/json")
                         .addHeader("Authorization", "Bearer "+token)
@@ -224,6 +354,7 @@ public class NetworkRequestThreadBase {
                 try {
                     Response response = okHttpClient.newCall(request).execute();
                     String bodyString = response.body().string();
+//                  che
                     intf.onSuccess(bodyString);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -231,6 +362,69 @@ public class NetworkRequestThreadBase {
                 }
             }
         });
+    }
+
+    public void getDataWithToken (final String url, final Map<String, Object> data, final String token, final AuthNetRequestIntf intf) {
+
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+
+                String params = "";
+
+                if (data != null) {
+                    Object[] d = data.keySet().toArray();
+                    for (int i = 0; i < data.keySet().toArray().length; i++) {
+                        String s = (String) d[i];
+                        params += (s + "=" + data.get(s));
+                        if (i + 1 < data.keySet().toArray().length) {
+                            params += "&";
+                        }
+                    }
+                }
+
+                OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                        .connectTimeout(CONNECT_TIME_OUT, TimeUnit.SECONDS)
+                        .writeTimeout(WRITE_TIME_OUT, TimeUnit.SECONDS)
+                        .readTimeout(READ_TIME_OUT, TimeUnit.SECONDS)
+                        .build();
+
+                final Request request = new Request.Builder()
+                        .url(url+   ("".equals(params) ? params : ("?"+params)))
+                        .get()
+                        .addHeader("Content-Type", "application/json")
+                        .addHeader("Authorization", "Bearer "+token)
+                        .addHeader("cache-control", "no-cache")
+                        .build();
+
+                try {
+                    Response response = okHttpClient.newCall(request).execute();
+                    String bodyString = response.body().string();
+                    check401Response (bodyString, intf);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    intf.onNetworkError();
+                }
+            }
+        });
+    }
+
+    private void check401Response(String bodyString, AuthNetRequestIntf intf) {
+
+        /* */
+        try {
+            Log.d(Constant.APP_TAG, bodyString);
+            JsonObject obj = new JsonParser().parse(bodyString).getAsJsonObject();
+            int error = obj.get("error").getAsInt();
+            if (error == 401) {
+                intf.onLoggingTimeout();
+            } else {
+                intf.onSuccess(bodyString);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+            intf.onSuccess(bodyString);
+        }
     }
 
     public String inThreadGetDataWithToken (final String url, final Map<String, Object> data, final String token) {
@@ -248,16 +442,21 @@ public class NetworkRequestThreadBase {
             }
         }
 
-        OkHttpClient okHttpClient = new OkHttpClient();
-
-        final Request request = new Request.Builder()
-                .url(url+"?"+params)
-                .get()
-                .addHeader("Content-Type", "application/json")
-                .addHeader("Authorization", "Bearer "+token)
-                .addHeader("cache-control", "no-cache")
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(CONNECT_TIME_OUT, TimeUnit.SECONDS)
+                .writeTimeout(WRITE_TIME_OUT, TimeUnit.SECONDS)
+                .readTimeout(READ_TIME_OUT, TimeUnit.SECONDS)
                 .build();
+
         try {
+            final Request request = new Request.Builder()
+                    .url(url+"?"+params)
+                    .get()
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("Authorization", "Bearer "+token)
+                    .addHeader("cache-control", "no-cache")
+                    .build();
+
             Response response = okHttpClient.newCall(request).execute();
             String bodyString = response.body().string();
             return bodyString;
@@ -271,31 +470,40 @@ public class NetworkRequestThreadBase {
     /**
      * Posting data to server
      */
-    public void postJsonData(String url, String postdata, NetRequestIntf inft) {
+    public void postJsonData(final String url, final String postdata, final NetRequestIntf inft) {
 
-        OkHttpClient okHttpClient = new OkHttpClient();
-        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        mHandler.post(new Runnable() {
+                          @Override
+                          public void run() {
 
-        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+                              OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                                      .connectTimeout(CONNECT_TIME_OUT, TimeUnit.SECONDS)
+                                      .writeTimeout(WRITE_TIME_OUT, TimeUnit.SECONDS)
+                                      .readTimeout(READ_TIME_OUT, TimeUnit.SECONDS)
+                                      .build();
 
-        final Request request = new Request.Builder()
-                .url(url)
-                .post(body)
-                .addHeader("Content-Type", "application/json")
-                .addHeader("Authorization", "Your Token")
-                .addHeader("cache-control", "no-cache")
-                .build();
+                              try {
+                                  MediaType MEDIA_TYPE = MediaType.parse("application/json");
 
-        try {
-            Response response = okHttpClient.newCall(request).execute();
-            String bodyString = response.body().string();
-            Log.d(Constant.APP_TAG, bodyString);
-            inft.onSuccess(bodyString);
-        } catch (Exception e) {
-            e.printStackTrace();
-            /* in case there is network exception or whatsoever */
-            inft.onNetworkError();
-        }
+                                  RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+                                  final Request request = new Request.Builder()
+                                          .url(url)
+                                          .post(body)
+                                          .build();
+
+                                  Response response = okHttpClient.newCall(request).execute();
+                                  String bodyString = response.body().string();
+                                  Log.d(Constant.APP_TAG, bodyString);
+                                  inft.onSuccess(bodyString);
+                              } catch (Exception e) {
+                                  e.printStackTrace();
+                                  /* in case there is network exception or whatsoever */
+                                  inft.onNetworkError();
+                              }
+                          }
+                      }
+        );
     }
 
     /**
@@ -303,20 +511,26 @@ public class NetworkRequestThreadBase {
      */
     public String inThreadPostJsonData(String url, String postdata, String token) {
 
-        OkHttpClient okHttpClient = new OkHttpClient();
-        MediaType MEDIA_TYPE = MediaType.parse("application/json");
-
-        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
-
-        final Request request = new Request.Builder()
-                .url(url)
-                .post(body)
-                .addHeader("Content-Type", "application/json")
-                .addHeader("Authorization", "Bearer "+token)
-                .addHeader("cache-control", "no-cache")
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(CONNECT_TIME_OUT, TimeUnit.SECONDS)
+                .writeTimeout(WRITE_TIME_OUT, TimeUnit.SECONDS)
+                .readTimeout(READ_TIME_OUT, TimeUnit.SECONDS)
                 .build();
 
         try {
+            MediaType MEDIA_TYPE = MediaType.parse("application/json");
+
+            RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+            final Request request = new Request.Builder()
+                    .url(url)
+                    .post(body)
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("Authorization", "Bearer "+token)
+                    .addHeader("cache-control", "no-cache")
+                    .build();
+
+
             Response response = okHttpClient.newCall(request).execute();
             String bodyString = response.body().string();
             Log.d(Constant.APP_TAG, bodyString);
@@ -354,29 +568,33 @@ public class NetworkRequestThreadBase {
             @Override
             public void run() {
 
-                OkHttpClient okHttpClient = new OkHttpClient();
-
-                MultipartBody.Builder builder = new MultipartBody.Builder()
-                        .setType(MultipartBody.FORM);
-
-                Object[] entries =  params.keySet().toArray();
-                for (int i = 0; i < entries.length; i++) {
-                    builder.addFormDataPart((String)entries[i], params.get(entries[i]));
-                }
-
-                RequestBody body = builder.build();
-
-                final Request request = new Request.Builder()
-                        .url(url)
-                        .post(body)
-                        .addHeader("cache-control", "no-cache")
+                OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                        .connectTimeout(CONNECT_TIME_OUT, TimeUnit.SECONDS)
+                        .writeTimeout(WRITE_TIME_OUT, TimeUnit.SECONDS)
+                        .readTimeout(READ_TIME_OUT, TimeUnit.SECONDS)
                         .build();
 
                 try {
+                    MultipartBody.Builder builder = new MultipartBody.Builder()
+                            .setType(MultipartBody.FORM);
+
+                    Object[] entries =  params.keySet().toArray();
+                    for (int i = 0; i < entries.length; i++) {
+                        builder.addFormDataPart((String)entries[i], params.get(entries[i]));
+                    }
+
+                    RequestBody body = builder.build();
+
+                    final Request request = new Request.Builder()
+                            .url(url)
+                            .post(body)
+                            .addHeader("cache-control", "no-cache")
+                            .build();
+
                     intf.onSuccess(okHttpClient.newCall(request).execute().body().string());
                 } catch (Exception e) {
                     e.printStackTrace();
-            /* in case there is network exception or whatsoever */
+                    /* in case there is network exception or whatsoever */
                     intf.onNetworkError();
                 }
             }
@@ -385,7 +603,11 @@ public class NetworkRequestThreadBase {
 
     public void loggedOnGet (String url, String token, NetRequestIntf<String> netRequestIntf) {
 
-        OkHttpClient okHttpClient = new OkHttpClient();
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(CONNECT_TIME_OUT, TimeUnit.SECONDS)
+                .writeTimeout(WRITE_TIME_OUT, TimeUnit.SECONDS)
+                .readTimeout(READ_TIME_OUT, TimeUnit.SECONDS)
+                .build();
 
         final Request request = new Request.Builder()
                 .url(url)
@@ -410,6 +632,14 @@ public class NetworkRequestThreadBase {
         void onNetworkError();
         void onSysError();
         void onSuccess(T jsonResponse);
+    }
+
+    public interface AuthNetRequestIntf<T> {
+
+        void onNetworkError();
+        void onSysError();
+        void onSuccess(T jsonResponse);
+        void onLoggingTimeout();
     }
 
     public interface OnNetworkAction extends Runnable {

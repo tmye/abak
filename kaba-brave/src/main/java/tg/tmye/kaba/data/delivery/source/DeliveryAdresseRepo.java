@@ -2,7 +2,13 @@ package tg.tmye.kaba.data.delivery.source;
 
 import android.content.Context;
 
+import com.google.android.gms.maps.model.LatLng;
+
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import tg.tmye.kaba._commons.MultiThreading.DatabaseRequestThreadBase;
@@ -31,19 +37,20 @@ public class DeliveryAdresseRepo {
         this.networkRequestThreadBase =  ((MyKabaApp)context.getApplicationContext()).getNetworkRequestBase();
     }
 
-    public void loadUserDeliveryAdresses(final NetworkRequestThreadBase.NetRequestIntf<String> netRequestIntf) {
+    public void loadUserDeliveryAdresses(final NetworkRequestThreadBase.AuthNetRequestIntf<String> netRequestIntf) {
 
         /* token of the user */
         final String token = ((MyKabaApp)context.getApplicationContext()).getAuthToken();
 
-        networkRequestThreadBase.run(new NetworkRequestThreadBase.OnNetworkAction() {
+      /*  networkRequestThreadBase.run(new NetworkRequestThreadBase.OnNetworkAction() {
             @Override
             public void run() {
                 networkRequestThreadBase.loggedOnGet (
                         Config.LINK_GET_ADRESSES, token, netRequestIntf
                 );
             }
-        });
+        });*/
+      networkRequestThreadBase.getDataWithToken(Config.LINK_GET_ADRESSES, null, token, netRequestIntf);
     }
 
     public void postNewAdressToServer(DeliveryAddress address, final NetworkRequestThreadBase.NetRequestIntf<String> netRequestIntf) {
@@ -56,18 +63,22 @@ public class DeliveryAdresseRepo {
         data.put("location", address.location);
         data.put("phone_number", address.phone_number);
         data.put("description", address.description);
-        data.put("picture", UtilFunctions.toJsonData(address.picture));
+        data.put("description_details", address.description);
+        data.put("near", address.near);
+        data.put("quartier", address.quartier);
+        if (address.picture != null && address.picture.length > 0)
+            data.put("picture", UtilFunctions.toJsonData(address.picture));
 
         networkRequestThreadBase.postMapDataWithToken(Config.LINK_CREATE_NEW_ADRESS, data, token, new NetworkRequestThreadBase.NetRequestIntf<String>() {
 
             @Override
             public void onNetworkError() {
-
+                netRequestIntf.onNetworkError();
             }
 
             @Override
             public void onSysError() {
-
+                netRequestIntf.onSysError();
             }
 
             @Override
@@ -78,31 +89,50 @@ public class DeliveryAdresseRepo {
         });
     }
 
-    public void deleteDeliveryAddress(DeliveryAddress address, final NetworkRequestThreadBase.NetRequestIntf<String> netRequestIntf) {
+    public void deleteDeliveryAddress(DeliveryAddress address, final NetworkRequestThreadBase.AuthNetRequestIntf<String> netRequestIntf) {
 
         String token = ((MyKabaApp)context.getApplicationContext()).getAuthToken();
 
         Map<String, Object> data = new HashMap<>();
         data.put("id", address.id);
 
-        networkRequestThreadBase.postMapDataWithToken(Config.LINK_DELETE_ADRESS, data, token, new NetworkRequestThreadBase.NetRequestIntf<String>() {
+        networkRequestThreadBase.postMapDataWithToken(Config.LINK_DELETE_ADRESS, data, token, netRequestIntf);
+    }
+
+    public void getGpsPositionDetails(LatLng location, final NetworkRequestThreadBase.NetRequestIntf<String> intf) {
+
+        String token = ((MyKabaApp)context.getApplicationContext()).getAuthToken();
+
+        NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
+        DecimalFormat df = (DecimalFormat)nf;
+        df.applyPattern("#.######");
+//        df.setCurrency(Curre);
+        df.setRoundingMode(RoundingMode.CEILING);
+
+        String lat = df.format(location.latitude);
+        String lon = df.format(location.longitude);
+
+        String position = lat+":"+lon;
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("coordinates", position);
+
+        networkRequestThreadBase.postMapDataWithToken(Config.LINK_GET_LOCATION_DETAILS, data, token, new NetworkRequestThreadBase.NetRequestIntf<String>() {
 
             @Override
             public void onNetworkError() {
-
+                intf.onNetworkError();
             }
 
             @Override
             public void onSysError() {
-
+                intf.onSysError();
             }
 
             @Override
             public void onSuccess(String jsonResponse) {
-
-                netRequestIntf.onSuccess(jsonResponse);
+                intf.onSuccess(jsonResponse);
             }
         });
-
     }
 }

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.command.MyCommandsActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:background="@color/colorPrimary">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentScrim="@color/colorPrimary"
+            app:statusBarScrim="@android:color/transparent"
+            app:titleEnabled="false">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent"
+                    app:navigationIcon="@drawable/ic_kaba_main_white"
+                    app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+
+                <LinearLayout
+                    android:padding="@dimen/activity_horizontal_margin_half"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_height="?actionBarSize">
+
+                    <TextView
+                        android:text="@string/me"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_delivery_man_name"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="@color/white"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <tg.tmye.kaba_i_deliver.cviews.CustomTabLayout
+                    android:id="@+id/tablayout_vp_strip"
+                    app:tabGravity="center"
+                    android:background="@color/transparent"
+                    app:tabMode="scrollable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:tabMaxWidth="0dp"
+                    android:layout_gravity="center_horizontal"
+                    android:fillViewport="true"
+                    app:tabBackground="@color/transparent"
+                    app:tabTextColor="@color/transparent_white"
+                    app:tabIndicatorColor="@color/colorPrimaryDark"
+                    app:tabSelectedTextColor="@color/white"/>
+            </LinearLayout>
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefreshlayout"
+        android:layout_width="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_height="match_parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:background="@color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <tg.tmye.kaba_i_deliver.cviews.NoScrollViewPager
+                android:id="@+id/viewpager_commands"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+            <tg.tmye.kaba_i_deliver.cviews.CustomProgressbar
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/progress_bar"
+                android:indeterminateTint="@color/colorPrimary"
+                android:layout_width="@dimen/webview_circle_progressbar_size"
+                android:layout_height="@dimen/webview_circle_progressbar_size" />
+
+            <TextView
+                android:id="@+id/tv_no_food_message"
+                android:text="@string/there_is_no_food"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:textColor="@color/dark_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</android.support.design.widget.CoordinatorLayout>

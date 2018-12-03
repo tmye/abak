@@ -3,6 +3,7 @@ package tg.tmye.kaba.data.Restaurant.source;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.location.Location;
 import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
@@ -13,6 +14,8 @@ import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
 import org.greenrobot.greendao.AbstractDao;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -56,6 +59,7 @@ public class RestaurantDbRepository {
     DatabaseRequestThreadBase databaseRequestThreadBase;
     NetworkRequestThreadBase networkRequestBase;
 
+    String last_location = "";
 
     private static Gson gson = new Gson();
 
@@ -69,9 +73,9 @@ public class RestaurantDbRepository {
     public void loadMainRestaurants(JsonObject data, final YesOrNoWithResponse yesOrNo) {
 
         /* get the array of ids from class */
-        LightRestaurant[] daily_restoz =
-                gson.fromJson(data.get("resto"), new TypeToken<LightRestaurant[]>(){}.getType());
-        List<LightRestaurant> lightRestaurants = Arrays.asList(daily_restoz);
+        RestaurantEntity[] daily_restoz =
+                gson.fromJson(data.get("resto"), new TypeToken<RestaurantEntity[]>(){}.getType());
+        List<RestaurantEntity> lightRestaurants = Arrays.asList(daily_restoz);
         yesOrNo.yes(lightRestaurants, false);
     }
 
@@ -82,11 +86,19 @@ public class RestaurantDbRepository {
         SharedPreferences preferences = context.getSharedPreferences(Config.HOMEPAGE_SP_VAL, Context.MODE_PRIVATE);
         final int last_resto = preferences.getInt(Config.LAST_RESTAURANT_PAGE_JSON, 0);
 
+
+        Location lastLocation = ((MyKabaApp) context.getApplicationContext()).getLastLocation();
+        if (lastLocation != null) {
+            if (last_location.equals(lastLocation.getLatitude()+":"+lastLocation.getLongitude()))
+                netRequestIntf.onSuccess("-1");
+            last_location = (lastLocation.getLatitude()+":"+lastLocation.getLongitude());
+        }
+
         /* read current file content */
+        final String finalLast_location = last_location;
         networkRequestBase.run(new NetworkRequestThreadBase.OnNetworkAction() {
             @Override
             public void run() {
-
                 Log.d(Constant.APP_SUPER_TAG, "last resto list = "+last_resto);
 
                 if (last_resto != 0) {
@@ -96,7 +108,14 @@ public class RestaurantDbRepository {
                         netRequestIntf.onSuccess(json);
                     }
                 }
-                networkRequestBase.run(Config.LINK_RESTO_LIST, netRequestIntf);
+
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("location", finalLast_location);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                networkRequestBase.postJsonData(Config.LINK_RESTO_LIST_V2, jsonObject.toString(), netRequestIntf);
             }
         });
     }

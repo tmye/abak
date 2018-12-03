@@ -19,13 +19,16 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import tg.tmye.kaba.R;
+import tg.tmye.kaba._commons.OnImageClickListener;
 import tg.tmye.kaba._commons.decorator.CommandInnerFoodLineDecorator;
 import tg.tmye.kaba.activity.FoodDetails.FoodDetailsActivity;
+import tg.tmye.kaba.activity.ImagePreviewActivity;
 import tg.tmye.kaba.activity.favorite.FavoriteActivity;
 import tg.tmye.kaba.config.Constant;
 import tg.tmye.kaba.data.Food.Food_Tag;
 import tg.tmye.kaba.data.Food.Restaurant_Menu_FoodEntity;
 import tg.tmye.kaba.data.Restaurant.RestaurantEntity;
+import tg.tmye.kaba.data.advert.AdsBanner;
 import tg.tmye.kaba.data.favorite.Favorite;
 import tg.tmye.kaba.syscore.GlideApp;
 import tg.tmye.kaba.syscore.MyKabaApp;
@@ -138,7 +141,7 @@ class FavoriteInnerFoodViewAdapter extends RecyclerView.Adapter<FavoriteInnerFoo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        Restaurant_Menu_FoodEntity favoriteFoodEntity = favorite_item.get(position);
+        final Restaurant_Menu_FoodEntity favoriteFoodEntity = favorite_item.get(position);
         holder.tv_food_name.setText(favoriteFoodEntity.name.toUpperCase());
 
         holder.itemView.setOnClickListener(new FoodOnClickListener(favoriteFoodEntity, restaurantEntity));
@@ -148,6 +151,22 @@ class FavoriteInnerFoodViewAdapter extends RecyclerView.Adapter<FavoriteInnerFoo
                 .placeholder(R.drawable.placeholder_kaba)
                 .centerCrop()
                 .into(holder.iv_food_pic);
+
+        holder.iv_food_pic.setOnClickListener(new OnImageClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                /* on transforme ca en ads */
+                AdsBanner adsBanner = new AdsBanner();
+                adsBanner.name = favoriteFoodEntity.name;
+                adsBanner.pic = favoriteFoodEntity.pic;
+                adsBanner.description = favoriteFoodEntity.details;
+
+                Intent intent = new Intent(ctx, ImagePreviewActivity.class);
+                intent.putExtra(ImagePreviewActivity.IMG_URL_TAG, new AdsBanner[]{adsBanner});
+                ctx.startActivity(intent);
+            }
+        });
     }
 
     @Override

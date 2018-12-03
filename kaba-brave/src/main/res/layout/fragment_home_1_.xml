@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
                 android:theme="@style/AppTheme.MainToolbar"
-                app:navigationIcon="@drawable/ic_actionbar_scan_24dp"
+                app:navigationIcon="@drawable/ic_kaba_main_white"
                 app:popupTheme="@style/AppTheme.AppBarOverlay">
 
                 <RelativeLayout
@@ -36,7 +36,6 @@
                     <android.support.v7.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_toLeftOf="@+id/ib_search_bt"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:background="?selectableItemBackgroundBorderless">
@@ -50,7 +49,6 @@
                             android:enabled="false"
                             android:gravity="center_vertical|left"
                             android:maxLines="1"
-                            android:text="@string/ed_search_query_text"
                             android:textColor="@color/white"
                             android:textSize="@dimen/search_bar_text_height"
                             app:autoSizeMaxTextSize="18sp"
@@ -62,14 +60,14 @@
 
                     </android.support.v7.widget.LinearLayoutCompat>
 
-                    <ImageButton
-                        android:id="@+id/ib_search_bt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:background="?selectableItemBackgroundBorderless"
-                        app:srcCompat="@drawable/ic_actionbar_search_24dp" />
+                    <!-- <ImageButton
+                         android:id="@+id/ib_search_bt"
+                         android:layout_width="wrap_content"
+                         android:layout_height="match_parent"
+                         android:layout_alignParentRight="true"
+                         android:layout_centerVertical="true"
+                         android:background="?selectableItemBackgroundBorderless"
+                         app:srcCompat="@drawable/ic_actionbar_search_24dp" />-->
 
                     <View
                         android:layout_width="match_parent"
@@ -84,85 +82,173 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <tg.tmye.kaba._commons.cviews.HomeCustom_SwipeRefreshLayout
+    <tg.tmye.kaba._commons.cviews.custom_swipe.HomeCustom_SwipeRefreshLayout
         android:id="@+id/swiperefresh_1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="?actionBarSize"
         android:layout_marginTop="?actionBarSize">
 
-        <android.support.v4.widget.NestedScrollView
+        <!-- either a framelayout / nestedscrollview -->
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context="tg.tmye.kaba.activity.home.views.fragment.F_Home_1_Fragment">
+            android:layout_height="match_parent">
 
-            <LinearLayout
+            <android.support.v7.widget.LinearLayoutCompat
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:gravity="center"
+                android:visibility="gone"
+                android:id="@+id/lny_error">
 
-                <!-- viewpager sliding ... -->
-                <tg.tmye.kaba._commons.cviews.SlidingBanner_LilRound
-                    android:id="@+id/sliding_banner"
+                <TextView
+                    android:id="@+id/tv_message"
+                    android:layout_margin="@dimen/activity_horizontal_margin_double"
+                    style="@style/nice_showup_error_textstyle"
+                    android:gravity="center"
+                    android:text="@string/please_connect_and_retry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/bt_tryagain"
+                    android:text="@string/retry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_red_cornered"
+                    android:textColor="@color/white"
+                    android:padding="@dimen/activity_horizontal_margin_half"
+                    />
+
+            </android.support.v7.widget.LinearLayoutCompat>
+            <android.support.v4.widget.NestedScrollView
+                android:id="@+id/nested_main_content"
+                android:background="@color/xtra_light_gray"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="tg.tmye.kaba.activity.home.views.fragment.F_Home_1_Fragment">
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/sliding_banner_height"
-                    android:layout_gravity="center_vertical"
-                    android:background="@color/brown">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                    <tg.tmye.kaba._commons.cviews.AutoScrollViewPager
-                        android:id="@+id/viewpager_sliding_banner"
+                    <!-- viewpager sliding ... -->
+                    <tg.tmye.kaba._commons.cviews.SlidingBanner_LilRound
+                        android:id="@+id/sliding_banner"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/transparent" />
-
-                    <LinearLayout
-                        android:id="@+id/lny_lil_round"
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="bottom|center_horizontal"
-                        android:layout_marginBottom="@dimen/home_slidingbanner_bottom_semicirlce_height"
-                        android:orientation="horizontal" />
+                        android:layout_gravity="center_vertical"
+                        android:background="@color/brown">
 
-                    <!-- put a circular matching parent bottom white circle -->
-                    <tg.tmye.kaba._commons.cviews.SlidingBannerBottomHalfCircle
+                        <tg.tmye.kaba._commons.cviews.AutoScrollViewPager
+                            android:id="@+id/viewpager_sliding_banner"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/transparent" />
+
+
+                        <LinearLayout
+                            android:id="@+id/lny_lil_round"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|right"
+                            android:layout_marginBottom="@dimen/lil_round_margin_bottom"
+                            android:layout_marginRight="@dimen/activity_horizontal_margin_half"
+                            android:orientation="horizontal" />
+
+                        <!--kpeli center... dekon, 500k # 35%;;;; caution bancaire;; 100%... 1million. -->
+
+                        <!-- put a circular matching parent bottom white circle -->
+                        <tg.tmye.kaba._commons.cviews.SlidingBannerBottomHalfCircle
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/home_slidingbanner_bottom_semicirlce_height"
+                            android:layout_gravity="bottom" />
+
+                    </tg.tmye.kaba._commons.cviews.SlidingBanner_LilRound>
+
+                    <!-- 6 main restaurant list -->
+                    <tg.tmye.kaba._commons.cviews.OffRecyclerview
+                        android:id="@+id/recyclerview_home_restaurant_icon"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/home_slidingbanner_bottom_semicirlce_height"
-                        android:layout_gravity="bottom" />
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:paddingTop="@dimen/restaurant_icon_padding" />
 
-                </tg.tmye.kaba._commons.cviews.SlidingBanner_LilRound>
+                    <!-- all restaurants shortcut -->
+                    <RelativeLayout
+                        android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/rel_bt_all_restaurant_height">
 
-                <!-- 6 main restaurant list -->
-                <tg.tmye.kaba._commons.cviews.OffRecyclerview
-                    android:id="@+id/recyclerview_home_restaurant_icon"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:paddingTop="@dimen/restaurant_icon_padding" />
+                        <Button
+                            android:id="@+id/bt_all_restaurants"
+                            android:textColor="@color/colorPrimary"
+                            android:background="@drawable/bt_all_restaurant_bg"
+                            android:text="@string/all_restaurants"
+                            android:textAllCaps="true"
+                            android:textSize="@dimen/all_restaurant_text_size"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:paddingLeft="@dimen/activity_horizontal_margin_half"
+                            android:paddingRight="@dimen/activity_horizontal_margin_quarter"
+                            android:layout_alignParentEnd="true" />
+                    </RelativeLayout>
 
-                <!-- advertising mainview -->
-                <!-- 4 main restaurant list -->
-                <tg.tmye.kaba._commons.cviews.Grid48View
-                    android:id="@+id/recyclerview_home_4_adspace"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/restaurant_icon_padding"
-                    android:background="@color/white" />
+                    <!-- gif space -->
+                    <tg.tmye.kaba._commons.cviews.GifFrameSpaceView
+                        android:id="@+id/frame_gif_space"
+                        android:visibility="visible"
+                        android:background="@color/transparent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
 
-                <tg.tmye.kaba._commons.cviews.OffRecyclerview
-                    android:id="@+id/recyclerview_home_group_ads"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/adgroup_bottom_space" />
+                        <tg.tmye.kaba._commons.cviews.AutoScrollViewPager
+                            android:id="@+id/viewpager_gif_banner"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/brown" />
 
-                <tg.tmye.kaba._commons.cviews.OffRecyclerview
-                    android:id="@+id/recyclerview_home_feeds"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/food_details_fab_margin_bottom" />
+                        <LinearLayout
+                            android:id="@+id/lny_gif_lil_round"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|left"
+                            android:layout_marginBottom="@dimen/lil_round_margin_bottom"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+                            android:orientation="horizontal" />
 
-            </LinearLayout>
+                    </tg.tmye.kaba._commons.cviews.GifFrameSpaceView>
 
-        </android.support.v4.widget.NestedScrollView>
-    </tg.tmye.kaba._commons.cviews.HomeCustom_SwipeRefreshLayout>
+                    <!-- advertising mainview --> <!-- 4 main restaurant list -->
+                    <tg.tmye.kaba._commons.cviews.Grid48View
+                        android:id="@+id/recyclerview_home_4_adspace"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/restaurant_icon_padding"
+                        android:background="@color/light_gray" />
+
+                    <!-- group ads -->
+                    <tg.tmye.kaba._commons.cviews.OffRecyclerview
+                        android:id="@+id/recyclerview_home_group_ads"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/adgroup_bottom_space" />
+
+                    <tg.tmye.kaba._commons.cviews.OffRecyclerview
+                        android:id="@+id/recyclerview_home_feeds"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/food_details_fab_margin_bottom" />
+
+                </LinearLayout>
+
+            </android.support.v4.widget.NestedScrollView>
+        </FrameLayout>
+
+    </tg.tmye.kaba._commons.cviews.custom_swipe.HomeCustom_SwipeRefreshLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/kaba-brave/kaba-brave.iml" filepath="$PROJECT_DIR$/kaba-brave/kaba-brave.iml" />
       <module fileurl="file://$PROJECT_DIR$/kaba-i_deliver/kaba-i_deliver.iml" filepath="$PROJECT_DIR$/kaba-i_deliver/kaba-i_deliver.iml" />
       <module fileurl="file://$PROJECT_DIR$/kaba-restaurant/kaba-restaurant.iml" filepath="$PROJECT_DIR$/kaba-restaurant/kaba-restaurant.iml" />
+      <module fileurl="file://$PROJECT_DIR$/toolbox/toolbox.iml" filepath="$PROJECT_DIR$/toolbox/toolbox.iml" />
     </modules>
   </component>
 </project>

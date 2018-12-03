@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:paddingBottom="@dimen/activity_horizontal_margin"
+    tools:context=".activity.UserAcc.cash_transaction.ConfirmPayActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:textAlignment="gravity"
+            app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="?actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <!-- telling the user he's gonna pay 100$ + delivery fees. -->
+        <LinearLayout
+            android:id="@+id/lny_transaction_libelle"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:text="@string/your_are_about_to_pay"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_trans_amount"
+                android:gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                android:text="1000F"
+                style="@style/AppTheme.Transaction.PayConfirmation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <!-- text saying input your transaction password -->
+
+        <TextView
+            android:id="@+id/tv_action_libelle"
+            android:gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="0dp"
+            android:text="@string/input_transaction_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/lny_ed_fields"/>
+
+        <!-- transaction box at the top -->
+        <LinearLayout
+            android:id="@+id/lny_ed_fields"
+            android:layout_below="@+id/lny_transaction_libelle"
+            android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- votre solde s'elève a ? -->
+
+            <LinearLayout
+                android:padding="@dimen/activity_horizontal_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/ed_field_1"
+                    android:layout_width="wrap_content"
+                    style="@style/AppTheme.Transaction.Password_Field"
+                    android:text=""
+                    android:inputType="numberPassword"
+                    />
+
+                <EditText
+                    android:id="@+id/ed_field_2"
+                    android:layout_width="wrap_content"
+                    style="@style/AppTheme.Transaction.Password_Field"
+                    android:text=""
+                    android:inputType="numberPassword"
+                    />
+
+                <EditText
+                    android:id="@+id/ed_field_3"
+                    android:layout_width="wrap_content"
+                    style="@style/AppTheme.Transaction.Password_Field"
+                    android:text=""
+                    android:inputType="numberPassword"
+                    />
+
+                <EditText
+                    android:id="@+id/ed_field_4"
+                    android:layout_width="wrap_content"
+                    style="@style/AppTheme.Transaction.Password_Field"
+                    android:text=""
+                    android:inputType="numberPassword"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <!-- keyboard at the bottom -->
+        <include
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            layout="@layout/transaction_keyboard"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content" />
+
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

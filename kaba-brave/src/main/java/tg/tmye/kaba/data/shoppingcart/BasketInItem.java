@@ -15,7 +15,7 @@ import tg.tmye.kaba.data.Food.Food_Tag;
 public class BasketInItem implements Parcelable {
 
 
-    public long id;
+    public int id;
 
     public String name;
 
@@ -35,8 +35,6 @@ public class BasketInItem implements Parcelable {
 
     public List<String> food_details_pictures;
 
-    public List<Food_Tag> food_tags;
-
     public double stars;
 
     public BasketInItem() {
@@ -44,7 +42,7 @@ public class BasketInItem implements Parcelable {
     }
 
     protected BasketInItem(Parcel in) {
-        id = in.readLong();
+        id = in.readInt();
         name = in.readString();
         price = in.readString();
         pic = in.readString();
@@ -54,13 +52,12 @@ public class BasketInItem implements Parcelable {
         restaurant_id = in.readLong();
         food_description = in.readString();
         food_details_pictures = in.createStringArrayList();
-        food_tags = in.createTypedArrayList(Food_Tag.CREATOR);
         stars = in.readDouble();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(id);
+        dest.writeInt(id);
         dest.writeString(name);
         dest.writeString(price);
         dest.writeString(pic);
@@ -70,7 +67,6 @@ public class BasketInItem implements Parcelable {
         dest.writeLong(restaurant_id);
         dest.writeString(food_description);
         dest.writeStringList(food_details_pictures);
-        dest.writeTypedList(food_tags);
         dest.writeDouble(stars);
     }
 

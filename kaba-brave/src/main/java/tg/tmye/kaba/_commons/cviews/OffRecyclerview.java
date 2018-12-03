@@ -1,12 +1,15 @@
 package tg.tmye.kaba._commons.cviews;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.view.View;
 
 import java.util.List;
 
+import tg.tmye.kaba._commons.cviews.custom_swipe.HomeCustom_SwipeRefreshLayout;
 import tg.tmye.kaba.data.advert.Group10AdvertItem;
 
 /**
@@ -28,8 +31,10 @@ public class OffRecyclerview extends RecyclerView {
     }
 
     @Override
-    public boolean isNestedScrollingEnabled() {
-        return false;
+    protected void onFinishInflate() {
+
+        setNestedScrollingEnabled(false);
+        super.onFinishInflate();
     }
 
 }

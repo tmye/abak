@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="?selectableItemBackground" />
+    <item android:top="-2dp" android:right="-2dp" android:left="-2dp">
+        <selector>
+            <item android:state_activated="true">
+                <shape>
+                    <solid android:color="#44910E12" />
+                </shape>
+            </item>
+        </selector>
+    </item>
+</layer-list>

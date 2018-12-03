@@ -43,7 +43,7 @@ public class FavoriteRepository {
         databaseRequestThreadBase = ((MyKabaApp) context.getApplicationContext()).getDatabaseRequestThreadBase();
     }
 
-    public void onlineFavoriteLoad(NetworkRequestThreadBase.NetRequestIntf intf) {
+    public void onlineFavoriteLoad(NetworkRequestThreadBase.AuthNetRequestIntf intf) {
 
         String token = ((MyKabaApp)context.getApplicationContext()).getAuthToken();
         Map<String, Object> map = new HashMap<>();

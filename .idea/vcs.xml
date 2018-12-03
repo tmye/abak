@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="VcsDirectoryMappings">
-    <mapping directory="" vcs="svn" />
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/kaba-brave" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/kaba-i_deliver" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/kaba-restaurant" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/toolbox" vcs="svn" />
   </component>
 </project>

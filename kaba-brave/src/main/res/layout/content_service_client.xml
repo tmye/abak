@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="tg.experta.kaba.activities.UserAcc.ServiceClientActivity"
+    tools:context=".activity.UserAcc.ServiceClientActivity"
     tools:showIn="@layout/activity_service_client">
 
     <android.support.v7.widget.LinearLayoutCompat
@@ -20,68 +20,65 @@
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize" />
 
-        <android.support.v7.widget.LinearLayoutCompat
+        <FrameLayout
+            android:id="@+id/lny_dial"
             android:layout_gravity="center_horizontal|center_vertical"
-            android:background="@drawable/ic_myaccount_client_service"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:orientation="vertical"
             android:gravity="center_horizontal|center_vertical">
 
-        <!--    <TextView
-                android:gravity="center"
-                android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
-                android:text="@string/call_customers"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:textAlignment="center"
-                android:maxLines="4"
-                app:autoSizeTextType="uniform"
-                app:autoSizeMinTextSize="6sp"
-                app:autoSizeMaxTextSize="18sp"
-                app:autoSizeStepGranularity="1sp"
-                />-->
-            <TextView
-                android:maxLines="1"
-                app:autoSizeTextType="uniform"
-                app:autoSizeMinTextSize="6sp"
-                app:autoSizeMaxTextSize="18sp"
-                app:autoSizeStepGranularity="1sp"
-                android:gravity="center"
-                android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
-                android:text="@string/sav_call"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content" />
+            <ImageView
+                app:srcCompat="@drawable/ic_myaccount_client_service"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-            <TextView
-                android:maxLines="1"
-                app:autoSizeTextType="uniform"
-                app:autoSizeMinTextSize="6sp"
-                app:autoSizeMaxTextSize="18sp"
-                app:autoSizeStepGranularity="1sp"
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
-                android:text="@string/sav_customer"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content" />
+                android:orientation="vertical">
+                <TextView
+                    android:maxLines="1"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="6sp"
+                    app:autoSizeMaxTextSize="18sp"
+                    app:autoSizeStepGranularity="1sp"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:text="@string/sav_call"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content" />
 
-            <TextView
-                android:maxLines="1"
-                app:autoSizeTextType="uniform"
-                app:autoSizeMinTextSize="6sp"
-                app:autoSizeMaxTextSize="18sp"
-                app:autoSizeStepGranularity="1sp"
-                android:gravity="center"
-                android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
-                android:text="@string/sav_service"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content" />
+                <TextView
+                    android:maxLines="1"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="6sp"
+                    app:autoSizeMaxTextSize="18sp"
+                    app:autoSizeStepGranularity="1sp"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:text="@string/sav_customer"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content" />
 
-        </android.support.v7.widget.LinearLayoutCompat>
+                <TextView
+                    android:maxLines="1"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="6sp"
+                    app:autoSizeMaxTextSize="18sp"
+                    app:autoSizeStepGranularity="1sp"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:text="@string/sav_service"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content" />
+            </android.support.v7.widget.LinearLayoutCompat>
+        </FrameLayout>
 
         <View
             android:layout_width="match_parent"
@@ -99,17 +96,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <EditText
-            android:layout_gravity="center_horizontal"
-            android:gravity="center_vertical|left"
-            style="@style/TextStyle.LoginField"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:hint="@string/sav_name"
-            android:drawablePadding="15dp"
-            />
+        <!-- <EditText
+             android:id="@+id/ed_client_name"
+             android:layout_gravity="center_horizontal"
+             android:gravity="center_vertical|left"
+             style="@style/TextStyle.LoginField"
+             android:layout_width="300dp"
+             android:layout_height="40dp"
+             android:hint="@string/sav_name"
+             android:drawablePadding="15dp"
+             />-->
 
         <EditText
+            android:id="@+id/ed_client_message"
             android:layout_gravity="center_horizontal"
             android:gravity="top|left"
             style="@style/TextStyle.LoginField"
@@ -121,9 +120,10 @@
             />
 
         <Button
+            android:id="@+id/bt_confirm_suggestion"
             android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal"
-            android:text="@string/confirm"
+            android:text="@string/send_suggestion"
             android:layout_width="100dp"
             android:background="#f8bf00"
             android:textStyle="bold"

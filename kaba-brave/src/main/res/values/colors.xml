@@ -14,7 +14,7 @@
     <color name="white">#ffffffff</color>
     <color name="transparent">#00ffffff</color>
     <color name="black">#000000</color>
-    <color name="restaurant_name">#aaaaaa</color>
+    <color name="restaurant_name">@color/dark_gray</color>
 
     <color name="sliding_banner_left_pad_transparent_bg">#30000000</color>
     <color name="red">#ff0000</color>
@@ -26,6 +26,7 @@
     <color name="brown">#b1adad</color>
     <color name="confirm_transaction_bt_background_gray">#d0ced1</color>
     <color name="light_gray">#dadada</color>
+    <color name="xtra_light_gray">#f2f2f2</color> <!-- linkedin blue -->
     <color name="facebook_blue">#2660b1</color>
     <color name="green_">#16d457</color>
     <color name="article_details_color">#499</color>
@@ -45,5 +46,44 @@
     <color name="dark_gray">#666666</color>
     <color name="very_light_gray">#ffffff</color>
     <color name="map_green">#32CD32</color>
+    <color name="buy_now">#260fa4</color>
+
+
+    <color name="transparent_white_red">#94cc1641</color>
+    <color name="transparent_green_red">#8b00b472</color>
+    <color name="transparent_less_black">#12000000</color>
+
+
+    <!-- theme colors -->
+
+    <!-- en attente -->
+    <color name="command_state_0">@color/dark_gray</color>
+    <color name="text_command_state_0">@color/white</color>
+
+    <!-- en cours de preparation -->
+    <color name="command_state_1">#e65100</color>
+    <color name="text_command_state_1">@color/white</color>
+
+    <!-- en cours de livraison -->
+    <color name="command_state_2">@color/colorPrimary_yellow</color>
+    <color name="text_command_state_2">@color/white</color>
+
+    <!-- livraison terminee -->
+    <color name="command_state_3">#00695c</color>
+    <color name="text_command_state_3">@color/white</color>
+
+    <!-- rejetee-->
+    <color name="command_state_4">#d50000</color>
+    <color name="text_command_state_4">@color/white</color>
+
+    <!-- annulees -->
+    <color name="command_state_5">@color/black</color>
+    <color name="text_command_state_5">@color/white</color>
+
+
+    <color name="group_ad_title_color">#0076b5</color>
+
+
+    <color name="extra_light_gray">#efefef</color>
 
 </resources>

@@ -13,12 +13,13 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+
+        <tg.tmye.kaba._commons.cviews.CustomProgressbar
+            android:layout_gravity="center"
+            android:id="@+id/progress_bar"
+            android:layout_width="@dimen/webview_circle_progressbar_size"
+            android:layout_height="@dimen/webview_circle_progressbar_size"
             android:visibility="gone"
-            tools:listitem="@layout/fragment_command_list_item"
             />
 
         <android.support.v7.widget.LinearLayoutCompat
@@ -29,24 +30,35 @@
             android:id="@+id/lny_error">
 
             <TextView
-                android:layout_margin="@dimen/activity_horizontal_margin_double"
-                style="@style/nice_showup_error_textstyle"
-                android:gravity="center"
+                android:id="@+id/tv_message"
+                android:gravity="center_horizontal"
+                android:textColor="@color/dark_gray"
+                android:layout_margin="@dimen/activity_horizontal_margin"
                 android:text="@string/please_connect_and_retry"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                />
 
             <Button
                 android:id="@+id/bt_tryagain"
                 android:text="@string/retry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/bg_red_cornered"
                 android:textColor="@color/white"
                 android:padding="@dimen/activity_horizontal_margin_half"
                />
 
         </android.support.v7.widget.LinearLayoutCompat>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:background="@color/xtra_light_gray"
+            tools:listitem="@layout/fragment_command_list_item"
+            />
 
     </FrameLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

@@ -22,6 +22,7 @@ import tg.tmye.kaba.R;
 import tg.tmye.kaba._commons.notification.KabaNotificationJobService;
 import tg.tmye.kaba._commons.notification.NotificationItem;
 import tg.tmye.kaba.activity.home.HomeActivity;
+import tg.tmye.kaba.config.Constant;
 import tg.tmye.kaba.data.Restaurant.RestaurantEntity;
 
 /**
@@ -44,29 +45,31 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
-
         /*
-        *
-        *
         * */
+        Log.d(Constant.APP_TAG, "here we are boss");
 
         // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
-        Log.d(TAG, "From: " + remoteMessage.getFrom());
+        Log.d(Constant.APP_TAG, "From: " + remoteMessage.getFrom());
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
-            Log.d(TAG, "Message data payload: " + remoteMessage.getData());
+            Log.d(Constant.APP_TAG, "Message data payload: " + remoteMessage.getData());
         }
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
-            Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
+            Log.d(Constant.APP_TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
         }
+
+        String body = remoteMessage.getData().get("data");
 
         /* create notification item - and make him handle it */
 
-        JsonObject obj = new JsonParser().parse(remoteMessage.getNotification().getBody()).getAsJsonObject();
+        /* DEPENDING ON THE TYPE OF NOFICATIONS, SOMETHING DIFFERENT IS DONE */
+
+        JsonObject obj = new JsonParser().parse(body).getAsJsonObject();
 
         JsonObject data = obj.get("data").getAsJsonObject();
 
@@ -123,4 +126,5 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
+
 }

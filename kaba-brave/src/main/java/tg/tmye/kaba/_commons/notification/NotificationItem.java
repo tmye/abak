@@ -18,6 +18,7 @@ public class NotificationItem implements Parcelable {
     public String body;
     public String image_link;
     public NotificationFDestination destination;
+    public int priority = 0;
 
 
     /* according to the type
@@ -27,7 +28,6 @@ public class NotificationItem implements Parcelable {
     * 3- article {"link"} .. got special articles ... not loaded from internet
     * 4- activity {"Activity name"}
     * 5- command - state {"command_activity", "command_id"}
-    *
     * */
 
 
@@ -39,26 +39,32 @@ public class NotificationItem implements Parcelable {
         public static final int FOOD_DETAILS = 373;
         public static final int RESTAURANT_PAGE = 758;
         public static final int RESTAURANT_MENU = 434;
+        public static final int MONEY_MOVMENT = 888;
 
         /* get comand details */
         public static final int COMMAND_PAGE = 90;
         public static final int COMMAND_DETAILS = 154;
 
+        public static final int COMMAND_PREPARING = 300;
+        public static final int COMMAND_SHIPPING = 301;
+        public static final int COMMAND_END_SHIPPING = 302;
+        public static final int COMMAND_CANCELLED = 303;
+        public static final int COMMAND_REJECTED = 304;
+
         /* get article details */
         public static final int ARTICLE_DETAILS = 128;
+
 
         /* help to know which activity we're going in */
         public int type;
 
         /* meta data attached with it */
-        public String product_id; /* cn be product / restaurant */
+        public int product_id; /* cn be product / restaurant */
 
         protected NotificationFDestination(Parcel in) {
             type = in.readInt();
-            product_id = in.readString();
+            product_id = in.readInt();
         }
-
-
 
         /* can be article */
 
@@ -84,7 +90,7 @@ public class NotificationItem implements Parcelable {
         @Override
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(type);
-            dest.writeString(product_id);
+            dest.writeInt(product_id);
         }
 
         @Override

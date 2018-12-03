@@ -15,8 +15,15 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:theme="@style/Toolbar.Transparent"
-            />
+            app:theme="@style/Toolbar.WhiteRedText"
+            app:title="@string/login"
+            app:titleTextColor="@color/colorPrimary"
+            android:textSize="@dimen/actionbar_title_text_size"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:textAlignment="gravity"
+            app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
 

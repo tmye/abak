@@ -8,12 +8,12 @@
     android:animateLayoutChanges="true"
     tools:context=".activity.FoodDetails.FoodDetailsActivity">
 
-
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/food_details_sliding_banner_height"
         android:fitsSystemWindows="true"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.design.widget.CollapsingToolbarLayout
@@ -31,6 +31,7 @@
                 android:id="@+id/sliding_banner"
                 android:layout_width="match_parent"
                 android:background="@color/brown"
+                app:autocompute="false"
                 android:layout_height="@dimen/food_details_sliding_banner_height"
                 android:layout_gravity="center_vertical">
 
@@ -38,6 +39,7 @@
                     android:id="@+id/viewpager_sliding_banner"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    app:autocompute="false"
                     android:background="@color/transparent" />
 
                 <LinearLayout
@@ -45,7 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="@dimen/lil_round_margin_bottom"
                     android:orientation="horizontal">
 
                 </LinearLayout>
@@ -60,23 +62,21 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-
     <include
         layout="@layout/content_food_details"
         />
 
-
-    <!--<android.support.design.widget.FloatingActionButton
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_chart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="@dimen/fab_margin"
         app:backgroundTint="@color/colorPrimary_rm"
         app:srcCompat="@drawable/ic_shopping_card_yellow_24dp"
-        android:layout_gravity="bottom|right"
         android:layout_marginBottom="@dimen/food_details_fab_margin_bottom"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        app:fabSize="normal"
         />
--->
 
     <RelativeLayout
         android:id="@+id/rel_below_bar"
@@ -85,38 +85,36 @@
         android:layout_height="?actionBarSize"
         android:background="@drawable/below_bar">
 
-        <LinearLayout
-            android:id="@+id/lny_stars"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        <!-- button add to chart -->
+        <android.support.v7.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:id="@+id/iv_star_1"
-                app:srcCompat="@drawable/ic_star_red_24dp"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-            <ImageView
-                android:id="@+id/iv_star_2"
-                app:srcCompat="@drawable/ic_star_red_24dp"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-            <ImageView
-                android:id="@+id/iv_star_3"
-                app:srcCompat="@drawable/ic_star_half_red_24dp"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-            <ImageView
-                android:id="@+id/iv_star_4"
-                app:srcCompat="@drawable/ic_star_border_red_24dp"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+        <TextView
+            android:id="@+id/ib_add_to_basket"
+            android:background="@drawable/bg_white_cornered"
+            android:text="@string/bt_add_to_basket"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:paddingLeft="@dimen/activity_horizontal_margin_half"
+            android:paddingRight="@dimen/activity_horizontal_margin_half"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+            android:layout_marginRight="@dimen/activity_horizontal_margin_half"
+            android:layout_marginTop="@dimen/activity_horizontal_margin_quarter"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin_quarter"
+            android:layout_centerVertical="true"
+            android:autoSizeTextType="uniform"
+            android:textStyle="bold"
+            />
+        </android.support.v7.widget.LinearLayoutCompat>
 
         <android.support.v7.widget.LinearLayoutCompat
-            android:layout_toRightOf="@+id/lny_stars"
+            android:id="@+id/lny_quantity_bts"
+            android:layout_centerHorizontal="true"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:layout_centerVertical="true"
@@ -157,30 +155,34 @@
 
         </android.support.v7.widget.LinearLayoutCompat>
 
-
-        <!-- button add to chart -->
-        <ImageButton
-            android:id="@+id/ib_add_to_basket"
-            android:layout_toLeftOf="@+id/ib_purchase_now"
-            app:srcCompat="@drawable/ic_shopping_add_to_card_red_24dp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@null"
-            android:layout_margin="@dimen/activity_horizontal_margin"/>
-
         <!-- button buy now -->
-        <ImageButton
-            android:id="@+id/ib_purchase_now"
+        <android.support.v7.widget.LinearLayoutCompat
             android:layout_alignParentRight="true"
-            android:background="@drawable/ic_purchase_now_red_24dp"
-            android:src="@null"
-            android:layout_width="?actionBarSize"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+         >
+       <TextView
+            android:id="@+id/ib_purchase_now"
+            android:background="@drawable/bg_white_cornered"
+            android:text="@string/bt_buy_now"
+            android:layout_width="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+            android:layout_marginRight="@dimen/activity_horizontal_margin_half"
+            android:paddingLeft="@dimen/activity_horizontal_margin_half"
+            android:paddingRight="@dimen/activity_horizontal_margin_half"
+            android:layout_marginTop="@dimen/activity_horizontal_margin_quarter"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin_quarter"
+            android:autoSizeTextType="uniform"
             android:layout_centerVertical="true"
             />
-    </RelativeLayout>
 
+    </android.support.v7.widget.LinearLayoutCompat>
+
+    </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

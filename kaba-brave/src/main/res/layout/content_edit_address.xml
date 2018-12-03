@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,17 +15,6 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"/>
-
-        <!-- <de.hdodenhof.circleimageview.CircleImageView
-             android:layout_marginTop="@dimen/activity_vertical_margin"
-             android:src="@drawable/add_place_icon"
-             android:layout_gravity="center_horizontal"
-             android:layout_width="@dimen/common_adress_image_width"
-             app:border_color="@color/selected_yellow"
-             app:border_width="1px"
-             android:scaleType="centerCrop"
-             android:layout_height="@dimen/common_adress_image_width"
-             android:onClick="selectPhoto"/>-->
 
         <android.support.v7.widget.RecyclerView
             android:layout_margin="@dimen/activity_horizontal_margin"
@@ -51,28 +40,17 @@
 
             <EditText
                 android:id="@+id/ed_title_of_location"
-                android:background="@null"
+                android:background="@color/white"
                 android:textColor="@color/black"
                 android:textSize="@dimen/personnal_info_content_text_size"
                 android:layout_width="match_parent"
                 android:paddingLeft="@dimen/activity_horizontal_margin_half"
                 android:paddingTop="@dimen/activity_horizontal_margin_half"
                 android:paddingRight="@dimen/activity_horizontal_margin_half"
+                android:textCursorDrawable="@drawable/edit_black_drawable"
                 android:layout_height="wrap_content" />
 
         </android.support.v7.widget.LinearLayoutCompat>
-
-        <!-- <EditText
-             android:id="@+id/ed_title_of_location"
-             android:layout_gravity="center_horizontal"
-             android:gravity="center_vertical|left"
-             style="@style/TextStyle.LoginField"
-             android:layout_width="300dp"
-             android:layout_height="40dp"
-             android:hint="@string/sav_location_name"
-             android:drawablePadding="15dp"
-             />-->
-
 
         <android.support.v7.widget.LinearLayoutCompat
             android:layout_marginTop="@dimen/edittext_margintop_8"
@@ -92,13 +70,109 @@
 
             <EditText
                 android:id="@+id/ed_phone_number"
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:textSize="@dimen/personnal_info_content_text_size"
+                android:inputType="phone"
+                android:maxLength="8"
+                android:layout_width="match_parent"
+                android:paddingLeft="@dimen/activity_horizontal_margin_half"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingRight="@dimen/activity_horizontal_margin_half"
+                android:textCursorDrawable="@drawable/edit_black_drawable"
+                android:layout_height="wrap_content" />
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+
+        <RelativeLayout
+            android:layout_marginTop="@dimen/edittext_margintop_8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:id="@+id/tv_select_address"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:padding="@dimen/activity_horizontal_margin_half"
+                android:textColor="@color/white"
+                android:text="@string/select_your_delivery_position"
+                android:textSize="@dimen/editadress_textsize"
+                android:layout_alignParentLeft="true"
+                android:layout_width="match_parent"
+                android:gravity="left|center_vertical"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:background="@null"
+                app:srcCompat="@drawable/ic_chevron_right_white_24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:id="@+id/lny_pick_address"
+            android:layout_marginTop="@dimen/edittext_margintop_8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:padding="@dimen/activity_horizontal_margin"
+            >
+
+            <TextView
+                android:text="@string/add_qte"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/personnal_info_title_text_size"
+                android:background="?selectableItemBackground"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_address_quartier"
+                android:background="?selectableItemBackground"
                 android:textColor="@color/black"
                 android:textSize="@dimen/personnal_info_content_text_size"
                 android:layout_width="match_parent"
                 android:paddingLeft="@dimen/activity_horizontal_margin_half"
                 android:paddingTop="@dimen/activity_horizontal_margin_half"
                 android:paddingRight="@dimen/activity_horizontal_margin_half"
+                android:layout_height="wrap_content" />
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+        <!-- non loin de -->
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_marginTop="@dimen/edittext_margintop_8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:padding="@dimen/activity_horizontal_margin">
+
+            <TextView
+                android:text="@string/add_non_loin"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/personnal_info_title_text_size"
+                android:layout_height="wrap_content" />
+
+            <!-- donner des inforamtions sur le details -->
+
+            <EditText
+                android:id="@+id/ed_address_non_loin"
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:textSize="@dimen/personnal_info_content_text_size"
+                android:layout_width="match_parent"
+                android:paddingLeft="@dimen/activity_horizontal_margin_half"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingRight="@dimen/activity_horizontal_margin_half"
+                android:hint="@string/non_loin_adress_sample"
+                android:textCursorDrawable="@drawable/edit_black_drawable"
                 android:layout_height="wrap_content" />
 
         </android.support.v7.widget.LinearLayoutCompat>
@@ -119,62 +193,22 @@
                 android:textSize="@dimen/personnal_info_title_text_size"
                 android:layout_height="wrap_content" />
 
+        <!-- donner des inforamtions sur le details -->
+
             <EditText
                 android:id="@+id/ed_address_details"
-                android:background="@null"
+                android:background="@color/white"
                 android:textColor="@color/black"
                 android:textSize="@dimen/personnal_info_content_text_size"
                 android:layout_width="match_parent"
                 android:paddingLeft="@dimen/activity_horizontal_margin_half"
                 android:paddingTop="@dimen/activity_horizontal_margin_half"
                 android:paddingRight="@dimen/activity_horizontal_margin_half"
+                android:hint="@string/details_adress_sample"
+                android:textCursorDrawable="@drawable/edit_black_drawable"
                 android:layout_height="wrap_content" />
 
         </android.support.v7.widget.LinearLayoutCompat>
-
-
-        <Button
-            android:id="@+id/bt_add_gps_address"
-            android:layout_margin="@dimen/edittext_margintop_24"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/add_location_button_drawable"
-            android:text="@string/add_gps_address"
-            android:textAllCaps="true"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <!--
-                <fragment
-                    android:id="@+id/frg_map"
-                    android:layout_marginTop="@dimen/edittext_margintop_24"
-                    andrrestaurant_namename="com.google.android.gms.maps.SupportMapFragment"
-                    class="com.google.android.gms.maps.SupportMapFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"/>
-        -->
-
-        <!--  <android.support.v7.widget.CardView
-              android:id="@+id/map_cardview"
-              android:visibility="visible"
-              android:layout_width="match_parent"
-              android:layout_margin="@dimen/activity_horizontal_margin"
-              android:layout_height="@dimen/edit_address_map_height"
-              app:cardBackgroundColor="@android:color/white">
-        -->
-
-        <com.google.android.gms.maps.MapView
-            android:id="@+id/swagishmap"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/edit_address_map_height"
-            />
-
-        <!--  </android.support.v7.widget.CardView>-->
-
-        <!-- we can add a view stub to load the image in case -->
-
 
         <android.support.v7.widget.LinearLayoutCompat
             android:layout_marginTop="@dimen/edittext_margintop_24"
@@ -186,13 +220,20 @@
             <Button
                 style="@style/AppTheme.Button.Cancel"
                 android:text="@string/cancel"
+                android:onClick="exitActivity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_white_cornered"
+                android:textColor="@color/colorPrimary"
+                android:textAllCaps="true"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
             <Button
                 android:id="@+id/bt_confirm"
                 style="@style/AppTheme.Button.Confirm"
+                android:textColor="@color/white"
+                android:textAllCaps="true"
+                android:background="@drawable/bg_red_cornered"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/save" />
@@ -203,7 +244,6 @@
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"/>
 
-
     </android.support.v7.widget.LinearLayoutCompat>
 
-</ScrollView>
+</android.support.v4.widget.NestedScrollView>

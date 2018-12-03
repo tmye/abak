@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/article_list_item_height"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:layout_gravity="center_vertical"
+    android:animateLayoutChanges="true"
+    android:background="?selectableItemBackground">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_pic"
+        android:layout_width="@dimen/menu_food_pic_size"
+        android:layout_height="@dimen/menu_food_pic_size"
+        android:layout_margin="@dimen/menu_food_item_spacing"
+        android:src="@drawable/placeholder_kaba"
+        android:layout_alignParentLeft="true"
+        android:layout_weight="1"
+        app:border_color="@color/circular_view_border_yellow"
+        app:border_width="@dimen/restaurant_rounded_image_border_width" />
+
+   <!-- <ImageView
+        android:id="@+id/iv_pic"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:src="@drawable/placeholder_kaba"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />-->
+
+    <TextView
+        android:id="@+id/tv_drink_name"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+        android:layout_marginRight="@dimen/activity_horizontal_margin_half"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary_yellow"
+        android:text="COCA-COLA"
+        android:layout_weight="5"
+        android:layout_width="0dp"
+        android:textSize="@dimen/article_content_textsize"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_drink_count"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:text="X 1"
+        android:textColor="@color/black"
+        android:textSize="@dimen/actionbar_title_text_size"
+        android:layout_weight="2"
+        android:textStyle="bold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+
+</android.support.v7.widget.LinearLayoutCompat>

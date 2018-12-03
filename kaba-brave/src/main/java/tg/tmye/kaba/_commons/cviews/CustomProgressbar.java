@@ -1,11 +1,15 @@
 package tg.tmye.kaba._commons.cviews;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import tg.tmye.kaba.R;
 
@@ -14,7 +18,7 @@ import tg.tmye.kaba.R;
  * email: 2597434002@qq.com
  */
 
-public class CustomProgressbar extends android.support.v7.widget.AppCompatImageView {
+public class CustomProgressbar extends ProgressBar /*android.support.v7.widget.AppCompatImageView*/ {
 
 
     private AnimationDrawable foodLoadingAnimation;
@@ -34,12 +38,19 @@ public class CustomProgressbar extends android.support.v7.widget.AppCompatImageV
         setdrawable();
     }
 
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+
+        /* bottom stuff, need to draw the items on the bottom. */
+    }
 
     private void setdrawable() {
 
-        setBackgroundResource(R.drawable.custom_loading_drawable);
+
+        /*setBackgroundResource(R.drawable.custom_loading_drawable);
         foodLoadingAnimation = (AnimationDrawable) getBackground();
-        foodLoadingAnimation.start();
+        foodLoadingAnimation.start();*/
     }
 
     public void stopAnim() {
@@ -55,10 +66,10 @@ public class CustomProgressbar extends android.support.v7.widget.AppCompatImageV
     @Override
     public void setVisibility(int visibility) {
         super.setVisibility(visibility);
-        if (visibility == VISIBLE) {
+       /* if (visibility == VISIBLE) {
             startAnim();
         } else {
             stopAnim();
-        }
+        }*/
     }
 }

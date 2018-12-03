@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="tg.experta.kaba.activities.UserAcc.NewsFeedActivity">
+    tools:context=".activity.UserAcc.feeds.FeedActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:theme="@style/Toolbar.WhiteRedText"
-            app:title="@string/my_news_feed"
+            app:title="@string/myaccount_feeds"
             app:titleTextColor="@color/colorPrimary"
             android:textSize="@dimen/actionbar_title_text_size"
             android:textStyle="bold"
@@ -25,6 +25,28 @@
             android:gravity="center_horizontal"
             android:textAlignment="gravity"
             app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay" />
+
+        <RelativeLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tablayout_vp_strip"
+                app:tabGravity="center"
+                android:background="@color/transparent"
+                app:tabMode="scrollable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                app:tabMaxWidth="0dp"
+                android:layout_gravity="center_horizontal"
+                android:fillViewport="true"
+                app:tabBackground="@color/white"
+                app:tabTextColor="@color/colorPrimary"
+                app:tabIndicatorColor="@color/colorPrimaryDark"
+                app:tabSelectedTextColor="@color/black"/>
+        </RelativeLayout>
 
     </android.support.design.widget.AppBarLayout>
 

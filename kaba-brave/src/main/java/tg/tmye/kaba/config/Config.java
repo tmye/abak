@@ -14,6 +14,7 @@ public class Config {
     public static final String PARAMS_RESTAURANT_ID = "PARAMS_RESTAURANT_ID";
     public static final String KABA_CUSTOM_NETWORK_THREAD = "KABA_CUSTOM_NETWORK_THREAD";
     public static final String KABA_CUSTOM_DATABASE_THREAD = "KABA_CUSTOM_DATABASE_THREAD";
+    public static final String KABA_PARA_THREAD = "KABA_PARA_THREAD";
 
 
     /* shared preferences */
@@ -26,7 +27,9 @@ public class Config {
     public static final String PHONE_FIREBASE_PUSH_TOKEN = "PHONE_FIREBASE_PUSH_TOKEN";
     public static final String FIREBASE_PUSH_SHPF = "FIREBASE_PUSH_SHPF";
     public static final String PHONE_IS_OK_WITH_SERVER = "PHONE_IS_OK_WITH_SERVER";
-
+    public static final String PRE_LOGIN_SHARED_PREFS = "PRE_LOGIN_SHARED_PREFS";
+    public static final String BALANCE_FIELD = "BALANCE";
+    public static final String PRE_RECOVER_PASSWORD_SHARED_PREFS = "PRE_RECOVER_PASSWORD_SHARED_PREFS";
 
 
     public static String USER_SHARED_PREFS = "kb.user";
@@ -62,13 +65,20 @@ public class Config {
             "/sample/restaurant_menu_sample.json";
 
     /* get current command db */
-    public static final String LINK_MY_COMMANDS = Constant.SERVER_ADDRESS+
-            "/sample/commands.json";
+    public static final String LINK_MY_COMMANDS_GET_CURRENT = Constant.SERVER_ADDRESS+
+            "/mobile/api/command/get";
+
+    /* get all commands list */
+    public static final String LINK_GET_ALL_COMMAND_LIST = Constant.SERVER_ADDRESS+
+            "/mobile/api/command/all/get";
 
     /* create command db */
-    public static final String LINK_CREATE_COMMAND = Constant.SERVER_ADDRESS+
+    public static final String LINK_CREATE_COMMAND = Constant.SERVER_ADDRESS_SECURE +
             "/mobile/api/command/create";
 
+    /* get command details */
+    public static final String LINK_GET_COMMAND_DETAILS =  Constant.SERVER_ADDRESS+
+            "/mobile/api/command/details/get";
 
     /* get current basket content */
     public static final String LINK_MY_BASKET_GET = Constant.SERVER_ADDRESS+
@@ -106,22 +116,28 @@ public class Config {
             "/sample/useraccount.json";
 
     /* menu food*/
-    public static final String LINK_MENU_BY_ID = Constant.SERVER_ADDRESS+
+    public static final String LINK_MENU_BY_RESTAURANT_ID = Constant.SERVER_ADDRESS+
             "/api/menu/get";
+
+    public static final String LINK_MENU_BY_ID = Constant.SERVER_ADDRESS+
+            "/api/menu/get/id";
 
     public static final String LINK_RESTO_LIST = Constant.SERVER_ADDRESS+
             "/api/restaurant/get";
+
+    public static final String LINK_RESTO_LIST_V2 = Constant.SERVER_ADDRESS+
+            "/api/restaurant/v2/get";
 
     /* glide config */
     public static String GLIDE_CACHE_FOLDER = "kbCache";
 
 
     /* user login */
-    public static final String LINK_USER_LOGIN =  Constant.SERVER_ADDRESS+
+    public static final String LINK_USER_LOGIN =  Constant.SERVER_ADDRESS_SECURE+
             "/mobile/api/login_check";
 
     /* user register */
-    public static final String LINK_USER_REGISTER =  Constant.SERVER_ADDRESS+
+    public static final String LINK_USER_REGISTER =  Constant.SERVER_ADDRESS_SECURE+
             "/api/user/register";
 
     /* register push token */
@@ -136,5 +152,75 @@ public class Config {
     public static final String LINK_NOTIFICATION_FOOD_DATA =  Constant.SERVER_ADDRESS+
             "/notification/food";
 
+    /* get notification menu data */
+    public static final String LINK_NOTIFICATION_RESTAURANT_DATA = Constant.SERVER_ADDRESS+
+            "/notification/restaurant";
+
+    /* get notification menu data */
+    public static final String LINK_NOTIFICATION_MENU_DATA = Constant.SERVER_ADDRESS+
+            "/notification/menu";
+
+    /* delete basket item */
+    public static final String LINK_MY_BASKET_DELETE = Constant.SERVER_ADDRESS+
+            "/mobile/api/basket/delete";
+
+    /* update user informations */
+    public static final String LINK_UPDATE_USER_INFORMATIONS = Constant.SERVER_ADDRESS+
+            "/mobile/api/user/change";
+
+    /* get article informations */
+    public static final String LINK_ARTICLE_INFORMATIONS = Constant.SERVER_ADDRESS+
+            "/api/article/get";
+
+    /* get position details */
+    public static final String LINK_GET_LOCATION_DETAILS = Constant.SERVER_ADDRESS+
+            "/mobile/api/district/get";
+
+    public static final String LINK_CHECK_RESTAURANT_IS_OPEN = Constant.SERVER_ADDRESS+
+            "/api/resto/state/get";
+
+    public static final String LINK_COMPUTE_BILLING = Constant.SERVER_ADDRESS+
+            "/mobile/api/commandBilling/get";
+
+    public static final String LINK_GET_LASTEST_FEEDS = Constant.SERVER_ADDRESS+
+            "/mobile/api/feeds/get";
+
+    public static final String LINK_SEND_VERIFCATION_SMS = Constant.SERVER_ADDRESS+
+            "/api/code/request";
+
+    public static final String LINK_POST_SUGGESTION = Constant.SERVER_ADDRESS +
+            "/mobile/api/add/suggestion";
+
+    public static final String LINK_GET_BESTSELLERS_LIST = Constant.SERVER_ADDRESS +
+            "/api/food/rating/get";
+
+    /* get notification food data */
+    public static final String LINK_GET_FOOD_DETAILS_LOGGED =  Constant.SERVER_ADDRESS+
+            "/mobile/api/food/details/get";
+
+    public static final String LINK_GET_FOOD_DETAILS_SIMPLE =  Constant.SERVER_ADDRESS+
+            "/api/food/details/get";
+
+    public static final String LINK_GET_EVENEMENTS_LIST = Constant.SERVER_ADDRESS +
+            "/api/event/get";
+
+    public static final String LINK_CHECK_VERIFCATION_CODE = Constant.SERVER_ADDRESS +
+            "/api/code/check";
+
+    /* pay addresses */
+    public static final String LINK_GET_TRANSACTION_HISTORY = Constant.PAY_SERVER_ADDRESS_SECURE +
+            "/mobile/api/user/transaction/history";
+
+    public static final String LINK_GET_BALANCE =  Constant.PAY_SERVER_ADDRESS_SECURE +
+            "/mobile/api/user/transaction/balance/get";
+
+    /* top up */
+    public static final String LINK_GET_TOPUP_CHOICES = LINK_HOME_PAGE;
+
+    /* flooz top up */
+    public static final String LINK_TOPUP_FLOOZ = Constant.PAY_SERVER_ADDRESS_SECURE+"/mobile/api/sms/payment/init";
+
+    /* t-money top up */
+    public static final String LINK_TOPUP_TMONEY = Constant.PAY_SERVER_ADDRESS_SECURE+"/mobile/api/web/payment/init";
 
 }

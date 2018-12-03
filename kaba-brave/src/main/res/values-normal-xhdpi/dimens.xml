@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="food_details_sliding_banner_height">240dp</dimen>
+    <dimen name="food_details_sliding_banner_height">280dp</dimen>
     <dimen name="sliding_banner_height">180dp</dimen>
     <dimen name="myaccount_settings_size">35dp</dimen>
     <dimen name="account_top_height">190dp</dimen>
+
+    <dimen name="transaction_pwd_bt_height">75dp</dimen>
+    <dimen name="transaction_pwd_bt_width">160dp</dimen>
+
+    <!-- no touch -->
+    <dimen name="transaction_pwd_field_height">80dp</dimen>
+    <dimen name="transaction_pwd_field_width">160dp</dimen>
+    <dimen name="trans_keyboard_textsize">18sp</dimen>
 </resources>

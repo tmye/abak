@@ -64,10 +64,13 @@ public class WebActivity extends AppCompatActivity {
                 this.progressbar.setVisibility(View.GONE);
             }
         }
-
     }
 
     WebHolder wbHolder;
+
+    /* we need to receive data in a json from ... */
+
+    /* text - image - video - text - image - possibility to like at the bottom of the page */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

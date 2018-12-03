@@ -9,10 +9,31 @@
     tools:context="tg.tmye.kaba.activity.favorite.FavoriteActivity"
     tools:showIn="@layout/activity_favorite">
 
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <!-- textview -->
+        <TextView
+            android:id="@+id/tv_message"
+            android:gravity="center"
+            android:visibility="gone"
+            android:textColor="@color/dark_gray"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:text="@string/no_command_data"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+        <!-- recyclerview -->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </FrameLayout>
+
+
 
 </android.support.v4.widget.SwipeRefreshLayout>

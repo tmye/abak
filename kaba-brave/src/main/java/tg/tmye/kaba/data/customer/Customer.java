@@ -13,9 +13,9 @@ public class Customer {
     public String nickname;
     public String birthday;
     public int gender; /* 1 female - 2 male - 3 dontwannasay - 0 notsetyet */
-    public String profile_picture;
+    public String profilePicture;
     public String theme_picture;
-    public int is_gender_to_set;
+    public int isSet;
 
     public static Customer fakeCustomer() {
         Customer customer = new Customer();
@@ -23,8 +23,8 @@ public class Customer {
         customer.username = "Esso Modeste";
         customer.birthday = "21-01-1992";
         customer.gender = 1;
-        customer.profile_picture = "/sample/advert_full/p1.jpg";
-        customer.is_gender_to_set = 0; // 0false, 1true
+        customer.profilePicture = "/sample/advert_full/p1.jpg";
+        customer.isSet = 0; // 0false, 1true
 
         return customer;
     }

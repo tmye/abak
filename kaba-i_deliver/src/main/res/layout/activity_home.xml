@@ -5,7 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="tg.tmye.kaba_i_deliver.HomeActivity">
+    tools:context="tg.tmye.kaba_i_deliver.activity.home.HomeActivity">
 
     <TextView
         android:id="@+id/message"

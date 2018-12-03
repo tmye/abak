@@ -44,6 +44,9 @@ public class KabaNotificationJobService extends JobIntentService {
     public static final int JOB_ID = 1994;
 
     static final String TAG = "KabaNotfJobService";
+    private static final int RESTAURANT_MENU_SMALL_ICON = R.drawable.notification_kaba_drawable;
+    private static final int RESTAURANT_SMALL_ICON = R.drawable.notification_kaba_drawable;
+    private static final int ARTICLE_MENU_SMALL_ICON = R.drawable.notification_kaba_drawable;
 
     String jsonData = "";
 
@@ -69,8 +72,7 @@ public class KabaNotificationJobService extends JobIntentService {
             @Override
             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
 
-                String good = "";
-                good = "8993";
+                manageNotification(getApplicationContext().getResources().getDrawable(R.drawable.icon_commander), item);
               /* still launch notification with default image */
                 return false;
             }
@@ -80,77 +82,133 @@ public class KabaNotificationJobService extends JobIntentService {
 
                 String good = "";
                 good = "8993 -- cool one ";
-
-                /* launch the notification */
-                /* first download the image */
-                /* when the image is ready, */
-                /* the require json data for the action on the net, then do it. */
-
-                NetworkRequestThreadBase networkRequestThreadBase =  ((MyKabaApp)getApplicationContext()).getNetworkRequestBase();
-
-                /* get token */
-                String token =  ((MyKabaApp) getApplicationContext()).getAuthToken();
-
-
-                switch (item.destination.type) {
-
-                    case NotificationItem.NotificationFDestination.ARTICLE_DETAILS:
-                        NotificationBuilder.sendArticleDetails_N (getApplicationContext(), jsonData);
-                        break;
-                    case NotificationItem.NotificationFDestination.COMMAND_DETAILS:
-                        NotificationBuilder.sendCommandDetails_N (getApplicationContext(), jsonData);
-                        break;
-                    case NotificationItem.NotificationFDestination.COMMAND_PAGE:
-                        NotificationBuilder.sendCommandPage_N (getApplicationContext(), jsonData);
-                        break;
-                    case NotificationItem.NotificationFDestination.FOOD_DETAILS:
-                        JSONObject object = new JSONObject();
-                        try {
-                            object.put("food_id", item.destination.product_id);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-
-                        networkRequestThreadBase.postJsonDataWithToken(Config.LINK_NOTIFICATION_FOOD_DATA, object.toString(), token, new NetworkRequestThreadBase.NetRequestIntf<String>() {
-                            @Override
-                            public void onNetworkError() {
-
-                            }
-
-                            @Override
-                            public void onSysError() {
-
-                            }
-
-                            @Override
-                            public void onSuccess(String jsonResponse) {
-                                jsonData = jsonResponse;
-
-                                NotificationBuilder.sendFood_N(getApplication(), jsonData, R.drawable.ic_refresh_icon, getBitmapFromDrawable(resource),
-                                        item.title, item.body);
-                            }
-                        });
-
-
-                        break;
-                    case NotificationItem.NotificationFDestination.RESTAURANT_MENU:
-                        NotificationBuilder.sendRestaurantMenu_N (getApplicationContext(), jsonData);
-                        break;
-                    case NotificationItem.NotificationFDestination.RESTAURANT_PAGE:
-                        NotificationBuilder.sendRestaurantPage_N (getApplicationContext(), jsonData);
-                        break;
-                }
-
-
+                manageNotification(resource, item);
                 /* send notification */
-
-
                 return false;
             }
         }).submit();
         /* according to different types, should handle it differntly */
+    }
 
+    private void manageNotification(final Drawable resource, final NotificationItem item) {
+
+             /* launch the notification */
+                /* first download the image */
+                /* when the image is ready, */
+                /* the require json data for the action on the net, then do it. */
+
+        NetworkRequestThreadBase networkRequestThreadBase =  ((MyKabaApp)getApplicationContext()).getNetworkRequestBase();
+
+                /* get token */
+        String token =  ((MyKabaApp) getApplicationContext()).getAuthToken();
+
+        JSONObject object = null;
+
+        switch (item.destination.type) {
+
+            case NotificationItem.NotificationFDestination.ARTICLE_DETAILS:
+                NotificationBuilder.sendArticleDetails_N(getApplication(), ""+item.destination.product_id, ARTICLE_MENU_SMALL_ICON, getBitmapFromDrawable(resource),
+                        item.title, item.body, item.priority);
+                break;
+            case NotificationItem.NotificationFDestination.FOOD_DETAILS:
+                object = new JSONObject();
+                try {
+                    object.put("food_id", item.destination.product_id);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                networkRequestThreadBase.postJsonDataWithToken(Config.LINK_NOTIFICATION_FOOD_DATA, object.toString(), token, new NetworkRequestThreadBase.NetRequestIntf<String>() {
+                    @Override
+                    public void onNetworkError() {}
+
+                    @Override
+                    public void onSysError() {}
+
+                    @Override
+                    public void onSuccess(String jsonResponse) {
+                        jsonData = jsonResponse;
+
+                        Log.d(Constant.APP_TAG, jsonResponse);
+
+                        NotificationBuilder.sendFood_N(getApplication(), jsonData, RESTAURANT_SMALL_ICON, getBitmapFromDrawable(resource),
+                                item.title, item.body, item.priority);
+                    }
+                });
+                break;
+            case NotificationItem.NotificationFDestination.RESTAURANT_MENU:
+                object = new JSONObject();
+                try {
+                    object.put("menu_id", item.destination.product_id);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                networkRequestThreadBase.postJsonDataWithToken(Config.LINK_NOTIFICATION_MENU_DATA, object.toString(), token, new NetworkRequestThreadBase.NetRequestIntf<String>() {
+                    @Override
+                    public void onNetworkError() {}
+
+                    @Override
+                    public void onSysError() {}
+
+                    @Override
+                    public void onSuccess(String jsonResponse) {
+                        jsonData = jsonResponse;
+
+                        NotificationBuilder.sendRestaurantMenu_N(getApplication(), jsonData, RESTAURANT_MENU_SMALL_ICON, getBitmapFromDrawable(resource),
+                                item.title, item.body, item.priority);
+                    }
+                });
+                break;
+            case NotificationItem.NotificationFDestination.RESTAURANT_PAGE:
+                object = new JSONObject();
+                try {
+                    object.put("restaurant_id", item.destination.product_id);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                networkRequestThreadBase.postJsonDataWithToken(Config.LINK_NOTIFICATION_RESTAURANT_DATA, object.toString(), token, new NetworkRequestThreadBase.NetRequestIntf<String>() {
+                    @Override
+                    public void onNetworkError() {}
+
+                    @Override
+                    public void onSysError() {}
+
+                    @Override
+                    public void onSuccess(String jsonResponse) {
+                        jsonData = jsonResponse;
+
+                        NotificationBuilder.sendRestaurantPage_N(getApplication(), jsonData, RESTAURANT_MENU_SMALL_ICON, getBitmapFromDrawable(resource),
+                                item.title, item.body, item.priority);
+                    }
+                });
+                break;
+            case NotificationItem.NotificationFDestination.COMMAND_PREPARING:
+                /* get command product id */
+                Log.d(Constant.APP_TAG, "COMMAND_PREPARING");
+                NotificationBuilder.sendCommandNotification(getApplicationContext(), NotificationItem.NotificationFDestination.COMMAND_PREPARING, item.destination.product_id);
+                break;
+            case NotificationItem.NotificationFDestination.COMMAND_CANCELLED:
+                Log.d(Constant.APP_TAG, "COMMAND_CANCELLED");
+                NotificationBuilder.sendCommandNotification(getApplicationContext(),NotificationItem.NotificationFDestination.COMMAND_CANCELLED, item.destination.product_id);
+                break;
+            case NotificationItem.NotificationFDestination.COMMAND_END_SHIPPING:
+                Log.d(Constant.APP_TAG, "COMMAND_END_SHIPPING");
+                NotificationBuilder.sendCommandNotification(getApplicationContext(),NotificationItem.NotificationFDestination.COMMAND_END_SHIPPING, item.destination.product_id);
+                break;
+            case NotificationItem.NotificationFDestination.COMMAND_REJECTED:
+                Log.d(Constant.APP_TAG, "COMMAND_REJECTED");
+                NotificationBuilder.sendCommandNotification(getApplicationContext(),NotificationItem.NotificationFDestination.COMMAND_REJECTED, item.destination.product_id);
+                break;
+            case NotificationItem.NotificationFDestination.COMMAND_SHIPPING:
+                Log.d(Constant.APP_TAG, "COMMAND_SHIPPING");
+                NotificationBuilder.sendCommandNotification(getApplicationContext(),NotificationItem.NotificationFDestination.COMMAND_SHIPPING, item.destination.product_id);
+                break;
+            case NotificationItem.NotificationFDestination.MONEY_MOVMENT:
+                Log.d(Constant.APP_TAG, "MONEY_MOVMENT");
+                String message = ""; /* - > ; + < rechargment ; remboursement ? */
+                NotificationBuilder.sendMoneyMovmentNotification(getApplicationContext(),NotificationItem.NotificationFDestination.MONEY_MOVMENT, message);
+                break;
+        }
     }
 
     private Bitmap getBitmapFromDrawable(Drawable drawable) {

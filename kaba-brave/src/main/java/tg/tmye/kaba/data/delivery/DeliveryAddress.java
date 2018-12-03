@@ -17,6 +17,9 @@ public class DeliveryAddress implements Parcelable {
     public String user_id;
     public String description;
     public String[] picture;
+    public String quartier;
+    public String near;
+    public String updated_at; /* last update date - time stamp */
 
     public DeliveryAddress () {
         super();
@@ -30,6 +33,28 @@ public class DeliveryAddress implements Parcelable {
         user_id = in.readString();
         description = in.readString();
         picture = in.createStringArray();
+        quartier = in.readString();
+        near = in.readString();
+        updated_at = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(name);
+        dest.writeString(location);
+        dest.writeString(phone_number);
+        dest.writeString(user_id);
+        dest.writeString(description);
+        dest.writeStringArray(picture);
+        dest.writeString(quartier);
+        dest.writeString(near);
+        dest.writeString(updated_at);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<DeliveryAddress> CREATOR = new Creator<DeliveryAddress>() {
@@ -43,20 +68,4 @@ public class DeliveryAddress implements Parcelable {
             return new DeliveryAddress[size];
         }
     };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(id);
-        parcel.writeString(name);
-        parcel.writeString(location);
-        parcel.writeString(phone_number);
-        parcel.writeString(user_id);
-        parcel.writeString(description);
-        parcel.writeStringArray(picture);
-    }
 }

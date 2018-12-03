@@ -12,6 +12,7 @@
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.LinearLayoutCompat
+            android:id="@+id/lny_10box_top_height"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="@dimen/ads_item_height">
@@ -66,18 +67,20 @@
 
         </android.support.v7.widget.LinearLayoutCompat>
 
-        <android.support.v7.widget.RecyclerView
+        <tg.tmye.kaba._commons.cviews.OffRecyclerview
             android:id="@+id/rec_ads_lvl_1"
             android:layout_width="match_parent"
             android:layout_height="@dimen/ad_4_height"
             android:background="@color/white"
+            android:visibility="gone"
             />
 
-        <android.support.v7.widget.RecyclerView
+        <tg.tmye.kaba._commons.cviews.OffRecyclerview
             android:id="@+id/rec_ads_lvl_2"
             android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="@dimen/ad_4_height"
+            android:visibility="gone"
             android:layout_marginTop="1dp"/>
 
     </android.support.v7.widget.LinearLayoutCompat>
@@ -87,9 +90,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:padding="@dimen/activity_horizontal_margin_half"
-        android:background="@color/selected_yellow"
+        android:background="@drawable/group_ad_title"
         android:textStyle="bold"
-        android:height="32dp"
+        android:maxLines="1"
         android:text="TOGOTELECOM"
         android:textColor="@color/white"
         android:layout_width="wrap_content"

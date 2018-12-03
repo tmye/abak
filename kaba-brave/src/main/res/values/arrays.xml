@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string-array name="status_list">
+
+        <item>ATTENTE</item>
+        <item>PREPARATION</item>
+        <item>EN ROUTE</item>
+        <item>LIVRÉ</item>
+        <item>REJETÉ</item>
+        <item>ANNULÉ</item>
+    </string-array>
+
+    <string-array name="feeds_tabs">
+        <item>ARTICLES</item>
+        <item>NOTIFICATIONS</item>
+    </string-array>
+
+    <string-array name="week_days_short">
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thu</item>
+        <item>Fri</item>
+        <item>Sat</item>
+        <item>Sun</item>
+    </string-array>
+
+</resources>

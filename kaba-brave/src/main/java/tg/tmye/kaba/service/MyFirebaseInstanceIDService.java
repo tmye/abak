@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 import tg.tmye.kaba._commons.MultiThreading.NetworkRequestThreadBase;
 import tg.tmye.kaba.config.Config;
+import tg.tmye.kaba.config.Constant;
 import tg.tmye.kaba.syscore.MyKabaApp;
 
 /**
@@ -22,6 +23,9 @@ import tg.tmye.kaba.syscore.MyKabaApp;
  */
 
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
+
+
+    private static final String TAG = "MyFirebaseInstanceIDService";
 
 
     /* metadata += "VERSION.SDK: " + android.os.Build.VERSION.SDK + "\n";
@@ -37,6 +41,7 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Config.FIREBASE_PUSH_SHPF, Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putBoolean(Config.PHONE_IS_OK_WITH_SERVER, false);
+        edit.putString(Config.PHONE_FIREBASE_PUSH_TOKEN, refreshedToken);
         edit.commit();
 
 
@@ -58,18 +63,31 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         networkRequestBase.postJsonData(Config.LINK_REGISTER_PUSH_TOKEN,
                 object.toString(),
                 new NetworkRequestThreadBase.NetRequestIntf() {
-                    @Override
-                    public void onNetworkError() {
-                    }
 
                     @Override
-                    public void onSysError() {
-                    }
+                    public void onNetworkError() {}
+
+                    @Override
+                    public void onSysError() {}
 
                     @Override
                     public void onSuccess(Object jsonResponse) {
                         /* save a local system error to the database */
                     }
+
                 });
     }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Log.d(Constant.APP_TAG, TAG+" onCreate");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(Constant.APP_TAG, TAG+" onDestroy");
+    }
+
 }

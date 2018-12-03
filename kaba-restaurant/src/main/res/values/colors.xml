@@ -1,6 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#e65100</color>
+    <color name="colorPrimaryDark">#6e2701</color>
+    <color name="colorAccent">@color/black</color>
+
+    <color name="colorPrimary_yellow">#f8bf00</color>
+    <color name="transparent">#00000000</color>
+    <color name="restaurant_name_color">#001199</color>
+    <color name="circular_view_border_yellow">@color/kaba_red_color</color>
+    <color name="kaba_red_color">#cc1641</color>
+
+
+
+    <color name="restaurant_name">#aaaaaa</color>
+
+    <color name="sliding_banner_left_pad_transparent_bg">#30000000</color>
+    <color name="red">#ff0000</color>
+    <color name="unselected_gray">#a1a0a1</color>
+    <color name="selected_yellow">#f8bf00</color>
+
+    <color name="brown">#b1adad</color>
+    <color name="confirm_transaction_bt_background_gray">#d0ced1</color>
+    <color name="light_gray">#dadada</color>
+    <color name="facebook_blue">#2660b1</color>
+    <color name="green_">#16d457</color>
+    <color name="article_details_color">#499</color>
+    <color name="mini_list_date_text_color">#acacac</color>
+    <color name="black_overlay">#aa000000</color>
+    <color name="horoscope_blue">#499</color>
+
+    <color name="horoscope_sun_color">#f39f18</color>
+    <color name="horoscope_moon_color">#003366</color>
+
+    <color name="gray_login_title_color">#9d9b9c</color>
+    <color name="gray_login_field_text_color">#3e3e3e</color>
+    <color name="gray_login_field_background_color">#e2e1e1</color>
+
+    <color name="transparent_white">#99ffffff</color>
+    <color name="edit_image_transparent_black">#66000000</color>
+    <color name="dark_gray">#666666</color>
+    <color name="very_light_gray">#ffffff</color>
+    <color name="map_green">#32CD32</color>
+    <color name="buy_now">#260fa4</color>
+
+
+    <color name="transparent_white_red">#94cc1641</color>
+    <color name="transparent_green_red">#8b00b472</color>
+    <color name="transparent_less_black">#12000000</color>
+
+
+    <!-- en attente -->
+    <color name="command_state_0">@color/dark_gray</color>
+    <color name="text_command_state_0">@color/white</color>
+
+    <!-- en cours de preparation -->
+    <color name="command_state_1">#e65100</color>
+    <color name="text_command_state_1">@color/white</color>
+
+    <!-- en cours de livraison -->
+    <color name="command_state_2">@color/colorPrimary_yellow</color>
+    <color name="text_command_state_2">@color/white</color>
+
+    <!-- livraison terminee -->
+    <color name="command_state_3">#00695c</color>
+    <color name="text_command_state_3">@color/white</color>
+
+    <!-- rejetee-->
+    <color name="command_state_4">#d50000</color>
+    <color name="text_command_state_4">@color/white</color>
+
+    <!-- annulees -->
+    <color name="command_state_5">@color/black</color>
+    <color name="text_command_state_5">@color/white</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+
+    <color name="extra_light_gray">#efefef</color> <!-- linkedin blue -->
+
+
 </resources>

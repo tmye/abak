@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
+        android:textSize="@dimen/restaurant_title_textsize"
         android:text="@string/restaurant_name_sample"
         android:textColor="@color/restaurant_name"/>
 

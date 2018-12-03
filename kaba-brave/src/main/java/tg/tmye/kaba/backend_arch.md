@@ -53,3 +53,40 @@ Home informations also will have their hown databundle that can
 // Verifier si la base de donnees sqlite est aussi maleable que
    ce que je pense, avec possibilite de mettre les choses comme
    nous le voulons.
+
+
+
+# Liste des activities / fragments qui ont besoin d'auth.
+
+- HomeActivity (frag3, frag4)
+- fooddetailsactivity
+- confirmcommand-
+- transactionactivity
+- command details act
+- solde act
+- personnal
+- favorite
+- address
+- customer
+- feeds
+- shopping cart
+- historic des transactions
+
+
+*** Gestion de tout celà
+- Toutes les vues de ces interfaces doivent avoir des
+    fonctions qui deloggent automatiquement avec une information box qui restart
+    l'app apres le click
+
+
+- Tous les presenters et fonctions repository doivent avoir ces fonctions la qui declanchent
+    aussi les vues
+
+
+- il faut verifier dans tous les json qui sont renvoyer par l'utlisateur si le code d'erreur
+    n'est pas 401 par hazard. Veillez a ce que toutes les reponses soit des emd shape.
+
+
+-
+
+

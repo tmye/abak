@@ -6,7 +6,7 @@ What can the restaurant do with the app.
 3. manage commands.
 4. Get the stats of selling, and state of daily commands
 5. Open / Close restaurant (allowing us to send commands)
-6.
+6. -
 
 
 (if you want to launch an activity, you have to come in our office

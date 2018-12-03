@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_horizontal_margin">
+
+    <tg.tmye.kaba.restaurant.cviews.CustomProgressbar
+        android:layout_gravity="center"
+        android:id="@+id/progress_bar"
+        android:layout_margin="@dimen/activity_horizontal_margin_half"
+        android:layout_width="@dimen/progress_dialog_circle_progressbar_size"
+        android:layout_height="@dimen/progress_dialog_circle_progressbar_size" />
+
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_margin="@dimen/activity_horizontal_margin_half"
+        android:text="@string/content_on_loading"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dialog_box_text_size"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content" />
+
+</android.support.v7.widget.LinearLayoutCompat>

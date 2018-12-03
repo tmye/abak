@@ -6,12 +6,14 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import tg.tmye.kaba._commons.baseviewstubfragment.BaseViewStubFragment;
+
 /**
  * By abiguime on 10/01/2018.
  * email: 2597434002@qq.com
  */
 
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment extends BaseViewStubFragment {
 
     @Override
     public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {

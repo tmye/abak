@@ -10,11 +10,14 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.List;
 
 import tg.tmye.kaba.R;
 import tg.tmye.kaba._commons.adapters.FavoriteRecyclerAdapter;
+import tg.tmye.kaba._commons.cviews.dialog.ForceLogoutDialogFragment;
 import tg.tmye.kaba._commons.decorator.CommandListSpacesItemDecoration;
 import tg.tmye.kaba._commons.decorator.FavoriteListSpacesItemDecoration;
 import tg.tmye.kaba.activity.cart.ShoppingCartActivity;
@@ -37,6 +40,9 @@ public class FavoriteActivity extends AppCompatActivity implements View.OnClickL
     /* rec item decoraton */
     private FavoriteListSpacesItemDecoration favoriteListDecorator;
 
+
+    private TextView tv_message;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +51,7 @@ public class FavoriteActivity extends AppCompatActivity implements View.OnClickL
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_yellow_upward_navigation_24dp);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_upward_navigation_24dp);
 
         initViews();
 
@@ -63,6 +69,7 @@ public class FavoriteActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initViews() {
+        tv_message = findViewById(R.id.tv_message);
         swipeRefreshLayout = findViewById(R.id.swiperefresh);
         recyclerview = findViewById(R.id.recyclerview);
     }
@@ -83,6 +90,14 @@ public class FavoriteActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void networkError() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                recyclerview.setVisibility(View.GONE);
+                tv_message.setVisibility(View.VISIBLE);
+                tv_message.setText(getResources().getString(R.string.network_error));
+            }
+        });
     }
 
     @Override
@@ -90,8 +105,8 @@ public class FavoriteActivity extends AppCompatActivity implements View.OnClickL
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
                 swipeRefreshLayout.setRefreshing(isLoading);
+                tv_message.setVisibility(View.GONE);
             }
         });
     }
@@ -115,13 +130,22 @@ public class FavoriteActivity extends AppCompatActivity implements View.OnClickL
 
                 recyclerview.setLayoutManager(new LinearLayoutManager(FavoriteActivity.this));
                 recyclerview.setAdapter(new FavoriteRecyclerAdapter(FavoriteActivity.this, data));
+
+                recyclerview.setVisibility(View.VISIBLE);
             }
         });
     }
 
     @Override
     public void showErrorPage(boolean isShowed) {
-
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                recyclerview.setVisibility(View.GONE);
+                tv_message.setVisibility(View.VISIBLE);
+                tv_message.setText(getResources().getString(R.string.sys_error));
+            }
+        });
     }
 
     @Override
@@ -146,4 +170,23 @@ public class FavoriteActivity extends AppCompatActivity implements View.OnClickL
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void startActivity(Intent intent) {
+        super.startActivity(intent);
+        overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_void);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.enter_from_left, R.anim.fade_out);
+    }
+
+    @Override
+    public void onLoggingTimeout() {
+        ForceLogoutDialogFragment forceLogoutDialogFragment = ForceLogoutDialogFragment.newInstance();
+        forceLogoutDialogFragment.show(getSupportFragmentManager(), ForceLogoutDialogFragment.TAG);
+    }
+
 }

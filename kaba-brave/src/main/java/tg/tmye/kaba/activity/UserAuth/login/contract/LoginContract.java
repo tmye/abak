@@ -1,7 +1,7 @@
 package tg.tmye.kaba.activity.UserAuth.login.contract;
 
-import tg.tmye.kaba.BasePresenter;
-import tg.tmye.kaba.BaseView;
+import tg.tmye.kaba.syscore.baseobj.BasePresenter;
+import tg.tmye.kaba.syscore.baseobj.BaseView;
 
 /**
  * By abiguime on 13/03/2018.

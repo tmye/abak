@@ -2,7 +2,6 @@ package tg.tmye.kaba.data.customer.source;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.CpuUsageInfo;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -36,6 +35,7 @@ import tg.tmye.kaba.syscore.MyKabaApp;
 public class CustomerDataRepository {
 
 
+    private static final String TGO = "228";
     public String TAG = "CustomerDataRepository";
 
     private final Context context;
@@ -68,7 +68,7 @@ public class CustomerDataRepository {
         customer.phone_number = sharedPreferences.getString(Config.CUSTOMER_PHONE_NUMBER, "");
         customer.birthday = sharedPreferences.getString(Config.CUSTOMER_BIRTHDAY, "");
         customer.nickname = sharedPreferences.getString(Config.CUSTOMER_NICKNAME, "");
-        customer.profile_picture = sharedPreferences.getString(Config.CUSTOMER_PROFILE_PICTURE, "");
+        customer.profilePicture = sharedPreferences.getString(Config.CUSTOMER_PROFILE_PICTURE, "");
         customer.theme_picture = sharedPreferences.getString(Config.CUSTOMER_THEME_PICTURE, "");
 
         yesOrNoWithResponse.yes(customer, false);
@@ -99,12 +99,13 @@ public class CustomerDataRepository {
     }
 
     /* register */
-    public void register(String phonecode, String password, String nickname, final RegisterPresenter.RegisterImpl register) {
+    public void register(final String phonecode, final String password, String nickname, String request_id, final RegisterPresenter.RegisterImpl register) {
 
         Map<String,Object> params = new HashMap<>();
         params.put("nickname", nickname);
         params.put("password", password);
         params.put("phone_number", phonecode);
+        params.put("request_id", request_id);
 
         networkRequestHandler.postJsonData(Config.LINK_USER_REGISTER, params, new NetworkRequestThreadBase.NetRequestIntf<String>() {
 
@@ -127,12 +128,8 @@ public class CustomerDataRepository {
 
                 switch (errorCode) {
                     case RegisterPresenter.SUCCESS:
-                        JsonObject data = obj.get("data").getAsJsonObject();
-
-                        /* register token */
-                        /* register username */
-                        /* register phone */
-
+//                        JsonObject data = obj.get("data").getAsJsonObject();
+                        register.yes(phonecode, password);
                         break;
                     default:
                         register.no(obj.get("message").getAsString(), true);
@@ -149,7 +146,7 @@ public class CustomerDataRepository {
         params.put("_username", username);
         params.put("_password", password);
 
-           /* send login params by post */
+        /* send login params by post */
         networkRequestHandler.postWithParams (Config.LINK_USER_LOGIN, params, new NetworkRequestThreadBase.NetRequestIntf<String>(){
 
             @Override
@@ -184,18 +181,18 @@ public class CustomerDataRepository {
     }
 
 
-    private void saveCustomer(Customer customer) {
+    public void saveCustomer(Customer customer) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(Config.USER_SHARED_PREFS, Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putInt(Config.CUSTOMER_ID, customer.id);
         edit.putString(Config.CUSTOMER_USERNAME, customer.username);
         edit.putString(Config.CUSTOMER_NICKNAME, customer.nickname);
-        edit.putString(Config.CUSTOMER_PHONE_NUMBER, customer.phone_number);
+        edit.putString(Config.CUSTOMER_PHONE_NUMBER, customer.username);
         edit.putString(Config.CUSTOMER_BIRTHDAY, customer.birthday);
-        edit.putString(Config.CUSTOMER_PROFILE_PICTURE, customer.profile_picture);
+        edit.putString(Config.CUSTOMER_PROFILE_PICTURE, customer.profilePicture);
         edit.putString(Config.CUSTOMER_THEME_PICTURE, customer.theme_picture);
         edit.putInt(Config.CUSTOMER_GENDER, customer.gender);
-        edit.putInt(Config.CUSTOMER_IS_GENDER_TO_SET, customer.is_gender_to_set);
+        edit.putInt(Config.CUSTOMER_IS_GENDER_TO_SET, customer.isSet);
 
         edit.commit();
     }
@@ -264,5 +261,118 @@ public class CustomerDataRepository {
         SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putBoolean(Config.PHONE_IS_OK_WITH_SERVER, false);
         edit.commit();
+    }
+
+    public void updateCustomerInformations(Customer customer, NetworkRequestThreadBase.AuthNetRequestIntf<String> intf) {
+
+        /*        "nickname" : string,
+                "email" : string,
+                "password" : string,
+                "gender" : string,
+                "bithday" : string,
+                "profile_picture" : base64,
+                "theme_picture" : base64*/
+
+        String authToken = ((MyKabaApp) context.getApplicationContext()).getAuthToken();
+
+        JSONObject object = new JSONObject();
+        try {
+            object.put("nickname", customer.nickname);
+            object.put("gender", customer.gender);
+            object.put("birthday", ""+customer.birthday);
+            object.put("phone_number", ""+customer.phone_number);
+
+            /* if there is base64 then, write it */
+            if (customer.profilePicture != null && UtilFunctions.isBase64(customer.profilePicture)) {
+
+                /* change local path to base 64 */
+                object.put("profile_picture", customer.profilePicture);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        networkRequestHandler.postJsonDataWithToken(Config.LINK_UPDATE_USER_INFORMATIONS, object.toString(),
+                authToken, intf);
+    }
+
+    public static String getDevicePushToken (Context ctx) {
+        /* save token locally */
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(Config.FIREBASE_PUSH_SHPF, Context.MODE_PRIVATE);
+        return  sharedPreferences.getString(Config.PHONE_FIREBASE_PUSH_TOKEN, "");
+    }
+
+    public static void deleteCustomerInfos(Context context) {
+
+        SharedPreferences sp = context.getSharedPreferences(Config.USER_SHARED_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.remove(Config.CUSTOMER_NICKNAME);
+        editor.remove(Config.CUSTOMER_THEME_PICTURE);
+        editor.remove(Config.CUSTOMER_PROFILE_PICTURE);
+        editor.remove(Config.CUSTOMER_BIRTHDAY);
+        editor.remove(Config.CUSTOMER_USERNAME);
+        editor.remove(Config.CUSTOMER_ID);
+        editor.remove(Config.CUSTOMER_GENDER);
+        editor.remove(Config.CUSTOMER_IS_GENDER_TO_SET);
+        editor.remove(Config.CUSTOMER_PHONE_NUMBER);
+        editor.remove(Config.SYSTOKEN);
+        /* delete money account relative informations */
+        editor.remove(Config.BALANCE_FIELD);
+
+        editor.commit();
+        /* remove token */
+    }
+
+    public static void deleteToken(Context context) {
+
+        ((MyKabaApp)context.getApplicationContext()).setAuthToken("");
+    }
+
+    public void sendVerificationCode(String phone_number, NetworkRequestThreadBase.NetRequestIntf<String> intf) {
+
+//        /api/code/request
+        JSONObject object = new JSONObject();
+        try {
+            object.put("phone_number", TGO+phone_number);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        networkRequestHandler.postJsonData(Config.LINK_SEND_VERIFCATION_SMS, object.toString(), intf);
+    }
+
+    public void postSuggestion(String message, NetworkRequestThreadBase.AuthNetRequestIntf<String> netRequestIntf) {
+
+        JSONObject object = new JSONObject();
+        try {
+            object.put("message", message);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String authToken = ((MyKabaApp) context.getApplicationContext()).getAuthToken();
+        networkRequestHandler.postJsonDataWithToken(Config.LINK_POST_SUGGESTION, object.toString(), authToken, netRequestIntf);
+    }
+
+    public void check_verification_code(String code, String request_id, NetworkRequestThreadBase.NetRequestIntf intf) {
+
+        JSONObject object = new JSONObject();
+        try {
+            object.put("code", code);
+            object.put("request_id", request_id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        networkRequestHandler.postJsonData(Config.LINK_CHECK_VERIFCATION_CODE, object.toString(), intf);
+    }
+
+    public void recoverPassword(String account_no, String new_password, NetworkRequestThreadBase.NetRequestIntf<String> netRequestIntf) {
+
+        /* send data to the server, and make sure there is a success */
+        JSONObject object = new JSONObject();
+        try {
+            object.put("code", account_no);
+            object.put("request_id", new_password);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 }

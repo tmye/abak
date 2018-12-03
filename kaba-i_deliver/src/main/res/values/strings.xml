@@ -1,6 +1,236 @@
 <resources>
-    <string name="app_name">Kaba-i_deliver</string>
+    <string name="app_name">KIRIKOU</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="show_commands">Mes Commandes</string>
+    <string name="my_commands">Mes Commandes</string>
+    <string name="title_activity_my_comands">Mes Commandes</string>
+
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_restaurant">Restaurant</string>
+    <string name="title_shopping_card">Cart</string>
+    <string name="title_command_list">Commands</string>
+    <string name="title_myaccount">Account</string>
+    <string name="action_message_box">Messages</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="restaurant_name_sample">CASTAS</string>
+    <string name="title_activity_menu_content">MenuContentActivity</string>
+    <string name="title_activity_restaurant_menu">RestaurantMenuActivity</string>
+
+    <string name="restaurant_adress_sample">Kégué, 100m away from Stadium</string>
+    <string name="restaurant_contact_sample">0022890909090</string>
+    <string name="menu_food_item_name_sample">HAMBURGER STEAK</string>
+    <string name="menu_food_item_price_sample">1500FCFA</string>
+    <string name="title_activity_food_details"></string>
+    <string name="food_tag_sample">CROISSANT</string>
+    <string name="drink_name_sample">COCA</string>
+    <string name="action_share">Share</string>
+    <string name="there_is_no_food">No food in the Menu</string>
+    <string name="restaurant">RESTAURANT</string>
+    <string name="update_done">UPDATE FINISHED</string>
+    <string name="update_no_needed">UPDATE NOT NEEDED</string>
+    <string name="network_error">Network Error. Press the Button to try again</string>
+    <string name="try_again">Try Again</string>
+    <string name="sys_error">Sorry for the disconvenience, The server is encountering an Error.</string>
+    <string name="title_activity_web">WEBACTIVITY</string>
+    <string name="title_activity_geo">GEOACTIVITY</string>
+    <string name="total">TOTAL:</string>
+    <string name="article_title_sample">Comment faire une bonne tisane?</string>
+    <string name="article_details_sample">2 tubercules de Gingembre + Kpatima, when a user tries to pick up one of cards... 2 tubercules de Gingembre + Kpatima, when a user tries to pick up one of cards</string>
+    <string name="scanner_activity">Scan</string>
+
+
+    <string-array name="days_of_week">
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
+
+    <string-array name="months_of_year">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+    <string name="title_activity_login">LOGIN</string>
+    <string name="register_account">REGISTER AN ACCOUNT</string>
+    <string name="register">Register</string>
+    <string name="confirm">Confirm</string>
+    <string name="password">Password</string>
+    <string name="full_name">Full name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="login">CONNEXION</string>
+    <string name="i_login">I Login</string>
+    <string name="title_activity_service_client">ServiceClientActivity</string>
+    <string name="service_client">CUSTOMER SERVICE</string>
+    <string name="call_customers">"CALL \nCUSTOMER \nSERVICE"</string>
+    <string name="sav_name">Client Name</string>
+    <string name="sav_type_ur_message">Type your message</string>
+    <string name="title_activity_my_adresses">MyAdressesActivity</string>
+    <string name="my_adresses">MY ADDRESSES</string>
+    <string name="home">Maison Agoè</string>
+    <string name="details_adress_sample">Agbalépédogan, En face de la Gare Routière</string>
+    <string name="details_adress_country">Lomé (TOGO)</string>
+    <string name="title_activity_edit_address">EditAddressActivity</string>
+    <string name="sav_location_name">Name Of Location</string>
+    <string name="add_country">Country</string>
+    <string name="add_city">City</string>
+    <string name="add_qte">District</string>
+    <string name="add_details">Addresses details</string>
+    <string name="add_phone">Phone number</string>
+    <string name="cancel">CANCEL</string>
+    <string name="save">Save</string>
+    <string name="sav_call">CALL</string>
+    <string name="sav_service">SERVICE</string>
+    <string name="sav_customer">CUSTOMER</string>
+    <string name="action_add_address">CREATE NEW ADDRESS</string>
+    <string name="add_gps_address">ADD GPS LOCATION</string>
+    <string name="this_is_location">This is your current location</string>
+    <string name="title_activity_personnal_info">Me</string>
+    <string name="your_name">Full Name</string>
+    <string name="your_nick_name">Nick Name</string>
+    <string name="your_gender">Genre</string>
+    <string name="your_birth_date">Birth Date</string>
+    <string name="title_activity_news_feed">NewsFeedActivity</string>
+    <string name="my_news_feed">NEWSFEED</string>
+    <string name="feeds_message">We are happy to announce you that we wont be available for the delivery service from to ...</string>
+    <string name="title_activity_solde">SoldeActivity</string>
+    <string name="solde_payment_historic">HISTORIC</string>
+    <string name="solde_recharge">TOP UP</string>
+    <string name="solde_transfert">TRANSFERT</string>
+    <string name="ad_rectangle_test">EAT MORE HEALTY!!!</string>
+
+    <!-- home account menu -->
+    <string name="myaccount_commands">COMMANDS</string>
+    <string name="myaccount_bon_dachat">VOUCHER</string>
+    <string name="myaccount_favorite_plat">FAVORITES</string>
+    <string name="myaccount_delivery_address">ADRESSES</string>
+    <string name="myaccount_client_service">CUSTOMER</string>
+    <string name="myaccount_settings">SETTINGS</string>
+    <string name="myaccount_shopping_card">SHOPCART</string>
+    <string name="my_horoscope">VOIR HOROSCOPE</string>
+    <string name="your_horoscope">Horoscope of</string>
+    <string name="myaccount_infos">PERSONNAL</string>
+    <string name="myaccount_newsletter">NEWSLETTER</string>
+    <string name="camera_permission_denied">Camera Permission Denied</string>
+    <string name="camera_permission_require">Camera permission required to use the scanner</string>
+    <string name="camera_permission_no_available_on_this_system">Permission is not available. Requesting camera permission.</string>
+    <string name="storage_permission_require">Storage Permission Required</string>
+    <string name="storage_permission_denied">Write Storage Permission Denied</string>
+    <string name="location_permission_denied">Location Permissions Denied</string>
+    <string name="title_activity_shopping_cart">Cart</string>
+    <string name="ed_search_query_text">Pizza - Tous Au GreenField ce soir!</string>
+    <string name="please_connect_and_retry">Please connect to Internet then,Try Again</string>
+    <string name="retry">Try Again</string>
+    <string name="title_activity_search">Search</string>
+    <string name="account_credit">Credit</string>
+    <string name="account_balance">15,400</string>
+    <string name="account_settings">Setting</string>
+    <string name="account_recharge">Top Up</string>
+    <string name="empty"></string>
+    <string name="title_activity_favorite">FavoriteActivity</string>
+    <string name="title_activity_edit_field">EditFieldActivity</string>
+    <string name="restaurant_load_error">Sorry, There is no restaurant to show. Please Refresh The Application.</string>
+    <string name="no_data">This restaurant has no menu.</string>
+    <string name="content_on_loading">Wait Please... </string>
+    <string name="wait_for_address_creation">We are creating a new Adress for You!  Please Wait a moment...</string>
+    <string name="this_field_shouldnt_empty">This field shouldn\'t be empty</string>
+    <string name="please_choose_location">Please choose a location in the gps map</string>
+    <string name="please_choose_atleast_a_picture">Please choose a picture at least</string>
+    <string name="adress_creation_success">Address successfully created!</string>
+    <string name="adress_creation_failed">Address creation failed!</string>
+    <string name="map_coordonates_invalid">Coordinates of Map Invalid</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="are_you_sure_delete">You are going to delete an Address! Do you want to continue?</string>
+    <string name="bt_delete">Delete</string>
+    <string name="address_deleted_success">Address deleted Successfully</string>
+    <string name="a_problem_happenned">A problem happened</string>
+    <string name="add_remove_favorite">+- Favorite</string>
+    <string name="action_cancel">CANCEL</string>
+    <string name="no_additionnal_drinks">There is no additionnal drinks</string>
+    <string name="quantity_cannot_less">Quantity cannot go less</string>
+    <string name="quantity_to_much">Quantity Too Much</string>
+    <string name="title_activity_confirm_command_details">Confirm</string>
+    <string name="details_adress_date">02 Fev 2016</string>
+    <string name="delete_before_adding_more">Max Count 5 reached</string>
+    <string name="press_to_add_to_basket">Press to add to basket</string>
+    <string name="add_to_basket_successfull">Your choice has been successfully added to the basket.</string>
+    <string name="please_choose_delivery_address">Please, select the delivery location</string>
+    <string name="feature_not_yet_available">This feature will be available in a later version.</string>
+    <string name="default_notification_channel_id">default_notifaction_channel_id</string>
+    <string name="title_activity_test__notification">Test_NotificationActivity</string>
+    <string name="restaurant_no_drinks">Sorry, This restaurant has no drinks to offer.</string>
+    <string name="buy_now">BUY NOW</string>
+    <string name="data_error">Data Error</string>
+    <string name="title_activity_web_article">WebArticleActivity</string>
+    <string name="there_is_no_food_in_basket">You haven\'t put no food yet in the Basket.</string>
+    <string name="article_may_have_problem">This article may have a problem. Please try again later. Sorry for the Inconvinience!</string>
+    <string name="enter_menu">Menu</string>
+    <string name="enter_restaurant">HOME</string>
+    <string name="title_activity_restaurant"></string>
+    <string name="ok">ok</string>
+    <string name="purchase_failure">Sorry, Purchase Failed.</string>
+    <string name="purchase_success">"Congratulations , your purchase is done. Sit tight and wait for the food to get to you.\nThanks"</string>
+    <string name="today">Today</string>
+    <string name="icontinue">Buy</string>
+    <string name="wha_not_installed">Sorry, You don\'t have Whatsapp Installed.</string>
+
+    <string name="share_on_platform">Hi. I just discovered this amazing service on %1$s. Check out the link below and experience it yourself.\n%2$s</string>
+    <string name="last_update">Derniere mise a jour:</string>
+    <string name="last_update_content">29 Jan 23:04</string>
+    <string name="contact">Contact</string>
+    <string name="command_preparing">Hi: Your command is preparing.</string>
+    <string name="command_cancelled">Sorry: Your command has been cancelled</string>
+    <string name="command_end_shipping">Congratulations: Your command has successfully ended.</string>
+    <string name="command_rejected">Sorry: Your command has been rejected by the Restaurant.</string>
+    <string name="command_shipping">Shipping: We are shipping your command right now! Please get ready to receive.</string>
+    <string name="title_activity_command_details">Command Details</string>
+    <string name="your_contact">Your contact</string>
+    <string name="action_logout">Logout</string>
+    <string name="press_again_to_exit">Please, double press to exit.</string>
+    <string name="delivery_man_login">DELIVERMAN - LOGIN</string>
+    <string name="username">Username</string>
+    <string name="sent_to_cooking">Thanks for Sending the food at cooking process.</string>
+    <string name="ireturn">Return</string>
+    <string name="select_shipping_man">Select Shipping man</string>
+    <string name="there_is_no_shipping_man">No - Shipping - Man</string>
+    <string name="please_select_shipping_man">Please select a shipping man</string>
+    <string name="sent_to_delivering">Thanks for Sending the food at delivering process.</string>
+    <string name="action_delivery_mode_enter">START</string>
+    <string name="action_delivery_mode_exit">END</string>
+    <string name="title_activity_delivery_mode">Delivery Mode</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="shipping_mode_libelle">Hi. You are in Shipping Mode. Enjoy!</string>
+    <string name="shipping_man_in_charge">Man in Charge</string>
+    <string name="customer_contact">Customer Contact</string>
+    <string name="confirm_deliver_success">Thank for confirming the end of the deliverying.</string>
+    <string name="command_attributed">You got a command to deliver</string>
+    <string name="no_command_to_ship">No command to ship now. Exiting.</string>
+    <string name="customer_adress_district">District</string>
+    <string name="customer_adress_location">Location</string>
+    <string name="open">Open</string>
+    <string name="google_maps_not_installed">Please install GoogleMaps and start again.</string>
+    <string name="delivery_key">Command Key</string>
+    <string name="call">Call</string>
+    <string name="me">Me:</string>
+    <string name="customer_adress_near">Non Loin de</string>
+
+
 </resources>

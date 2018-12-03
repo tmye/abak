@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioButton
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Here we are"
+    android:textSize="@dimen/shipping_man_rd_button_text_size"
+    android:padding="@dimen/activity_horizontal_margin"
+    android:background="@color/white"
+    android:layout_marginBottom="1px"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:textColor="@color/black"/>

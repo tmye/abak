@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nestedscrollview"
+    android:layout_marginTop="?actionBarSize"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="tg.tmye.kaba.activity.command.CommandDetailsActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <tg.tmye.kaba._commons.cviews.command_details_view.CommandProgressView
+            android:layout_marginTop="@dimen/activity_horizontal_margin_double"
+            android:id="@+id/command_progress_view"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <!-- balls and lines -->
+
+            <!-- attente de preparation -->
+            <tg.tmye.kaba._commons.cviews.command_details_view.CommandProgressSingleLine
+                android:id="@+id/lny_1_waiting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="right"
+                android:layout_gravity="left">
+
+                <TextView
+                    android:id="@+id/tv_1_waiting"
+                    android:text="En attente"
+                    android:gravity="center_vertical"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+                <tg.tmye.kaba._commons.cviews.command_details_view.CommandProgress_BallView
+                    android:id="@+id/ball_1_waiting"
+                    app:command_style_color="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </tg.tmye.kaba._commons.cviews.command_details_view.CommandProgressSingleLine>
+
+            <!-- line -->
+            <tg.tmye.kaba._commons.cviews.command_details_view.CommandProgress_LineView
+                android:id="@+id/line_1_waiting_preparing"
+                android:layout_width="@dimen/command_progress_line_width"
+                android:layout_height="@dimen/command_progress_line_height"
+                android:layout_gravity="center_horizontal"
+                app:command_style_color="@color/colorPrimary"
+                />
+
+
+            <!-- en cours de preparation -->
+            <tg.tmye.kaba._commons.cviews.command_details_view.CommandProgressSingleLine
+                android:id="@+id/lny_2_preparing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="left"
+                android:layout_gravity="right">
+
+                <tg.tmye.kaba._commons.cviews.command_details_view.CommandProgress_BallView
+                    android:id="@+id/ball_2_preparing"
+                    android:layout_width="wrap_content"
+                    app:command_style_color="@color/colorPrimary"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tv_2_preparing"
+                    android:text="En preparation"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+            </tg.tmye.kaba._commons.cviews.command_details_view.CommandProgressSingleLine>
+
+            <!-- line -->
+            <tg.tmye.kaba._commons.cviews.command_details_view.CommandProgress_LineView
+                android:id="@+id/line_2_preparing_shipping"
+                android:layout_width="@dimen/command_progress_line_width"
+                android:layout_height="@dimen/command_progress_line_height"
+                android:layout_gravity="center_horizontal"
+                app:command_style_color="@color/colorPrimary"/>
+
+            <!-- en cours de livraison -->
+            <tg.tmye.kaba._commons.cviews.command_details_view.CommandProgressSingleLine
+                android:id="@+id/lny_3_shipping"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="right"
+                android:layout_gravity="left">
+
+                <TextView
+                    android:id="@+id/tv_3_shipping"
+                    android:text="En cours de livraison"
+                    android:gravity="center_vertical"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+                <tg.tmye.kaba._commons.cviews.command_details_view.CommandProgress_BallView
+                    android:id="@+id/ball_3_shipping"
+                    android:layout_width="wrap_content"
+                    app:command_style_color="@color/command_state_1"
+                    android:layout_height="wrap_content" />
+
+            </tg.tmye.kaba._commons.cviews.command_details_view.CommandProgressSingleLine>
+
+            <!-- line -->
+            <tg.tmye.kaba._commons.cviews.command_details_view.CommandProgress_LineView
+                android:id="@+id/line_3_shipping_end"
+                android:layout_width="@dimen/command_progress_line_width"
+                android:layout_height="@dimen/command_progress_line_height"
+                android:layout_gravity="center_horizontal"
+                app:command_style_color="@color/command_state_3"/>
+
+            <!-- livraison finished -->
+            <tg.tmye.kaba._commons.cviews.command_details_view.CommandProgressSingleLine
+                android:id="@+id/lny_4_end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="left"
+                android:layout_gravity="right">
+
+                <tg.tmye.kaba._commons.cviews.command_details_view.CommandProgress_BallView
+                    android:id="@+id/ball_4_end"
+                    app:command_style_color="@color/command_state_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tv_4_end"
+                    android:text="Fin de livraison"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+            </tg.tmye.kaba._commons.cviews.command_details_view.CommandProgressSingleLine>
+
+        </tg.tmye.kaba._commons.cviews.command_details_view.CommandProgressView>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/activity_horizontal_margin_double"
+            android:padding="@dimen/activity_horizontal_margin_half"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left">
+
+            <TextView
+                android:text="@string/last_update"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:textColor="@color/dark_gray"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_half"/>
+
+            <TextView
+                android:id="@+id/tv_last_update"
+                android:textColor="@color/black"
+                android:text="@string/last_update_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <!-- contact -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+            android:padding="@dimen/activity_horizontal_margin_half">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_contact_title_preview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:text="@string/your_contact"
+                android:textSize="16sp"
+                android:layout_alignParentLeft="true"
+                android:textColor="@color/black" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_contact_description_preview"
+                android:layout_alignParentRight="true"
+                android:gravity="bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:text="+228 90320012"
+                android:textSize="13sp"
+                android:textColor="@color/dark_gray" />
+
+        </RelativeLayout>
+
+        <!-- delivery key -->
+        <RelativeLayout
+            android:id="@+id/rel_delivery_key"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+            android:padding="@dimen/activity_horizontal_margin_half">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:text="@string/delivery_key"
+                android:textSize="16sp"
+                android:layout_alignParentLeft="true"
+                android:textColor="@color/black" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_password_delivery_key"
+                android:layout_alignParentRight="true"
+                android:gravity="bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:text=""
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+        </RelativeLayout>
+
+        <!-- delivery man name -->
+        <RelativeLayout
+            android:id="@+id/rel_delivery_man_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+            android:padding="@dimen/activity_horizontal_margin_half">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:text="@string/delivery_man_name"
+                android:textSize="16sp"
+                android:layout_alignParentLeft="true"
+                android:textColor="@color/black" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_name_delivery_man"
+                android:layout_alignParentRight="true"
+                android:gravity="bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:text=""
+                android:textSize="13sp"
+                android:textColor="@color/dark_gray" />
+
+        </RelativeLayout>
+
+        <!-- delivery man contact -->
+        <RelativeLayout
+            android:id="@+id/rel_delivery_man_contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+            android:padding="@dimen/activity_horizontal_margin_half">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:text="@string/delivery_man_contact"
+                android:textSize="16sp"
+                android:layout_alignParentLeft="true"
+                android:textColor="@color/black" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_contact_delivery_man"
+                android:layout_alignParentRight="true"
+                android:gravity="bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:text=""
+                android:textSize="13sp"
+                android:textColor="@color/dark_gray" />
+
+        </RelativeLayout>
+
+
+        <!-- near -->
+        <RelativeLayout
+            android:id="@+id/rel_near"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+            android:padding="@dimen/activity_horizontal_margin_half">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:text="@string/customer_adress_near"
+                android:textSize="16sp"
+                android:layout_alignParentLeft="true"
+                android:textColor="@color/black"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/tv_contact_near_preview"
+                android:layout_alignParentRight="true"
+                android:gravity="bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:text=""
+                android:textSize="13sp"
+                android:textColor="@color/dark_gray"
+                android:layout_alignParentEnd="true" />
+
+        </RelativeLayout>
+
+        <!-- shipping address -->
+        <RelativeLayout
+            android:id="@+id/rel_address_preview"
+            android:layout_width="match_parent"
+            android:visibility="visible"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+                android:padding="@dimen/activity_horizontal_margin_half">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_address_title_preview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/activity_horizontal_margin_half"
+                    android:text="Bureau"
+                    android:textSize="16sp"
+                    android:textColor="@color/black" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_address_description_preview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/activity_horizontal_margin_half"
+                    android:text="En Face de la Guare routière d'agbalepedogan"
+                    android:textSize="13sp"
+                    android:textColor="@color/dark_gray" />
+            </android.support.v7.widget.LinearLayoutCompat>
+
+        </RelativeLayout>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/menu_food_item_spacing"
+            android:layout_marginLeft="@dimen/menu_food_item_spacing"
+            android:layout_marginRight="@dimen/menu_food_item_spacing"
+            android:layout_marginTop="@dimen/menu_food_item_spacing">
+
+            <tg.tmye.kaba._commons.cviews.OffRecyclerview
+                android:id="@+id/recyclerview_items_bought"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </android.support.v7.widget.CardView>
+
+        <!-- facture -->
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_pricing"
+            android:visibility="visible"
+            android:layout_margin="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            app:cardBackgroundColor="@color/white"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:padding="@dimen/activity_horizontal_margin_half"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_alignParentLeft="true"
+                        android:text="Montant Commande: "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_price_command"
+                        android:layout_alignParentRight="true"
+                        android:text="2000 FCFA"
+                        android:textColor="@color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_alignParentLeft="true"
+                        android:text="Montant Livraison: "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_price_delivery"
+                        android:layout_alignParentRight="true"
+                        android:text="2000 FCFA"
+                        android:textColor="@color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_alignParentLeft="true"
+                        android:text="Total: "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_price_total"
+                        android:layout_alignParentRight="true"
+                        android:text="4000 FCFA"
+                        android:textColor="@color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:textColor="@color/dark_gray"
+                        android:textStyle="bold"
+                        android:layout_alignParentLeft="true"
+                        android:text="Remise: "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_price_remise"
+                        android:layout_alignParentRight="true"
+                        android:text="-0 FCFA"
+                        android:textColor="@color/dark_gray"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"/>
+
+                </RelativeLayout>
+
+
+                <View
+                    android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
+                    android:background="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px" />
+
+
+
+                <RelativeLayout
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_alignParentLeft="true"
+                        android:text="Net à Payer: "
+                        android:textSize="16sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_price_net_to_pay"
+                        android:layout_alignParentRight="true"
+                        android:text="4000 FCFA"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

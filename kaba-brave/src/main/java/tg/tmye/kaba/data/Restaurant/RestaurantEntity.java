@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tg.tmye.kaba.data.Menu.Restaurant_SubMenuEntity;
-import tg.tmye.kaba.data._OtherEntities.Contact;
 import tg.tmye.kaba.data._OtherEntities.LightRestaurant;
 
 /**
@@ -33,22 +32,27 @@ public class RestaurantEntity implements Parcelable {
 
     public String pic;
 
-    public String restaurant_theme_image;
+    public String theme_pic = "";
 
     public String name;
 
-    public String description;
+    public String description = "";
 
     private long contactId;
 
-    public String address;
+    public String address = "";
 
     public String email;
 
-    public String main_contact;
+    public String main_contact = "";
 
-    public String working_hour;
+    public String working_hour = "";
 
+    public String distance;
+
+    public int is_open;
+
+    public int coming_soon = 0;
 
     public List<Restaurant_SubMenuEntity> menu;
 
@@ -59,7 +63,7 @@ public class RestaurantEntity implements Parcelable {
     protected RestaurantEntity(Parcel in) {
         id = in.readLong();
         pic = in.readString();
-        restaurant_theme_image = in.readString();
+        theme_pic = in.readString();
         name = in.readString();
         description = in.readString();
         contactId = in.readLong();
@@ -74,7 +78,7 @@ public class RestaurantEntity implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(id);
         dest.writeString(pic);
-        dest.writeString(restaurant_theme_image);
+        dest.writeString(theme_pic);
         dest.writeString(name);
         dest.writeString(description);
         dest.writeLong(contactId);
@@ -118,12 +122,12 @@ public class RestaurantEntity implements Parcelable {
         this.pic = pic;
     }
 
-    public String getRestaurant_theme_image() {
-        return restaurant_theme_image;
+    public String getTheme_pic() {
+        return theme_pic;
     }
 
-    public void setRestaurant_theme_image(String restaurant_theme_image) {
-        this.restaurant_theme_image = restaurant_theme_image;
+    public void setTheme_pic(String theme_pic) {
+        this.theme_pic = theme_pic;
     }
 
     public String getName() {

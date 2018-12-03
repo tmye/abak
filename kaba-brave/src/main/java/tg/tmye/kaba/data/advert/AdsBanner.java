@@ -12,32 +12,58 @@ import tg.tmye.kaba.data._OtherEntities.SimplePicture;
 
 public class AdsBanner implements Parcelable {
 
-    /*"id": 3,
-             "restaurant_name": "slider/cropper.jpg",
-             "link": "www.google.tg",
-             "placeholder": "slider 1"*/
+
+    /* tips */
+    public static final int TYPE_REPAS = 1;
+    public static final int TYPE_MENU = 2;
+    public static final int TYPE_ARTICLE = 3;
+    public static final int TYPE_RESTAURANT = 4;
+    public static final int BEST_SELLER = 90;
+    public static final int EVENEMENT = 91;
 
     public int id;
     public String name;
     public String link;
-    public String image;
-    public String placeholder;
-
+    public String description;
+    public String pic;
     public String food_json = "";
-
-// id ... ad ? food ?
+    public int type;
+    public int entity_id;
 
     public AdsBanner() {
 
     }
+
+    //    public String image;
+    //    public String placeholder;
 
 
     protected AdsBanner(Parcel in) {
         id = in.readInt();
         name = in.readString();
         link = in.readString();
-        image = in.readString();
-        placeholder = in.readString();
+        description = in.readString();
+        pic = in.readString();
+        food_json = in.readString();
+        type = in.readInt();
+        entity_id = in.readInt();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(name);
+        dest.writeString(link);
+        dest.writeString(description);
+        dest.writeString(pic);
+        dest.writeString(food_json);
+        dest.writeInt(type);
+        dest.writeInt(entity_id);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<AdsBanner> CREATOR = new Creator<AdsBanner>() {
@@ -51,18 +77,4 @@ public class AdsBanner implements Parcelable {
             return new AdsBanner[size];
         }
     };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(id);
-        parcel.writeString(name);
-        parcel.writeString(link);
-        parcel.writeString(image);
-        parcel.writeString(placeholder);
-    }
 }

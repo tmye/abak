@@ -2,11 +2,13 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.menu.RestaurantMenuActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay"
@@ -26,165 +28,313 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/colorPrimary"
-                app:popupTheme="@style/AppTheme.PopupOverlay"/>
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <!--    <ImageButton
-                    android:id="@+id/ib_close_window"
-                    android:layout_margin="@dimen/menu_header_spacing"
-                    android:src="@null"
-                    android:background="@drawable/ic_close_cross_24dp"
-                    android:layout_width="@dimen/restaurant_menu_close_cross_size"
-                    android:layout_height="@dimen/restaurant_menu_close_cross_size"
-                    android:layout_gravity="right"/>-->
+                    <TextView
+                        android:id="@+id/tv_choosed_food_count"
+                        android:text="00"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:background="@drawable/ic_circlebackground_white_24dp"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin_half"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:padding="@dimen/activity_horizontal_margin"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin_half"
+                        android:layout_alignParentEnd="true" />
+                </RelativeLayout>
+
+            </android.support.v7.widget.Toolbar>
+
         </android.support.design.widget.CollapsingToolbarLayout>
 
-        <android.support.v7.widget.LinearLayoutCompat
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:padding="@dimen/menu_header_spacing"
-            android:gravity="left|center_vertical"
-            android:background="@color/transparent">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_alignParentLeft="true"
-                android:layout_width="@dimen/rounded_image_restaurant_logo_size"
-                android:layout_height="@dimen/rounded_image_restaurant_logo_size"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/kaba_pic"
-                app:layout_constraintRight_toLeftOf="@id/view_separator"
-                app:border_color="@color/circular_view_border_yellow"
-                app:border_width="@dimen/restaurant_rounded_image_border_width"
-                android:layout_gravity="center_vertical"/>
-
-            <android.support.v7.widget.LinearLayoutCompat
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_margin="@dimen/menu_header_spacing"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:maxLines="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:layout_gravity="center_horizontal"
-                    android:text="RESTAURANT"/>
-
-                <TextView
-                    android:layout_gravity="center_horizontal"
-                    android:text="MARIAM"
-                    android:textColor="@color/restaurant_name_color"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:maxLines="2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </android.support.v7.widget.LinearLayoutCompat>
-
-            <!-- middle view separating both -->
-            <View
-                android:id="@+id/view_separator"
-                android:layout_width="@dimen/menu_header_divider_width"
-                android:layout_height="@dimen/menu_header_divider_height"
-                android:background="@color/colorPrimary"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <!-- rinameitle of the restaurant -->
-
-            <android.support.v7.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/menu_header_spacing"
-                android:orientation="vertical">
-
-                <TextView
-                    android:text="@string/restaurant_adress_sample"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"/>
-
-                <TextView
-                    android:text="@string/restaurant_contact_sample"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"/>
-
-            </android.support.v7.widget.LinearLayoutCompat>
-
-        </android.support.v7.widget.LinearLayoutCompat>
-
-        <tg.tmye.kaba._commons.cviews.CustomTabLayout
-            android:id="@+id/tablayout_vp_strip"
-            app:tabGravity="center"
-            android:background="@color/colorPrimary"
-            app:tabMode="scrollable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:tabMaxWidth="0dp"
-            android:layout_gravity="center_horizontal"
-            android:fillViewport="true"
-            app:tabBackground="@color/colorPrimary"
-            app:tabTextColor="@color/colorPrimary_rm"
-            app:tabIndicatorColor="@color/colorPrimary_rm"
-            app:tabSelectedTextColor="@color/circular_view_border_yellow"/>
     </android.support.design.widget.AppBarLayout>
 
-
-    <android.support.constraint.ConstraintLayout
-        android:background="@color/transparent"
+    <FrameLayout
+        android:layout_below="@+id/appbarlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        >
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewpager_menus"
-            android:name="tg.experta.kaba.Menu.RestaurantMenuActivityFragment"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <!-- content -->
+        <LinearLayout
+            android:id="@+id/lny_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-             />
+            android:orientation="vertical"
+            >
 
-        <tg.tmye.kaba._commons.cviews.CustomProgressbar
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:id="@+id/progress_bar"
-            android:indeterminateTint="@color/colorPrimary"
-            android:layout_width="@dimen/webview_circle_progressbar_size"
-            android:layout_height="@dimen/webview_circle_progressbar_size" />
+            <RelativeLayout
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:padding="@dimen/menu_header_spacing"
+                android:gravity="center"
+                android:background="@color/transparent">
 
-        <TextView
-            android:id="@+id/tv_no_food_message"
-            android:text="@string/there_is_no_food"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:textColor="@color/dark_gray"
+                <LinearLayout
+                    android:id="@+id/lny_name_title"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:layout_alignParentStart="true">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/cic_rest_pic"
+                        android:layout_width="@dimen/rounded_image_restaurant_logo_size"
+                        android:layout_height="@dimen/rounded_image_restaurant_logo_size"
+                        android:src="@drawable/kaba_pic"
+                        app:layout_constraintRight_toLeftOf="@id/view_separator"
+                        app:border_color="@color/circular_view_border_yellow"
+                        app:border_width="@dimen/restaurant_rounded_image_border_width"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:maxLines="1"
+                        android:text="RESTAURANT"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_restaurant_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:maxLines="2"
+                        android:text=""
+                        android:textColor="@color/restaurant_name_color"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@+id/lny_name_title"
+                    android:gravity="center_vertical"
+                    android:layout_toEndOf="@+id/lny_name_title"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin_double">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:maxLines="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:textSize="12sp"
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:text="@string/address_location"/>
+
+                        <TextView
+                            android:id="@+id/tv_address_quartier"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+                            android:maxLines="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/dark_gray"
+                            android:textSize="12sp"
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:text="--"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin_half" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:maxLines="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:textSize="12sp"
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:text="@string/working_hour"/>
+
+                        <TextView
+                            android:id="@+id/tv_working_time"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+                            android:maxLines="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/dark_gray"
+                            android:textSize="12sp"
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:text="--"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin_half" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--   <View
+                       android:id="@+id/view_separator"
+                       android:layout_width="@dimen/menu_header_divider_width"
+                       android:layout_height="@dimen/menu_header_divider_height"
+                       android:background="@color/colorPrimary"
+                       app:layout_constraintLeft_toLeftOf="parent"
+                       app:layout_constraintRight_toRightOf="parent"
+                       app:layout_constraintBottom_toBottomOf="parent"
+                       app:layout_constraintTop_toTopOf="parent" />
+    -->
+
+                <!--    <android.support.v7.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/menu_header_spacing"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:text="@string/restaurant_adress_sample"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"/>
+
+                        <TextView
+                            android:text="@string/restaurant_contact_sample"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"/>
+
+                    </android.support.v7.widget.LinearLayoutCompat>
+    -->
+            </RelativeLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:background="@color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+                <FrameLayout
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:id="@+id/lny_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rec_menu_list"
+                            android:layout_width="0dp"
+                            android:layout_weight="3"
+                            android:background="@color/extra_light_gray"
+                            android:layout_height="match_parent" />
+
+                        <FrameLayout
+                            android:id="@+id/frame_container"
+                            android:layout_weight="7"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_no_menu"
+                        android:visibility="gone"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/dark_gray"
+                        android:layout_margin="@dimen/activity_horizontal_margin"
+                        android:text="@string/no_menu_data"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        />
+
+                </FrameLayout>
+            </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
+
+        <!-- inner page error -->
+        <LinearLayout
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/lny_error_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_messages"
+                android:gravity="center_horizontal"
+                android:textColor="@color/dark_gray"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:text="@string/restaurant_load_error"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+            <Button
+                android:id="@+id/bt_tryagain"
+                android:text="@string/retry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_red_cornered"
+                android:textColor="@color/white"
+                android:padding="@dimen/activity_horizontal_margin_half"
+                />
+
+        </LinearLayout>
+
+        <!-- loading frame -->
+        <LinearLayout
+            android:id="@+id/lny_loading"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center">
 
+            <tg.tmye.kaba._commons.cviews.CustomProgressbar
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/progress_bar"
+                android:indeterminateTint="@color/colorPrimary"
+                android:layout_width="@dimen/webview_circle_progressbar_size"
+                android:layout_height="@dimen/webview_circle_progressbar_size" />
 
-    </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
+    </FrameLayout>
+
+<!--    <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_chart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="@dimen/fab_margin"
         app:backgroundTint="@color/colorPrimary_rm"
-        app:srcCompat="@drawable/ic_shopping_card_yellow_24dp" />
+        app:srcCompat="@drawable/ic_shopping_card_yellow_24dp" />-->
 
 </android.support.design.widget.CoordinatorLayout>

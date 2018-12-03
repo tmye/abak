@@ -50,7 +50,6 @@ public class LoginPresenter implements LoginContract.Presenter {
 
                 /* login failure */
                 /* network issue */
-
                 loginView.showLoading(false);
                 loginView.toast(message);
             }

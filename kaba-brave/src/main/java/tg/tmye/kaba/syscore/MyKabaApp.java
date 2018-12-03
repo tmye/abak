@@ -4,9 +4,13 @@ import android.animation.ObjectAnimator;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.location.Location;
+import android.support.multidex.MultiDexApplication;
 import android.view.View;
 
 import com.bumptech.glide.request.transition.ViewPropertyTransition;
+import com.github.piasy.biv.BigImageViewer;
+import com.github.piasy.biv.loader.glide.GlideImageLoader;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,12 +27,13 @@ import tg.tmye.kaba.data._OtherEntities.DaoSession;
  * email: 2597434002@qq.com
  */
 
-public class MyKabaApp extends Application {
+public class MyKabaApp extends MultiDexApplication {
 
     DaoSession daoSession;
 
     NetworkRequestThreadBase networkRequestBase;
     DatabaseRequestThreadBase databaseRequestThreadBase;
+    ParallelThreadBase parallelThreadBase;
 
     /* sys token */
     private String authToken = "";
@@ -36,22 +41,25 @@ public class MyKabaApp extends Application {
     /* personnal db restaurant_name */
     public static String personnal_db = "personnal";
 
-
     private ViewPropertyTransition.Animator animationObject;
+
+    private Location location = null;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-//        initDb();
+        BigImageViewer.initialize(GlideImageLoader.with(this));
+
         daoSessionMap = new HashMap<>();
         networkRequestBase = new NetworkRequestThreadBase(this);
         databaseRequestThreadBase = new DatabaseRequestThreadBase(this);
+        parallelThreadBase = new ParallelThreadBase(this);
         // load token inside the app
 
-        /* update the whole database of the restaurants and everything */
-//        RestaurantDbRepository.RestaurantDbOnlineSource.update(this,networkRequestBase, databaseRequestThreadBase, null);
+        BigImageViewer.initialize(GlideImageLoader.with(this));
     }
+
 
     private void initDb(String restaurantCodeName) {
 
@@ -99,6 +107,10 @@ public class MyKabaApp extends Application {
         return databaseRequestThreadBase;
     }
 
+    public ParallelThreadBase getParaThreadBase() {
+        return parallelThreadBase;
+    }
+
     public ViewPropertyTransition.Animator getGlideAnimation() {
 
         if (animationObject == null) {
@@ -117,5 +129,13 @@ public class MyKabaApp extends Application {
             };
         }
         return animationObject;
+    }
+
+    public void setLastLocation(Location location) {
+        this.location = location;
+    }
+
+    public Location getLastLocation() {
+        return this.location;
     }
 }

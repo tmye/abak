@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/frame_container"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+    <tg.tmye.kaba._commons.cviews.CustomProgressbar
+        android:id="@+id/customprogressbar"
+        android:visibility="visible"
+        android:layout_gravity="center"
+        android:layout_width="@dimen/webview_circle_progressbar_size"
+        android:layout_height="@dimen/webview_circle_progressbar_size"/>
+
+    <LinearLayout
+        android:id="@+id/lny_bottom"
+        android:visibility="gone"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:background="#ccffffff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/bt_agree"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:text="Agree"
+            android:background="@drawable/bt_primary_red_rounded"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/bt_disagree"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:text="Disagree"
+            android:textColor="@color/black"
+            android:background="@drawable/bt_disagreen_drawable_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:id="@+id/lny_error">
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_margin="@dimen/activity_horizontal_margin_double"
+            style="@style/nice_showup_error_textstyle"
+            android:gravity="center"
+            android:text="@string/please_connect_and_retry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/bt_tryagain"
+            android:text="@string/retry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_red_cornered"
+            android:textColor="@color/white"
+            android:padding="@dimen/activity_horizontal_margin_half"
+            />
+
+    </LinearLayout>
+
+</FrameLayout>

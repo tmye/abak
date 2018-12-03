@@ -3,7 +3,7 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/kaba-brave" />
             <option value="$PROJECT_DIR$/kaba-i_deliver" />
             <option value="$PROJECT_DIR$/kaba-restaurant" />
+            <option value="$PROJECT_DIR$/toolbox" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -41,29 +41,37 @@ public class F_Restaurant_2_Presenter implements F_RestaurantContract.Presenter 
         populateViews();
     }
 
-    private void populateViews() {
+    @Override
+    public void populateViews() {
 
         /* populate restaurant list */
         restaurant2View.showLoading(true);
         restaurantDbRepository.loadRestaurantList(new NetworkRequestThreadBase.NetRequestIntf<String>(){
+
             @Override
             public void onNetworkError() {
-                restaurant2View.showNetworkError();
                 restaurant2View.showLoading(false);
+                restaurant2View.showNetworkError();
             }
 
             @Override
             public void onSysError() {
-                restaurant2View.showSysError();
                 restaurant2View.showLoading(false);
+                restaurant2View.showSysError();
             }
 
             @Override
             public void onSuccess(String jsonResponse) {
 
+                restaurant2View.showLoading(false);
+
+                if (jsonResponse.equals("-1")) {
+                    restaurant2View.showSysError();
+                    return;
+                }
+
                 /* string*/
                 Log.d(Constant.APP_TAG, jsonResponse);
-//                restaurant2View.inflateRestaurantList(data);
                 /* use the current json string and squeeze out all the need data */
                 JsonObject obj = new JsonParser().parse(jsonResponse).getAsJsonObject();
                 JsonObject data = obj.get("data").getAsJsonObject();
@@ -72,17 +80,17 @@ public class F_Restaurant_2_Presenter implements F_RestaurantContract.Presenter 
                 restaurantDbRepository.checkAndSaveRestaurantList(data, jsonResponse);
 
                 /* load restaurant into a list */
+//                restaurant2View.showLoading(false);
                 loadRestaurantList (data);
-
-                restaurant2View.showLoading(false);
             }
-
         });
     }
+
 
     private void loadRestaurantList(JsonObject data) {
 
         restaurantDbRepository.loadRestaurantList(data, new YesOrNoWithResponse<List<RestaurantEntity>>(){
+
             @Override
             public void yes(List<RestaurantEntity> data, boolean isFromOnline) {
                 restaurant2View.inflateRestaurantList(data);
@@ -90,6 +98,11 @@ public class F_Restaurant_2_Presenter implements F_RestaurantContract.Presenter 
 
             @Override
             public void no(Object data, boolean isFromOnline) {
+                restaurant2View.showNetworkError();
+            }
+
+            @Override
+            public void onLoggingTimeout() {
 
             }
         });

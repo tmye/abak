@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nestedscrollview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="tg.tmye.kaba.activity.WebArticle.WebArticleActivity"
+    tools:showIn="@layout/activity_web_article"
+    >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <tg.tmye.kaba._commons.cviews.SlidingBanner_LilRound
+            android:id="@+id/sliding_banner"
+            android:layout_width="match_parent"
+            android:background="@color/brown"
+            android:layout_height="@dimen/food_details_sliding_banner_height"
+            android:layout_gravity="center_vertical">
+
+            <tg.tmye.kaba._commons.cviews.AutoScrollViewPager
+                android:id="@+id/viewpager_sliding_banner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/transparent" />
+
+        <LinearLayout
+            android:id="@+id/lny_lil_round"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="@dimen/lil_round_margin_bottom"
+            android:layout_marginRight="@dimen/activity_horizontal_margin_half"
+            android:orientation="horizontal" >
+            </LinearLayout>
+        </tg.tmye.kaba._commons.cviews.SlidingBanner_LilRound>
+
+        <LinearLayout
+            android:id="@+id/lny_root"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+</android.support.v4.widget.NestedScrollView>

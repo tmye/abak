@@ -3,8 +3,8 @@ package tg.tmye.kaba.activity.home.contracts;
 
 import java.util.List;
 
-import tg.tmye.kaba.BasePresenter;
-import tg.tmye.kaba.BaseView;
+import tg.tmye.kaba.syscore.baseobj.BasePresenter;
+import tg.tmye.kaba.syscore.baseobj.BaseView;
 import tg.tmye.kaba.data.Restaurant.RestaurantEntity;
 
 
@@ -27,6 +27,6 @@ public interface F_RestaurantContract {
     }
 
     interface Presenter extends BasePresenter {
-
+          void populateViews();
     }
 }

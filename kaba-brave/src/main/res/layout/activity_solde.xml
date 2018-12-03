@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="tg.experta.kaba.activities.UserAcc.SoldeActivity">
+    tools:context=".activity.UserAcc.cash_transaction.SoldeActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:theme="@style/Toolbar.WhiteRedText"
-            app:title="@string/my_news_feed"
+            app:title="@string/title_activity_solde"
             app:titleTextColor="@color/colorPrimary"
             android:textSize="@dimen/actionbar_title_text_size"
             android:textStyle="bold"

@@ -1,12 +1,16 @@
 package tg.tmye.kaba._commons.cviews;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+
+import tg.tmye.kaba.R;
+import tg.tmye.kaba._commons.utils.UtilFunctions;
 
 /**
  * By abiguime on 05/04/2018.
@@ -16,6 +20,7 @@ import android.view.MotionEvent;
 public class AutoScrollViewPager extends ViewPager {
 
 
+    private boolean autoCompute = true;
     public boolean canScroll = false;
 
     private boolean stopScrollWhenTouch = true;
@@ -28,7 +33,13 @@ public class AutoScrollViewPager extends ViewPager {
 
     public AutoScrollViewPager(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        if (attrs != null) {
+            TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.customSlider);
+            autoCompute = a.getBoolean(R.styleable.customSlider_autocompute, true);
+            a.recycle();
+        }
     }
+
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -65,6 +76,18 @@ public class AutoScrollViewPager extends ViewPager {
     @Override
     public void setCurrentItem(int item, boolean smoothScroll) {
         if (!canScroll)
-            super.setCurrentItem(item, smoothScroll);
+            super.setCurrentItem(item, smoothScroll); // gros bug
     }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        /* set up the size of the view here */
+        if (autoCompute) {
+            int width = UtilFunctions.getScreenSize(getContext())[0];
+            int height = 9 * width / 16;
+            setMeasuredDimension(width, height);
+        }
+    }
+
 }

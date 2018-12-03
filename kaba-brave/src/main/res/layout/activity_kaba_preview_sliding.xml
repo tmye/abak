@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/full_screen_content"
+    tools:context="tg.tmye.kaba.activity.Splash.KabaPreviewSlidingActivity">
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        />
+
+    <TextView
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/tv_mini_title"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin_triple"
+        android:layout_alignParentBottom="true"
+        android:textSize="@dimen/preview_title_text_size"
+        android:text="@string/title_preview_1"
+        android:gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_above="@+id/lny_lil_round"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/lny_lil_round"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="@dimen/lil_round_margin_bottom"
+        android:orientation="horizontal"/>
+
+    <Button
+        android:id="@+id/bt_continue"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin_triple"
+        android:textColor="@color/colorPrimary"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:textSize="13sp"
+        android:textAllCaps="true"
+        android:visibility="gone"
+        android:background="@drawable/preview_continue_button"
+        android:padding="@dimen/activity_horizontal_margin_half"
+        android:text="@string/i_continue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

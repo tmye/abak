@@ -9,4 +9,5 @@ public interface YesOrNoWithResponse<T> {
 
     void yes(T data, boolean isFromOnline);
     void no(Object data, boolean isFromOnline);
+    void onLoggingTimeout();
 }

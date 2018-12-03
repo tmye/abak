@@ -20,6 +20,30 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_shopping_cart" />
+    <FrameLayout
+        android:layout_marginTop="?actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <tg.tmye.kaba._commons.cviews.CustomProgressbar
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:id="@+id/progress_bar"
+            android:layout_width="@dimen/webview_circle_progressbar_size"
+            android:layout_height="@dimen/webview_circle_progressbar_size"
+            />
+
+        <include layout="@layout/content_shopping_cart" />
+
+        <TextView
+            android:id="@+id/tv_no_food_message"
+            android:text="@string/there_is_no_food_in_basket"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+
 
 </android.support.design.widget.CoordinatorLayout>

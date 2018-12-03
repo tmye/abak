@@ -2,7 +2,7 @@
 <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/iv_image"
     android:background="@color/white"
-    android:scaleType="fitCenter"
+    android:scaleType="centerCrop"
     android:src="@drawable/white_placeholder"
     android:layout_width="match_parent"
     android:layout_height="match_parent"

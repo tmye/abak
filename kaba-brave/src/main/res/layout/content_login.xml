@@ -36,9 +36,10 @@
             android:layout_height="40dp"
             android:drawablePadding="15dp"
             android:hint="@string/phone_number"
+            android:inputType="number"
             />
 
-        <EditText
+       <!-- <EditText
             android:id="@+id/ed_password"
             android:layout_gravity="center_horizontal"
             android:gravity="center_vertical|left"
@@ -46,8 +47,9 @@
             android:layout_width="250dp"
             android:layout_height="40dp"
             android:hint="@string/password"
+            android:inputType="textPassword"
             android:drawablePadding="15dp"
-            />
+            />-->
 
         <Button
             android:id="@+id/bt_login"
@@ -55,7 +57,34 @@
             android:layout_gravity="center_horizontal"
             android:text="@string/i_login"
             android:layout_width="100dp"
-            android:background="#f8bf00"
+            android:background="@drawable/bt_yellow_rounded"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_forgot_password"
+            android:gravity="center_horizontal"
+            android:textColor="@color/dark_gray"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:text="@string/forgot_password"
+            android:textSize="13sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <Button
+            android:id="@+id/bt_register"
+            android:layout_marginTop="40dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/i_register"
+            android:layout_width="100dp"
+            android:textSize="12sp"
+            android:background="@drawable/bt_primary_red_rounded"
             android:textColor="@color/white"
             android:layout_height="wrap_content" />
 

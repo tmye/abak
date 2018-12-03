@@ -2,6 +2,7 @@ package tg.tmye.kaba._commons.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +11,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.GenericTransitionOptions;
+import com.bumptech.glide.Priority;
 
 import java.util.List;
-import java.util.Random;
 
 import tg.tmye.kaba.R;
+import tg.tmye.kaba._commons.cviews.OffRecyclerview;
 import tg.tmye.kaba._commons.decorator.AdsSingleLineDecorator;
+import tg.tmye.kaba._commons.intf.ImagePreviewerListener;
+import tg.tmye.kaba._commons.utils.UtilFunctions;
 import tg.tmye.kaba.activity.home.views.fragment.F_Home_1_Fragment;
 import tg.tmye.kaba.config.Constant;
 import tg.tmye.kaba.data.advert.AdsBanner;
@@ -54,44 +58,53 @@ public class GroupAdsAdapter extends RecyclerView.Adapter<GroupAdsAdapter.ViewHo
 
         /* rectangle */
         GlideApp.with(ctx)
-                .load(Constant.SERVER_ADDRESS + "/" + item.big_pub.image)
+                .load(Constant.SERVER_ADDRESS + "/" + item.big_pub.pic)
                 .transition(GenericTransitionOptions.with(  ((MyKabaApp)ctx.getApplicationContext()).getGlideAnimation()  ))
                 .placeholder(R.drawable.white_placeholder)
                 .centerCrop()
+                .priority(Priority.HIGH)
                 .into(holder.iv_rectangle);
 
-         /* square */
+        /* square */
         GlideApp.with(ctx)
-                .load(Constant.SERVER_ADDRESS + "/" + item.small_pub.image)
+                .load(Constant.SERVER_ADDRESS + "/" + item.small_pub.pic)
                 .transition(GenericTransitionOptions.with(  ((MyKabaApp)ctx.getApplicationContext()).getGlideAnimation()  ))
                 .placeholder(R.drawable.white_placeholder)
                 .centerCrop()
+                .priority(Priority.HIGH)
                 .into(holder.iv_square);
 
+//        holder.iv_rectangle.setOnClickListener(new OnPicPreviewListener(new String[]{item.big_pub.pic, item.small_pub.pic}));
+//        holder.iv_square.setOnClickListener(new OnPicPreviewListener(new String[]{item.small_pub.pic,item.big_pub.pic}));
 
         holder.tv_title.setText(item.title.toUpperCase());
 
         /* big pub title */
         holder.tv_rectangle_description.setText(item.big_pub.name.toUpperCase());
-        holder.iv_rectangle.setOnClickListener(new OnAdsClickListener(item.big_pub));
+        holder.iv_rectangle.setOnClickListener(new OnAdsClickListener(new AdsBanner[]{item.big_pub, item.small_pub}));
         /* small pub title */
         holder.tv_square_description.setText(item.small_pub.name.toUpperCase());
-        holder.iv_square.setOnClickListener(new OnAdsClickListener(item.small_pub));
+        holder.iv_square.setOnClickListener(new OnAdsClickListener(new AdsBanner[]{item.small_pub, item.big_pub}));
 
-//        holder.tv_title.setBackgroundColor(Color.parseColor(item.title_code_color));
+        /* set visibility gone to group ads */
+        holder.rc_level_1.setVisibility(View.GONE);
+        holder.rc_level_2.setVisibility(View.GONE);
 
-        if (item.level_one != null)
+      /*  if (item.level_one != null)
             inflateLevel(holder.rc_level_1, item.level_one, true);
         if (item.level_two != null)
-            inflateLevel(holder.rc_level_2, item.level_two, false);
+            inflateLevel(holder.rc_level_2, item.level_two, false);*/
     }
 
     private void inflateLevel(RecyclerView rc, List<AdsBanner> data, boolean isTop) {
 
-        int rand = new Random().nextInt(2)%2;
-//        data = ProductAdvertItem.fakeList(rand == 0 ? 2 : 4);
+        if (data == null || data.size() < 0) {
+            rc.setVisibility(View.GONE);
+        } else {
+            rc.setVisibility(View.VISIBLE);
+        }
 
-        Grid48ViewAdapter ad_4 = new Grid48ViewAdapter(ctx, data, listener);
+        GroupAdGridViewAdapter ad_4 = new GroupAdGridViewAdapter(ctx, data, listener);
         rc.setLayoutManager(new GridLayoutManager(ctx, data.size()));
         // separation
         rc.addItemDecoration(new AdsSingleLineDecorator(
@@ -108,8 +121,10 @@ public class GroupAdsAdapter extends RecyclerView.Adapter<GroupAdsAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public RecyclerView rc_level_1;
-        public RecyclerView rc_level_2;
+        LinearLayoutCompat lny_10box_top_height;
+
+        public OffRecyclerview rc_level_1;
+        public OffRecyclerview rc_level_2;
 
         public ImageView iv_rectangle;
         public ImageView iv_square;
@@ -120,6 +135,7 @@ public class GroupAdsAdapter extends RecyclerView.Adapter<GroupAdsAdapter.ViewHo
 
         public ViewHolder(View itemView) {
             super(itemView);
+            lny_10box_top_height = itemView.findViewById(R.id.lny_10box_top_height);
             iv_rectangle = itemView.findViewById(R.id.iv_long2);
             iv_square = itemView.findViewById(R.id.iv_square1);
             tv_rectangle_description = itemView.findViewById(R.id.tv_long2);
@@ -127,20 +143,39 @@ public class GroupAdsAdapter extends RecyclerView.Adapter<GroupAdsAdapter.ViewHo
             rc_level_1 = itemView.findViewById(R.id.rec_ads_lvl_1);
             rc_level_2 = itemView.findViewById(R.id.rec_ads_lvl_2);
             tv_title = itemView.findViewById(R.id.tv_title);
+            /* init size */
+            initSize();
+        }
+
+        private void initSize() {
+            LinearLayoutCompat.LayoutParams params = new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UtilFunctions.getScreenSize(ctx)[0]/3);
+            lny_10box_top_height.setLayoutParams(params);
         }
     }
 
     private class OnAdsClickListener implements View.OnClickListener {
 
-        private final AdsBanner pub;
+        private final AdsBanner[] pubs;
 
-        public OnAdsClickListener(AdsBanner pub) {
-            this.pub = pub;
+        public OnAdsClickListener(AdsBanner[] pubs) {
+            this.pubs = pubs;
         }
 
         @Override
         public void onClick(View view) {
-            listener.onAdsInteraction(pub);
+//            listener.onAdsInteraction(pubs);
+            ((ImagePreviewerListener)ctx).onShowPic(view, pubs);
         }
     }
+
+   /* private class OnPicPreviewListener implements View.OnClickListener {
+        private final String[] pics;
+        public OnPicPreviewListener(String[] pics) {
+            this.pics = pics;
+        }
+        @Override
+        public void onClick(View view) {
+            ((ImagePreviewerListener)ctx).onShowPic(view, pu);
+        }
+    }*/
 }

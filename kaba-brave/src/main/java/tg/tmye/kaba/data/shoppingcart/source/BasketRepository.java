@@ -23,6 +23,7 @@ import tg.tmye.kaba.config.Config;
 import tg.tmye.kaba.config.Constant;
 import tg.tmye.kaba.data.Food.Restaurant_Menu_FoodEntity;
 import tg.tmye.kaba.data.favorite.Favorite;
+import tg.tmye.kaba.data.shoppingcart.BasketInItem;
 import tg.tmye.kaba.data.shoppingcart.ShoppingBasketGroupItem;
 import tg.tmye.kaba.syscore.MyKabaApp;
 
@@ -48,7 +49,7 @@ public class BasketRepository {
     }
 
 
-    public void addFoodToBasket(Map<Restaurant_Menu_FoodEntity, Integer> commands, NetworkRequestThreadBase.NetRequestIntf<String> netRequestIntf) {
+    public void addFoodToBasket(Map<Restaurant_Menu_FoodEntity, Integer> commands, NetworkRequestThreadBase.AuthNetRequestIntf<String> netRequestIntf) {
 
         /* */
         JSONArray array = new JSONArray();
@@ -74,10 +75,25 @@ public class BasketRepository {
         networkRequestBase.postJsonDataWithToken(Config.LINK_MY_BASKET_CREATE, array.toString(), authToken, netRequestIntf);
     }
 
-    public void loadBasketItems(NetworkRequestThreadBase.NetRequestIntf<String> netRequestIntf) {
+    public void loadBasketItems(NetworkRequestThreadBase.AuthNetRequestIntf<String> netRequestIntf) {
 
         String token = ((MyKabaApp)context.getApplicationContext()).getAuthToken();
 
         networkRequestBase.getDataWithToken(Config.LINK_MY_BASKET_GET, null, token, netRequestIntf);
+    }
+
+    public void deleteBasketItem(BasketInItem basketInItem, NetworkRequestThreadBase.AuthNetRequestIntf<String> intf) {
+
+        /* */
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("id", basketInItem.id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String authToken = ((MyKabaApp) context.getApplicationContext()).getAuthToken();
+        networkRequestBase.postJsonDataWithToken(Config.LINK_MY_BASKET_DELETE, jsonObject.toString(), authToken, intf);
     }
 }

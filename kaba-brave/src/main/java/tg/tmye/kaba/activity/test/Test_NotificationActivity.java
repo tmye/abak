@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -21,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import tg.tmye.kaba.R;
+import tg.tmye.kaba._commons.cviews.PreviewImageFragment;
 import tg.tmye.kaba._commons.notification.KabaNotificationJobService;
 import tg.tmye.kaba._commons.notification.NotificationItem;
 import tg.tmye.kaba.activity.FoodDetails.FoodDetailsActivity;
@@ -35,9 +38,13 @@ public class Test_NotificationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test__notification);
+        setContentView(R.layout.activity_empty_test);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        /* test activity */
+
+        String img = "http://www.kaba-delivery.com/wp-content/uploads/2018/07/kaba_icon_bg_white.png";
 
     }
 
@@ -70,7 +77,7 @@ public class Test_NotificationActivity extends AppCompatActivity {
     public void simple(View view) {
 
         /* you can get a job that downloads the icons, and that
-        * sends the notification once done. */
+         * sends the notification once done. */
         /* just image, title - text */
 
         /* parse the json text */

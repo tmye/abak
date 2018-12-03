@@ -2,7 +2,6 @@ package tg.tmye.kaba.activity.home.views.fragment;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,13 +14,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.function.Consumer;
 
 import tg.tmye.kaba.R;
 import tg.tmye.kaba._commons.adapters.CommandRecyclerAdapter;
+import tg.tmye.kaba._commons.cviews.CustomProgressbar;
+import tg.tmye.kaba._commons.cviews.dialog.ForceLogoutDialogFragment;
 import tg.tmye.kaba._commons.decorator.CommandListSpacesItemDecoration;
 import tg.tmye.kaba.activity.home.contracts.F_CommandContract;
 import tg.tmye.kaba.data.command.Command;
@@ -35,13 +35,16 @@ public class F_Commands_3_Fragment extends BaseFragment implements F_CommandCont
     /* views */
     private RecyclerView commandRecyclerview;
     private SwipeRefreshLayout swiperefresh;
-    private LinearLayoutCompat lny;
+    private LinearLayoutCompat lny_error;
     private Button bt_refresh;
+    private CustomProgressbar customProgressBar;
+    private TextView tv_message;
 
 
     private F_CommandContract.Presenter presenter;
     private android.support.v7.widget.RecyclerView.ItemDecoration commandListDecorator;
     private CommandRecyclerAdapter commandsAdapter;
+
 
     public F_Commands_3_Fragment() {
         // Required empty public constructor
@@ -69,10 +72,13 @@ public class F_Commands_3_Fragment extends BaseFragment implements F_CommandCont
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_command_list, container, false);
+    protected void onCreateViewAfterViewStubInflated(View inflatedView, Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    protected int getViewStubLayoutResource() {
+        return R.layout.fragment_command_list;
     }
 
     @Override
@@ -92,18 +98,16 @@ public class F_Commands_3_Fragment extends BaseFragment implements F_CommandCont
     }
 
     private void initViews(View rootView) {
+        customProgressBar = rootView.findViewById(R.id.progress_bar);
         bt_refresh = rootView.findViewById(R.id.bt_tryagain);
-        lny = rootView.findViewById(R.id.lny_error);
+        lny_error = rootView.findViewById(R.id.lny_error);
         commandRecyclerview = rootView.findViewById(R.id.recyclerview);
         swiperefresh = rootView.findViewById(R.id.swiperefresh);
+        tv_message = rootView.findViewById(R.id.tv_message);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
+
 
     @Override
     public void onAttach(Context context) {
@@ -130,18 +134,22 @@ public class F_Commands_3_Fragment extends BaseFragment implements F_CommandCont
     @Override
     public void networkError() {
         /* hide recyclerview ...
-        * show message
-        * */
+         * show message
+         * */
         this.showErrorPage(true);
     }
 
     @Override
     public void showIsLoading(final boolean isLoading) {
-        if (swiperefresh.isRefreshing() == isLoading) return;
+//        if (swiperefresh.isRefreshing() == isLoading) return;
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 swiperefresh.setRefreshing(isLoading);
+                customProgressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
+                /* hide everything */
+                commandRecyclerview.setVisibility(isLoading ? View.GONE : View.VISIBLE);
+                lny_error.setVisibility(View.GONE);
             }
         });
     }
@@ -149,12 +157,14 @@ public class F_Commands_3_Fragment extends BaseFragment implements F_CommandCont
     @Override
     public void inflateCommandList(final List<Command> data) {
 
-        if (data == null)
-            return;
-
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+
+                if (data == null || data.size() == 0) {
+                    showDataNullPage();
+                    return;
+                }
 
                 if (commandListDecorator == null) {
                     commandListDecorator = new CommandListSpacesItemDecoration(
@@ -169,6 +179,7 @@ public class F_Commands_3_Fragment extends BaseFragment implements F_CommandCont
                     commandRecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
 
                 commandsAdapter = new CommandRecyclerAdapter(getContext(), data);
+                commandRecyclerview.setVisibility(View.VISIBLE);
                 commandRecyclerview.setAdapter(commandsAdapter);
             }
         });
@@ -181,11 +192,29 @@ public class F_Commands_3_Fragment extends BaseFragment implements F_CommandCont
                 @Override
                 public void run() {
 
-                    lny.setVisibility(isShowed ? View.VISIBLE : View.GONE);
-                    commandRecyclerview.setVisibility(isShowed ? View.GONE : View.VISIBLE);
+                    commandRecyclerview.setVisibility(View.GONE);
+                    tv_message.setText(getResources().getString(R.string.please_connect_and_retry));
+                    tv_message.setVisibility(View.VISIBLE);
+                    lny_error.setVisibility(View.VISIBLE);
                 }
             });
     }
+
+    public void showDataNullPage () {
+        if (getActivity() != null)
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    commandRecyclerview.setVisibility(View.GONE);
+                    tv_message.setText(getResources().getString(R.string.no_command_data));
+                    lny_error.setVisibility(View.VISIBLE);
+                    tv_message.setVisibility(View.VISIBLE);
+                    bt_refresh.setVisibility(View.GONE);
+                }
+            });
+    }
+
 
     @Override
     public void onRefresh() {
@@ -194,11 +223,17 @@ public class F_Commands_3_Fragment extends BaseFragment implements F_CommandCont
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.bt_tryagain:
                 presenter.update();
                 break;
         }
+    }
+
+    @Override
+    public void onLoggingTimeout() {
+        ForceLogoutDialogFragment forceLogoutDialogFragment = ForceLogoutDialogFragment.newInstance();
+        forceLogoutDialogFragment.show(getFragmentManager(), ForceLogoutDialogFragment.TAG);
     }
 
     /**
@@ -213,6 +248,6 @@ public class F_Commands_3_Fragment extends BaseFragment implements F_CommandCont
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and restaurant_name
-        void onFragmentInteraction(Uri uri);
+        void onCommandInteraction(Command command);
     }
 }

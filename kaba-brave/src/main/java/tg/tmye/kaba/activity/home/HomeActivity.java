@@ -1,559 +1,1 @@
-package tg.tmye.kaba.activity.home;
-
-import android.Manifest;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.Toast;
-
-import tg.tmye.kaba.R;
-import tg.tmye.kaba._commons.intf.YesOrNo;
-import tg.tmye.kaba._commons.utils.PhoneUtils;
-import tg.tmye.kaba.activity.UserAcc.SoldeActivity;
-import tg.tmye.kaba.activity.UserAuth.login.LoginActivity;
-import tg.tmye.kaba.activity.Web.WebActivity;
-import tg.tmye.kaba.activity.cart.ShoppingCartActivity;
-import tg.tmye.kaba.activity.home.presenter.F_Commands_3_Presenter;
-import tg.tmye.kaba.activity.home.presenter.F_Home_1_Presenter;
-import tg.tmye.kaba.activity.home.presenter.F_Restaurant_2_Presenter;
-import tg.tmye.kaba.activity.home.presenter.F_UserAccount_4_Presenter;
-import tg.tmye.kaba.activity.home.views.fragment.F_Commands_3_Fragment;
-import tg.tmye.kaba.activity.home.views.fragment.F_Home_1_Fragment;
-import tg.tmye.kaba.activity.home.views.fragment.F_MyAccount_4_Fragment;
-import tg.tmye.kaba.activity.home.views.fragment.F_Restaurant_2_Fragment;
-import tg.tmye.kaba.activity.menu.RestaurantMenuActivity;
-import tg.tmye.kaba.activity.scanner.ScannerActivity;
-import tg.tmye.kaba.activity.search.SearchActivity;
-import tg.tmye.kaba.config.Config;
-import tg.tmye.kaba.config.Constant;
-import tg.tmye.kaba.data.Restaurant.RestaurantEntity;
-import tg.tmye.kaba.data.Restaurant.source.RestaurantDbRepository;
-import tg.tmye.kaba.data._OtherEntities.LightRestaurant;
-import tg.tmye.kaba.data._OtherEntities.SimplePicture;
-import tg.tmye.kaba.data.advert.AdsBanner;
-import tg.tmye.kaba.data.advert.source.AdvertRepository;
-import tg.tmye.kaba.data.command.source.CommandRepository;
-import tg.tmye.kaba.data.customer.source.CustomerDataRepository;
-import tg.tmye.kaba.syscore.MyKabaApp;
-
-
-public class HomeActivity extends AppCompatActivity implements
-        F_Commands_3_Fragment.OnFragmentInteractionListener,
-        F_Home_1_Fragment.OnFragmentInteractionListener,
-        F_MyAccount_4_Fragment.OnFragmentInteractionListener,
-        F_Restaurant_2_Fragment.OnFragmentInteractionListener, View.OnClickListener {
-
-    /* constants*/
-    private static final int HOME = 0;
-    private static final int RESTAURANT = 1;
-    private static final int COMMAND_LIST = 2;
-    private static final int MY_ACCOUNT = 3; // ids of the bottomTabs
-    private static final long DELAY = 1000; // delay of the loading
-    private static final int MY_PERMISSION_REQUEST_STORAGE = 0;
-
-
-    private boolean isLoggedIn = false;
-
-    /* presenters */
-    F_Home_1_Presenter home_1_presenter;
-    F_Restaurant_2_Presenter restaurant_2_presenter;
-    F_Commands_3_Presenter command_3_presenter;
-    F_UserAccount_4_Presenter userAccount_4_presenter;
-
-
-    /* models */
-    RestaurantDbRepository restaurantDbRepository;
-    CommandRepository commandRepository;
-    AdvertRepository advertRepository;
-    private CustomerDataRepository customerDataRepository;
-
-
-    /* fragments */
-    F_Home_1_Fragment frg_1_home;
-    F_Restaurant_2_Fragment frg_2_restaurants;
-    F_Commands_3_Fragment frg_3_command_list;
-    F_MyAccount_4_Fragment frg_4_myaccount; // try to find a strong reference towards these fragmntss
-
-
-    /* variables */
-    private int previousFragmentCode = -1;
-    private String daily_query;
-
-
-    /* views */
-    private FloatingActionButton cartFab;
-
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    switchFragment(HOME);
-                    return true;
-                case R.id.navigation_restaurant:
-                    switchFragment(RESTAURANT);
-                    return true;
-                case R.id.navigation_command_list:
-                    switchFragment(COMMAND_LIST);
-                    return isLoggedIn;
-                case R.id.navigation_my_account:
-                    switchFragment(MY_ACCOUNT);
-                    return isLoggedIn;
-            }
-            return false;
-        }
-    };
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        initViews();
-
-        initRepos();
-
-        initFragments();
-
-        initPresenters();
-
-        switchFragment(HOME);
-
-          /* ask for different permissions
-         * - accessing gps : little location
-         * - accessing networkstate
-         * - accessing external_storage
-         * */
-        cartFab.setOnClickListener(this);
-
-        Log.d(Constant.APP_TAG, PhoneUtils.getPhoneData());
-    }
-
-    private void initViews() {
-        cartFab = findViewById(R.id.fab_chart);
-    }
-
-    private void initFragments() {
-        frg_1_home = F_Home_1_Fragment.newInstance();
-        frg_2_restaurants = F_Restaurant_2_Fragment.newInstance();
-        frg_3_command_list = F_Commands_3_Fragment.newInstance();
-        frg_4_myaccount = F_MyAccount_4_Fragment.newInstance();
-    }
-
-    private void initPresenters() {
-        home_1_presenter = new F_Home_1_Presenter(restaurantDbRepository, advertRepository, frg_1_home);
-        restaurant_2_presenter = new F_Restaurant_2_Presenter(restaurantDbRepository, frg_2_restaurants);
-        command_3_presenter = new F_Commands_3_Presenter(commandRepository, frg_3_command_list);
-        userAccount_4_presenter = new F_UserAccount_4_Presenter(customerDataRepository, frg_4_myaccount);
-    }
-
-    private void initRepos() {
-
-        restaurantDbRepository = new RestaurantDbRepository(this);
-        commandRepository = new CommandRepository(this);
-        advertRepository = new AdvertRepository(this);
-        customerDataRepository = new CustomerDataRepository(this);
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
-
-    @Override
-    public void onRestaurantInteraction(RestaurantEntity resto) {
-        Intent intent = new Intent(this, RestaurantMenuActivity.class);
-        intent.putExtra(RestaurantMenuActivity.RESTAURANT, resto);
-        startActivity(intent);
-    }
-
-    @Override
-    public void onRestaurantInteraction(LightRestaurant restaurantEntity) {
-        Intent intent = new Intent(this, RestaurantMenuActivity.class);
-        intent.putExtra(RestaurantMenuActivity.RESTAURANT, restaurantEntity);
-        startActivity(intent);
-    }
-
-    @Override
-    public void onAdsInteraction(AdsBanner ad) {
-        Intent intent = new Intent(this, WebActivity.class);
-        intent.putExtra(WebActivity.DATA, ad.link);
-        startActivity(intent);
-    }
-
-    @Override
-    public void onShowPic(SimplePicture.KabaShowPic pic) {
-        Log.d(Constant.APP_TAG, pic.toString());
-    }
-
-    private void mSnack(String s) {
-//        Snackbar.make(getSupportActionBar().getCustomView(), s, Snackbar.LENGTH_SHORT).show();
-    }
-
-    private void switchFragment(final int frgId) {
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                == PackageManager.PERMISSION_DENIED) {
-            requestStoragePermission();
-            return;
-        }
-
-        switch (frgId) {
-            case HOME:
-                if (frg_1_home == null) {
-                    frg_1_home = F_Home_1_Fragment.newInstance();
-                    frg_1_home.setPresenter(home_1_presenter);
-                }
-                performNoBackStackTransaction(getSupportFragmentManager(), getString(R.string.title_home),  frg_1_home, HOME);
-                previousFragmentCode = frgId;
-                break;
-            case RESTAURANT:
-                if (frg_2_restaurants == null) {
-                    frg_2_restaurants = F_Restaurant_2_Fragment.newInstance();
-                    frg_2_restaurants.setPresenter(restaurant_2_presenter);
-                }
-                performNoBackStackTransaction(getSupportFragmentManager(), getString(R.string.title_restaurant),  frg_2_restaurants, RESTAURANT);
-                previousFragmentCode = frgId;
-                break;
-            case COMMAND_LIST:
-                checkLogin(previousFragmentCode, COMMAND_LIST, new YesOrNo(){
-                    @Override
-                    public void yes() {
-                        if (frg_3_command_list == null){
-                            frg_3_command_list = F_Commands_3_Fragment.newInstance();
-                            frg_3_command_list.setPresenter(command_3_presenter);
-                        }
-                        performNoBackStackTransaction(getSupportFragmentManager(), getString(R.string.title_command_list),  frg_3_command_list, COMMAND_LIST);
-                        previousFragmentCode = frgId;
-                    }
-                    @Override
-                    public void no() {
-                        // go back to the previous
-                        switchFragment(getSwitchedOne(previousFragmentCode));
-                    }
-                });
-                break;
-            case MY_ACCOUNT:
-                checkLogin(previousFragmentCode, MY_ACCOUNT, new YesOrNo() {
-                    @Override
-                    public void yes() {
-                        if (frg_4_myaccount == null) {
-                            frg_4_myaccount = F_MyAccount_4_Fragment.newInstance();
-                            frg_4_myaccount.setPresenter(userAccount_4_presenter);
-                        }
-                        performNoBackStackTransaction(getSupportFragmentManager(), getString(R.string.title_myaccount),  frg_4_myaccount, MY_ACCOUNT);
-                        previousFragmentCode = frgId;
-                        // switch bottom button to the fourth
-                    }
-
-                    @Override
-                    public void no() {
-                        // go back to the previous
-                        switchFragment(getSwitchedOne(previousFragmentCode));
-                    }
-                });
-                break;
-        }
-    }
-
-
-    private void requestStoragePermission() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-            ActivityCompat.requestPermissions(HomeActivity.this, new String[] {
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-            }, MY_PERMISSION_REQUEST_STORAGE);
-        } else {
-            ActivityCompat.requestPermissions(this, new String[] {
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-            }, MY_PERMISSION_REQUEST_STORAGE);
-        }
-    }
-
-    @Override public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                                     @NonNull int[] grantResults) {
-        if (requestCode != MY_PERMISSION_REQUEST_STORAGE) {
-            return;
-        }
-
-        if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            switchFragment(HOME);
-        } else {
-            Toast.makeText(this, getResources().getString(R.string.storage_permission_denied), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private int getSwitchedOne (int frgId) {
-        switch (frgId) {
-            case HOME:
-                return R.id.navigation_home;
-            case RESTAURANT:
-                return R.id.navigation_restaurant;
-            case COMMAND_LIST:
-                return R.id.navigation_command_list;
-            case MY_ACCOUNT:
-                return R.id.navigation_my_account;
-        }
-        return R.id.navigation_home;
-    }
-
-
-    private void checkLogin(int previousFragCode, int fragmentDestination, YesOrNo yesOrNo) {
-
-        String token = ((MyKabaApp)getApplication()).getAuthToken().trim();
-        // if try to do a transaction and it fails, then you know there is someth wrong
-        if (token == null || token.equals("")) {
-            Intent in = new Intent(this, LoginActivity.class);
-            in.putExtra(Config.HOME_SWITCH_FRAG_DESTINATION, fragmentDestination);
-            in.putExtra(Config.HOME_SWITCH_FRAG_PREVIOUS, previousFragCode);
-            startActivityForResult(in, Config.LOGIN_SUCCESS);
-        } else {
-            isLoggedIn = true;
-            yesOrNo.yes();
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (resultCode) {
-            case Config.LOGIN_SUCCESS:
-                // if login success, confirm the switch
-                if (data != null) {
-                    int dest = data.getIntExtra(Config.HOME_SWITCH_FRAG_DESTINATION, -1);
-                    if (dest != -1){
-                        isLoggedIn = true;
-                        switchFragment(dest);
-                    }
-                }
-                break;
-            case Config.LOGIN_FAILURE:
-                if (data != null) {
-                    int prev = data.getIntExtra(Config.HOME_SWITCH_FRAG_PREVIOUS, -1);
-                    if (prev != -1)
-                        switchFragment(prev);
-                } else
-                    switchFragment(HOME);
-                mToast("LOGIN FAILURE");
-                break;
-        }
-    }
-
-    public void performNoBackStackTransaction(final FragmentManager fragmentManager,
-                                              String tag,
-                                              Fragment fragment,
-                                              int fragmentIndex) {
-
-        final int newBackStackLength = fragmentManager.getBackStackEntryCount() +1;
-
-        int anim_In = 0, anim_Out = 0;
-
-        if (previousFragmentCode == -1) {
-            anim_In = android.R.anim.fade_in;
-            anim_Out = android.R.anim.fade_out;
-        } else {
-            if (previousFragmentCode < fragmentIndex) {
-                anim_In = R.anim.enter_from_right;
-                anim_Out = R.anim.exit_to_left;
-            } else {
-                anim_In = R.anim.enter_from_left;
-                anim_Out = R.anim.exit_to_right;
-            }
-        }
-
-        anim_Out = R.anim.exit_to_void;
-
-        /* replace destoys the fragment */
-
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
-                .setCustomAnimations(anim_In, anim_Out);
-
-        Fragment previsouFragment = getFragmentByCode(previousFragmentCode);
-
-         /* hide fragment if it is there, and showed */
-        if (previsouFragment != null)
-            fragmentTransaction = fragmentTransaction.hide(previsouFragment);
-
-        /* add fragment that doesnt exist yet */
-        if (getSupportFragmentManager().findFragmentByTag(getFragmentTagByCode(fragmentIndex)) == null) {
-            fragmentTransaction = fragmentTransaction.add(R.id.frame_main_layout_content, fragment, getFragmentTagByCode(fragmentIndex));
-        }
-
-        /* show fragment */
-        fragmentTransaction = fragmentTransaction.show(fragment);
-
-        /* commit change */
-//        if (!onSaveInstanceState)
-            fragmentTransaction.addToBackStack(tag).commitAllowingStateLoss();
-
-        fragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
-            @Override
-            public void onBackStackChanged() {
-                int nowCount = fragmentManager.getBackStackEntryCount();
-                if (newBackStackLength != nowCount) {
-                    // we don't really care if going back or forward. we already performed the logic here.
-                    fragmentManager.removeOnBackStackChangedListener(this);
-
-                    if ( newBackStackLength > nowCount ) { // user pressed back
-                        fragmentManager.popBackStackImmediate();
-                    }
-                }
-            }
-        });
-
-        // update theme
-        if (previousFragmentCode == 3 && fragmentIndex < 3) {
-            revealFabCart(true);
-            return;
-        }
-        if (previousFragmentCode < 3 && fragmentIndex == 3) {
-            revealFabCart(false);
-        }
-    }
-
-
-    private String getFragmentTagByCode(int previousFragmentCode) {
-
-        switch (previousFragmentCode) {
-            case HOME:
-                return getResources().getString(R.string.title_home);
-            case RESTAURANT:
-                return getResources().getString(R.string.title_restaurant);
-            case COMMAND_LIST:
-                return getResources().getString(R.string.title_command_list);
-            case MY_ACCOUNT:
-                return getResources().getString(R.string.title_myaccount);
-        }
-        return null;
-    }
-
-    private Fragment getFragmentByCode(int previousFragmentCode) {
-
-        switch (previousFragmentCode) {
-            case HOME:
-                return frg_1_home;
-            case RESTAURANT:
-                return frg_2_restaurants;
-            case COMMAND_LIST:
-                return frg_3_command_list;
-            case MY_ACCOUNT:
-                return frg_4_myaccount;
-        }
-        return null;
-    }
-
-    private void revealFabCart(boolean isFabCartVisible) {
-
-        if (isFabCartVisible) {
-            if (cartFab != null)
-                cartFab.setVisibility(View.VISIBLE);
-        } else {
-            if (cartFab != null)
-                cartFab.setVisibility(View.GONE);
-        }
-    }
-
-
-    @Override
-    public void onBackPressed() {
-//        super.onBackPressed();
-        finish();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.home_page_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            mToast("action_settings home");
-            return true;
-        } else if (id == R.id.action_mymessages) {
-            mToast("action_mymessages home");
-            return true;
-        } else if (id == android.R.id.home) {
-            mToast(getResources().getString(R.string.feature_not_yet_available));
-//            Intent intent = new Intent(this, ScannerActivity.class);
-//            startActivity(intent);
-        }
-        return false;
-    }
-
-    private void mToast(String string) {
-        Toast.makeText(this, string, Toast.LENGTH_SHORT).show();
-    }
-
-    FrameLayout frm;
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.fab_chart:
-                openShopCart();
-                break;
-            case R.id.ib_search_bt:
-                openSearch_hasDailyQuery(false);
-                break;
-            case R.id.tv_search_query:
-                openSearch_hasDailyQuery(true);
-                break;
-            case R.id.lny_account_balance:
-                showHideBalance();
-                break;
-            case R.id.lny_account_more:
-                openSoldeActivity();
-                break;
-            case R.id.lny_account_topup:
-                openSoldeTopUpActivity();
-                break;
-        }
-    }
-
-    private void showHideBalance() {
-    }
-
-    private void openSoldeActivity() {
-
-        Intent intent = new Intent(this, SoldeActivity.class);
-        startActivity(intent);
-    }
-
-    private void openSoldeTopUpActivity() {
-
-    }
-
-    private void openSearch_hasDailyQuery(boolean hasDailyQuery) {
-        Intent intent = new Intent(this, SearchActivity.class);
-        startActivity(intent);
-    }
-
-
-    private void openShopCart() {
-        Intent intent = new Intent(this, ShoppingCartActivity.class);
-        startActivity(intent);
-    }
-}
+package tg.tmye.kaba.activity.home;import android.Manifest;import android.content.Context;import android.content.Intent;import android.content.pm.PackageManager;import android.location.Location;import android.location.LocationListener;import android.location.LocationManager;import android.net.Uri;import android.os.Build;import android.os.Bundle;import android.os.Parcelable;import android.support.annotation.NonNull;import android.support.design.internal.BottomNavigationItemView;import android.support.design.internal.BottomNavigationMenuView;import android.support.design.widget.BottomNavigationView;import android.support.design.widget.CoordinatorLayout;import android.support.design.widget.FloatingActionButton;import android.support.v4.app.ActivityCompat;import android.support.v4.app.ActivityOptionsCompat;import android.support.v4.app.Fragment;import android.support.v4.app.FragmentManager;import android.support.v4.app.FragmentTransaction;import android.support.v7.app.AppCompatActivity;import android.transition.Explode;import android.transition.Fade;import android.util.Log;import android.view.Menu;import android.view.MenuItem;import android.view.View;import android.view.Window;import android.widget.FrameLayout;import android.widget.ImageView;import android.widget.ProgressBar;import android.widget.Toast;import com.bumptech.glide.Glide;import com.google.gson.Gson;import com.google.gson.JsonObject;import com.google.gson.JsonParser;import com.google.gson.reflect.TypeToken;import java.lang.reflect.Array;import java.lang.reflect.Field;import java.util.ArrayList;import java.util.Arrays;import tg.tmye.kaba.R;import tg.tmye.kaba._commons.behavior.BottomNavigationViewBehavior;import tg.tmye.kaba._commons.cviews.dialog.ComingSoonDialogFragment;import tg.tmye.kaba._commons.cviews.dialog.LoadingDialogFragment;import tg.tmye.kaba._commons.intf.ImagePreviewerListener;import tg.tmye.kaba._commons.intf.YesOrNo;import tg.tmye.kaba._commons.notification.NotificationItem;import tg.tmye.kaba._commons.utils.ImageViewUtil;import tg.tmye.kaba._commons.utils.PhoneUtils;import tg.tmye.kaba.activity.FoodDetails.FoodDetailsActivity;import tg.tmye.kaba.activity.ImagePreviewActivity;import tg.tmye.kaba.activity.Splash.SplashActivity;import tg.tmye.kaba.activity.UserAcc.cash_transaction.SoldeActivity;import tg.tmye.kaba.activity.UserAcc.cash_transaction.TopUpActivity;import tg.tmye.kaba.activity.UserAcc.feeds.FeedActivity;import tg.tmye.kaba.activity.UserAuth.login.LoginActivity;import tg.tmye.kaba.activity.WebArticle.WebArticleActivity;import tg.tmye.kaba.activity.ad_categories.best_seller.BestSellerActivity;import tg.tmye.kaba.activity.ad_categories.evenements.EvenementActivity;import tg.tmye.kaba.activity.cart.ShoppingCartActivity;import tg.tmye.kaba.activity.command.CommandDetailsActivity;import tg.tmye.kaba.activity.home.presenter.F_Commands_3_Presenter;import tg.tmye.kaba.activity.home.presenter.F_Home_1_Presenter;import tg.tmye.kaba.activity.home.presenter.F_Restaurant_2_Presenter;import tg.tmye.kaba.activity.home.presenter.F_UserAccount_4_Presenter;import tg.tmye.kaba.activity.home.tools.SystemUtils;import tg.tmye.kaba.activity.home.views.fragment.F_Commands_3_Fragment;import tg.tmye.kaba.activity.home.views.fragment.F_Home_1_Fragment;import tg.tmye.kaba.activity.home.views.fragment.F_MyAccount_4_Fragment;import tg.tmye.kaba.activity.home.views.fragment.F_Restaurant_2_Fragment;import tg.tmye.kaba.activity.menu.RestaurantMenuActivity;import tg.tmye.kaba.activity.restaurant.RestaurantActivity;import tg.tmye.kaba.activity.settings.SettingsActivity;import tg.tmye.kaba.config.Config;import tg.tmye.kaba.config.Constant;import tg.tmye.kaba.data.Restaurant.RestaurantEntity;import tg.tmye.kaba.data.Restaurant.source.RestaurantDbRepository;import tg.tmye.kaba.data.advert.AdsBanner;import tg.tmye.kaba.data.advert.source.AdvertRepository;import tg.tmye.kaba.data.command.Command;import tg.tmye.kaba.data.command.source.CommandRepository;import tg.tmye.kaba.data.customer.source.CustomerDataRepository;import tg.tmye.kaba.syscore.MyKabaApp;import tg.tmye.kaba.syscore.baseobj.BasePresenter;import static tg.tmye.kaba.activity.UserAcc.personnalinfo.PersonnalInfoActivity.CONTENT_MODIFIED;public class HomeActivity extends AppCompatActivity implements        F_Commands_3_Fragment.OnFragmentInteractionListener,        F_Home_1_Fragment.OnFragmentInteractionListener,        F_MyAccount_4_Fragment.OnFragmentInteractionListener,        F_Restaurant_2_Fragment.OnFragmentInteractionListener, View.OnClickListener,        ImagePreviewerListener{    private static final String PROPNAME_SCREENLOCATION_LEFT = "PROPNAME_SCREENLOCATION_LEFT";    private static final String PROPNAME_SCREENLOCATION_TOP = "PROPNAME_SCREENLOCATION_TOP";    private static final String PROPNAME_WIDTH = "PROPNAME_WIDTH", PROPNAME_HEIGHT = "PROPNAME_HEIGHT";    public static final String VIEW_INFO_EXTRA = "VIEW_INFO_EXTRA";    /* permissions */    String[]  permissions = {Manifest.permission.CAMERA, Manifest.permission.CALL_PHONE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE};    /* constants*/    private static final int HOME = 0;    private static final int RESTAURANT = 1;    private static final int COMMAND_LIST = 2;    private static final int MY_ACCOUNT = 3; // ids of the bottomTabs    private static final long DELAY = 1000; // delay of the loading    private static final int MY_PERMISSION_REQUEST_STORAGE = 0;    private static final int MY_PERMISSION_REQUEST_CALL = 2;    private static final int MY_PERMISSION_REQUEST_GPS_LOCATION = 3;    private static final int MY_PERMISSION_LOCATION_PERMISSION = 9;    private boolean isLoggedIn = false;    /* presenters */    F_Home_1_Presenter home_1_presenter;    F_Restaurant_2_Presenter restaurant_2_presenter;    F_Commands_3_Presenter command_3_presenter;    F_UserAccount_4_Presenter userAccount_4_presenter;    /* models */    RestaurantDbRepository restaurantDbRepository;    CommandRepository commandRepository;    AdvertRepository advertRepository;    private CustomerDataRepository customerDataRepository;    /* fragments */    F_Home_1_Fragment frg_1_home;    F_Restaurant_2_Fragment frg_2_restaurants;    F_Commands_3_Fragment frg_3_command_list;    F_MyAccount_4_Fragment frg_4_myaccount; // try to find a strong reference towards these fragmntss    /* variables */    private int previousFragmentCode = -1;    private String daily_query;    /* views */    private FloatingActionButton cartFab;    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener            = new BottomNavigationView.OnNavigationItemSelectedListener() {        @Override        public boolean onNavigationItemSelected(@NonNull MenuItem item) {            switch (item.getItemId()) {                case R.id.navigation_home:                    switchFragment(HOME);                    return true;                case R.id.navigation_restaurant:                    switchFragment(RESTAURANT);                    return true;                case R.id.navigation_command_list:                    switchFragment(COMMAND_LIST);                    return isLoggedIn;                case R.id.navigation_my_account:                    switchFragment(MY_ACCOUNT);                    return isLoggedIn;            }            return false;        }    };    private BottomNavigationView navigation;    private long firstTime;    private Gson gson = new Gson();    private boolean mIsRunning = false;    @Override    protected void onResumeFragments() {        super.onResumeFragments();        if (userAccount_4_presenter != null) {            frg_4_myaccount.setPresenter(userAccount_4_presenter);        }        if (home_1_presenter != null) {            frg_1_home.setPresenter(home_1_presenter);        }        if (restaurant_2_presenter != null) {            frg_2_restaurants.setPresenter(restaurant_2_presenter);        }        if (command_3_presenter != null) {            frg_3_command_list.setPresenter(command_3_presenter);        }    }    @Override    protected void onCreate(Bundle savedInstanceState) {        super.onCreate(savedInstanceState);        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {            // inside your activity (if you did not enable transitions in your theme)            getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);            // set an enter transition            getWindow().setEnterTransition(new Explode());            // set an exit transition            getWindow().setExitTransition(new Explode());        }        setContentView(R.layout.activity_home);        Bundle dead_notification_extras = getIntent().getExtras();        /* see the direction we are supposed to go and the rest */        if (dead_notification_extras != null) {            String notification_data = dead_notification_extras.getString("data", "");            Log.d(Constant.APP_TAG, notification_data);            if (!"".equals(notification_data)) {                /* launch the activity that is supposed */                mToast(notification_data);                JsonObject obj = new JsonParser().parse(notification_data).getAsJsonObject();                JsonObject data = obj.get("data").getAsJsonObject();                NotificationItem notificationItem =                        gson.fromJson(data.get("notification").getAsJsonObject(), new TypeToken<NotificationItem>() {                        }.getType());                /* work on the notification and get to the resultant activity */                managePassiveNotification(notificationItem);            }        }        navigation = findViewById(R.id.navigation);        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);        /* set bottom tabs labels constantly visible*/        BottomNavigationViewHelper.disableShiftMode(navigation);        initViews();        initRepos();//        initFragments();//        initPresenters();        switchFragment(HOME);        /* ask for different permissions         * - accessing gps : little location         * - accessing networkstate         * - accessing external_storage         * */        cartFab.setOnClickListener(this);        Log.d(Constant.APP_TAG, PhoneUtils.getPhoneData());        SystemUtils.refreshPushTokenIfNeeded(this);        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {            // Acquire a reference to the system Location Manager            final LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);            String locationProvider = LocationManager.NETWORK_PROVIDER;            // Or, use GPS location data:            // String locationProvider = LocationManager.GPS_PROVIDER;            LocationListener locationListener = new LocationListener() {                public void onLocationChanged(Location location) {                    /* update the 2fragment */                    if (!mIsRunning)                        return;                    if (((MyKabaApp) getApplicationContext()).getLastLocation() == null) {                        ((MyKabaApp) getApplicationContext()).setLastLocation(location);                        if (frg_2_restaurants != null /*&& frg_2_restaurants.isHidden() &&  && previousFragmentCode != RESTAURANT*/) {                            restaurant_2_presenter.populateViews();                        }                        if (previousFragmentCode != RESTAURANT) {                            frg_2_restaurants = null;                        }                        locationManager.removeUpdates(this);                    }                }                public void onStatusChanged(String provider, int status, Bundle extras) {                }                public void onProviderEnabled(String provider) {                }                public void onProviderDisabled(String provider) {                }            };            locationManager.requestLocationUpdates(locationProvider, 0, 0, locationListener);        }    }    private void managePassiveNotification(NotificationItem notificationItem) {        /* according to the type of the notification ? article ? command ? food ? restaurant - menu // launch an activity and send the id to it */        switch (notificationItem.destination.type) {            case NotificationItem.NotificationFDestination.ARTICLE_DETAILS:                Intent article_intent = new Intent(this, WebArticleActivity.class);                article_intent.putExtra(WebArticleActivity.ARTICLE_ID, notificationItem.destination.product_id);                startActivity(article_intent);                break;            case NotificationItem.NotificationFDestination.COMMAND_DETAILS:                Intent command_details_intent = new Intent(this, CommandDetailsActivity.class);                command_details_intent.putExtra(CommandDetailsActivity.ID, notificationItem.destination.product_id);                startActivity(command_details_intent);                break;            case NotificationItem.NotificationFDestination.FOOD_DETAILS:                Intent food_details_intent = new Intent(this, FoodDetailsActivity.class);                food_details_intent.putExtra(FoodDetailsActivity.HAS_SENT_ID, true);                food_details_intent.putExtra(FoodDetailsActivity.FOOD_ID, notificationItem.destination.product_id);                startActivity(food_details_intent);                break;            case NotificationItem.NotificationFDestination.RESTAURANT_MENU:                break;            case NotificationItem.NotificationFDestination.RESTAURANT_PAGE:                break;        }    }    private void initViews() {        cartFab = findViewById(R.id.fab_chart);    }    private void initFragments() {        frg_1_home = F_Home_1_Fragment.newInstance();        frg_2_restaurants = F_Restaurant_2_Fragment.newInstance();        frg_3_command_list = F_Commands_3_Fragment.newInstance();        frg_4_myaccount = F_MyAccount_4_Fragment.newInstance();    }    private void initPresenters() {        if (home_1_presenter == null)            home_1_presenter = new F_Home_1_Presenter(restaurantDbRepository, advertRepository, frg_1_home);        if (restaurant_2_presenter == null && frg_2_restaurants != null)            restaurant_2_presenter = new F_Restaurant_2_Presenter(restaurantDbRepository, frg_2_restaurants);        if (command_3_presenter == null && frg_3_command_list != null)            command_3_presenter = new F_Commands_3_Presenter(commandRepository, frg_3_command_list);        if (userAccount_4_presenter == null && frg_4_myaccount != null)            userAccount_4_presenter = new F_UserAccount_4_Presenter(customerDataRepository, frg_4_myaccount);    }    private void initRepos() {        restaurantDbRepository = new RestaurantDbRepository(this);        commandRepository = new CommandRepository(this);        advertRepository = new AdvertRepository(this);        customerDataRepository = new CustomerDataRepository(this);    }    @Override    public void onFragmentInteraction(Uri uri) {    }    @Override    public void onRestaurantInteraction(RestaurantEntity resto, int restaurant) {        Intent intent = null;        switch (restaurant) {            case F_Restaurant_2_Fragment.OnFragmentInteractionListener.MENU:                intent = new Intent(this, RestaurantMenuActivity.class);                break;            case F_Restaurant_2_Fragment.OnFragmentInteractionListener.RESTAURANT:                intent = new Intent(this, RestaurantActivity.class);                break;        }        if (intent != null) {            intent.putExtra(RestaurantMenuActivity.RESTAURANT, resto);            startActivity(intent);        } else {            mToast("No activity destination specified!");        }    }    @Override    public void onComingSoonInteractionListener(RestaurantEntity resto) {        /* show information dialog with coming soon informations */        ComingSoonDialogFragment comingSoonDialogFragment = ComingSoonDialogFragment.newInstance(resto.pic, getResources().getString(R.string.coming_soon_message));        comingSoonDialogFragment.show(getSupportFragmentManager(), LoadingDialogFragment.TAG);    }    @Override    public void onRestaurantInteraction(RestaurantEntity restaurantEntity) {        /* this shouldnt be a light restaurant anymore */        Intent intent = new Intent(this, RestaurantActivity.class);        intent.putExtra(RestaurantMenuActivity.RESTAURANT, restaurantEntity);        startActivity(intent);    }    @Override    public void onAdsInteraction(AdsBanner ads) {        switch (ads.type) {            case AdsBanner.BEST_SELLER:                Intent bs_intent = new Intent(this, BestSellerActivity.class);                startActivity(bs_intent);                break;            case AdsBanner.EVENEMENT:                Intent evenemnt_intent = new Intent(this, EvenementActivity.class);                startActivity(evenemnt_intent);                break;            case AdsBanner.TYPE_ARTICLE:                /* launch article */                Intent article_intent = new Intent(this, WebArticleActivity.class);                article_intent.putExtra(WebArticleActivity.ARTICLE_ID, ads.entity_id);                startActivity(article_intent);                break;            case AdsBanner.TYPE_MENU:                /* scroll right to the menu -- with an indication */                Intent menu_intent = new Intent(this, RestaurantMenuActivity.class);                // add restaurant id and menu id too//                menu_intent.putExtra(RestaurantMenuActivity.RESTAURANT, /*ad.entity_id*/);//                startActivity(article_intent);                break;            case AdsBanner.TYPE_REPAS:                Intent food_details_intent = new Intent(this, FoodDetailsActivity.class);                food_details_intent.putExtra(FoodDetailsActivity.FOOD_ID, ads.entity_id);                food_details_intent.putExtra(FoodDetailsActivity.HAS_SENT_ID, true);                startActivity(food_details_intent);                /* implement opening food with id only, and also, implemeting the reduction thing - reduire le prix de la chose. */                break;            case AdsBanner.TYPE_RESTAURANT:                /* get in a restaurant when the principal card at the top  has to be an advertising one with expiration date.                 *      - no clicking after a certain time */                break;        }    }    private void switchFragment(final int frgId) {        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)                == PackageManager.PERMISSION_DENIED) {            requestStoragePermission();            return;        }        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {            requestPhoneCallPermission();            return;        }        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {            requestGpsLocationPermission();            return;        }        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)                == PackageManager.PERMISSION_DENIED ||                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)                        == PackageManager.PERMISSION_DENIED                ) {            requestLocationPermission();            return;        }        switch (frgId) {            case HOME:                if (previousFragmentCode == HOME)                    return;                if (frg_1_home == null) {                    frg_1_home = F_Home_1_Fragment.newInstance();                    if (home_1_presenter == null)                        initPresenters();                    frg_1_home.setPresenter(home_1_presenter);                }                performNoBackStackTransaction(getSupportFragmentManager(), getString(R.string.title_home),  frg_1_home, HOME);                previousFragmentCode = frgId;                break;            case RESTAURANT:                if (previousFragmentCode == RESTAURANT)                    return;                if (frg_2_restaurants == null) {                    frg_2_restaurants = F_Restaurant_2_Fragment.newInstance();                    if (restaurant_2_presenter == null)                        initPresenters();                    frg_2_restaurants.setPresenter(restaurant_2_presenter);                }                performNoBackStackTransaction(getSupportFragmentManager(), getString(R.string.title_restaurant),  frg_2_restaurants, RESTAURANT);                previousFragmentCode = frgId;                break;            case COMMAND_LIST:                if (previousFragmentCode == COMMAND_LIST)                    return;                checkLogin(previousFragmentCode, COMMAND_LIST, new YesOrNo(){                    @Override                    public void yes() {                        if (frg_3_command_list == null){                            frg_3_command_list = F_Commands_3_Fragment.newInstance();                            if (command_3_presenter == null)                                initPresenters();                            frg_3_command_list.setPresenter(command_3_presenter);                        }                        performNoBackStackTransaction(getSupportFragmentManager(), getString(R.string.title_command_list),  frg_3_command_list, COMMAND_LIST);                        previousFragmentCode = frgId;                    }                    @Override                    public void no() {                        // go back to the previous                        switchFragment(getSwitchedOne(previousFragmentCode));                    }                });                break;            case MY_ACCOUNT:                if (previousFragmentCode == MY_ACCOUNT)                    return;                checkLogin(previousFragmentCode, MY_ACCOUNT, new YesOrNo() {                    @Override                    public void yes() {                        if (frg_4_myaccount == null) {                            frg_4_myaccount = F_MyAccount_4_Fragment.newInstance();                            if (userAccount_4_presenter == null)                                initPresenters();                            frg_4_myaccount.setPresenter(userAccount_4_presenter);                        }                        performNoBackStackTransaction(getSupportFragmentManager(), getString(R.string.title_myaccount),  frg_4_myaccount, MY_ACCOUNT);                        previousFragmentCode = frgId;                        // switch bottom button to the fourth                    }                    @Override                    public void no() {                        // go back to the previous                        switchFragment(getSwitchedOne(previousFragmentCode));                    }                });                break;        }    }    private void requestPhoneCallPermission() {        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CALL_PHONE)) {            ActivityCompat.requestPermissions(HomeActivity.this, new String[] {                    Manifest.permission.CALL_PHONE            }, MY_PERMISSION_REQUEST_CALL);        } else {            ActivityCompat.requestPermissions(this, new String[] {                    Manifest.permission.CALL_PHONE            }, MY_PERMISSION_REQUEST_CALL);        }    }    private void requestGpsLocationPermission() {        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {            ActivityCompat.requestPermissions(HomeActivity.this, new String[] {                    Manifest.permission.ACCESS_FINE_LOCATION            }, MY_PERMISSION_REQUEST_GPS_LOCATION);        } else {            ActivityCompat.requestPermissions(this, new String[] {                    Manifest.permission.ACCESS_FINE_LOCATION            }, MY_PERMISSION_REQUEST_GPS_LOCATION);        }    }    private void requestLocationPermission() {        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {            ActivityCompat.requestPermissions(HomeActivity.this, new String[] {                    Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION            }, MY_PERMISSION_LOCATION_PERMISSION);        } else {            ActivityCompat.requestPermissions(this, new String[] {                    Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION            }, MY_PERMISSION_LOCATION_PERMISSION);        }    }    private void requestStoragePermission() {        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {            ActivityCompat.requestPermissions(HomeActivity.this, new String[] {                    Manifest.permission.WRITE_EXTERNAL_STORAGE            }, MY_PERMISSION_REQUEST_STORAGE);        } else {            ActivityCompat.requestPermissions(this, new String[] {                    Manifest.permission.WRITE_EXTERNAL_STORAGE            }, MY_PERMISSION_REQUEST_STORAGE);        }    }    @Override public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,                                                     @NonNull int[] grantResults) {        if (!(requestCode == MY_PERMISSION_REQUEST_STORAGE || requestCode == MY_PERMISSION_REQUEST_CALL                || requestCode == MY_PERMISSION_REQUEST_GPS_LOCATION)) {            return;        }        if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {            switchFragment(HOME);        } else {            Toast.makeText(this, getResources().getString(R.string.permission_denied), Toast.LENGTH_SHORT).show();        }        if (grantResults.length == 2 && grantResults[1] == PackageManager.PERMISSION_GRANTED) {            switchFragment(HOME);        } else {            Toast.makeText(this, getResources().getString(R.string.permission_denied), Toast.LENGTH_SHORT).show();        }        if (grantResults.length == 3 && grantResults[2] == PackageManager.PERMISSION_GRANTED) {            switchFragment(HOME);        } else {            Toast.makeText(this, getResources().getString(R.string.permission_denied), Toast.LENGTH_SHORT).show();        }    }    private int getSwitchedOne (int frgId) {        switch (frgId) {            case HOME:                return R.id.navigation_home;            case RESTAURANT:                return R.id.navigation_restaurant;            case COMMAND_LIST:                return R.id.navigation_command_list;            case MY_ACCOUNT:                return R.id.navigation_my_account;        }        return R.id.navigation_home;    }    private void checkLogin(int previousFragCode, int fragmentDestination, YesOrNo yesOrNo) {        String token = ((MyKabaApp)getApplication()).getAuthToken().trim();        // if try to do a transaction and it fails, then you know there is someth wrong        if (token == null || token.equals("")) {            Intent in = new Intent(this, LoginActivity.class);            in.putExtra(Config.HOME_SWITCH_FRAG_DESTINATION, fragmentDestination);            in.putExtra(Config.HOME_SWITCH_FRAG_PREVIOUS, previousFragCode);            startActivityForResult(in, Config.LOGIN_SUCCESS);        } else {            isLoggedIn = true;            yesOrNo.yes();        }    }    @Override    protected void onActivityResult(int requestCode, int resultCode, Intent data) {        super.onActivityResult(requestCode, resultCode, data);        switch (resultCode) {            case Config.LOGIN_SUCCESS:                // if login success, confirm the switch                if (data != null) {                    int dest = data.getIntExtra(Config.HOME_SWITCH_FRAG_DESTINATION, -1);                    if (dest != -1){                        isLoggedIn = true;                        switch (dest) {                            case COMMAND_LIST:                                navigation.setSelectedItemId(R.id.navigation_command_list);                                break;                            case HOME:                                navigation.setSelectedItemId(R.id.navigation_home);                                break;                            case RESTAURANT:                                navigation.setSelectedItemId(R.id.navigation_restaurant);                                break;                            case MY_ACCOUNT:                                navigation.setSelectedItemId(R.id.navigation_my_account);                                break;                        }                    }                }                break;            case Config.LOGIN_FAILURE:                if (data != null) {                    int prev = data.getIntExtra(Config.HOME_SWITCH_FRAG_PREVIOUS, -1);                    if (prev != -1)                        switchFragment(prev);                } else                    switchFragment(HOME);                mToast("LOGIN FAILURE");                break;            case CONTENT_MODIFIED:                userAccount_4_presenter.start();                break;        }    }    public void performNoBackStackTransaction(final FragmentManager fragmentManager,                                              String tag,                                              Fragment fragment,                                              int fragmentIndex) {        final int newBackStackLength = fragmentManager.getBackStackEntryCount() +1;        int anim_In = 0, anim_Out = 0;        if (previousFragmentCode == -1) {            anim_In = android.R.anim.fade_in;            anim_Out = android.R.anim.fade_out;        } else {            if (previousFragmentCode < fragmentIndex) {                anim_In = R.anim.enter_from_right;                anim_Out = R.anim.exit_to_left;            } else {                anim_In = R.anim.enter_from_left;                anim_Out = R.anim.exit_to_right;            }        }        anim_Out = R.anim.exit_to_void;        /* replace destoys the fragment */        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()                .setCustomAnimations(anim_In, anim_Out);        Fragment previsouFragment = getFragmentByCode(previousFragmentCode);        /* hide fragment if it is there, and showed */        if (previsouFragment != null)            fragmentTransaction = fragmentTransaction.hide(previsouFragment);        /* add fragment that doesnt exist yet */        if (getSupportFragmentManager().findFragmentByTag(getFragmentTagByCode(fragmentIndex)) == null) {            fragmentTransaction = fragmentTransaction.add(R.id.frame_main_layout_content, fragment, getFragmentTagByCode(fragmentIndex));        }        /* show fragment */        fragmentTransaction = fragmentTransaction.show(fragment);        /* commit change *///        if (!onSaveInstanceState)        fragmentTransaction.addToBackStack(tag).commitAllowingStateLoss();        fragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {            @Override            public void onBackStackChanged() {                int nowCount = fragmentManager.getBackStackEntryCount();                if (newBackStackLength != nowCount) {                    // we don't really care if going back or forward. we already performed the logic here.                    fragmentManager.removeOnBackStackChangedListener(this);                    if ( newBackStackLength > nowCount ) { // user pressed back                        fragmentManager.popBackStackImmediate();                    }                }            }        });        // update theme        if (previousFragmentCode == 3 && fragmentIndex < 3) {            revealFabCart(true);            return;        }        if (previousFragmentCode < 3 && fragmentIndex == 3) {            revealFabCart(false);        }        /* if not yet, we should set the new choosen bottom sheet button */       /* switch (fragmentIndex) {            case COMMAND_LIST:                navigation.setSelectedItemId(R.id.navigation_command_list);                break;            case HOME://                navigation.setSelectedItemId(R.id.navigation_home);                break;            case RESTAURANT://                navigation.setSelectedItemId(R.id.navigation_restaurant);                break;            case MY_ACCOUNT://                navigation.setSelectedItemId(R.id.navigation_my_account);                break;        }*/    }    private String getFragmentTagByCode(int previousFragmentCode) {        switch (previousFragmentCode) {            case HOME:                return getResources().getString(R.string.title_home);            case RESTAURANT:                return getResources().getString(R.string.title_restaurant);            case COMMAND_LIST:                return getResources().getString(R.string.title_command_list);            case MY_ACCOUNT:                return getResources().getString(R.string.title_myaccount);        }        return null;    }    private Fragment getFragmentByCode(int previousFragmentCode) {        switch (previousFragmentCode) {            case HOME:                return frg_1_home;            case RESTAURANT:                return frg_2_restaurants;            case COMMAND_LIST:                return frg_3_command_list;            case MY_ACCOUNT:                return frg_4_myaccount;        }        return null;    }    private void revealFabCart(boolean isFabCartVisible) {        if (isFabCartVisible) {            if (cartFab != null)                cartFab.setVisibility(View.VISIBLE);        } else {            if (cartFab != null)                cartFab.setVisibility(View.GONE);        }    }    @Override    public void onBackPressed() {        long secondTime = System.currentTimeMillis();        if (secondTime - firstTime > 800) {            mToast(getResources().getString(R.string.press_again_to_exit));            firstTime = secondTime;        } else {            moveTaskToBack(false);        }    }    @Override    public boolean onCreateOptionsMenu(Menu menu) {        /* check if connected then show another one */        String authToken = ((MyKabaApp)getApplication()).getAuthToken();        if (authToken != null && authToken.length() > 10)            getMenuInflater().inflate(R.menu.home_page_menu_onconnexion , menu);        else            getMenuInflater().inflate(R.menu.home_page_menu_offconnexion , menu);        return super.onCreateOptionsMenu(menu);    }    @Override    public boolean onOptionsItemSelected(MenuItem item) {        int id = item.getItemId();        if (id == R.id.action_settings) {            startSettingsActivity();            return true;        } else if (id == R.id.action_mymessages) {            openMessagesView();            return true;        } else if (id == android.R.id.home) {            mToast(getResources().getString(R.string.feature_not_yet_available));//            Intent intent = new Intent(this, ScannerActivity.class);//            startActivity(intent);        } else if (id == R.id.action_logout){            /* remove the data inside manifest and kabaapp - then restard the activity             * - make a logout automatic function for             * */            CustomerDataRepository.deleteCustomerInfos(this);            CustomerDataRepository.deleteToken(this);            startActivity(new Intent(this, SplashActivity.class));            finish();        }        return false;    }    private void startSettingsActivity() {        Intent intent = new Intent(this, SettingsActivity.class);        startActivity(intent);    }    private void openMessagesView() {        String authToken = ((MyKabaApp)getApplication()).getAuthToken();        if (authToken != null && !"".equals(authToken) && authToken.length() > 10) {            Intent in = new Intent(this, FeedActivity.class);            startActivity(in);        } else {            Intent in = new Intent(this, LoginActivity.class);            startActivity(in);        }    }    private void mToast(String string) {        Toast.makeText(this, string, Toast.LENGTH_SHORT).show();    }    FrameLayout frm;    @Override    public void onClick(View view) {        switch (view.getId()) {            case R.id.fab_chart:                openShopCart();                break;            /*case R.id.ib_search_bt:                openSearch_hasDailyQuery(false);                break;*/            case R.id.tv_search_query:                openDailyPubQuery();                break;            case R.id.lny_account_balance:                openSoldeActivity();                break;            case R.id.lny_account_topup:                openSoldeTopUpActivity();                break;            case R.id.bt_all_restaurants:                swicthRestaurantList();                break;        }    }    private void swicthRestaurantList() {        navigation.setSelectedItemId(R.id.navigation_restaurant);//        switchFragment(RESTAURANT);    }    private void showHideBalance() {    }    private void openSoldeActivity() {        Intent intent = new Intent(this, SoldeActivity.class);        startActivity(intent);    }    private void openSoldeTopUpActivity() {        Intent intent = new Intent(this, TopUpActivity.class);        startActivity(intent);    }  /*  private void openSearch_hasDailyQuery(boolean hasDailyQuery) {        Intent intent = new Intent(this, SearchActivity.class);        startActivity(intent);    }*/    private void openDailyPubQuery () {        /* open daily pub activity*/    }    public void hideMainLoading () {        final ProgressBar home_main_progressbar = findViewById(R.id.home_main_progressbar);        home_main_progressbar.post(new Runnable() {            @Override            public void run() {                home_main_progressbar.setVisibility(View.GONE);            }        });    }    private void openShopCart() {        String token = ((MyKabaApp) getApplication()).getAuthToken().trim();        // if try to do a transaction and it fails, then you know there is someth wrong        if (token == null || token.equals("")) {            Intent in = new Intent(this, LoginActivity.class);            startActivityForResult(in, Config.LOGIN_SUCCESS);        } else {            // if try to do a transaction and it fails, then you know there is someth wrong            Intent intent = new Intent(this, ShoppingCartActivity.class);            startActivity(intent);        }    }    @Override    public void onCommandInteraction(Command command) {        Intent intent = new Intent(this, CommandDetailsActivity.class);        intent.putExtra(CommandDetailsActivity.ID, command.id);        startActivity(intent);    }    public BasePresenter getPresenterWithNo(int no) {        initRepos();        initPresenters();        switch (no) {            case 1:                return home_1_presenter;            case 2:                return restaurant_2_presenter;            case 3:                return command_3_presenter;            case 4:                return userAccount_4_presenter;        }        return null;    }    @Override    public void startActivity(Intent intent) {        super.startActivity(intent);        overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_void);    }    public void startActivityWithNoAnimation(Intent intent) {        super.startActivity(intent);        overridePendingTransition(0, 0);    }    @Override    public void startActivityForResult(Intent intent, int requestCode) {        super.startActivityForResult(intent, requestCode);        overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_void);    }    @Override    public void finish() {        super.finish();        overridePendingTransition(R.anim.enter_from_left, R.anim.fade_out);    }    /* when activity is out .. remove all request */    @Override    protected void onPause() {        super.onPause();        Glide.with(this).pauseRequestsRecursive();        mIsRunning = false;    }    @Override    protected void onResume() {        super.onResume();        Glide.with(this).resumeRequestsRecursive();        mIsRunning = true;    }    @Override    public void onShowPic(View originView, AdsBanner adsBanner) {//        pic = Constant.SERVER_ADDRESS+"/"+pic;        AdsBanner[] adsBanners = new AdsBanner[]{adsBanner};        Intent intent = new Intent(this, ImagePreviewActivity.class);        intent.putExtra(ImagePreviewActivity.IMG_URL_TAG, adsBanners);      /*  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {            originView.setTransitionName("kaba-image");            ActivityOptionsCompat options = ActivityOptionsCompat.                    makeSceneTransitionAnimation(this, (View) originView, "kaba-image");            startActivity(intent, options.toBundle());        } else {            startActivityWithNoAnimation(intent);        }*/        startActivity(intent);    }    /* adapt showItems/pubs to the view we're seeing here. */    @Override    public void onShowPic(View originView, AdsBanner[] adsBanners) {        Intent intent = new Intent(this, ImagePreviewActivity.class);        intent.putExtra(ImagePreviewActivity.IMG_URL_TAG,  adsBanners);        intent.putExtra(VIEW_INFO_EXTRA, /* start values */ captureValues(originView));        /*  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {            originView.setTransitionName("kaba-image");            ActivityOptionsCompat options = ActivityOptionsCompat.                    makeSceneTransitionAnimation(this, (View) originView, "kaba-image");            startActivity(intent, options.toBundle());        } else {            startActivityWithNoAnimation(intent);        }*/        startActivity(intent);    }    /**     * Helper method to capture the view values to animate     *     * @param view target view     * @return Bundle with the captured values     */    private static Bundle captureValues(@NonNull View view) {        Bundle b = new Bundle();        captureScaleValues(b, view);        captureScreenLocationValues(b, view);        return b;    }    private static void captureScaleValues(@NonNull Bundle b, @NonNull View view) {        if (view instanceof ImageView) {            int[] size = ImageViewUtil.getDisplayedImageLocation((ImageView) view);            b.putInt(PROPNAME_WIDTH, size[2]);            b.putInt(PROPNAME_HEIGHT, size[3]);        } else {            b.putInt(PROPNAME_WIDTH, view.getWidth());            b.putInt(PROPNAME_HEIGHT, view.getHeight());        }    }    private static void captureScreenLocationValues(@NonNull Bundle b, @NonNull View view) {        if (view instanceof ImageView) {            int[] size = ImageViewUtil.getDisplayedImageLocation((ImageView) view);            b.putInt(PROPNAME_SCREENLOCATION_LEFT, size[0]);            b.putInt(PROPNAME_SCREENLOCATION_TOP, size[1]);        } else {            int[] screenLocation = new int[2];            view.getLocationOnScreen(screenLocation);            b.putInt(PROPNAME_SCREENLOCATION_LEFT, screenLocation[0]);            b.putInt(PROPNAME_SCREENLOCATION_TOP, screenLocation[1]);        }    }    public static class BottomNavigationViewHelper {        public static void disableShiftMode(BottomNavigationView view) {            BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);            try {                Field shiftingMode = menuView.getClass().getDeclaredField("mShiftingMode");                shiftingMode.setAccessible(true);                shiftingMode.setBoolean(menuView, false);                shiftingMode.setAccessible(false);                for (int i = 0; i < menuView.getChildCount(); i++) {                    BottomNavigationItemView item = (BottomNavigationItemView) menuView.getChildAt(i);                    //noinspection RestrictedApi                    item.setShiftingMode(false);                    // set once again checked value, so view will be updated                    //noinspection RestrictedApi                    item.setChecked(item.getItemData().isChecked());                }            } catch (NoSuchFieldException e) {                Log.e(Constant.APP_TAG, "Unable to get shift mode field", e);            } catch (IllegalAccessException e) {                Log.e(Constant.APP_TAG, "Unable to change value of shift mode", e);            }        }    }}

@@ -1,8 +1,11 @@
 package tg.tmye.kaba.syscore;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
+import com.bumptech.glide.Registry;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory;
 import com.bumptech.glide.load.engine.cache.LruResourceCache;
@@ -24,11 +27,12 @@ public class MyAppGlideModule extends AppGlideModule {
         // set cache memory
         MemorySizeCalculator calculator = new MemorySizeCalculator.Builder(context)
                 .setMemoryCacheScreens(2)
+//                .setMemoryCacheScreens()
                 .build();
         builder.setMemoryCache(new LruResourceCache(calculator.getMemoryCacheSize()));
 
         // set disk cache
-        int diskCacheSizeBytes = 1024 * 1024 * 100; // 100 MB
+        int diskCacheSizeBytes = 1024 * 1024 * 60; // 60 MB
         builder.setDiskCache(
                 new InternalCacheDiskCacheFactory(context, Config.GLIDE_CACHE_FOLDER, diskCacheSizeBytes));
     }
@@ -37,6 +41,5 @@ public class MyAppGlideModule extends AppGlideModule {
     public boolean isManifestParsingEnabled() {
         return false;
     }
-
 
 }

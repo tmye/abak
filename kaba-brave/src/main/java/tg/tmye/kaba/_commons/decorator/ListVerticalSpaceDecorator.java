@@ -11,10 +11,16 @@ import android.view.View;
 
 public class ListVerticalSpaceDecorator extends RecyclerView.ItemDecoration {
 
+    private int bottom_space = -1;
     private int space;
 
     public ListVerticalSpaceDecorator (int space) {
         this.space = space;
+    }
+
+    public ListVerticalSpaceDecorator (int space, int bottom_space) {
+        this.space = space;
+        this.bottom_space = bottom_space;
     }
 
 
@@ -22,6 +28,11 @@ public class ListVerticalSpaceDecorator extends RecyclerView.ItemDecoration {
     public void getItemOffsets(Rect outRect, View view,
                                RecyclerView parent, RecyclerView.State state) {
 
-        outRect.bottom = space;
+        /* last item bottom*/
+        if (bottom_space!=-1 && parent.getChildAdapterPosition(view) == parent.getAdapter().getItemCount()-1) {
+            outRect.bottom = bottom_space;
+        } else {
+            outRect.bottom = space;
+        }
     }
 }

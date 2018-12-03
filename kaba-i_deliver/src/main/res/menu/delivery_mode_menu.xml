@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activities.Menu.MenuContentActivity">
+
+    <item
+        android:id="@+id/action_exit_delivery_mode"
+        android:orderInCategory="100"
+        android:title="@string/action_delivery_mode_exit"
+        app:showAsAction="always" />
+
+</menu>

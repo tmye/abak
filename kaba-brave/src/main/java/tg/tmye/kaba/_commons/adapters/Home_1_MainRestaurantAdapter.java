@@ -9,12 +9,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.GenericTransitionOptions;
+import com.bumptech.glide.Priority;
 
 import java.util.List;
 
 import tg.tmye.kaba.R;
 import tg.tmye.kaba.activity.home.views.fragment.F_Home_1_Fragment;
+import tg.tmye.kaba.activity.home.views.fragment.F_Restaurant_2_Fragment;
 import tg.tmye.kaba.config.Constant;
+import tg.tmye.kaba.data.Restaurant.RestaurantEntity;
 import tg.tmye.kaba.data._OtherEntities.LightRestaurant;
 import tg.tmye.kaba.syscore.GlideApp;
 import tg.tmye.kaba.syscore.MyKabaApp;
@@ -28,10 +31,10 @@ public class Home_1_MainRestaurantAdapter extends RecyclerView.Adapter<Home_1_Ma
 
 
     private final F_Home_1_Fragment.OnFragmentInteractionListener mListener;
-    private List<LightRestaurant> data;
+    private List<RestaurantEntity> data;
     private final Context ctx;
 
-    public Home_1_MainRestaurantAdapter(Context context, List<LightRestaurant> data,
+    public Home_1_MainRestaurantAdapter(Context context, List<RestaurantEntity> data,
                                         F_Home_1_Fragment.OnFragmentInteractionListener mListener) {
 
         this.ctx = context;
@@ -48,30 +51,35 @@ public class Home_1_MainRestaurantAdapter extends RecyclerView.Adapter<Home_1_Ma
     public void onBindViewHolder(ViewHolder holder, int position) {
 
 
-        final LightRestaurant item = data.get(position);
+        final RestaurantEntity item = data.get(position);
 
         if (item == null)
             return;
 
         // bind the data.
-        holder.tv_resto_name.setText(item.name);
+        holder.tv_resto_name.setText(item.name.toUpperCase());
 
         GlideApp.with(ctx)
                 .load(Constant.SERVER_ADDRESS + "/" +item.pic)
                 .transition(GenericTransitionOptions.with(  ((MyKabaApp)ctx.getApplicationContext()).getGlideAnimation()  ))
                 .placeholder(R.drawable.kaba_pic)
+                .priority(Priority.IMMEDIATE)
                 .centerCrop()
                 .into(holder.iv_resto_icon);
 
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mListener.onRestaurantInteraction(
-                        item
-                );
-            }
-        });
+        if (item.coming_soon != F_Restaurant_2_Fragment.COMING_SOON) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mListener.onRestaurantInteraction(
+                            item
+                    );
+                }
+            });
+        } else {
+            holder.itemView.setOnClickListener(new ComingSoonClickListener(item));
+        }
     }
 
     @Override
@@ -80,7 +88,7 @@ public class Home_1_MainRestaurantAdapter extends RecyclerView.Adapter<Home_1_Ma
     }
 
 
-    public void updateData(List<LightRestaurant> daily_restaurants) {
+    public void updateData(List<RestaurantEntity> daily_restaurants) {
         this.data = daily_restaurants;
         notifyDataSetChanged();
     }
@@ -97,6 +105,26 @@ public class Home_1_MainRestaurantAdapter extends RecyclerView.Adapter<Home_1_Ma
             this.rootView = itemView;
             this.tv_resto_name = itemView.findViewById(R.id.tv_restaurant_name);
             this.iv_resto_icon = itemView.findViewById(R.id.iv_restaurant_icon);
+        }
+    }
+
+    public class ComingSoonClickListener implements View.OnLongClickListener, View.OnClickListener {
+
+        private final RestaurantEntity resto;
+
+        public ComingSoonClickListener(RestaurantEntity resto) {
+            this.resto = resto;
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            mListener.onComingSoonInteractionListener(resto);
+            return true;
+        }
+
+        @Override
+        public void onClick(View view) {
+            mListener.onComingSoonInteractionListener(resto);
         }
     }
 }

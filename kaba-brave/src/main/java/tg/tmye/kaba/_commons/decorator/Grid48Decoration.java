@@ -24,24 +24,23 @@ public class Grid48Decoration extends RecyclerView.ItemDecoration {
                                RecyclerView parent, RecyclerView.State state) {
 
 
-        if (parent.getChildAdapterPosition(view)  == 1 ||
-                parent.getChildAdapterPosition(view)  == 5) {
+
+        if (parent.getChildAdapterPosition(view)  == 0) {
+//            outRect.bottom = space/2;
             outRect.right = space/2;
         }
 
-        if (parent.getChildAdapterPosition(view)  == 2 ||
-                parent.getChildAdapterPosition(view)  == 6) {
-            outRect.left = space/2;
+        if (parent.getChildAdapterPosition(view)  == 1) {
+//            outRect.bottom = space/2;
         }
 
-        // Add top margin only for the first item to avoid double space between items
-        if (parent.getChildLayoutPosition(view) >= 0 && parent.getChildLayoutPosition(view) < 4) {
-            outRect.top = 0;
-        } else {
-            outRect.top = space;
-        }
-
-        // if u are the first of the list, nothing left, something right
+//        if (parent.getChildAdapterPosition(view)  == 2) {
+//            outRect.right = space/2;
+//        }
+//
+//        if (parent.getChildAdapterPosition(view)  == 3) {
+//
+//        }
     }
 
 }
