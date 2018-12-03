@@ -5882,7 +5882,7 @@
       <window_info anchor="bottom" id="Event Log" order="14" sideWeight="0.46203554" side_tool="true" weight="0.6392694" />
       <window_info anchor="bottom" id="Run" order="3" sideWeight="0.4821718" weight="0.47488585" />
       <window_info anchor="bottom" id="Version Control" order="11" sideWeight="0.49675852" weight="0.3242424" />
-      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.6807131" weight="0.31659058" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="12" sideWeight="0.6807131" visible="true" weight="0.31659058" />
       <window_info anchor="bottom" id="Logcat" order="9" sideWeight="0.53796446" weight="0.6392694" />
       <window_info id="Captures" order="5" sideWeight="0.50626564" weight="0.24878444" />
       <window_info id="Capture Tool" order="7" />
