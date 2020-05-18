@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string-array name="status_list">
+
+        <item>ATTENTE</item>
+        <item>PREPARATION</item>
+        <item>EN ROUTE</item>
+        <item>LIVRÉ</item>
+        <item>ANNULÉS</item>
+        <item>REJETÉS</item>
+    </string-array>
+
+    <string-array name="status_list_small">
+
+        <item>ATTENTE</item>
+        <item>PREPARATION</item>
+        <item>EN ROUTE</item>
+        <item>LIVRÉ</item>
+        <item>AUTRES</item>
+    </string-array>
+
+
+    <string-array name="command_details_explain">
+        <item>Accept the command</item>
+        <item>Confirm the cooking is ready and Send to Shipping!</item>
+        <item>Send command to shipping</item>
+    </string-array>
+
+    <string-array name="motives">
+        <item>Menu is not available</item>
+        <item>Restaurant in Pause</item>
+        <item>Restaurant in Closed</item>
+        <item>Other reasons</item>
+    </string-array>
+
+
+</resources>

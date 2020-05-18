@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="distributionType" value="LOCAL" />
+        <option name="delegatedBuild" value="false" />
+        <option name="testRunner" value="PLATFORM" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/kaba-brave" />
-            <option value="$PROJECT_DIR$/kaba-i_deliver" />
-            <option value="$PROJECT_DIR$/kaba-restaurant" />
-            <option value="$PROJECT_DIR$/toolbox" />
+            <option value="$PROJECT_DIR$/kaba-i_deliver-2.2" />
+            <option value="$PROJECT_DIR$/kaba-restaurant-public" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

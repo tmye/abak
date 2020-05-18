@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".activities.home.HomeActivity"
+    tools:showIn="@layout/activity_home">
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- restaurant identity -->
+        <RelativeLayout
+            android:id="@+id/rel_top"
+            android:background="@color/transparent"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/header_resto_cic"
+                android:layout_gravity="center_vertical"
+                android:layout_width="@dimen/command_item_header_pic"
+                android:layout_height="@dimen/command_item_header_pic"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:src="@drawable/placeholder_kaba"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"/>
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_toRightOf="@+id/header_resto_cic"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_header_resto_name"
+                    android:text=""
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/food_details_tag_padding_horizontal"
+                    android:paddingRight="@dimen/food_details_tag_padding_horizontal"
+                    android:paddingTop="@dimen/food_details_tag_padding_vertical"
+                    android:paddingBottom="@dimen/food_details_tag_padding_vertical"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:maxLines="1"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="6sp"
+                    app:autoSizeMaxTextSize="18sp"
+                    app:autoSizeStepGranularity="1sp"
+                    />
+
+            </android.support.v7.widget.LinearLayoutCompat>
+
+            <TextView
+                android:layout_below="@id/header_resto_cic"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/tv_state_opend"
+                android:text=""
+                android:padding="@dimen/activity_horizontal_margin_quarter"
+                android:textSize="@dimen/restaurant_distance_text_size"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_red_cornered"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                />
+
+        </RelativeLayout>
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!-- quantité vendue -->
+            <android.support.v7.widget.CardView
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:padding="@dimen/activity_horizontal_margin_half"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:padding="@dimen/activity_horizontal_margin"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <ImageView
+                        android:id="@+id/iv_profiles"
+                        android:layout_alignParentLeft="true"
+                        android:src="@drawable/profiles"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+
+                    <TextView
+                        android:layout_toRightOf="@+id/iv_profiles"
+                        android:text="@string/quantity_sold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+                        android:layout_centerVertical="true"
+                        android:maxLines="1"
+                        />
+
+                    <TextView
+                        android:layout_alignParentRight="true"
+                        android:id="@+id/tv_quantity"
+                        android:maxLines="1"
+                        android:text="@string/quantity_sold_value"
+                        android:textStyle="bold"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin_half"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin" />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <!-- prix total vendu -->
+            <android.support.v7.widget.CardView
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:padding="@dimen/activity_horizontal_margin_half"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <RelativeLayout
+                    android:padding="@dimen/activity_horizontal_margin"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                  >
+
+                    <ImageView
+                        android:id="@+id/iv_purse"
+                        android:layout_alignParentLeft="true"
+                        android:src="@drawable/purse"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+
+                    <TextView
+                        android:layout_toRightOf="@+id/iv_purse"
+                        android:text="@string/price_sold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+                        android:layout_centerVertical="true"
+                        android:maxLines="1"
+                      />
+
+                    <TextView
+                        android:layout_alignParentRight="true"
+                        android:id="@+id/tv_money"
+                        android:text="@string/price_sold_value"
+                        android:textStyle="bold"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin_half"
+                        android:maxLines="1"
+                        android:textColor="@color/command_state_3"
+                        android:textSize="20sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+               />
+
+                </RelativeLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_closed"
+                android:text="CLOSED"
+                android:textSize="18sp"
+                android:padding="@dimen/activity_horizontal_margin_half"
+                android:textAllCaps="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/switch_compat"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_opened"
+                android:text="OPENED"
+                android:textSize="18sp"
+                android:padding="@dimen/activity_horizontal_margin_half"
+                android:textAllCaps="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+
+        <!-- etats et quantité des commandes a gerer -->
+        <LinearLayout
+            android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/lny_1_waiting"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/dark_gray"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:text="@string/waiting_food"
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
+                    android:textSize="12sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <ImageView
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    app:srcCompat="@drawable/ic_navigation_waiting_24dp"
+                    android:layout_width="@dimen/preview_commands_list_icons"
+                    android:layout_height="@dimen/preview_commands_list_icons" />
+
+                <TextView
+                    android:id="@+id/tv_waiting_count"
+                    android:text="--"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textSize="22sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lny_2_preparing"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/dark_gray"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:text="@string/cooking_food"
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
+                    android:textSize="12sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <ImageView
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    app:srcCompat="@drawable/ic_navigation_cooking_24dp"
+                    android:layout_width="@dimen/preview_commands_list_icons"
+                    android:layout_height="@dimen/preview_commands_list_icons" />
+
+                <TextView
+                    android:id="@+id/tv_cooking_count"
+                    android:text="--"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textSize="22sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lny_3_shipping"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/dark_gray"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:text="@string/in_delivery_food"
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
+                    android:textSize="12sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <ImageView
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    app:srcCompat="@drawable/ic_navigation_shipping_24dp"
+                    android:layout_width="@dimen/preview_commands_list_icons"
+                    android:layout_height="@dimen/preview_commands_list_icons" />
+
+                <TextView
+                    android:id="@+id/tv_shipping_count"
+                    android:text="--"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textSize="22sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:text="@string/actions_of_restaurant"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:textColor="@color/dark_gray"
+            android:textSize="12sp"
+            android:layout_margin="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- list of menus -->
+        <android.support.v7.widget.CardView
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:weightSum="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.CardView
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="?selectableItemBackground"
+                android:id="@+id/bt_my_commands"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.LinearLayoutCompat
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/activity_horizontal_margin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:src="@drawable/burger"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="?actionBarSize"
+                        android:layout_height="?actionBarSize" />
+
+                    <TextView
+                        android:gravity="center_horizontal"
+                        android:layout_margin="@dimen/activity_horizontal_margin_half"
+                        android:text="@string/my_commands"
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </android.support.v7.widget.LinearLayoutCompat>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="?selectableItemBackground"
+                android:id="@+id/bt_weekly_stats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.LinearLayoutCompat
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/activity_horizontal_margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:src="@drawable/pie_chart"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="?actionBarSize"
+                        android:layout_height="?actionBarSize" />
+
+                    <TextView
+                        android:gravity="center_horizontal"
+                        android:layout_margin="@dimen/activity_horizontal_margin_half"
+                        android:text="@string/statistics_of_restaurant"
+                        android:textColor="@color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </android.support.v7.widget.LinearLayoutCompat>
+            </android.support.v7.widget.CardView>
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+
+</android.support.v4.widget.NestedScrollView>

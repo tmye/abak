@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content" >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/cic_deliveryman"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/kaba_pic"
+        android:layout_centerVertical="true"
+        android:layout_width="@dimen/rc_shippingman_pic_height"
+        android:layout_height="@dimen/rc_shippingman_pic_height"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+        />
+
+
+
+    <!-- Name -->
+    <LinearLayout
+        android:layout_centerVertical="true"
+        android:paddingLeft="@dimen/activity_horizontal_margin_half"
+        android:orientation="vertical"
+        android:gravity="left"
+        android:layout_toRightOf="@+id/cic_deliveryman"
+        android:layout_toLeftOf="@+id/iv_confirm_icon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:padding="@dimen/activity_horizontal_margin_half"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:id="@+id/tv_kaba_man_name"
+                android:textSize="@dimen/rc_shippingman_text_size"
+                android:textColor="@color/black"
+                android:text="Calvin Klein"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin_quarter"/>
+
+            <TextView
+                android:id="@+id/tv_is_available"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:layout_alignParentLeft="true"
+                android:padding="@dimen/activity_horizontal_margin_quarter"
+                android:textSize="@dimen/restaurant_distance_text_size"
+                android:textColor="@color/white"
+                android:text="OCCUPÉ"
+                android:background="@drawable/transparent_red_rounded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+
+        <!-- mettre une iconne appeler à coté -->
+
+        <TextView
+            android:id="@+id/tv_kaba_man_no"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:textSize="@dimen/rc_shippingman_no_text_size"
+            android:textColor="@color/dark_gray"
+            android:text="90 05 09 19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+
+    <!-- Tel no -->
+
+    <ImageView
+        android:id="@+id/iv_confirm_icon"
+        android:visibility="invisible"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/bg_green_rounded"
+        android:layout_width="@dimen/rc_shippingman_confirm_button"
+        android:layout_height="@dimen/rc_shippingman_confirm_button"
+        android:layout_marginRight="@dimen/activity_horizontal_margin_half"/>
+
+
+</RelativeLayout>

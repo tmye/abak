@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string-array name="status_list">
+
+        <item>ATTENTE</item>
+        <item>PREPARATION</item>
+        <item>EN ROUTE</item>
+        <item>LIVRÉ</item>
+        <item>ANNULÉS</item>
+        <item>REJETÉS</item>
+    </string-array>
+
+    <string-array name="delivery_status_list_small">
+        <item>PRECOMMANDES ATTENTE</item>
+        <item>EN ATTENTE</item>
+        <item>EN LIVRAISON</item>
+        <item>TRAITÉ</item>
+    </string-array>
+
+
+    <string-array name="command_details_explain">
+        <item>Confirm Shipping done</item>
+        <item>PostPone Shipping to another round</item>
+    </string-array>
+
+    <string-array name="week_days_short">
+        <item>Lun</item>
+        <item>Mar</item>
+        <item>Mer</item>
+        <item>Jeu</item>
+        <item>Ven</item>
+        <item>Sam</item>
+        <item>Dim</item>
+    </string-array>
+
+    <string-array name="week_days">
+        <item>Dimanche</item>
+        <item>Lundi</item>
+        <item>Mardi</item>
+        <item>Mercredi</item>
+        <item>Jeudi</item>
+        <item>Vendredi</item>
+        <item>Samedi</item>
+    </string-array>
+
+</resources>
