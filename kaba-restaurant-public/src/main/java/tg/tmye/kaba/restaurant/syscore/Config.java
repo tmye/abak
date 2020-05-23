@@ -1,5 +1,7 @@
 package tg.tmye.kaba.restaurant.syscore;
 
+import android.Manifest;
+
 /**
  * By abiguime on 24/05/2018.
  * email: 2597434002@qq.com
@@ -36,7 +38,6 @@ public class Config {
     public static final String SYSTOKEN = "SYSTOKEN";
     public static final String HOME_SWITCH_FRAG_PREVIOUS = "HOME_SWITCH_FRAG_PREVIOUS";
     public static final String HOME_SWITCH_FRAG_DESTINATION = "HOME_SWITCH_FRAG_DESTINATION";
-
 
     // for result codes
     public static final int LOGIN_SUCCESS = 3;

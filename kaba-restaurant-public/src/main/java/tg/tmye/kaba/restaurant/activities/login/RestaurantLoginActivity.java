@@ -1,5 +1,6 @@
 package tg.tmye.kaba.restaurant.activities.login;
 
+import android.Manifest;
 import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -61,6 +62,7 @@ public class RestaurantLoginActivity extends AppCompatActivity implements LoginC
         bt_login = findViewById(R.id.bt_login);
         ed_password = findViewById(R.id.ed_password);
         ed_username = findViewById(R.id.ed_username);
+
 
 //        ed_username.setText("vadout");
 //        ed_password.setText("123456");

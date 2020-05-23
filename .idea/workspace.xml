@@ -20,7 +20,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
     <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
   </component>
@@ -31,13 +31,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb246aff-a498-4926-95cc-ec65b31aa146" name="Default" comment="c">
-      <change afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/drawable-hdpi/ic_notification.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/drawable-mdpi/ic_notification.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/drawable-xhdpi/ic_notification.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/drawable-xxhdpi/ic_notification.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/drawable-xxxhdpi/ic_notification.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/_commons/adapter/CommandRecyclerAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/_commons/adapter/CommandRecyclerAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/_commons/decorator/CommandInnerFoodLineDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/_commons/decorator/CommandInnerFoodLineDecorator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/MyCommandsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/MyCommandsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/cviews/NoScrollViewPager.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/cviews/NoScrollViewPager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/syscore/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/syscore/Constant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/layout/activity_command_details.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/layout/activity_command_details.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/layout/activity_deliverman_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/layout/activity_deliverman_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/layout/activity_delivery_mode.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/layout/activity_delivery_mode.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/layout/activity_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/layout/activity_home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/layout/activity_my_commands.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/layout/activity_my_commands.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/layout/content_command_details.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/layout/content_command_details.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/layout/content_delivery_mode.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/layout/content_delivery_mode.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/layout/dialog_info.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/layout/dialog_info.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/layout/fragment_command_list_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/layout/fragment_command_list_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/layout/fragment_restaurant_sub_commands.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/layout/fragment_restaurant_sub_commands.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/layout/frg_dialog_loading_custom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/layout/frg_dialog_loading_custom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/layout/selected_food_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/layout/selected_food_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/login/RestaurantLoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/login/RestaurantLoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/syscore/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/syscore/Config.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -120,11 +135,11 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="AnalyzeApkAction.lastApkPath" value="$PROJECT_DIR$/kaba-brave-2.2/build/outputs/apk/debug/kaba-brave-2.2-debug.apk" />
-    <property name="ApkExportedModule" value="kaba-restaurant-public" />
+    <property name="ApkExportedModule" value="kaba-i_deliver-2.2" />
     <property name="DEBUGGABLE_DEVICE" value="huawei-cun_al00-CYSBBBE692726552" />
     <property name="DEBUGGABLE_PROCESS" value="tg.tmye.kaba.restaurant" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="03445118BU002310" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-04-27T09:58:53.763Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="02770097AH018526" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-05-23T11:59:15.587Z" />
     <property name="ExportApk.ApkPath" value="$PROJECT_DIR$/deploy_test/release" />
     <property name="ExportApk.BuildType" value="release" />
     <property name="ExportApk.BuildVariants" value="release" />
@@ -207,7 +222,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Android App.kaba-restaurant-public">
+  <component name="RunManager" selected="Android App.kaba-i_deliver-2.2">
     <configuration name="&lt;template&gt;" type="JUnit" default="true" selected="false">
       <option name="MAIN_CLASS_NAME" />
       <option name="VM_PARAMETERS" value="-ea" />

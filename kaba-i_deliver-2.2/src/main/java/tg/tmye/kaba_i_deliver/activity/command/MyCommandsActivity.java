@@ -360,7 +360,7 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
         if (presenter != null)
             presenter.loadActualCommandsList();
 
-        if (viewpager_commands != null && f != null && adapter.getCount() > lastPosition) {
+        if (viewpager_commands != null && adapter != null && adapter.getCount() > lastPosition) {
             viewpager_commands.setCurrentItem(lastPosition);
             animateAppAndStatusBar(R.color.command_state_3, R.color.command_state_3, 0);
         }

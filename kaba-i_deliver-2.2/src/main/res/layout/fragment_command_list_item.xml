@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -114,7 +114,7 @@
                 android:layout_alignParentLeft="true"/>
 
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <android.support.v7.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_toRightOf="@+id/header_resto_cic"
                 android:layout_centerVertical="true"
@@ -142,16 +142,16 @@
                     app:autoSizeStepGranularity="1sp"
                     />
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
+            </android.support.v7.widget.LinearLayoutCompat>
 
         </RelativeLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_inner_food"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <android.support.v7.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="wrap_content">
@@ -251,7 +251,7 @@
                 </LinearLayout>
 
             </RelativeLayout>
-        </androidx.appcompat.widget.LinearLayoutCompat>
+        </android.support.v7.widget.LinearLayoutCompat>
         <TextView
             android:id="@+id/tv_pay_at_arrival"
             android:text="@string/post_pay"
@@ -266,5 +266,5 @@
             android:background="@color/silver_blue"
             android:layout_height="wrap_content" />
     </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </android.support.v7.widget.CardView>
 
