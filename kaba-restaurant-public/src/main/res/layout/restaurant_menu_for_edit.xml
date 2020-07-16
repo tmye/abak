@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/activity_horizontal_margin"
+    android:layout_margin="@dimen/activity_horizontal_margin"
+    >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_menu_name"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/green_"
+            android:text="pizza"
+            android:textAllCaps="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_description"
+            android:layout_margin="@dimen/activity_horizontal_margin_half"
+            style="@style/TextAppearance.Design.Hint"
+            android:gravity="center"
+            android:text=""
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+            android:layout_marginRight="@dimen/activity_horizontal_margin_half"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/bt_hide"
+            android:text="HIDE"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/bt_edit_name"
+            android:text="EDIT"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/bt_enter"
+            android:text="ENTER"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_hidden"
+            android:src="@drawable/hide"
+            android:alpha="0.3"
+            android:layout_gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="100dp"/>
+    </FrameLayout>
+
+</android.support.v7.widget.CardView>

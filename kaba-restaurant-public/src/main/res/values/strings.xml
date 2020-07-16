@@ -21,31 +21,8 @@
     <string name="sys_error">Sorry for the disconvenience, The server is encountering an Error.</string>
     <string name="total">TOTAL:</string>
 
-    <string-array name="days_of_week">
-        <item>Sunday</item>
-        <item>Monday</item>
-        <item>Tuesday</item>
-        <item>Wednesday</item>
-        <item>Thursday</item>
-        <item>Friday</item>
-        <item>Saturday</item>
-    </string-array>
-
-    <string-array name="months_of_year">
-        <item>January</item>
-        <item>February</item>
-        <item>March</item>
-        <item>April</item>
-        <item>May</item>
-        <item>June</item>
-        <item>July</item>
-        <item>August</item>
-        <item>September</item>
-        <item>October</item>
-        <item>November</item>
-        <item>December</item>
-    </string-array>
     <string name="title_activity_login">LOGIN</string>
+
     <string name="confirm">Confirm</string>
     <string name="password">Password</string>
     <string name="i_login">Login</string>
@@ -255,5 +232,37 @@
     <string name="title_activity_food_details">title_activity_food_details</string>
     <string name="call">CALL</string>
     <string name="failed_in_allowing_permission">Failed allowing permission</string>
+    <string name="there_is_no_food">There is no food</string>
+    <string name="address_location">Address</string>
+    <string name="working_hour">Working hour</string>
+    <string name="menu_name">MENU</string>
+    <string name="is_pausing">" Breaktime"</string>
+    <string name="is_unavailable">Unavailable</string>
+    <string name="no_menu_data">No menu data</string>
+    <string name="bt_add_to_basket">BASKET</string>
+    <string name="my_menu">Menu</string>
+    <string-array name="days_of_week">
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
+    <string-array name="months_of_year">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
 
 </resources>

@@ -3,6 +3,10 @@ package tg.tmye.kaba.restaurant.data.Menu;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.List;
+
+import tg.tmye.kaba.restaurant.data.Food.Restaurant_Menu_FoodEntity;
+
 /**
  * By abiguime on 2017/12/3.
  * email: 2597434002@qq.com
@@ -24,6 +28,10 @@ public class Restaurant_SubMenuEntity implements Parcelable {
 
     public String description;
 
+    public int promotion = 0;
+
+    public int is_hidden = 0;
+
     public String getDescription() {
         return description;
     }
@@ -32,7 +40,7 @@ public class Restaurant_SubMenuEntity implements Parcelable {
         this.description = description;
     }
 
-
+    public List<Restaurant_Menu_FoodEntity> foods;
 
 
     protected Restaurant_SubMenuEntity(Parcel in) {
@@ -101,6 +109,8 @@ public class Restaurant_SubMenuEntity implements Parcelable {
         this.restaurant_id = restaurant_id;
     }
 
-
+    public void setFoods (List<Restaurant_Menu_FoodEntity> foods){
+        this.foods = foods;
+    }
 
 }

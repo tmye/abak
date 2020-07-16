@@ -23,8 +23,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import tg.tmye.kaba.restaurant.R;
+import tg.tmye.kaba.restaurant.data.advert.AdsBanner;
 import tg.tmye.kaba.restaurant.syscore.Constant;
 
 
@@ -393,6 +395,16 @@ public class UtilFunctions {
         /* day */
         String[] days_of_week = context.getResources().getStringArray(R.array.days_of_week);
         return days_of_week[commandTime.getDay()];
+    }
+
+    public static AdsBanner[] convertToArray(List<AdsBanner> ads_list) {
+
+        AdsBanner[] adsBanners = new AdsBanner[ads_list.size()];
+
+        for (int i = 0; i < ads_list.size(); i++) {
+            adsBanners[i] = ads_list.get(i);
+        }
+        return adsBanners;
     }
 
     /*

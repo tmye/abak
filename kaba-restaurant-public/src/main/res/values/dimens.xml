@@ -138,4 +138,5 @@
     <dimen name="rc_shippingman_text_size">17sp</dimen>
     <dimen name="rc_shippingman_no_text_size">16sp</dimen>
     <dimen name="preview_commands_list_icons">40dp</dimen>
+    <dimen name="lil_round_margin_bottom">4dp</dimen>
 </resources>

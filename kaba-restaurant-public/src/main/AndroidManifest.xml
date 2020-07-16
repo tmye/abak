@@ -2,37 +2,28 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="tg.tmye.kaba.restaurant">
 
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
-
-
-    <!-- wave lock -->
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-
     <application
-        android:networkSecurityConfig="@xml/network_security_config"
         android:name=".syscore.MyRestaurantApp"
         android:allowBackup="true"
         android:icon="@mipmap/kaba_icon_orange_rectangle"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/kaba_icon_orange"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".activities.menu.EditSingleMenuActivity"></activity>
+        <activity android:name=".activities.menu.EditSingleFoodActivity"></activity>
+        <activity android:name=".activities.menu.EditMenuActivity" />
         <activity
-            android:screenOrientation="portrait"
             android:name=".activities.home.HomeActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".activities.commands.MyCommandsActivity"
-            android:label="@string/title_activity_my_commands"></activity>
-        <activity android:name=".activities.login.RestaurantLoginActivity"
+            android:label="@string/title_activity_my_commands"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.login.RestaurantLoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,12 +32,32 @@
             </intent-filter>
         </activity>
         <activity
-            android:screenOrientation="portrait"
-            android:name=".activities.commands.CommandDetailsActivity" />
+            android:name=".activities.commands.CommandDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.stats.StatsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.menu.RestaurantMenuActivity"
+            android:screenOrientation="portrait" /> <!-- notification job service -->
+        <activity
+            android:name=".activities.menu.EditFoodActivity"
+            android:screenOrientation="portrait" />
 
-        <service android:name=".firebase.MyRestoFirebaseMessagingService"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:exported="true">
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_notification" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorPrimary" />
+        <!--
+             Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
+        <service
+            android:name=".firebase.MyRestoFirebaseMessagingService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -56,25 +67,20 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-        <!-- notification job service -->
-        <service android:name="._commons.notification.RestaurantKabaNotificationJobService"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:exported="true"/>
-
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_notification" />
-
-        <!--
-             Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more.
-        -->
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorPrimary" />
-
-        <activity android:name=".activities.stats.StatsActivity"
-            android:screenOrientation="portrait"></activity>
+        <service
+            android:name="._commons.notification.RestaurantKabaNotificationJobService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
+    <!-- wave lock -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
 
 </manifest>

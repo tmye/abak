@@ -30,6 +30,10 @@ public class RestaurantEntity implements Parcelable {
 
     public String working_hour = "";
 
+    public int is_open;
+
+    public int open_type;
+
 
     public RestaurantEntity() {
     }

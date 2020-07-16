@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="@dimen/activity_horizontal_margin"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+            <tg.tmye.kaba.restaurant.cviews.SlidingBanner_LilRound
+                android:id="@+id/sliding_banner"
+                android:layout_width="match_parent"
+                android:background="@color/brown"
+                app:autocompute="false"
+                android:layout_height="@dimen/food_details_sliding_banner_height"
+                android:layout_gravity="center_vertical">
+
+                <tg.tmye.kaba.restaurant.cviews.AutoScrollViewPager
+                    android:id="@+id/viewpager_sliding_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:autocompute="false"
+                    android:background="@color/transparent" />
+
+                <LinearLayout
+                    android:id="@+id/lny_lil_round"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginBottom="@dimen/lil_round_margin_bottom"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+            </tg.tmye.kaba.restaurant.cviews.SlidingBanner_LilRound>
+
+            <TextView
+                android:id="@+id/tv_food_name"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/kaba_red_color"
+                android:text="SOMETHING"
+                android:gravity="center"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:textAllCaps="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        android:text="Normal price"
+                        android:layout_marginRight="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/tv_food_price"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary_yellow"
+                        android:text="1600"
+                        android:textAllCaps="true"
+                        android:layout_marginRight="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        android:text="Promotion price"
+                        android:layout_marginRight="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/tv_food_promotion_price"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:text="1300"
+                        android:textAllCaps="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <Switch
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:enabled="false"
+                    android:checked="false"
+                    android:id="@+id/switch_is_promotion"
+                    android:text="Promotion activated  "
+                    android:textColor="@color/dark_green"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/tv_is_food_hidden"
+                    android:text="hidden"
+                    android:padding="@dimen/activity_horizontal_margin_quarter"
+                    android:textSize="@dimen/restaurant_distance_text_size"
+                    android:textColor="@color/white"
+                    android:background="@drawable/bg_red_cornered"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                style="@style/TextAppearance.Design.Hint"
+                android:gravity="center"
+                android:text=""
+                android:layout_width="match_parent"
+                android:textColor="@color/gray_login_title_color"
+                android:textSize="18sp"
+                android:textAlignment="center"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_half"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_weight="1"
+                    android:id="@+id/bt_edit_name"
+                    android:text="EDIT"
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_hidden"
+            android:src="@drawable/hide"
+            android:alpha="0.3"
+            android:layout_gravity="center"
+            android:layout_width="200dp"
+            android:layout_height="200dp"/>
+
+    </FrameLayout>
+
+
+    <!-- image -->
+
+    <!-- name -->
+
+    <!-- description -->
+
+    <!-- normal price -->
+
+    <!-- promotion price -->
+
+    <!-- is in promotion -->
+
+    <!-- hide / activate -->
+
+    <!-- delete -->
+</android.support.v7.widget.CardView>

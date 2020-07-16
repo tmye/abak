@@ -33,13 +33,17 @@ import tg.tmye.kaba.restaurant.R;
 import tg.tmye.kaba.restaurant.activities.commands.contract.MyCommandContract;
 import tg.tmye.kaba.restaurant.activities.commands.presenter.MyCommandsPresenter;
 import tg.tmye.kaba.restaurant.activities.login.RestaurantLoginActivity;
+import tg.tmye.kaba.restaurant.activities.menu.RestaurantMenuActivity;
 import tg.tmye.kaba.restaurant.activities.stats.StatsActivity;
 import tg.tmye.kaba.restaurant.cviews.dialog.LoadingDialogFragment;
+import tg.tmye.kaba.restaurant.data.Restaurant.RestaurantEntity;
 import tg.tmye.kaba.restaurant.data.Restaurant.source.RestaurantOnlineRepository;
 import tg.tmye.kaba.restaurant.data.command.source.CommandRepository;
 import tg.tmye.kaba.restaurant.syscore.Constant;
 import tg.tmye.kaba.restaurant.syscore.GlideApp;
 import tg.tmye.kaba.restaurant.syscore.MyRestaurantApp;
+
+import static tg.tmye.kaba.restaurant.activities.menu.RestaurantMenuActivity.RESTAURANT_ID;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener, MyCommandContract.HomePageView, View.OnTouchListener, CompoundButton.OnCheckedChangeListener {
 
@@ -55,7 +59,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     SwitchCompat switch_compat;
 
-    CardView bt_my_commands, bt_weekly_stats;
+    CardView bt_my_commands, bt_weekly_stats, bt_my_menu;
 
     private TextView tv_header_resto_name;
     ImageView header_resto_cic;
@@ -82,6 +86,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         initViews();
 
         bt_my_commands.setOnClickListener(this);
+        bt_my_menu.setOnClickListener(this);
         bt_weekly_stats.setOnClickListener(this);
 
         lny_1_waiting.setOnClickListener(this);
@@ -140,6 +145,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initViews() {
         bt_my_commands = findViewById(R.id.bt_my_commands);
+        bt_my_menu = findViewById(R.id.bt_my_menu);
 
         tv_quantity = findViewById(R.id.tv_quantity);
         tv_money = findViewById(R.id.tv_money);
@@ -227,6 +233,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bt_my_commands:
                 showMyCommands();
                 break;
+            case R.id.bt_my_menu:
+                showMenu();
+                break;
             case R.id.bt_weekly_stats:
                 showStats();
                 break;
@@ -240,6 +249,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 showMyCommands(2);
                 break;
         }
+    }
+
+    private void showMenu() {
+        Intent intent = new Intent(HomeActivity.this, RestaurantMenuActivity.class);
+        RestaurantEntity restaurant = restaurantOnlineRepository.getRestaurant();
+        intent.putExtra(RESTAURANT_ID, restaurant.id);
+        startActivity(intent);
     }
 
     private void showStats() {

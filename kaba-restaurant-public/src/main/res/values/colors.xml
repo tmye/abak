@@ -9,7 +9,7 @@
     <color name="restaurant_name_color">#001199</color>
     <color name="circular_view_border_yellow">@color/kaba_red_color</color>
     <color name="kaba_red_color">#cc1641</color>
-
+<color name="colorPrimary_with_transparent">#85CC1641</color>
 
 
     <color name="restaurant_name">#aaaaaa</color>
@@ -76,7 +76,9 @@
     <color name="black">#000000</color>
 
     <color name="extra_light_gray">#efefef</color>
-    <color name="silver_blue">#195e9e</color> <!-- linkedin blue -->
+    <color name="silver_blue">#195e9e</color>
+    <color name="grey" />
+    <color name="dark_green">#009688</color> <!-- linkedin blue -->
 
 
 </resources>

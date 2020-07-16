@@ -73,4 +73,11 @@ public class Config {
     public static final String LINK_RESTAURANT_CANCEL_COMMAND = Constant.SERVER_ADDRESS + "/resto/api/command/reject";
 
     public static final String LINK_RESTAURANT_CHECK_OPENED = Constant.SERVER_ADDRESS + "/resto/api/open_close";
+
+    /* menu food*/
+    public static final String LINK_MENU_BY_RESTAURANT_ID = Constant.SERVER_ADDRESS+
+            "/api/menu/get";
+
+    public static final String LINK_MENU_BY_ID = Constant.SERVER_ADDRESS+
+            "/api/menu/get/id";
 }

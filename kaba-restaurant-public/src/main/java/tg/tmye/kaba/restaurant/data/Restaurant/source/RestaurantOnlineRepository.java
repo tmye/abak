@@ -53,7 +53,7 @@ public class RestaurantOnlineRepository {
         params.put("_username", username);
         params.put("_password", password);
 
-           /* send login params by post */
+        /* send login params by post */
         networkRequestThreadBase.postWithParams (Config.LINK_RESTAURANT_LOGIN, params, intf);
     }
 
@@ -82,6 +82,18 @@ public class RestaurantOnlineRepository {
         edit.commit();
     }
 
+
+    public RestaurantEntity getRestaurant() {
+
+        RestaurantEntity restaurantEntity = new RestaurantEntity();
+        /* persist restaurant informations locally */
+        SharedPreferences sharedPreferences = context.getSharedPreferences(Config.RESTAURANT_SHARED_PREFS, Context.MODE_PRIVATE);
+        restaurantEntity.id = sharedPreferences.getInt(Config.RESTAURANT_ID,0);
+        restaurantEntity.name =  sharedPreferences.getString(Config.RESTAURANT_NAME, restaurantEntity.name);
+        return restaurantEntity;
+    }
+
+
     public void setIsNotOkWithServer() {
         SharedPreferences sharedPreferences = context.getSharedPreferences(Config.FIREBASE_PUSH_SHPF, Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = sharedPreferences.edit();
@@ -90,7 +102,7 @@ public class RestaurantOnlineRepository {
     }
 
     public void sendPushData() {
-    /*  */
+        /*  */
         final SharedPreferences sharedPreferences = context.getSharedPreferences(Config.FIREBASE_PUSH_SHPF, Context.MODE_PRIVATE);
 
         if (sharedPreferences.getBoolean(Config.PHONE_IS_OK_WITH_SERVER, false)) {
@@ -134,7 +146,7 @@ public class RestaurantOnlineRepository {
                     int errorCode = obj.get("error").getAsInt();
                     if (errorCode == 0) {
                         Log.d(TAG, "posting firebase push token - success");
-                /* set success into the sharedprefs */
+                        /* set success into the sharedprefs */
                         SharedPreferences.Editor edit = sharedPreferences.edit();
                         edit.putBoolean(Config.PHONE_IS_OK_WITH_SERVER, true);
                         edit.apply();
