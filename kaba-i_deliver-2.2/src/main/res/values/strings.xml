@@ -45,31 +45,8 @@
     <string name="scanner_activity">Scan</string>
 
 
-    <string-array name="days_of_week">
-        <item>Sunday</item>
-        <item>Monday</item>
-        <item>Tuesday</item>
-        <item>Wednesday</item>
-        <item>Thursday</item>
-        <item>Friday</item>
-        <item>Saturday</item>
-    </string-array>
-
-    <string-array name="months_of_year">
-        <item>January</item>
-        <item>February</item>
-        <item>March</item>
-        <item>April</item>
-        <item>May</item>
-        <item>June</item>
-        <item>July</item>
-        <item>August</item>
-        <item>September</item>
-        <item>October</item>
-        <item>November</item>
-        <item>December</item>
-    </string-array>
     <string name="title_activity_login">LOGIN</string>
+
     <string name="register_account">REGISTER AN ACCOUNT</string>
     <string name="register">Register</string>
     <string name="confirm">Confirm</string>
@@ -116,10 +93,10 @@
     <string name="solde_recharge">TOP UP</string>
     <string name="solde_transfert">TRANSFERT</string>
     <string name="ad_rectangle_test">EAT MORE HEALTY!!!</string>
-
-    <!-- home account menu -->
     <string name="myaccount_commands">COMMANDS</string>
     <string name="myaccount_bon_dachat">VOUCHER</string>
+
+    <!-- home account menu -->
     <string name="myaccount_favorite_plat">FAVORITES</string>
     <string name="myaccount_delivery_address">ADRESSES</string>
     <string name="myaccount_client_service">CUSTOMER</string>
@@ -237,9 +214,9 @@
     <string name="exiting_shipping_mode">Exiting shipping mode now...</string>
     <string name="confirm_shipping_done">Confirm shipping done</string>
     <string name="start_shipping_success">You are now shipping this order.</string>
-
     <string name="delivery_day">Delivery day</string>
     <string name="delivery_time">Delivery time</string>
+
     <string name="pay_at_arrival_not_allowed">Sorry, this restarant doesn\'t allow pay at arrival</string>
     <string name="prepay_not_allowed">Sorry this restaurant doesn\'t allow paying online</string>
     <string name="purchase_address_wrong">Sorry, delivery address error</string>
@@ -247,5 +224,29 @@
     <string name="preorder_not_accept">Sorry, preorder is not allowed for now.</string>
     <string name="pre_badge">Pre</string>
     <string name="infos">Additional informations</string>
+    <string name="action_restaurants">Restaurants</string>
+    <string-array name="days_of_week">
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
+    <string-array name="months_of_year">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
 
 </resources>

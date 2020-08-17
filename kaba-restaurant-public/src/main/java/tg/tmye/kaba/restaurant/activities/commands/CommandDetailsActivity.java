@@ -224,6 +224,7 @@ public class CommandDetailsActivity extends LoadingIsOkActivtity implements Comm
                 switch (command.state) {
                     case WAITING:
                         ib_action_cancel.setVisibility(View.VISIBLE);
+                        ib_action_button.setVisibility(View.VISIBLE);
                         ib_action_button.setBackgroundResource(R.drawable.icon_orange_circle);
                         tv_select_shipping_man.setVisibility(View.GONE);
                         recycler_kabaman_list.setVisibility(View.GONE);
@@ -280,11 +281,11 @@ public class CommandDetailsActivity extends LoadingIsOkActivtity implements Comm
                 inflateCommandFood(command.food_list);
                 inflateShippingAddress(deliveryAddress, command.last_update);
 
-                if (Constant.IS_RESTAURANT_APP){
+          /*      if (Constant.IS_RESTAURANT_APP){
                     tv_select_shipping_man.setVisibility(View.GONE);
                     ib_action_button.setVisibility(View.GONE);
                     tv_bottom_explain.setText(getResources().getString(R.string.wait_until_dispatched));
-                }
+                }*/
 
                 bt_contact_call.setOnClickListener(new OnContactViewClickListener(CommandDetailsActivity.this, command.shipping_address.phone_number));
             }
@@ -415,6 +416,9 @@ public class CommandDetailsActivity extends LoadingIsOkActivtity implements Comm
             case R.id.ib_action_cancel:
                 cancelCommand();
                 break;
+//            case R.id.ib_action_cancel:
+//                cancelCommand();
+//                break;
             default:
                 if (main_command_item != null) {
                     sendAction();
@@ -444,7 +448,7 @@ public class CommandDetailsActivity extends LoadingIsOkActivtity implements Comm
     private void sendAction() {
         if (main_command_item.state == 0)
             presenter.acceptCommand(main_command_item);
-        if (main_command_item.state == 1) {
+      /*  if (main_command_item.state == 1) {
             if (adapter == null || (adapter != null && adapter.getSelected() == -1)) {
                 mToast(getResources().getString(R.string.please_select_shipping_man));
             } else {
@@ -452,7 +456,7 @@ public class CommandDetailsActivity extends LoadingIsOkActivtity implements Comm
                 KabaShippingMan shippingMan = shippingMen.get(choice);
                 presenter.sendCommandToShipping(main_command_item, shippingMan);
             }
-        }
+        }*/
     }
 
     class SelectedFoodsAdapter extends RecyclerView.Adapter<SelectedFoodsAdapter.ViewHolder> {

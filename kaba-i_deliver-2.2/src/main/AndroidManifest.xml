@@ -2,80 +2,74 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="tg.tmye.kaba_i_deliver">
 
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
-
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <!-- wave lock -->
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-
     <application
-        android:networkSecurityConfig="@xml/network_security_config"
         android:name=".syscore.MyKabaDeliverApp"
         android:allowBackup="true"
         android:icon="@mipmap/kaba_icon_rectangle_green"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/kaba_icon_green"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.restaurant.RestaurantListActivity"></activity>
         <activity
             android:name=".activity.home.HomeActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:launchMode="singleTask"
             android:name=".activity.command.MyCommandsActivity"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.login.DeliverManLoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:launchMode="singleTask"
-            android:theme="@style/AppTheme.NoActionBar"
             android:name=".activity.delivery.DeliveryModeActivity"
-            android:label="@string/title_activity_delivery_mode">
-        </activity>
-        <activity
+            android:label="@string/title_activity_delivery_mode"
             android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".activity.command.CommandDetailsActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:label="@string/title_activity_command_details"
-            />
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar" />
 
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorPrimary" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_notification" /> <!-- notification job service -->
         <service android:name=".firebase.MyDeliverManFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <service android:name=".firebase.MyDeliverManFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
-        <!-- notification job service -->
-        <service android:name="._commons.notification.DeliveryKabaNotificationJobService"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:exported="true"/>
-
-       <meta-data
-            android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorPrimary" />
-
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_notification" />
-
+        <service
+            android:name="._commons.notification.DeliveryKabaNotificationJobService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
+    <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- wave lock -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
 
 </manifest>

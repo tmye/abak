@@ -20,7 +20,6 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="details" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
     <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
@@ -32,56 +31,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb246aff-a498-4926-95cc-ec65b31aa146" name="Default" comment="c">
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/_commons/adapter/EditFoodListAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/_commons/adapter/EditMenuListAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/EditFoodActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/EditMenuActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/EditSingleFoodActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/EditSingleMenuActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/Fragmentz/RestaurantSubMenuFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/OnMenuInteractionListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/RestaurantMenuActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/contract/EditMenuContract.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/contract/RestaurantMenuContract.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/presenter/EditMenuPresenter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/presenter/RestaurantMenuPresenter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/cviews/AutoScrollViewPager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/cviews/SlidingBanner_LilRound.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/data/advert/AdsBanner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/drawable-xhdpi/edit_menu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/drawable-xhdpi/hide.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/drawable/bg_resto_unavailable_rounded.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/drawable/ic_round_white_empty_24dp.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/drawable/ic_round_white_full_24dp.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/drawable/transparent_white_red_rounded.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/drawable/white_placeholder.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/layout/activity_edit_food.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/layout/activity_edit_menu.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/layout/activity_edit_single_menu.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/layout/activity_restaurant_menu.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/layout/fragment_restaurant_submenu.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/layout/lil_round.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/layout/restaurant_food_for_edit.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/layout/restaurant_menu_for_edit.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/layout/sliding_banner_iv.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/restaurant/RestaurantListActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/restaurant/contract/RestaurantListContract.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/restaurant/presenter/RestaurantListPresenter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/layout/activity_restaurant_list.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/_commons/utils/UtilFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/_commons/utils/UtilFunctions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/MyCommandsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/MyCommandsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/syscore/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/syscore/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/syscore/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/syscore/Constant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/menu/my_commands_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/menu/my_commands_menu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/_commons/adapter/EditFoodListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/_commons/adapter/EditFoodListAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/_commons/adapter/EditMenuListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/_commons/adapter/EditMenuListAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/commands/CommandDetailsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/commands/CommandDetailsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/commands/contract/MyCommandContract.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/commands/contract/MyCommandContract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/commands/presenter/MyCommandsPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/commands/presenter/MyCommandsPresenter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/home/HomeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/home/HomeActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/login/presenter/LoginPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/login/presenter/LoginPresenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/data/Food/Restaurant_Menu_FoodEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/data/Food/Restaurant_Menu_FoodEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/data/Menu/Restaurant_SubMenuEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/data/Menu/Restaurant_SubMenuEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/EditFoodActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/EditFoodActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/EditMenuActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/EditMenuActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/EditSingleFoodActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/EditSingleFoodActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/EditSingleMenuActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/EditSingleMenuActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/RestaurantMenuActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/RestaurantMenuActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/contract/EditMenuContract.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/contract/EditMenuContract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/presenter/EditMenuPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/presenter/EditMenuPresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/cviews/dialog/CancelConfirmationDialogFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/cviews/dialog/CancelConfirmationDialogFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/data/Menu/source/MenuDb_OnlineRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/data/Menu/source/MenuDb_OnlineRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/data/Restaurant/RestaurantEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/data/Restaurant/RestaurantEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/data/Restaurant/source/RestaurantOnlineRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/data/Restaurant/source/RestaurantOnlineRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/data/command/source/CommandRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/data/command/source/CommandRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/syscore/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/syscore/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/layout/activity_edit_single_food.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/layout/activity_edit_single_food.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/layout/activity_edit_single_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/layout/activity_edit_single_menu.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/layout/content_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/layout/content_home.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/layout/menu_title_list_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/layout/menu_title_list_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/values/attrs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/values/attrs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/values/colors.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/values/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/values/dimens.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -92,7 +75,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Kaba$Kaba_kaba_brave_2_2__build_.ic" NAME="Kaba:kaba-brave-2.2 [build] Coverage Results" MODIFIED="1555427138257" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="192.168.0.101:5555" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="041881193D000358" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -143,11 +126,11 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="valueResourceFile" />
-        <option value="resourceFile" />
         <option value="layoutResourceFile_vertical" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="layoutResourceFile" />
+        <option value="resourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -168,8 +151,8 @@
     <property name="DEBUGGABLE_DEVICE" value="tecno_mobile_limited-tecno_cf7-192.168.0.101:5555" />
     <property name="DEBUGGABLE_PROCESS" value="tg.tmye.kaba.restaurant" />
     <property name="DEBUGGER_ID" value="Auto" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="192.168.0.101:5555" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-06-19T15:31:40.258Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="041881193D000358" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-08-17T15:50:44.339Z" />
     <property name="ExportApk.ApkPath" value="$PROJECT_DIR$/deploy_test/release" />
     <property name="ExportApk.BuildType" value="release" />
     <property name="ExportApk.BuildVariants" value="release" />
@@ -191,7 +174,7 @@
     <property name="full.screen.before.presentation.mode" value="true" />
     <property name="ignore_missing_gitignore" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/drawable-xhdpi" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/kaba-restaurant-public/src/main/res/drawable-xhdpi" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Dependencies" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -210,11 +193,11 @@
       <recent name="tg.tmye.kaba._commons.intf" />
     </key>
     <key name="android.template.packageName">
+      <recent name="tg.tmye.kaba_i_deliver.activity.restaurant" />
       <recent name="tg.tmye.kaba.restaurant.activities.menu" />
       <recent name="tg.tmye.kaba.activity.UserAcc.sponsor" />
       <recent name="tg.tmye.kaba.activity.messaging" />
       <recent name="tg.tmye.kaba.brave.one.activity.messaging" />
-      <recent name="tg.tmye.kaba.brave.one" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/kaba-brave/src/main/assets/fonts" />
@@ -229,11 +212,11 @@
       <recent name="$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/cviews" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="tg.tmye.kaba_i_deliver.activity.restaurant.presenter" />
+      <recent name="tg.tmye.kaba_i_deliver.activity.restaurant" />
       <recent name="tg.tmye.kaba.restaurant.activities.menu" />
       <recent name="tg.tmye.kaba.restaurant._commons.adapter" />
       <recent name="tg.tmye.kaba.restaurant.activities.menu.contract" />
-      <recent name="tg.tmye.kaba.restaurant.activities.menu.presenter" />
-      <recent name="tg.tmye.kaba.activity.messaging.presenter" />
     </key>
     <key name="android.template.parentActivityClass">
       <recent name="" />
@@ -252,7 +235,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Android App.kaba-restaurant-public">
+  <component name="RunManager" selected="Android App.kaba-i_deliver-2.2">
     <configuration name="&lt;template&gt;" type="JUnit" default="true" selected="false">
       <option name="MAIN_CLASS_NAME" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -3765,39 +3748,14 @@
           <option name="timeStamp" value="1754" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/MyCommandsActivity.java</url>
-          <line>207</line>
-          <option name="timeStamp" value="1755" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/MyCommandsActivity.java</url>
-          <line>197</line>
-          <option name="timeStamp" value="1756" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/presenter/MyCommandsPresenter.java</url>
           <line>101</line>
           <option name="timeStamp" value="1757" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/presenter/MyCommandsPresenter.java</url>
-          <line>81</line>
-          <option name="timeStamp" value="1759" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/presenter/MyCommandsPresenter.java</url>
           <line>105</line>
           <option name="timeStamp" value="1760" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/MyCommandsActivity.java</url>
-          <line>199</line>
-          <option name="timeStamp" value="1761" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/MyCommandsActivity.java</url>
-          <line>209</line>
-          <option name="timeStamp" value="1762" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/CommandDetailsPresenter.java</url>
@@ -3890,23 +3848,18 @@
           <option name="timeStamp" value="1780" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/presenter/MyCommandsPresenter.java</url>
-          <line>82</line>
-          <option name="timeStamp" value="1781" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/commands/MyCommandsActivity.java</url>
           <line>238</line>
           <option name="timeStamp" value="1782" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/login/presenter/LoginPresenter.java</url>
-          <line>59</line>
+          <line>58</line>
           <option name="timeStamp" value="1783" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/login/presenter/LoginPresenter.java</url>
-          <line>57</line>
+          <line>56</line>
           <option name="timeStamp" value="1785" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -3941,7 +3894,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/RestaurantMenuActivity.java</url>
-          <line>194</line>
+          <line>196</line>
           <option name="timeStamp" value="1793" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -3960,9 +3913,154 @@
           <option name="timeStamp" value="1797" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/login/presenter/LoginPresenter.java</url>
-          <line>56</line>
-          <option name="timeStamp" value="1798" />
+          <url>file://$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/presenter/EditMenuPresenter.java</url>
+          <line>58</line>
+          <option name="timeStamp" value="1800" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/presenter/EditMenuPresenter.java</url>
+          <line>51</line>
+          <option name="timeStamp" value="1801" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/presenter/EditMenuPresenter.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="1802" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/menu/presenter/EditMenuPresenter.java</url>
+          <line>62</line>
+          <option name="timeStamp" value="1803" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/data/Menu/source/MenuDb_OnlineRepository.java</url>
+          <line>142</line>
+          <option name="timeStamp" value="1804" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/data/Menu/source/MenuDb_OnlineRepository.java</url>
+          <line>146</line>
+          <option name="timeStamp" value="1805" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/commands/presenter/MyCommandsPresenter.java</url>
+          <line>152</line>
+          <option name="timeStamp" value="1808" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/commands/presenter/MyCommandsPresenter.java</url>
+          <line>146</line>
+          <option name="timeStamp" value="1809" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/commands/presenter/MyCommandsPresenter.java</url>
+          <line>178</line>
+          <option name="timeStamp" value="1810" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/commands/presenter/MyCommandsPresenter.java</url>
+          <line>186</line>
+          <option name="timeStamp" value="1811" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/commands/presenter/MyCommandsPresenter.java</url>
+          <line>189</line>
+          <option name="timeStamp" value="1812" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/commands/presenter/MyCommandsPresenter.java</url>
+          <line>193</line>
+          <option name="timeStamp" value="1813" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/home/HomeActivity.java</url>
+          <line>352</line>
+          <option name="timeStamp" value="1818" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/commands/presenter/MyCommandsPresenter.java</url>
+          <line>81</line>
+          <option name="timeStamp" value="1819" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/commands/presenter/MyCommandsPresenter.java</url>
+          <line>129</line>
+          <option name="timeStamp" value="1821" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/activities/commands/presenter/MyCommandsPresenter.java</url>
+          <line>127</line>
+          <option name="timeStamp" value="1822" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/cviews/dialog/CancelConfirmationDialogFragment.java</url>
+          <line>113</line>
+          <option name="timeStamp" value="1823" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-restaurant-public/src/main/java/tg/tmye/kaba/restaurant/cviews/dialog/CancelConfirmationDialogFragment.java</url>
+          <line>112</line>
+          <option name="timeStamp" value="1824" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/MyCommandsActivity.java</url>
+          <line>437</line>
+          <option name="timeStamp" value="1837" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/MyCommandsActivity.java</url>
+          <line>436</line>
+          <option name="timeStamp" value="1838" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/MyCommandsActivity.java</url>
+          <line>420</line>
+          <option name="timeStamp" value="1839" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/MyCommandsActivity.java</url>
+          <line>426</line>
+          <option name="timeStamp" value="1840" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/MyCommandsActivity.java</url>
+          <line>429</line>
+          <option name="timeStamp" value="1841" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/restaurant/presenter/RestaurantListPresenter.java</url>
+          <line>138</line>
+          <option name="timeStamp" value="1844" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/restaurant/presenter/RestaurantListPresenter.java</url>
+          <line>137</line>
+          <option name="timeStamp" value="1845" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/restaurant/presenter/RestaurantListPresenter.java</url>
+          <line>110</line>
+          <option name="timeStamp" value="1846" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/restaurant/presenter/RestaurantListPresenter.java</url>
+          <line>116</line>
+          <option name="timeStamp" value="1847" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/restaurant/presenter/RestaurantListPresenter.java</url>
+          <line>124</line>
+          <option name="timeStamp" value="1848" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/restaurant/presenter/RestaurantListPresenter.java</url>
+          <line>127</line>
+          <option name="timeStamp" value="1849" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/restaurant/presenter/RestaurantListPresenter.java</url>
+          <line>140</line>
+          <option name="timeStamp" value="1850" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-field">
           <url>file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/config/Constant.java</url>

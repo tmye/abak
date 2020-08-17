@@ -106,12 +106,14 @@ public class CancelConfirmationDialogFragment extends DialogFragment implements 
     private void launchCancelling() {
         int radioButtonId = radioGroup_motive.getCheckedRadioButtonId();
 
-        Log.d(Constant.APP_TAG, ""+radioButtonId);
+        Log.d(Constant.APP_TAG, "" + radioButtonId);
 
-        String motif = motives[radioButtonId-1000];
+//        String motif = motives[radioButtonId-1000];
 
-        if (getActivity() != null)
-            ((CommandDetailsActivity)(getActivity())).cancelCommand((Integer) radioGroup_motive.getTag());
+        if (getActivity() != null) {
+//            ((CommandDetailsActivity) (getActivity())).cancelCommand((Integer) radioGroup_motive.getTag());
+            ((CommandDetailsActivity) (getActivity())).cancelCommand(radioButtonId);
+        }
     }
 
 

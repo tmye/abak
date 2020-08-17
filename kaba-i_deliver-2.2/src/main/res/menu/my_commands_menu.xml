@@ -10,6 +10,12 @@
         app:showAsAction="always" />
 -->
     <item
+        android:id="@+id/action_restaurants"
+        android:orderInCategory="100"
+        android:title="@string/action_restaurants"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/action_logout"
         android:orderInCategory="90"
         android:title="@string/action_logout"

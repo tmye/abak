@@ -56,8 +56,7 @@ public class EditFoodActivity extends AppCompatActivity implements
     static RestaurantEntity restaurantEntity;
     private EditMenuContract.Presenter presenter;
     private MenuDb_OnlineRepository menu_repository;
-    private List<Restaurant_SubMenuEntity> menu_food;
-    private List<Restaurant_Menu_FoodEntity> drinks;
+    private List<Restaurant_Menu_FoodEntity> foods;
 
     private Toolbar toolbar;
 
@@ -93,19 +92,15 @@ public class EditFoodActivity extends AppCompatActivity implements
 
         menu_repository = new MenuDb_OnlineRepository(this, resto);
         presenter = new EditMenuPresenter(menu_repository, this);
-        presenter.start();
+        presenter.populateFoodFromMenudId(sub_menu_id);
     }
 
-
-
     @Override
-    public void inflateMenus(RestaurantEntity entity, final List<Restaurant_SubMenuEntity> menu_food, List<Restaurant_Menu_FoodEntity> drinks) {
+    public void inflateFoods(RestaurantEntity restaurantEntity, List<Restaurant_Menu_FoodEntity> menu_food) {
 
         this.restaurantEntity = restaurantEntity;
-        /* send list of menus and foods list */
-        this.drinks = drinks;
         /* init pages */
-        this.menu_food = menu_food;
+        this.foods = menu_food;
         /* set strip together with viewpager */
         runOnUiThread(new Runnable() {
             @Override
@@ -113,27 +108,30 @@ public class EditFoodActivity extends AppCompatActivity implements
                 lny_error_box.setVisibility(View.GONE);
                 lny_loading_frame.setVisibility(View.GONE);
                 lny_content.setVisibility(View.VISIBLE);
-                for (int i = 0; i < menu_food.size(); i++) {
-                    if (menu_food.get(i).id == sub_menu_id) {
-                        inflateRecyclerView(menu_food.get(i).foods);
-                        break;
-                    }
-                }
-                tv_choosed_food_count.setText("Foods: "+getNonHiddenFoodCount(menu_food));
+                inflateRecyclerView(foods);
+                tv_choosed_food_count.setText("Foods: "+getNonHiddenFoodCount(foods));
             }
         });
     }
 
-    private int getNonHiddenFoodCount(List<Restaurant_SubMenuEntity> menu_food) {
+    @Override
+    public void inflateMenus(RestaurantEntity entity, final List<Restaurant_SubMenuEntity> menu_food, List<Restaurant_Menu_FoodEntity> drinks) {
+
+
+    }
+
+    private int getNonHiddenFoodCount(List<Restaurant_Menu_FoodEntity> food_) {
         int count = 0;
-        for (int i = 0; i < menu_food.size(); i++) {
-            if (menu_food.get(i).is_hidden == 0) // is not hidden
+        for (int i = 0; i < food_.size(); i++) {
+            if (food_.get(i).is_hidden == 0) // is not hidden
                 count++;
         }
         return count;
     }
 
     private void inflateRecyclerView(List<Restaurant_Menu_FoodEntity> menu_food) {
+
+        recyclerview.setNestedScrollingEnabled(false);
 
         EditFoodListAdapter adapter = new EditFoodListAdapter(this, getSupportFragmentManager(), menu_food);
         recyclerview.setLayoutManager(new LinearLayoutManager(this));
@@ -177,6 +175,8 @@ public class EditFoodActivity extends AppCompatActivity implements
             }
         });
     }
+
+
 
     @Override
     public void showNoDataMessage() {
@@ -286,7 +286,7 @@ public class EditFoodActivity extends AppCompatActivity implements
         switch (view.getId()) {
             case R.id.bt_tryagain:
                 if (presenter != null)
-                    presenter.populateViews();
+                    presenter.populateFoodFromMenudId(sub_menu_id);
                 break;
             case R.id.iv_edit_menu:
                 _jumpToEditMenuPage();

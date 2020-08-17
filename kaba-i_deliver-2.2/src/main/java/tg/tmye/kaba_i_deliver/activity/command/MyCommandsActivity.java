@@ -36,6 +36,7 @@ import tg.tmye.kaba_i_deliver.activity.command.frag.RestaurantSubCommandListFrag
 import tg.tmye.kaba_i_deliver.activity.command.presenter.MyCommandsPresenter;
 import tg.tmye.kaba_i_deliver.activity.delivery.DeliveryModeActivity;
 import tg.tmye.kaba_i_deliver.activity.login.DeliverManLoginActivity;
+import tg.tmye.kaba_i_deliver.activity.restaurant.RestaurantListActivity;
 import tg.tmye.kaba_i_deliver.cviews.CustomProgressbar;
 import tg.tmye.kaba_i_deliver.cviews.NoScrollViewPager;
 import tg.tmye.kaba_i_deliver.cviews.dialog.LoadingDialogFragment;
@@ -425,8 +426,16 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
                 /* clear logout and start the task bottom activity */
                 logout();
                 break;
+            case R.id.action_restaurants:
+                jumpToRestaurants();
+                break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void jumpToRestaurants() {
+        Intent intent = new Intent(this, RestaurantListActivity.class);
+        startActivity(intent);
     }
 
 

@@ -35,11 +35,14 @@ public interface EditMenuContract {
 
         void onNetworkError();
 
+        void inflateFoods(RestaurantEntity restaurantEntity, List<Restaurant_Menu_FoodEntity> menu_food);
     }
 
     public interface Presenter extends BasePresenter {
 
         void populateViews();
+
+        void populateFoodFromMenudId(int menu_id);
     }
 
 }

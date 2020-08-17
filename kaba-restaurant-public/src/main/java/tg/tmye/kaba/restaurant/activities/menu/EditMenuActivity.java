@@ -124,6 +124,8 @@ public class EditMenuActivity extends AppCompatActivity implements
 
         tv_menu_count.setText("Menu: "+getNonHiddenMenuCount(menu_food));
 
+        recyclerview.setNestedScrollingEnabled(false);
+
         EditMenuListAdapter adapter = new EditMenuListAdapter(this, menu_food);
         recyclerview.setLayoutManager(new LinearLayoutManager(this));
         recyclerview.setAdapter(adapter);
@@ -174,6 +176,11 @@ public class EditMenuActivity extends AppCompatActivity implements
                 lny_error_box.setVisibility(View.VISIBLE);
             }
         });
+    }
+
+    @Override
+    public void inflateFoods(RestaurantEntity restaurantEntity, List<Restaurant_Menu_FoodEntity> menu_food) {
+
     }
 
     @Override

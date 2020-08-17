@@ -53,4 +53,8 @@ public class Config {
 
     public static final String LINK_START_SHIPPING =  Constant.SERVER_ADDRESS + "/livreur/api/command/auto-assign";
 
+    public static final String LINK_RESTAURANT_LIST =  Constant.SERVER_ADDRESS + "/livreur/api/restaurants/get";
+
+//
+
 }

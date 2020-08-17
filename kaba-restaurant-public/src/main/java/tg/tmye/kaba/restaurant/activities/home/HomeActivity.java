@@ -318,7 +318,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void inflateStats (final int is_opened, final String head_pic, final String resto_name, final String quantity_count, final String amount_money) {
+    public void inflateStats (final int calendar_open_state, final int manual_open_state, final String head_pic, final String resto_name, final String quantity_count, final String amount_money) {
 
         runOnUiThread(new Runnable() {
             @Override
@@ -334,11 +334,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         .centerCrop()
                         .into(header_resto_cic);
 
-                if (is_opened == 1) {
+                if (calendar_open_state == 1) {
                     /* open*/
                     tv_state_opend.setTextColor(Color.WHITE);
                     tv_state_opend.setText(getResources().getText(R.string.is_opened));
                     tv_state_opend.setBackgroundResource(R.drawable.bg_green_rounded);
+                } else if (calendar_open_state == 2) {
+                    tv_state_opend.setTextColor(Color.WHITE);
+                    tv_state_opend.setText(getResources().getText(R.string.is_pausing));
+                    tv_state_opend.setBackgroundResource(R.drawable.bg_resto_pausing_yellow);
                 } else {
                     /* closed */
                     tv_state_opend.setTextColor(Color.WHITE);
@@ -346,7 +350,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     tv_state_opend.setBackgroundResource(R.drawable.bg_resto_closed_rounded);
                 }
 
-                presenterSwitchOpened (is_opened == 0 ? false : true);
+                presenterSwitchOpened (manual_open_state == 0 ? false : true);
             }
         });
     }
@@ -360,39 +364,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 switch_compat.setOnCheckedChangeListener(null);
                 switch_compat.setChecked(is_opened);
                 switch_compat.setOnCheckedChangeListener(HomeActivity.this);
-
-                /* according to the one that is selected, show something --' */
-                if (is_opened) {
-                    /* open*/
-                    tv_opened_opened.setTextColor(Color.WHITE);
-                    tv_opened_opened.setBackgroundResource(R.drawable.bg_green_rounded);
-
-                    tv_opened_opened.setVisibility(View.VISIBLE);
-                    tv_opened_closed.setVisibility(View.GONE);
-                } else {
-                    /* closed */
-                    tv_opened_closed.setTextColor(Color.WHITE);
-                    tv_opened_closed.setBackgroundResource(R.drawable.bg_resto_closed_rounded);
-
-                    tv_opened_closed.setVisibility(View.VISIBLE);
-                    tv_opened_opened.setVisibility(View.GONE);
-                }
-
-
-                if (is_opened) {
-                    /* open*/
-                    tv_state_opend.setTextColor(Color.WHITE);
-                    tv_state_opend.setText(getResources().getText(R.string.is_opened));
-                    tv_state_opend.setBackgroundResource(R.drawable.bg_green_rounded);
-                } else {
-                    /* closed */
-                    tv_state_opend.setTextColor(Color.WHITE);
-                    tv_state_opend.setText(getResources().getText(R.string.is_closed));
-                    tv_state_opend.setBackgroundResource(R.drawable.bg_resto_closed_rounded);
-                }
-
             }
         });
+    }
+
+    @Override
+    public void updateHomepage() {
+        myCommandsPresenter.loadStats();
     }
 
     @Override

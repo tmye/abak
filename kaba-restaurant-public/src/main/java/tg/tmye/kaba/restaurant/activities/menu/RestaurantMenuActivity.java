@@ -99,6 +99,8 @@ public class RestaurantMenuActivity extends AppCompatActivity implements
 
     private SimpleTextAdapter simpleTextAdapter;
 
+    RestaurantEntity resto;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -118,7 +120,7 @@ public class RestaurantMenuActivity extends AppCompatActivity implements
 
         RestaurantOnlineRepository restaurantOnlineRepository = new RestaurantOnlineRepository(this);
 
-        RestaurantEntity resto = restaurantOnlineRepository.getRestaurant();
+          resto = restaurantOnlineRepository.getRestaurant();
 
         menu_repository = new MenuDb_OnlineRepository(this, resto);
         presenter = new RestaurantMenuPresenter(menu_repository, this);
@@ -457,11 +459,11 @@ public class RestaurantMenuActivity extends AppCompatActivity implements
     }
 
     private void _jumpToEditMenuPage() {
+
         Intent intent = new Intent(RestaurantMenuActivity.this, EditMenuActivity.class);
-        intent.putExtra(RESTAURANT_ID, restaurantEntity.id);
+        intent.putExtra(RESTAURANT_ID, resto.id);
         startActivity(intent);
     }
-
 
     @Override
     protected void onDestroy() {

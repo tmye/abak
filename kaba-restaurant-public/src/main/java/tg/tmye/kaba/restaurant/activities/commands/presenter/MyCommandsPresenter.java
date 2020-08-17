@@ -184,9 +184,10 @@ public class MyCommandsPresenter implements MyCommandContract.Presenter {
                         e.printStackTrace();
                     }
 
-                    int is_open = data.get("restaurant").getAsJsonObject().get("is_open").getAsInt();
+                    int calendar_is_open = data.get("restaurant").getAsJsonObject().get("is_open").getAsInt();
+                    int manual_open_state = data.get("restaurant").getAsJsonObject().get("manual_open_state").getAsInt();
 
-                    viewHomePage.inflateStats(is_open, head_pic, resto_name, foods_sold, recipes);
+                    viewHomePage.inflateStats(calendar_is_open, manual_open_state, head_pic, resto_name, foods_sold, recipes);
                     viewHomePage.inflateCountStats(waiting_count, shipping_count, cooking_count);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -226,11 +227,11 @@ public class MyCommandsPresenter implements MyCommandContract.Presenter {
                     JsonObject data = obj.get("data").getAsJsonObject();
 
                     boolean is_opened = data.get("status").getAsBoolean();
-                    viewHomePage.presenterSwitchOpened (is_opened);
+                    viewHomePage.updateHomepage ();
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    viewHomePage.presenterSwitchOpened (false);
+             //       viewHomePage.presenterSwitchOpened (false);
                 }
             }
         });

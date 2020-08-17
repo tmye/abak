@@ -53,17 +53,16 @@ public class LoginPresenter implements LoginContract.Presenter {
                 JsonObject obj = new JsonParser().parse(jsonResponse).getAsJsonObject();
                 int errorCode = obj.get("error").getAsInt();
                 if (errorCode == 0) {
-                    obj = obj.get("data").getAsJsonObject().get("payload").getAsJsonObject().get("data").getAsJsonObject();
-                    String token = obj.get("payload").getAsJsonObject().get("token").getAsString();
+                    String token = obj.get("data").getAsJsonObject().get("payload").getAsJsonObject().get("token").getAsString();
                     RestaurantEntity restaurantEntity =
-                            gson.fromJson(obj.get("customer"), new TypeToken<RestaurantEntity>(){}.getType());
+                            gson.fromJson(obj.get("data").getAsJsonObject().get("customer"), new TypeToken<RestaurantEntity>(){}.getType());
                     restaurantOnlineRepository.saveToken(token);
                     restaurantOnlineRepository.saveRestaurant(restaurantEntity);
-                    /* active updating data with server */
+                   /* active updating data with server */
                     restaurantOnlineRepository.setIsNotOkWithServer();
-                    /* send push token and user id to server */
+                /* send push token and user id to server */
                     restaurantOnlineRepository.sendPushData ();
-                    view.loginSuccess(true);
+                   view.loginSuccess(true);
                 } else {
                     String message = obj.get("message").getAsString();
                     view.loginSuccess(false);

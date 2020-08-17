@@ -80,4 +80,13 @@ public class Config {
 
     public static final String LINK_MENU_BY_ID = Constant.SERVER_ADDRESS+
             "/api/menu/get/id";
+
+    // restaurant specific interface
+    public static final String LINK_GET_MENU_BY_ID_SPECIFIC = Constant.SERVER_ADDRESS+
+            "/resto/api/menu/get";
+
+    // restaurant specific interface
+    public static final String LINK_GET_FOOD_BY_ID_SPECIFIC = Constant.SERVER_ADDRESS+
+            "/resto/api/food/get";
+
 }

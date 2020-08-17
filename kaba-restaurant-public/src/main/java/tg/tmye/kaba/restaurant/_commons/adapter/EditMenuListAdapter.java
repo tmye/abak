@@ -61,9 +61,9 @@ public class EditMenuListAdapter extends RecyclerView.Adapter<EditMenuListAdapte
         holder.tv_description.setText(entity.description);
 
         if (entity.is_hidden == 0) { // not hidden
-
+            holder.iv_hidden.setVisibility(View.GONE);
         } else { // is hidden
-
+            holder.iv_hidden.setVisibility(View.VISIBLE);
         }
 
         holder.bt_enter_menu.setOnClickListener(new View.OnClickListener() {

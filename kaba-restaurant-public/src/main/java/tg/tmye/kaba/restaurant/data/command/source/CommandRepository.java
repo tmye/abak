@@ -130,11 +130,11 @@ public class CommandRepository {
 
         String authToken = ((MyRestaurantApp)context.getApplicationContext()).getAuthToken();
         JSONObject params = new JSONObject();
-        try {
-            params.put("is_opened",isOpened);
+        /*try {
+//            params.put("is_opened",isOpened);
         } catch (JSONException e) {
             e.printStackTrace();
-        }
+        }*/
         networkRequestBase.postJsonDataWithToken(Config.LINK_RESTAURANT_CHECK_OPENED, params.toString(), authToken, intf);
     }
 }

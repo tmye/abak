@@ -40,7 +40,7 @@ public class EditMenuPresenter implements EditMenuContract.Presenter {
 
         /* load restaurant menuz and food from locally or online -- */
         view.showIsLoading(true);
-        menuDb_onlineRepository.loadAllSubMenusOfRestaurant(new NetworkRequestThreadBase.NetRequestIntf<Object>() {
+        menuDb_onlineRepository.loadAllSubMenusOfRestaurantForEdit(new NetworkRequestThreadBase.NetRequestIntf<Object>() {
             @Override
             public void onNetworkError() {
                 view.showIsLoading(false);
@@ -79,8 +79,42 @@ public class EditMenuPresenter implements EditMenuContract.Presenter {
             }
 
         });
-
         /* then show it in the current interface */
+    }
+
+
+    @Override
+    public void populateFoodFromMenudId(int menu_id){
+
+        view.showIsLoading(true);
+        menuDb_onlineRepository.loadAllFoodsFromMenuForEdit(menu_id, new NetworkRequestThreadBase.NetRequestIntf<List<Restaurant_Menu_FoodEntity>>() {
+
+            @Override
+            public void onNetworkError() {
+                view.showIsLoading(false);
+                view.onNetworkError();
+            }
+
+            @Override
+            public void onSysError() {
+                view.showIsLoading(false);
+                view.onSysError();
+            }
+
+            @Override
+            public void onSuccess(List<Restaurant_Menu_FoodEntity> menu_food) {
+
+                // send
+                if (menu_food == null || menu_food.size() == 0) {
+                    /* show error message*/
+                    view.showNoDataMessage();
+                } else {
+                    view.inflateFoods(menuDb_onlineRepository.restaurantEntity, menu_food);
+                    view.showIsLoading(false);
+                }
+            }
+
+        });
     }
 
 }

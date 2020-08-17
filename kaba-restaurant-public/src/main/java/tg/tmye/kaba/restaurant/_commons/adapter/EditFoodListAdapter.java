@@ -67,7 +67,7 @@ public class EditFoodListAdapter extends RecyclerView.Adapter<EditFoodListAdapte
 
         // set a line
         holder.tv_food_price.setText(""+entity.price);
-        holder.tv_food_promotion_price.setText(""+entity.promotion_price);
+        holder.tv_food_promotion_price.setText(""+(entity.promotion_price == null ? 0 : entity.promotion_price));
         holder.switch_is_promotion.setChecked(entity.promotion == 1);
 
         initSlidingBanner(holder.sliding_banner, data.get(position));

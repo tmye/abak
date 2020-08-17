@@ -16,7 +16,8 @@ import tg.tmye.kaba.restaurant.data.Food.Restaurant_Menu_FoodEntity;
 
 public class EditSingleFoodActivity extends AppCompatActivity {
 
-    EditText ed_food_name;
+    EditText ed_food_name, ed_food_description;
+    EditText ed_normal_price, ed_promotion_price;
     CheckBox checkBox_promotion, checkBox_active;
     Button bt_cancel, bt_confirm;
     private Toolbar toolbar;
@@ -37,8 +38,12 @@ public class EditSingleFoodActivity extends AppCompatActivity {
         toolbar.setTitle(food.name);
 
         ed_food_name = findViewById(R.id.ed_food_name);
+        ed_food_description = findViewById(R.id.ed_food_description);
+        ed_normal_price = findViewById(R.id.ed_food_price);
+        ed_promotion_price = findViewById(R.id.ed_food_promotion_price);
+
         checkBox_active = findViewById(R.id.checkbox_food_active);
-    checkBox_promotion = findViewById(R.id.checkbox_food_promotion);
+        checkBox_promotion = findViewById(R.id.checkbox_food_promotion);
 
         // add a listener on it
         bt_confirm = findViewById(R.id.bt_confirm);
@@ -46,7 +51,9 @@ public class EditSingleFoodActivity extends AppCompatActivity {
 
         //inflate data
         ed_food_name.setText(food.name);
-
+        ed_food_description.setText(food.description);
+        ed_normal_price.setText(food.price);
+        ed_promotion_price.setText(food.promotion_price);
 
         checkBox_active.setChecked(food.is_hidden == 1);
         checkBox_active.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -84,8 +91,13 @@ public class EditSingleFoodActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // launch a presenter and upload this.
+                _launchAndConfirm();
             }
         });
+    }
+
+    private void _launchAndConfirm() {
+
     }
 
     @Override

@@ -116,5 +116,120 @@ public class MenuDb_OnlineRepository {
         });
     }
 
+    public void loadAllSubMenusOfRestaurantForEdit(final NetworkRequestThreadBase.NetRequestIntf intf) {
+
+        /* also get the serial of the restaurant database right now */
+        Map<String, Object> data = new HashMap<>();
+        data.put("id", restaurantEntity.id);
+
+        String authToken = ((MyRestaurantApp)context.getApplicationContext()).getAuthToken();
+
+        // put restaurant id, and you send me back everything that is in the db
+        // so that i can have a list of menus including their foods at the same time.
+        networkRequestThreadBase.postMapDataWithToken(Config.LINK_GET_MENU_BY_ID_SPECIFIC, data, authToken, new NetworkRequestThreadBase.NetRequestIntf<String>() {
+            @Override
+            public void onNetworkError() {
+                intf.onNetworkError();
+            }
+
+            @Override
+            public void onSysError() {
+                intf.onSysError();
+            }
+
+            @Override
+            public void onSuccess(String jsonResponse) {
+
+                Log.d(Constant.APP_TAG, jsonResponse);
+                /* conver to json objects */
+
+                Gson gson = new Gson();
+                JsonArray menuJsonArray = new JsonParser().parse(jsonResponse).getAsJsonObject().get("data").getAsJsonArray();
+//                Jsono data = data.get("data").getAsJsonArray();
+
+                /* get submenus and -- drinks */
+
+//                JsonArray menuJsonArray = data;
+
+                List<Restaurant_SubMenuEntity> subMenuEntities = new ArrayList<>();
+
+                for (int i = 0; i < menuJsonArray.size(); i++) {
+
+                    Restaurant_SubMenuEntity subMenuEntity =
+                            gson.fromJson(menuJsonArray.get(i).getAsJsonObject(), new TypeToken<Restaurant_SubMenuEntity>(){}.getType());
+
+                    List<Restaurant_Menu_FoodEntity> foods =
+                            gson.fromJson(
+                                    menuJsonArray.get(i).getAsJsonObject().getAsJsonArray("foods"),
+                                    new TypeToken<List<Restaurant_Menu_FoodEntity>>(){}.getType()
+                            );
+
+                    subMenuEntity.setFoods(foods);
+
+                    subMenuEntities.add(subMenuEntity);
+                }
+
+                /* get drinks */
+              /*  JsonArray drinksJsonArray = data.get("drinks").getAsJsonArray();
+                List<Restaurant_Menu_FoodEntity> drinks =
+                        gson.fromJson(
+                                drinksJsonArray,
+                                new TypeToken<List<Restaurant_Menu_FoodEntity>>(){}.getType()
+                        );*/
+
+                SimpleObjectHolder simpleObjectHolder = new SimpleObjectHolder();
+                simpleObjectHolder.arg1 = subMenuEntities;
+//                simpleObjectHolder.arg2 = drinks;
+
+                intf.onSuccess(simpleObjectHolder);
+            }
+        });
+    }
+
+    public void loadAllFoodsFromMenuForEdit(int menu_id, final NetworkRequestThreadBase.NetRequestIntf intf) {
+
+        /* also get the serial of the restaurant database right now */
+        Map<String, Object> data = new HashMap<>();
+        data.put("menu_id", menu_id);
+
+        String authToken = ((MyRestaurantApp)context.getApplicationContext()).getAuthToken();
+
+        // put restaurant id, and you send me back everything that is in the db
+        // so that i can have a list of menus including their foods at the same time.
+        networkRequestThreadBase.postMapDataWithToken(Config.LINK_GET_FOOD_BY_ID_SPECIFIC, data, authToken, new NetworkRequestThreadBase.NetRequestIntf<String>() {
+            @Override
+            public void onNetworkError() {
+                intf.onNetworkError();
+            }
+
+            @Override
+            public void onSysError() {
+                intf.onSysError();
+            }
+
+            @Override
+            public void onSuccess(String jsonResponse) {
+
+                Log.d(Constant.APP_TAG, jsonResponse);
+                /* conver to json objects */
+
+                Gson gson = new Gson();
+                JsonArray foodJsonArray = new JsonParser().parse(jsonResponse).getAsJsonObject().get("data").getAsJsonArray();
+//                Jsono data = data.get("data").getAsJsonArray();
+
+                List<Restaurant_Menu_FoodEntity> foods = new ArrayList<>();
+
+                for (int i = 0; i < foodJsonArray.size(); i++) {
+
+                    Restaurant_Menu_FoodEntity food =
+                            gson.fromJson(foodJsonArray.get(i).getAsJsonObject(), new TypeToken<Restaurant_Menu_FoodEntity>(){}.getType());
+
+                    foods.add(food);
+                }
+
+                intf.onSuccess(foods);
+            }
+        });
+    }
 
 }

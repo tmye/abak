@@ -69,8 +69,13 @@ public class EditSingleMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // launch a presenter and upload this.
+                _launchAndConfirm();
             }
         });
+    }
+
+    private void _launchAndConfirm() {
+
     }
 
     @Override
