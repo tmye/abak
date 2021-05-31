@@ -5,17 +5,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,13 +13,28 @@ import android.view.ViewAnimationUtils;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import tg.tmye.kaba_i_deliver.R;
+import tg.tmye.kaba_i_deliver._commons.utils.UtilFunctions;
 import tg.tmye.kaba_i_deliver.activity.command.contract.MyCommandContract;
 import tg.tmye.kaba_i_deliver.activity.command.frag.RestaurantSubCommandListFragment;
 import tg.tmye.kaba_i_deliver.activity.command.presenter.MyCommandsPresenter;
@@ -57,7 +61,7 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
 
     /* views */
     NoScrollViewPager viewpager_commands;
-    CustomProgressbar progressBar;
+    ProgressBar progressBar;
     TabLayout tablelayout_title_strip;
     TextView tv_no_food_message;
     SwipeRefreshLayout swiperefreshlayout;
@@ -78,7 +82,7 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
 
     private LoadingDialogFragment loadingDialogFragment;
 
-    TextView tv_delivery_man_name;
+    TextView tv_delivery_man_name, tv_daily_delivery_fees;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +129,7 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
         mRevealView = findViewById(R.id.collapsing_toolbar);
         mRevealBackgroundView = findViewById(R.id.appbarlayout);
         tv_delivery_man_name = findViewById(R.id.tv_delivery_man_name);
+        tv_daily_delivery_fees = findViewById(R.id.tv_daily_delivery_fees);
         // disable viewpager scroll
     }
 
@@ -187,8 +192,24 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
         ft.commitAllowingStateLoss();
     }
 
+    int todayMoney = 0;
+
     @Override
     public void inflateCommands(final List<Command> preorders,final List<Command> wait_for_me, final List<Command> yet_to_ship, final List<Command> shipping_done) {
+
+        todayMoney = 0;
+        for (int i = 0; i < shipping_done.size(); i++) {
+            if (shipping_done.get(i).is_email_account)
+                todayMoney += (Integer.valueOf(shipping_done.get(i).shipping_pricing_minus_extra));
+            else
+                todayMoney += (Integer.valueOf(shipping_done.get(i).shipping_pricing));
+        }
+
+        for (int i = 0; i < preorders.size(); i++) {
+            if (preorders.get(i).state == 3)
+                todayMoney += (Integer.valueOf(preorders.get(i).shipping_pricing));
+        }
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -209,8 +230,12 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
                 tv_tab_waiting_count.setText(""+(wait_for_me != null ? wait_for_me.size() : 0));
                 tv_tab_yet_count.setText(""+(yet_to_ship != null ? yet_to_ship.size() : 0));
                 tv_tab_shipping_count.setText(""+(shipping_done != null ? shipping_done.size() : 0));
+
+                tv_daily_delivery_fees.setText(UtilFunctions.intToMoney(todayMoney)+" F");
             }
         });
+
+
     }
 
     TextView tv_tab_preorder_count, tv_tab_yet_count, tv_tab_shipping_count, tv_tab_waiting_count;

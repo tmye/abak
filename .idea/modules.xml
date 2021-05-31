@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Kaba.iml" filepath="$PROJECT_DIR$/Kaba.iml" group="Kaba" />
-      <module fileurl="file://$PROJECT_DIR$/kaba-i_deliver-2.2/kaba-i_deliver-2.2.iml" filepath="$PROJECT_DIR$/kaba-i_deliver-2.2/kaba-i_deliver-2.2.iml" group="Kaba/kaba-i_deliver-2.2" />
-      <module fileurl="file://$PROJECT_DIR$/kaba-restaurant-public/kaba-restaurant-public.iml" filepath="$PROJECT_DIR$/kaba-restaurant-public/kaba-restaurant-public.iml" group="Kaba/kaba-restaurant-public" />
+      <module fileurl="file://$PROJECT_DIR$/Kaba.iml" filepath="$PROJECT_DIR$/Kaba.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kaba-i_deliver-2.2/Kaba.kaba-i_deliver-2.2.iml" filepath="$PROJECT_DIR$/.idea/modules/kaba-i_deliver-2.2/Kaba.kaba-i_deliver-2.2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kaba-restaurant-public/Kaba.kaba-restaurant-public.iml" filepath="$PROJECT_DIR$/.idea/modules/kaba-restaurant-public/Kaba.kaba-restaurant-public.iml" />
     </modules>
   </component>
 </project>

@@ -1,8 +1,9 @@
 package tg.tmye.kaba_i_deliver.cviews;
 
 import android.content.Context;
-import android.support.design.widget.TabLayout;
 import android.util.AttributeSet;
+
+import com.google.android.material.tabs.TabLayout;
 
 /**
  * By abiguime on 20/12/2017.

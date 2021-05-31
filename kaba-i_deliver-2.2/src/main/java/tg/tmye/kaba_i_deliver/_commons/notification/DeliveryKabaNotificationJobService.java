@@ -6,9 +6,10 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.v4.app.JobIntentService;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.core.app.JobIntentService;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;

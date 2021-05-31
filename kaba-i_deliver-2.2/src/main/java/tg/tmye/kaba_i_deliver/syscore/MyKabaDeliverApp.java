@@ -3,10 +3,13 @@ package tg.tmye.kaba_i_deliver.syscore;
 import android.animation.ObjectAnimator;
 import android.app.Application;
 import android.content.SharedPreferences;
-import android.support.multidex.MultiDexApplication;
+import android.location.Location;
 import android.view.View;
 
+import androidx.multidex.MultiDexApplication;
+
 import com.bumptech.glide.request.transition.ViewPropertyTransition;
+import com.google.android.gms.maps.model.LatLng;
 
 import tg.tmye.kaba_i_deliver._commons.MultiThreading.DatabaseRequestThreadBase;
 import tg.tmye.kaba_i_deliver._commons.MultiThreading.NetworkRequestThreadBase;
@@ -23,6 +26,7 @@ public class MyKabaDeliverApp extends MultiDexApplication {
     DatabaseRequestThreadBase databaseRequestThreadBase;
     private String authToken;
     private ViewPropertyTransition.Animator animationObject;
+    private LatLng latLng;
 
     @Override
     public void onCreate() {
@@ -74,5 +78,15 @@ public class MyKabaDeliverApp extends MultiDexApplication {
             };
         }
         return animationObject;
+    }
+
+    public void setLastLocation(Location location) {
+
+        if (location != null)
+            latLng = new LatLng(location.getLatitude(), location.getLongitude());
+    }
+
+    public LatLng getLastLocation() {
+        return this.latLng;
     }
 }

@@ -2,10 +2,11 @@ package tg.tmye.kaba_i_deliver.cviews.command_details_view;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import tg.tmye.kaba_i_deliver.R;
 

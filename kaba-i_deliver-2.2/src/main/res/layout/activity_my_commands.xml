@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,14 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".activity.command.MyCommandsActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbarlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay"
         android:background="@color/colorPrimary">
 
-        <android.support.design.widget.CollapsingToolbarLayout
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <android.support.v7.widget.Toolbar
+                <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -61,6 +61,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
+                    <TextView
+                        android:id="@+id/tv_daily_delivery_fees"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="@color/transparent_yellow"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
                 </LinearLayout>
 
                 <tg.tmye.kaba_i_deliver.cviews.CustomTabLayout
@@ -78,11 +89,11 @@
                     app:tabIndicatorColor="@color/colorPrimaryDark"
                     app:tabSelectedTextColor="@color/white"/>
             </LinearLayout>
-        </android.support.design.widget.CollapsingToolbarLayout>>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swiperefreshlayout"
         android:layout_width="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -100,11 +111,8 @@
                 android:layout_height="match_parent"
                 />
 
-            <tg.tmye.kaba_i_deliver.cviews.CustomProgressbar
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <ProgressBar
+                android:layout_gravity="center"
                 android:id="@+id/progress_bar"
                 android:indeterminateTint="@color/colorPrimary"
                 android:layout_width="@dimen/webview_circle_progressbar_size"
@@ -122,5 +130,5 @@
                 android:layout_height="wrap_content" />
 
         </FrameLayout>
-    </android.support.v4.widget.SwipeRefreshLayout>
-</android.support.design.widget.CoordinatorLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

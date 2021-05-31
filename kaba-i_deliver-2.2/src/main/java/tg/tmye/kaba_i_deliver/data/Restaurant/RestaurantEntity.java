@@ -19,6 +19,10 @@ public class RestaurantEntity implements Parcelable {
     public String name;
 
     public String description = "";
+    public String distance = "~";
+    public int open_type;
+    public String delivery_pricing;
+    public String location;
 
     private long contactId;
 

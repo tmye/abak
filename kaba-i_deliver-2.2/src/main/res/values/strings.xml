@@ -225,6 +225,14 @@
     <string name="pre_badge">Pre</string>
     <string name="infos">Additional informations</string>
     <string name="action_restaurants">Restaurants</string>
+    <string name="is_opened">Ouvert</string>
+    <string name="is_closed">Fermé</string>
+    <string name="is_pausing">En Pause</string>
+    <string name="is_unavailable">Indisponible</string>
+    <string name="kilometer">km</string>
+    <string name="search_title">Chercher</string>
+    <string name="search_hint">Quel restaurant ?</string>
+    <string name="services_fee_label">Service Fees</string>
     <string-array name="days_of_week">
         <item>Sunday</item>
         <item>Monday</item>

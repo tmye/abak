@@ -4,11 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +11,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.GenericTransitionOptions;
 
@@ -134,8 +134,13 @@ public class CommandRecyclerAdapter extends RecyclerView.Adapter<CommandRecycler
                 break;
         }
 
+
+        holder.tv_header_resto_name.setText(command.restaurant_entity.name);
+        holder.tv_order_id.setText(String.valueOf(command.id));
+
+
         // set up prices of the order whether promotion or not
-        if (command.is_preorder == 1){
+      /*  if (command.is_preorder == 1){
             // we setup pre-order price
             holder.tv_shipping_price.setText(command.preorder_shipping_pricing);
             holder.tv_total.setText(command.preorder_total_pricing);
@@ -149,14 +154,63 @@ public class CommandRecyclerAdapter extends RecyclerView.Adapter<CommandRecycler
         } else {
             holder.tv_shipping_price.setText(command.shipping_pricing);
             holder.tv_total.setText(command.total_pricing);
+        }*/
+
+
+        // diaspora stuffs
+
+        holder.tv_total_original_pricing.setVisibility(View.GONE);
+        holder.tv_shipping_original_price.setVisibility(View.GONE);
+
+        if (command.is_email_account) {
+            holder.rel_service_fees.setVisibility(View.VISIBLE);
+
+            holder.tv_shipping_price.setText(command.shipping_pricing_minus_extra);
+            holder.tv_total.setText(command.promotion_total_pricing);
+            holder.tv_service_fees.setText(command.extra_shipping_pricing);
+
+            if (command.have_billing_discount) {
+
+                holder.tv_total_original_pricing.setText(command.total_pricing);
+                holder.tv_shipping_original_price.setText(command.phoneNumber_shipping_pricing);
+
+                holder.tv_total_original_pricing.setVisibility(View.VISIBLE);
+                holder.tv_shipping_original_price.setVisibility(View.VISIBLE);
+                strikeThru(holder.tv_shipping_original_price);
+                strikeThru(holder.tv_shipping_original_price);
+            } else {
+                /* nothing */
+            }
+        } else {
+            holder.rel_service_fees.setVisibility(View.GONE);
+            if (command.have_billing_discount) {
+                holder.tv_shipping_price.setText(command.promotion_shipping_pricing);
+                holder.tv_shipping_original_price.setText(command.shipping_pricing);
+
+                holder.tv_total_original_pricing.setText(command.total_pricing);
+                holder.tv_total.setText(command.promotion_total_pricing);
+
+                holder.tv_total_original_pricing.setVisibility(View.VISIBLE);
+                holder.tv_shipping_original_price.setVisibility(View.VISIBLE);
+
+                strikeThru(holder.tv_total_original_pricing);
+                strikeThru(holder.tv_shipping_original_price);
+            } else {
+                holder.tv_shipping_price.setText(command.shipping_pricing);
+                holder.tv_total.setText(command.total_pricing);
+            }
+
         }
 
-holder.tv_header_resto_name.setText(command.restaurant_entity.name);
-holder.tv_order_id.setText(String.valueOf(command.id));
+
         holder.itemView.setOnClickListener(new OnCommandClickListener(command));
     }
 
-
+    private void strikeThru(TextView textView) {
+        textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        textView.setPaintFlags(Paint.ANTI_ALIAS_FLAG);
+        textView.setTextColor(ContextCompat.getColor(ctx, R.color.facebook_blue));
+    }
 
 
     @Override
@@ -175,10 +229,10 @@ holder.tv_order_id.setText(String.valueOf(command.id));
         private final TextView tv_quartier, tv_header_resto_name, tv_total, tv_date_time, tv_pay_at_arrival;
         public RecyclerView rc_food_list;
         public CircleImageView header_resto_cic;
-        public RelativeLayout rel_top;
+        public RelativeLayout rel_top, rel_service_fees;
         public TextView tv_shipping_price;
         public LinearLayout lny_preorder_infos;
-        public TextView tv_delivery_time, tv_delivery_day, tv_order_id;
+        public TextView tv_delivery_time, tv_delivery_day, tv_order_id, tv_service_fees, tv_shipping_original_price, tv_total_original_pricing;
 
         // make the recyclerview show his total elements
 
@@ -188,6 +242,7 @@ holder.tv_order_id.setText(String.valueOf(command.id));
             tv_total = view.findViewById(R.id.tv_total);
             tv_order_id = view.findViewById(R.id.tv_order_id);
             rel_top = view.findViewById(R.id.rel_top);
+            rel_service_fees = view.findViewById(R.id.rel_service_fees);
             rc_food_list = view.findViewById(R.id.recycler_inner_food);
             header_resto_cic = view.findViewById(R.id.header_resto_cic);
             tv_header_resto_name = view.findViewById(R.id.tv_header_resto_name);
@@ -198,6 +253,9 @@ holder.tv_order_id.setText(String.valueOf(command.id));
             lny_preorder_infos = view.findViewById(R.id.lny_preorder_infos);
             tv_delivery_time = view.findViewById(R.id.tv_delivery_time);
             tv_delivery_day = view.findViewById(R.id.tv_delivery_day);
+            tv_service_fees = view.findViewById(R.id.tv_service_fees);
+            tv_shipping_original_price = view.findViewById(R.id.tv_shipping_original_price);
+            tv_total_original_pricing = view.findViewById(R.id.tv_total_original_pricing);
 
             initNetstedRecyclerview();
         }

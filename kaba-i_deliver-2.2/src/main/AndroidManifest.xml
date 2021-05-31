@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="tg.tmye.kaba_i_deliver">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:name=".syscore.MyKabaDeliverApp"
         android:allowBackup="true"
@@ -11,7 +14,9 @@
         android:roundIcon="@mipmap/kaba_icon_green"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.restaurant.RestaurantListActivity"></activity>
+        <activity android:name=".activity.restaurant.RestaurantListActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".activity.home.HomeActivity"
             android:label="@string/app_name"
@@ -57,6 +62,10 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
+        <meta-data android:name="android.app.searchable"
+            android:resource="@xml/searchable" />
+
         <service
             android:name="._commons.notification.DeliveryKabaNotificationJobService"
             android:exported="true"

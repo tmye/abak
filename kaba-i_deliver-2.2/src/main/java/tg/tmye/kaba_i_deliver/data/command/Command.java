@@ -60,6 +60,17 @@ public class Command implements Parcelable {
     public DeliveryTimeFrame preorder_hour;
     public String remise;
 
+    // adding
+    public boolean is_email_account; //
+    public  boolean have_billing_discount; //
+
+    public  String email_shipping_pricing;
+    public  String promotion_email_shipping_pricing;
+    public  String phoneNumber_shipping_pricing;
+    public  String promotion_phoneNumber_shipping_pricing;
+    public  String extra_shipping_pricing;
+    public String shipping_pricing_minus_extra;
+
 
     protected Command(Parcel in) {
         id = in.readInt();
@@ -88,6 +99,31 @@ public class Command implements Parcelable {
         preorder = in.readInt();
         preorder_hour = in.readParcelable(DeliveryTimeFrame.class.getClassLoader());
         remise = in.readString();
+        is_email_account = in.readByte() != 0;
+        have_billing_discount = in.readByte() != 0;
+        email_shipping_pricing = in.readString();
+        promotion_email_shipping_pricing = in.readString();
+        phoneNumber_shipping_pricing = in.readString();
+        promotion_phoneNumber_shipping_pricing = in.readString();
+        extra_shipping_pricing = in.readString();
+        shipping_pricing_minus_extra = in.readString();
+    }
+
+    public static final Creator<Command> CREATOR = new Creator<Command>() {
+        @Override
+        public Command createFromParcel(Parcel in) {
+            return new Command(in);
+        }
+
+        @Override
+        public Command[] newArray(int size) {
+            return new Command[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     @Override
@@ -118,22 +154,13 @@ public class Command implements Parcelable {
         dest.writeInt(preorder);
         dest.writeParcelable(preorder_hour, flags);
         dest.writeString(remise);
+        dest.writeByte((byte) (is_email_account ? 1 : 0));
+        dest.writeByte((byte) (have_billing_discount ? 1 : 0));
+        dest.writeString(email_shipping_pricing);
+        dest.writeString(promotion_email_shipping_pricing);
+        dest.writeString(phoneNumber_shipping_pricing);
+        dest.writeString(promotion_phoneNumber_shipping_pricing);
+        dest.writeString(extra_shipping_pricing);
+        dest.writeString(shipping_pricing_minus_extra);
     }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public static final Creator<Command> CREATOR = new Creator<Command>() {
-        @Override
-        public Command createFromParcel(Parcel in) {
-            return new Command(in);
-        }
-
-        @Override
-        public Command[] newArray(int size) {
-            return new Command[size];
-        }
-    };
 }

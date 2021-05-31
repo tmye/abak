@@ -3,9 +3,10 @@ package tg.tmye.kaba_i_deliver.cviews.command_details_view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.annotation.Nullable;
 
 import tg.tmye.kaba_i_deliver.R;
 

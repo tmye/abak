@@ -11,8 +11,9 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.support.annotation.Nullable;
-import android.support.v4.app.NotificationCompat;
+
+import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 
 import com.google.gson.Gson;
 
@@ -20,7 +21,7 @@ import tg.tmye.kaba_i_deliver.R;
 import tg.tmye.kaba_i_deliver.activity.command.CommandDetailsActivity;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
-import static android.support.v4.app.NotificationCompat.VISIBILITY_PUBLIC;
+import static androidx.core.app.NotificationCompat.VISIBILITY_PUBLIC;
 import static tg.tmye.kaba_i_deliver.syscore.Constant.CHANNEL_ID;
 import static tg.tmye.kaba_i_deliver.syscore.Constant.CHANNEL_NAME;
 

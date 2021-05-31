@@ -234,5 +234,14 @@
     <string name="title_myaccount">Compte</string>
     <string name="action_message_box">Messages</string>
     <string name="title_restaurant">Restaurant</string>
+    <string name="services_fee_label">Frais de Service</string>
+    <string name="is_opened">Open</string>
+    <string name="is_closed">Closed</string>
+    <string name="action_restaurants">Restaurants</string>
+    <string name="is_pausing">Breaktime</string>
+    <string name="is_unavailable">Unavailable</string>
+    <string name="kilometer">km</string>
+    <string name="search_title">Search for</string>
+    <string name="search_hint">Which restaurant</string>
 
 </resources>

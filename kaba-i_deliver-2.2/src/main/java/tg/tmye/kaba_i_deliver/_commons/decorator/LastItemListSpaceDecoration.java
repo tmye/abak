@@ -1,8 +1,9 @@
 package tg.tmye.kaba_i_deliver._commons.decorator;
 
 import android.graphics.Rect;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * By abiguime on 2017/12/8.
