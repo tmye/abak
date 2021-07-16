@@ -1,6 +1,7 @@
 package tg.tmye.kaba_i_deliver.activity.login;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,16 +13,16 @@ import androidx.fragment.app.FragmentTransaction;
 
 import tg.tmye.kaba_i_deliver.R;
 import tg.tmye.kaba_i_deliver.activity.command.MyCommandsActivity;
-import tg.tmye.kaba_i_deliver.activity.home.HomeActivity;
 import tg.tmye.kaba_i_deliver.activity.login.contract.LoginContract;
 import tg.tmye.kaba_i_deliver.activity.login.presenter.LoginPresenter;
+import tg.tmye.kaba_i_deliver.activity.readygo.DeliveryReadyActivity;
 import tg.tmye.kaba_i_deliver.cviews.dialog.LoadingDialogFragment;
 import tg.tmye.kaba_i_deliver.data.delivery.source.DeliveryManRepository;
 import tg.tmye.kaba_i_deliver.syscore.MyKabaDeliverApp;
 
 public class DeliverManLoginActivity extends AppCompatActivity implements LoginContract.View, View.OnClickListener {
 
-    Button bt_login;
+    Button bt_login, bt_download;
     EditText ed_username, ed_password;
     LoginPresenter presenter;
     private DeliveryManRepository deliveryManRepository;
@@ -42,24 +43,29 @@ public class DeliverManLoginActivity extends AppCompatActivity implements LoginC
         deliveryManRepository = new DeliveryManRepository(this);
         presenter = new LoginPresenter(this, deliveryManRepository);
         bt_login.setOnClickListener(this);
+        bt_download.setOnClickListener(this);
     }
 
     private void checkLogin() {
 
         String authTOken = ((MyKabaDeliverApp)getApplicationContext()).getAuthToken();
         if (!"".equals(authTOken)) {
-            startActivity(new Intent(this, MyCommandsActivity.class));
+            // also check if you are delivery ready, if yes, continue, if yes go away
+            String deliveryMode = ((MyKabaDeliverApp)getApplicationContext()).getDeliveryMode();
+            if ("on".equals(deliveryMode)) {
+                startActivity(new Intent(this, MyCommandsActivity.class));
+            } else {
+                startActivity(new Intent(this, DeliveryReadyActivity.class));
+            }
             finish();
         }
     }
 
     private void initViews() {
         bt_login = findViewById(R.id.bt_login);
+        bt_download = findViewById(R.id.bt_download);
         ed_password = findViewById(R.id.ed_password);
         ed_username = findViewById(R.id.ed_username);
-
-//        ed_username.setText("kastas002");
-//        ed_password.setText("123456");
     }
 
     @Override
@@ -136,6 +142,19 @@ public class DeliverManLoginActivity extends AppCompatActivity implements LoginC
             case R.id.bt_login:
                 login();
                 break;
+            case R.id.bt_download:
+                getToKabaApp();
+                    break;
+        }
+    }
+
+    private void getToKabaApp() {
+//        https://play.google.com/store/apps/details?id=tg.tmye.kaba.brave.one
+        final String appPackageName = "tg.tmye.kaba.brave.one"; // getPackageName() from Context or Activity object
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+        } catch (android.content.ActivityNotFoundException anfe) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
         }
     }
 

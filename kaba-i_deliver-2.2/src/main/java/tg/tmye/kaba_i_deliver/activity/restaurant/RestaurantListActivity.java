@@ -121,13 +121,11 @@ public class RestaurantListActivity extends AppCompatActivity implements Restaur
 
                 /* compute the deliveries of the day on the app */
 
-
                 lny_error_box.setVisibility(View.GONE);
 
                 if (restaurantEntities == null || restaurantEntities.size() == 0) {
                     recyclerview.setVisibility(View.GONE);
                     lny_error_box.setVisibility(View.VISIBLE);
-//                    lny_error_box.setText(getResources().getString(R.string.no_restaurant_available));
                 } else {
                     lny_error_box.setVisibility(View.GONE);
                     recyclerview.setVisibility(View.VISIBLE);

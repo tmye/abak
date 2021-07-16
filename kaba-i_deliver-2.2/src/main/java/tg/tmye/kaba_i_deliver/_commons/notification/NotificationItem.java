@@ -37,6 +37,7 @@ public class NotificationItem implements Parcelable {
         /* get comand details */
         public static final int COMMAND_SHIPPING = 301;
         public static final int NEW_COMMAND = 400;
+        public static final int NEW_ORDER = 154;
         public static final int FOOD_DETAILS = 373;
 
         /* help to know which activity we're going in */

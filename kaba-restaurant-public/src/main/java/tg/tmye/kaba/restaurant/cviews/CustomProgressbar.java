@@ -2,8 +2,10 @@ package tg.tmye.kaba.restaurant.cviews;
 
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
 
 import tg.tmye.kaba.restaurant.R;
 
@@ -13,7 +15,7 @@ import tg.tmye.kaba.restaurant.R;
  * email: 2597434002@qq.com
  */
 
-public class CustomProgressbar extends android.support.v7.widget.AppCompatImageView {
+public class CustomProgressbar extends AppCompatImageView {
 
 
     private AnimationDrawable foodLoadingAnimation;

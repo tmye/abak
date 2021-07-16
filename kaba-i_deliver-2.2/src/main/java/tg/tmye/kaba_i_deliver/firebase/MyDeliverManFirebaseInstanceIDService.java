@@ -5,8 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.util.Log;
 
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.FirebaseInstanceIdService;
+
+import com.google.firebase.messaging.FirebaseMessagingService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,13 +22,12 @@ import tg.tmye.kaba_i_deliver.syscore.MyKabaDeliverApp;
  * email: 2597434002@qq.com
  */
 
-public class MyDeliverManFirebaseInstanceIDService extends FirebaseInstanceIdService {
+public class MyDeliverManFirebaseInstanceIDService extends FirebaseMessagingService {
 
     private String TAG = "MyDeliverManFirebaseInstanceIDService";
 
-    public void onTokenRefresh() {
+    public void onNewToken(String refreshedToken) {
 
-        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
 
         /* save token locally */
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Config.FIREBASE_PUSH_SHPF, Context.MODE_PRIVATE);

@@ -31,7 +31,6 @@ public class NetworkRequestThreadBase {
 
     private static final long CONNECT_TIME_OUT = 30, WRITE_TIME_OUT = 30, READ_TIME_OUT = 30;
 
-
     Context ctx;
 
     Handler mHandler;

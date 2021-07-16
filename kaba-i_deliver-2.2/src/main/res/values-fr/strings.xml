@@ -192,7 +192,7 @@
     <string name="your_contact">Votre contact</string>
     <string name="action_logout">Déconnexion</string>
     <string name="press_again_to_exit">Please, double press to exit.</string>
-    <string name="delivery_man_login">DELIVERMAN - LOGIN</string>
+    <string name="delivery_man_login">Salut Kirikou !</string>
     <string name="username">Username</string>
     <string name="sent_to_cooking">Thanks for Sending the food at cooking process.</string>
     <string name="ireturn">Return</string>
@@ -201,7 +201,7 @@
     <string name="please_select_shipping_man">Please select a shipping man</string>
     <string name="sent_to_delivering">Thanks for Sending the food at delivering process.</string>
     <string name="action_delivery_mode_enter">DEBUT</string>
-    <string name="action_delivery_mode_exit">FIN</string>
+    <string name="action_delivery_mode_exit">LIVRAISON OFF</string>
     <string name="title_activity_delivery_mode">Mode Livreur</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="shipping_mode_libelle">Mode Livreur</string>
@@ -243,5 +243,17 @@
     <string name="kilometer">km</string>
     <string name="search_title">Search for</string>
     <string name="search_hint">Which restaurant</string>
+    <string name="login_page_purpose">Cette Application est reservée aux Kirikou ! Téléchargez KABA !</string>
+    <string name="download_kaba">Téléchargez KABA</string>
+    <string name="order_amount">Montant commande</string>
+    <string name="customer_amount">Montant du Client</string>
+    <string name="left_amount">Montant à rembourser</string>
+    <string name="refund">Rembourser</string>
+    <string name="refund_amount_confirmation">Remboursement:\nVous être en train de recharger %d FCFA à ce client. Voulez vous confimer ?</string>
+    <string name="left_amount_error">Erreur montant à rembourser</string>
+    <string name="app_name">KIRIKOU</string>
+    <string name="title_shopping_card">Panier</string>
+    <string name="go_online">Activer Mode livraison</string>
+    <string name="you_are_currently_offline">Vous être hors ligne</string>
 
 </resources>

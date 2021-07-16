@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,13 +16,13 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,6 +37,8 @@ import tg.tmye.kaba_i_deliver.cviews.OffRecyclerview;
 import tg.tmye.kaba_i_deliver.cviews.command_details_view.CommandProgressView;
 import tg.tmye.kaba_i_deliver.cviews.dialog.InfoDialogFragment;
 import tg.tmye.kaba_i_deliver.cviews.dialog.LoadingDialogFragment;
+import tg.tmye.kaba_i_deliver.cviews.dialog.RefundConfirmationDialog;
+import tg.tmye.kaba_i_deliver.cviews.dialog.RefundDialogFragment;
 import tg.tmye.kaba_i_deliver.data.command.Command;
 import tg.tmye.kaba_i_deliver.data.command.source.CommandRepository;
 import tg.tmye.kaba_i_deliver.data.delivery.DeliveryAddress;
@@ -89,7 +90,7 @@ public class CommandDetailsActivity extends AppCompatActivity implements Command
     TextView tv_additionnal_infos, tv_additionnal_infos_title, tv_delivery_day, tv_delivery_time;
     LinearLayout  lny_additionnal_infos, lny_preorder_infos;
 
-
+    Command command;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,7 +143,7 @@ public class CommandDetailsActivity extends AppCompatActivity implements Command
         } else {
             commandRepo = new CommandRepository(this);
             presenter = new CommandDetailsPresenter(commandRepo, this);
-            Command command = getIntent().getParcelableExtra(COMMAND_ITEM);
+            command = getIntent().getParcelableExtra(COMMAND_ITEM);
             inflateCommandDetails(command, command.shipping_address);
         }
 
@@ -176,8 +177,8 @@ public class CommandDetailsActivity extends AppCompatActivity implements Command
         tv_additionnal_infos_title = findViewById(R.id.tv_additionnal_infos_title);
         lny_additionnal_infos = findViewById(R.id.lny_additionnal_infos);
         lny_preorder_infos = findViewById(R.id.lny_preorder_infos);
-      tv_delivery_day = findViewById(R.id.tv_delivery_day);
-       tv_delivery_time = findViewById(R.id.tv_delivery_time);
+        tv_delivery_day = findViewById(R.id.tv_delivery_day);
+        tv_delivery_time = findViewById(R.id.tv_delivery_time);
     }
 
 
@@ -213,12 +214,12 @@ public class CommandDetailsActivity extends AppCompatActivity implements Command
         }
     }
 
-    private void showFragment(LoadingDialogFragment loadingDialogFragment, String tag, boolean justCreated) {
+    private void showFragment(DialogFragment dialogFragment, String tag, boolean justCreated) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (justCreated == true)
-            ft.add(loadingDialogFragment, tag);
+            ft.add(dialogFragment, tag);
         else
-            ft.show(loadingDialogFragment);
+            ft.show(dialogFragment);
         ft.commitAllowingStateLoss();
     }
 
@@ -345,22 +346,23 @@ public class CommandDetailsActivity extends AppCompatActivity implements Command
         }
     }
 
+
     @Override
     public void startShippingSuccess(final boolean isSuccessfull) {
-       runOnUiThread(new Runnable() {
-           @Override
-           public void run() {
-               /* not easy */
-               if (isSuccessfull) {
-                   /* send to an activity */
-                   ib_action_start_shipping.setVisibility(View.GONE);
-                   InfoDialogFragment infoDialogFragment = InfoDialogFragment.newInstance(R.drawable.rocket_start, getResources().getString(R.string.start_shipping_success), InfoDialogFragment.CONFIRM_DELIVERING_SUCCESS);
-                   infoDialogFragment.show(getSupportFragmentManager(), "infodialog");
-               } else {
-                   showLoading(false);
-               }
-           }
-       });
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                /* not easy */
+                if (isSuccessfull) {
+                    /* send to an activity */
+                    ib_action_start_shipping.setVisibility(View.GONE);
+                    InfoDialogFragment infoDialogFragment = InfoDialogFragment.newInstance(R.drawable.rocket_start, getResources().getString(R.string.start_shipping_success), InfoDialogFragment.CONFIRM_DELIVERING_SUCCESS);
+                    infoDialogFragment.show(getSupportFragmentManager(), "infodialog");
+                } else {
+                    showLoading(false);
+                }
+            }
+        });
     }
 
     private void inflateShippingAddress(DeliveryAddress deliveryAddress, String last_update) {
@@ -387,6 +389,22 @@ public class CommandDetailsActivity extends AppCompatActivity implements Command
         } else {
             mToast(getResources().getString(R.string.sys_error));
         }
+    }
+
+    public void confirmRefund(int orderAmount, int givenAmount, int leftAmount) {
+        /* refund confirmation dialog and then get out of here. */
+        if (leftAmount > 0) {
+            RefundConfirmationDialog refundDialogFragment = RefundConfirmationDialog.newInstance(orderAmount, givenAmount, leftAmount);
+            showFragment(refundDialogFragment, "RefundConfirmationDialog", true);
+        } else if (leftAmount < 0){
+
+        } else {
+            // wolo waaa
+        }
+    }
+
+    public void lanchRefund(int orderAmount, int givenAmount, int leftAmount) {
+
     }
 
     class SelectedFoodsAdapter extends RecyclerView.Adapter<SelectedFoodsAdapter.ViewHolder> {
@@ -501,8 +519,13 @@ public class CommandDetailsActivity extends AppCompatActivity implements Command
 
             switch (view.getId()) {
                 case R.id.ib_action_shipping_done:
-                    /* if success - congratz */
-                    presenter.setShippingToDone(command);
+                    /* ask if shipping done, is there change to give back to the user
+                     * - if yes, show a page that ask how much the customer given you
+                     * */
+                    RefundDialogFragment refundDialogFragment = RefundDialogFragment.newInstance(getOrderAmount(command), command.id);
+                    refundDialogFragment.show(getSupportFragmentManager(), "refund_dialog");
+
+//                    presenter.setShippingToDone(command);
                     break;
                 case R.id.ib_action_postpone_shipping:
                     /* */
@@ -513,6 +536,21 @@ public class CommandDetailsActivity extends AppCompatActivity implements Command
                     break;
             }
         }
+    }
+
+    private int getOrderAmount(Command command) {
+
+        int orderAmount = 0;
+        if (command.is_email_account) {
+            orderAmount = Integer.valueOf(command.promotion_total_pricing);
+        } else {
+            if (command.have_billing_discount) {
+                orderAmount = Integer.valueOf(command.promotion_total_pricing);
+            } else {
+                orderAmount = Integer.valueOf(command.total_pricing);
+            }
+        }
+        return orderAmount;
     }
 
     private class OnLocationOverviewClickListener implements View.OnClickListener {

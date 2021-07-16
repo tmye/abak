@@ -5,8 +5,10 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.util.Log;
 
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.FirebaseInstanceIdService;
+
+import androidx.annotation.NonNull;
+
+import com.google.firebase.messaging.FirebaseMessagingService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,26 +18,25 @@ import tg.tmye.kaba.restaurant.syscore.Config;
 import tg.tmye.kaba.restaurant.syscore.Constant;
 import tg.tmye.kaba.restaurant.syscore.MyRestaurantApp;
 
+import static tg.tmye.kaba.restaurant.syscore.Constant.APP_TAG;
+
 /**
  * By abiguime on 30/05/2018.
  * email: 2597434002@qq.com
  */
 
-public class MyRestoFirebaseInstanceIDService extends FirebaseInstanceIdService {
+public class MyRestoFirebaseInstanceIDService extends FirebaseMessagingService {
 
     private String TAG = "MyRestoFirebaseInstanceIDService";
 
-    public void onTokenRefresh() {
-
-        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-
-        /* save token locally */
+    @Override
+    public void onNewToken(@NonNull String refreshedToken) {
+        super.onNewToken(refreshedToken);
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Config.FIREBASE_PUSH_SHPF, Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putBoolean(Config.PHONE_IS_OK_WITH_SERVER, false);
         edit.putString(Config.PHONE_FIREBASE_PUSH_TOKEN, refreshedToken);
         edit.commit();
-
 
         JSONObject object = new JSONObject();
         try {
@@ -73,12 +74,7 @@ public class MyRestoFirebaseInstanceIDService extends FirebaseInstanceIdService 
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d(Constant.APP_TAG, TAG+" onCreate");
+        Log.d( TAG, TAG+" onCreate");
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d(Constant.APP_TAG, TAG+" onDestroy");
-    }
 }

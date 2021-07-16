@@ -2,16 +2,6 @@ package tg.tmye.kaba.restaurant.activities.commands;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.internal.BottomNavigationItemView;
-import android.support.design.internal.BottomNavigationMenuView;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +11,17 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -146,7 +147,7 @@ public class MyCommandsActivity extends LoadingIsOkActivtity implements MyComman
 
         int destination = getIntent().getExtras().getInt(DESTINATION, 0);
         /* set bottom tabs labels constantly visible*/
-        BottomNavigationViewHelper.disableShiftMode(navigation);
+//        BottomNavigationViewHelper.disableShiftMode(navigation);
         navigation.setSelectedItemId(dest[destination]);
     }
 
@@ -608,28 +609,27 @@ public class MyCommandsActivity extends LoadingIsOkActivtity implements MyComman
     }
 
     public static class BottomNavigationViewHelper {
-        public static void disableShiftMode(BottomNavigationView view) {
+     /*   public static void disableShiftMode(BottomNavigationView view) {
             BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);
             try {
-                Field shiftingMode = menuView.getClass().getDeclaredField("mShiftingMode");
-                shiftingMode.setAccessible(true);
-                shiftingMode.setBoolean(menuView, false);
-                shiftingMode.setAccessible(false);
+//                Field shiftingMode = menuView.getClass().getDeclaredField("mShiftingMode");
+//                shiftingMode.setAccessible(true);
+//                shiftingMode.setBoolean(menuView, false);
+//                shiftingMode.setAccessible(false);
                 for (int i = 0; i < menuView.getChildCount(); i++) {
                     BottomNavigationItemView item = (BottomNavigationItemView) menuView.getChildAt(i);
                     //noinspection RestrictedApi
-                    item.setShiftingMode(false);
+                    item.setShifting(false);
+//                    item.setShiftingMode(false);
                     // set once again checked value, so view will be updated
                     //noinspection RestrictedApi
                     item.setChecked(item.getItemData().isChecked());
                 }
-            } catch (NoSuchFieldException e) {
-                Log.e(Constant.APP_TAG, "Unable to get shift mode field", e);
-            } catch (IllegalAccessException e) {
-                Log.e(Constant.APP_TAG, "Unable to change value of shift mode", e);
+            } catch (Exception e){
+                e.printStackTrace();
             }
         }
-    }
+   */ }
 
 
 }

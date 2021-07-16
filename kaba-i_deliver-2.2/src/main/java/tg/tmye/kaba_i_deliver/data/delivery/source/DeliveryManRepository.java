@@ -206,7 +206,6 @@ public class DeliveryManRepository {
     }
 
     public static void deleteToken(Context context) {
-        ((MyKabaDeliverApp)context.getApplicationContext()).setAuthToken("");
         // delete token stuffs
         SharedPreferences sharedPreferences = context.getSharedPreferences(Config.FIREBASE_PUSH_SHPF, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

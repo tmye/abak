@@ -6,9 +6,9 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.v4.app.JobIntentService;
 import android.widget.Toast;
+
+import androidx.core.app.JobIntentService;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -63,7 +63,7 @@ public class RestaurantKabaNotificationJobService extends JobIntentService {
         /* if there is an image download it here */
         Glide.with(this).load(Constant.SERVER_ADDRESS+"/"+item.image_link).listener(new RequestListener<Drawable>() {
             @Override
-            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+            public boolean onLoadFailed(GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
 
                 manageNotification(getApplicationContext().getResources().getDrawable(R.drawable.icon_commander), item);
               /* still launch notification with default image */
@@ -115,11 +115,6 @@ public class RestaurantKabaNotificationJobService extends JobIntentService {
         return  ((BitmapDrawable)drawable).getBitmap();
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-//        toast("All work complete");
-    }
 
     final Handler mHandler = new Handler();
 

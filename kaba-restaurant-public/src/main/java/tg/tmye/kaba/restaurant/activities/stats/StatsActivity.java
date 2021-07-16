@@ -1,32 +1,27 @@
 package tg.tmye.kaba.restaurant.activities.stats;
 
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.NestedScrollView;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.List;
 
 import tg.tmye.kaba.restaurant.R;
-import tg.tmye.kaba.restaurant._commons.adapter.CommandRecyclerAdapter;
 import tg.tmye.kaba.restaurant._commons.adapter.StatsRecyclerAdapter;
-import tg.tmye.kaba.restaurant._commons.decorator.CommandListSpacesItemDecoration;
 import tg.tmye.kaba.restaurant._commons.decorator.StatsListSpacesItemDecoration;
 import tg.tmye.kaba.restaurant.activities.stats.contract.RestaurantStatsContract;
 import tg.tmye.kaba.restaurant.activities.stats.presenter.StatsPresenter;
-import tg.tmye.kaba.restaurant.cviews.dialog.LoadingDialogFragment;
 import tg.tmye.kaba.restaurant.data._OtherEntities.StatsEntity;
 import tg.tmye.kaba.restaurant.data._OtherEntities.source.StatsRepository;
 
-public class StatsActivity extends AppCompatActivity  implements RestaurantStatsContract.View, SwipeRefreshLayout.OnRefreshListener {
+public class StatsActivity extends AppCompatActivity implements RestaurantStatsContract.View, SwipeRefreshLayout.OnRefreshListener {
 
     RecyclerView recyclerView;
 

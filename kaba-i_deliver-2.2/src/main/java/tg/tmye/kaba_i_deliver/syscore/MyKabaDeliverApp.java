@@ -24,7 +24,6 @@ public class MyKabaDeliverApp extends MultiDexApplication {
 
     NetworkRequestThreadBase networkRequestBase;
     DatabaseRequestThreadBase databaseRequestThreadBase;
-    private String authToken;
     private ViewPropertyTransition.Animator animationObject;
     private LatLng latLng;
 
@@ -32,7 +31,6 @@ public class MyKabaDeliverApp extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
 
-        loadToken();
     }
 
     public NetworkRequestThreadBase getNetworkRequestBase() {
@@ -41,19 +39,33 @@ public class MyKabaDeliverApp extends MultiDexApplication {
         return networkRequestBase;
     }
 
-    public void setAuthToken(String authToken) {
-        this.authToken = authToken;
-    }
-
     public String getAuthToken() {
-        if (authToken == null || authToken.equals(""))
-            return loadToken();
-        return this.authToken;
-    }
-
-    private String loadToken() {
         SharedPreferences pref = getSharedPreferences(Config.DELIVERMAN_SHARED_PREFS, MODE_PRIVATE);
         return pref.getString(Config.SYSTOKEN, "");
+    }
+
+    public String getUsername() {
+        SharedPreferences pref = getSharedPreferences(Config.DELIVERMAN_SHARED_PREFS, MODE_PRIVATE);
+        return pref.getString(Config.DELIVERMAN_NAME, "");
+    }
+
+    public String getDeliveryMode() {
+        SharedPreferences pref = getSharedPreferences(Config.DELIVERMAN_SHARED_PREFS, MODE_PRIVATE);
+        return pref.getString(Config.DELIVERY_MODE_ON_OFF, "off");
+    }
+
+    public void setDeliveryModeOn() {
+        SharedPreferences pref = getSharedPreferences(Config.DELIVERMAN_SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString(Config.DELIVERY_MODE_ON_OFF, "on");
+        editor.apply();
+    }
+
+    public void setDeliveryModeOff() {
+        SharedPreferences pref = getSharedPreferences(Config.DELIVERMAN_SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString(Config.DELIVERY_MODE_ON_OFF, "off");
+        editor.apply();
     }
 
     public DatabaseRequestThreadBase getDatabaseRequestThreadBase() {
@@ -89,4 +101,5 @@ public class MyKabaDeliverApp extends MultiDexApplication {
     public LatLng getLastLocation() {
         return this.latLng;
     }
+
 }

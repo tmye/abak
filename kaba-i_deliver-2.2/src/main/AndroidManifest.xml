@@ -2,8 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="tg.tmye.kaba_i_deliver">
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- wave lock -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".syscore.MyKabaDeliverApp"
@@ -14,9 +24,14 @@
         android:roundIcon="@mipmap/kaba_icon_green"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.restaurant.RestaurantListActivity"
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/kaba_notification_default" />
+        <activity android:name=".activity.readygo.DeliveryReadyActivity"></activity>
+        <activity
+            android:name=".activity.restaurant.RestaurantListActivity"
             android:label=""
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.home.HomeActivity"
             android:label="@string/app_name"
@@ -38,7 +53,7 @@
             android:name=".activity.delivery.DeliveryModeActivity"
             android:label="@string/title_activity_delivery_mode"
             android:launchMode="singleTask"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.command.CommandDetailsActivity"
             android:label="@string/title_activity_command_details"
@@ -48,14 +63,18 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorPrimary" />
+
         <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_notification" /> <!-- notification job service -->
+            android:name="android.app.searchable"
+            android:resource="@xml/searchable" />
+        <receiver android:name=".receiver.RestartBroadcastReceiver" />
         <service android:name=".firebase.MyDeliverManFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <service android:name=".service.TrackingService" android:foregroundServiceType="location" />
 
         <service android:name=".firebase.MyDeliverManFirebaseInstanceIDService">
             <intent-filter>
@@ -63,22 +82,11 @@
             </intent-filter>
         </service>
 
-        <meta-data android:name="android.app.searchable"
-            android:resource="@xml/searchable" />
-
         <service
             android:name="._commons.notification.DeliveryKabaNotificationJobService"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
-    <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- wave lock -->
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <uses-permission android:name="android.permission.VIBRATE" />
 
 </manifest>

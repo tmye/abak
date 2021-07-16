@@ -1,10 +1,10 @@
 package tg.tmye.kaba.restaurant.syscore;
 
 import android.animation.ObjectAnimator;
-import android.app.Application;
 import android.content.SharedPreferences;
-import android.support.multidex.MultiDexApplication;
 import android.view.View;
+
+import androidx.multidex.MultiDexApplication;
 
 import com.bumptech.glide.request.transition.ViewPropertyTransition;
 

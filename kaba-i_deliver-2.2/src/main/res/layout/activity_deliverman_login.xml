@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".activity.login.DeliverManLoginActivity">
 
+    <ImageView
+        android:layout_gravity="bottom"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/delivery_on_the_way"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -28,15 +39,28 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:text="App exclusivement réservée aux Livreurs de \n\nKABA"
+            android:text="@string/login_page_purpose"
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
             android:layout_marginRight="@dimen/activity_horizontal_margin_double"
             android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
+        <Button
+            style="@style/AppTheme.Button.DownloadKaba"
+            android:id="@+id/bt_download"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin_double"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/download_kaba"
+            android:layout_width="wrap_content"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:background="@drawable/bt_download_kaba"
+            android:layout_height="wrap_content" />
+
 
         <EditText
             style="@style/TextStyle.LoginField"
@@ -76,5 +100,8 @@
             android:layout_height="wrap_content" />
 
     </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
-</androidx.core.widget.NestedScrollView>
+
+
+</FrameLayout>

@@ -1,13 +1,14 @@
 package tg.tmye.kaba.restaurant._commons.baseviewstubfragment;
 
 import android.os.Bundle;
-import android.support.annotation.CallSuper;
-import android.support.annotation.LayoutRes;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+
+import androidx.annotation.CallSuper;
+import androidx.annotation.LayoutRes;
+import androidx.fragment.app.Fragment;
 
 import tg.tmye.kaba.restaurant.R;
 

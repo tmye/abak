@@ -1,7 +1,9 @@
 package tg.tmye.kaba_i_deliver._commons.adapter;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -9,10 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.GenericTransitionOptions;
@@ -22,6 +26,8 @@ import java.util.ArrayList;
 import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import tg.tmye.kaba_i_deliver.R;
+import tg.tmye.kaba_i_deliver.activity.command.CommandDetailsActivity;
+import tg.tmye.kaba_i_deliver.activity.restaurant.RestaurantListActivity;
 import tg.tmye.kaba_i_deliver.data.Restaurant.RestaurantEntity;
 import tg.tmye.kaba_i_deliver.syscore.Constant;
 import tg.tmye.kaba_i_deliver.syscore.GlideApp;
@@ -40,9 +46,6 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         this.ctx = ctx;
         this.data = data;
         this.usedData = data;
-     /*   for (int i = 0; i < data.size(); i++) {
-            data.get(i).is_coming_soon = (UtilFunctions.getRandomBoolean () ? F_Restaurant_2_Fragment.COMING_SOON : 0);
-        }*/
     }
 
     public void updateData(List<RestaurantEntity> data) {
@@ -67,21 +70,21 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         holder.tv_resto_name.setText(resto.name.toUpperCase());
         holder.tv_resto_address.setText(resto.address);
 
-        if (resto.distance == null || "".equals(resto.distance)) {
-            holder.view_separator.setVisibility(View.GONE);
-            holder.tv_distance.setVisibility(View.GONE);
-        } else {
-            holder.view_separator.setVisibility(View.VISIBLE);
-            holder.tv_distance.setVisibility(View.VISIBLE);
-            holder.tv_distance.setText(resto.distance + ctx.getResources().getString(R.string.kilometer));
-        }
-
         /* add a preorder tag to tell the user. */
-        holder.tv_is_open.setVisibility(View.GONE);
-
-        if (holder.tv_is_coming_soon != null) {
-            holder.tv_is_coming_soon.setVisibility(View.GONE);
-        }
+        holder.iv_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // call
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + resto.main_contact));
+                if (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions((RestaurantListActivity)ctx, new String[]{
+                            Manifest.permission.CALL_PHONE
+                    }, 9);
+                    return;
+                }
+                ctx.startActivity(intent);
+            }
+        });
 
         GlideApp.with(ctx)
                 .load(Constant.SERVER_ADDRESS + "/" + resto.pic)
@@ -90,19 +93,6 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
                 .priority(Priority.NORMAL)
                 .centerCrop()
                 .into(holder.cic_resto);
-
-        int distancePrincingInt = 0;
-        try {
-            distancePrincingInt = Integer.valueOf(resto.delivery_pricing);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (resto.delivery_pricing != null && !"".equals(resto.delivery_pricing) && distancePrincingInt > 0) {
-            holder.tv_distance_pricing.setText(resto.delivery_pricing + " F");
-            holder.tv_distance_pricing.setVisibility(View.VISIBLE);
-        } else
-            holder.tv_distance_pricing.setVisibility(View.GONE);
 
         holder.itemView.setOnClickListener(new OnShowRestaurantPosition(resto));
     }
@@ -119,14 +109,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         public CircleImageView cic_resto;
         public TextView tv_resto_name;
         public TextView tv_resto_address;
-        public ImageView iv_restaurant_theme_image;
-        public TextView tv_enter_menu;
-        public TextView tv_enter_restaurant;
-        public TextView tv_distance;
-        public View view_separator;
-        public TextView tv_is_open;
-        public TextView tv_is_coming_soon;
-        public TextView tv_distance_pricing;
+        public ImageButton iv_call;
 
         public ViewHolder(View view) {
             super(view);
@@ -134,10 +117,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
             this.cic_resto = view.findViewById(R.id.iv_restaurant_icon);
             this.tv_resto_name = view.findViewById(R.id.tv_restaurant_name);
             this.tv_resto_address = view.findViewById(R.id.tv_restaurant_address);
-            tv_distance = view.findViewById(R.id.tv_distance);
-            view_separator = view.findViewById(R.id.view_separator);
-            tv_is_open = view.findViewById(R.id.tv_is_open);
-            tv_distance_pricing = view.findViewById(R.id.tv_distance_pricing);
+            this.iv_call = view.findViewById(R.id.iv_call);
         }
     }
 
@@ -146,7 +126,6 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
-
                 String charString = charSequence.toString();
                 if (charString.isEmpty()) {
                     restaurantListFiltered = data;
@@ -158,7 +137,6 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
                             filteredList.add(row);
                         }
                     }
-
                     restaurantListFiltered = filteredList;
                 }
 

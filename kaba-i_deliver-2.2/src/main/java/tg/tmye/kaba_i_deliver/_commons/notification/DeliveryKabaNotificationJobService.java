@@ -94,6 +94,9 @@ public class DeliveryKabaNotificationJobService extends JobIntentService {
                 /* get command product id */
                 NotificationBuilder.sendCommandNotification(getApplicationContext(), NotificationItem.NotificationFDestination.NEW_COMMAND, item.destination.product_id);
                 break;
+            case NotificationItem.NotificationFDestination.NEW_ORDER:
+                NotificationBuilder.sendCommandNotification(getApplicationContext(), NotificationItem.NotificationFDestination.NEW_COMMAND, item.destination.product_id);
+                break;
         }
     }
 
@@ -105,7 +108,7 @@ public class DeliveryKabaNotificationJobService extends JobIntentService {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        toast("All work complete");
+//        toast("All work complete");
     }
 
     final Handler mHandler = new Handler();

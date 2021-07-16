@@ -1,6 +1,6 @@
 package tg.tmye.kaba.restaurant.activities;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * By abiguime on 25/06/2018.

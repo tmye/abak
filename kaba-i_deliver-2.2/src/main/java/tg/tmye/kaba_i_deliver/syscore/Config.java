@@ -31,6 +31,7 @@ public class Config {
     public static final String DELIVERMAN_THEME = "DELIVERMAN_PICTURE";
     public static final String DELIVERMAN_ADDRESS = "DELIVERMAN_PICTURE";
     public static final String VEHICULE_SERIAL = "VEHICULE_SERIAL";
+    public static final String DELIVERY_MODE_ON_OFF = "DELIVERY_MODE_ON_OFF";
 
 
     public static final String DELIVERMAN_SHIPPING_MODE_ENABLED = "DELIVERMAN_SHIPPING_MODE_ENABLED";
@@ -54,7 +55,5 @@ public class Config {
     public static final String LINK_START_SHIPPING =  Constant.SERVER_ADDRESS + "/livreur/api/command/auto-assign";
 
     public static final String LINK_RESTAURANT_LIST =  Constant.SERVER_ADDRESS + "/livreur/api/restaurants/get";
-
-//
 
 }

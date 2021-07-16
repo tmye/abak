@@ -19,8 +19,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="restaurant_name_sample">CASTAS</string>
-    <string name="title_activity_menu_content">MenuContentActivity</string>
-    <string name="title_activity_restaurant_menu">RestaurantMenuActivity</string>
+    <string name="title_activity_menu_content" translatable="false">MenuContentActivity</string>
+    <string name="title_activity_restaurant_menu" translatable="false">RestaurantMenuActivity</string>
 
     <string name="restaurant_adress_sample">Kégué, 100m away from Stadium</string>
     <string name="restaurant_contact_sample">0022890909090</string>
@@ -121,7 +121,7 @@
     <string name="account_balance">15,400</string>
     <string name="account_settings">Setting</string>
     <string name="account_recharge">Top Up</string>
-    <string name="empty"></string>
+    <string name="empty" translatable="false"></string>
     <string name="title_activity_favorite">FavoriteActivity</string>
     <string name="title_activity_edit_field">EditFieldActivity</string>
     <string name="restaurant_load_error">Sorry, There is no restaurant to show. Please Refresh The Application.</string>
@@ -182,7 +182,7 @@
     <string name="your_contact">Your contact</string>
     <string name="action_logout">Logout</string>
     <string name="press_again_to_exit">Please, double press to exit.</string>
-    <string name="delivery_man_login">DELIVERMAN - LOGIN</string>
+    <string name="delivery_man_login">Hi Kirikou !</string>
     <string name="username">Username</string>
     <string name="sent_to_cooking">Thanks for Sending the food at cooking process.</string>
     <string name="ireturn">Return</string>
@@ -191,7 +191,7 @@
     <string name="please_select_shipping_man">Please select a shipping man</string>
     <string name="sent_to_delivering">Thanks for Sending the food at delivering process.</string>
     <string name="action_delivery_mode_enter">START</string>
-    <string name="action_delivery_mode_exit">END</string>
+    <string name="action_delivery_mode_exit">OFF MODE</string>
     <string name="title_activity_delivery_mode">Delivery Mode</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="shipping_mode_libelle">Hi. You are in Shipping Mode. Enjoy!</string>
@@ -217,11 +217,11 @@
     <string name="delivery_day">Delivery day</string>
     <string name="delivery_time">Delivery time</string>
 
-    <string name="pay_at_arrival_not_allowed">Sorry, this restarant doesn\'t allow pay at arrival</string>
-    <string name="prepay_not_allowed">Sorry this restaurant doesn\'t allow paying online</string>
-    <string name="purchase_address_wrong">Sorry, delivery address error</string>
-    <string name="purchase_user_wrong">Purchase, user wrong</string>
-    <string name="preorder_not_accept">Sorry, preorder is not allowed for now.</string>
+    <string name="pay_at_arrival_not_allowed" translatable="false">Sorry, this restarant doesn\'t allow pay at arrival</string>
+    <string name="prepay_not_allowed" translatable="false">Sorry this restaurant doesn\'t allow paying online</string>
+    <string name="purchase_address_wrong" translatable="false">Sorry, delivery address error</string>
+    <string name="purchase_user_wrong" translatable="false">Purchase, user wrong</string>
+    <string name="preorder_not_accept" translatable="false">Sorry, preorder is not allowed for now.</string>
     <string name="pre_badge">Pre</string>
     <string name="infos">Additional informations</string>
     <string name="action_restaurants">Restaurants</string>
@@ -233,6 +233,16 @@
     <string name="search_title">Chercher</string>
     <string name="search_hint">Quel restaurant ?</string>
     <string name="services_fee_label">Service Fees</string>
+    <string name="login_page_purpose">This App is strictly for KirikouZ.\n\n Download KABA</string>
+    <string name="download_kaba">Download KABA</string>
+    <string name="order_amount">Order amount</string>
+    <string name="customer_amount">Customer amount</string>
+    <string name="left_amount">Left amount</string>
+    <string name="refund">Refund</string>
+    <string name="refund_amount_confirmation">Refund:\nYou are about to top up the customer %d for this order. Do you want to confirm refunding?</string>
+    <string name="left_amount_error">LEFT AMOUNT ERROR</string>
+    <string name="go_online">Go Online</string>
+    <string name="you_are_currently_offline">You are currently offline</string>
     <string-array name="days_of_week">
         <item>Sunday</item>
         <item>Monday</item>

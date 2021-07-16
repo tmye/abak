@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="@dimen/food_details_tag_padding_horizontal"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/iv_drawable_icon"
+        app:srcCompat="@drawable/refund"
+        android:layout_width="@dimen/dialog_info_icon_size"
+        android:layout_height="@dimen/dialog_info_icon_size"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        />
+
+
+    <TextView
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:text="@string/order_amount"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:textAlignment="gravity"
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/ed_order_amount"
+        android:enabled="false"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical|left"
+        style="@style/TextStyle.AmountField.Order"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:maxLength="8"
+        android:textColor="@color/colorPrimary_yellow"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:drawablePadding="15dp"
+        android:inputType="number"
+        />
+
+    <TextView
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:text="@string/customer_amount"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:textAlignment="gravity"
+
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+    <EditText
+        android:id="@+id/ed_customer_giving"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical|left"
+        style="@style/TextStyle.AmountField.Order"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:maxLength="8"
+        android:textSize="20sp"
+        android:drawablePadding="15dp"
+        android:inputType="number"
+        />
+
+    <TextView
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:text="@string/left_amount"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:textAlignment="gravity"
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/ed_customer_left"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical|left"
+        style="@style/TextStyle.AmountField.Left"
+        android:layout_width="250dp"
+        android:textColor="@color/kaba_red_color"
+        android:layout_height="40dp"
+        android:maxLength="8"
+        android:textStyle="bold"
+        android:enabled="false"
+        android:textSize="20sp"
+        android:drawablePadding="15dp"
+        android:inputType="number"
+        />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_marginTop="@dimen/activity_horizontal_margin_double"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/tv_confirm_home"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="@string/confirm"
+            android:textSize="12sp"
+            android:textColor="@color/colorPrimary"
+            android:background="@drawable/bt_confirm_drawable_red_border_white_inn"
+            android:layout_width="wrap_content"
+            android:textAllCaps="true"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_horizontal_margin"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

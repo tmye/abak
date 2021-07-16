@@ -12,8 +12,6 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
         />
 
-
-
     <!-- Name -->
     <LinearLayout
         android:layout_centerVertical="true"

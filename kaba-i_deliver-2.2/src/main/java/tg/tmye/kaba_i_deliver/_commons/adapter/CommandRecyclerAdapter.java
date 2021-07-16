@@ -162,6 +162,7 @@ public class CommandRecyclerAdapter extends RecyclerView.Adapter<CommandRecycler
         holder.tv_total_original_pricing.setVisibility(View.GONE);
         holder.tv_shipping_original_price.setVisibility(View.GONE);
 
+
         if (command.is_email_account) {
             holder.rel_service_fees.setVisibility(View.VISIBLE);
 
@@ -176,11 +177,12 @@ public class CommandRecyclerAdapter extends RecyclerView.Adapter<CommandRecycler
 
                 holder.tv_total_original_pricing.setVisibility(View.VISIBLE);
                 holder.tv_shipping_original_price.setVisibility(View.VISIBLE);
-                strikeThru(holder.tv_shipping_original_price);
+                strikeThru(holder.tv_total_original_pricing);
                 strikeThru(holder.tv_shipping_original_price);
             } else {
                 /* nothing */
             }
+
         } else {
             holder.rel_service_fees.setVisibility(View.GONE);
             if (command.have_billing_discount) {
@@ -208,7 +210,7 @@ public class CommandRecyclerAdapter extends RecyclerView.Adapter<CommandRecycler
 
     private void strikeThru(TextView textView) {
         textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        textView.setPaintFlags(Paint.ANTI_ALIAS_FLAG);
+//        textView.setPaintFlags(Paint.ANTI_ALIAS_FLAG);
         textView.setTextColor(ContextCompat.getColor(ctx, R.color.facebook_blue));
     }
 

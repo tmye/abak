@@ -2,6 +2,8 @@ package tg.tmye.kaba_i_deliver.activity.command;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,9 +12,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
-import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -28,6 +30,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.FirebaseApp;
 
 import java.util.HashMap;
 import java.util.List;
@@ -41,13 +44,15 @@ import tg.tmye.kaba_i_deliver.activity.command.presenter.MyCommandsPresenter;
 import tg.tmye.kaba_i_deliver.activity.delivery.DeliveryModeActivity;
 import tg.tmye.kaba_i_deliver.activity.login.DeliverManLoginActivity;
 import tg.tmye.kaba_i_deliver.activity.restaurant.RestaurantListActivity;
-import tg.tmye.kaba_i_deliver.cviews.CustomProgressbar;
 import tg.tmye.kaba_i_deliver.cviews.NoScrollViewPager;
 import tg.tmye.kaba_i_deliver.cviews.dialog.LoadingDialogFragment;
 import tg.tmye.kaba_i_deliver.data.command.Command;
 import tg.tmye.kaba_i_deliver.data.command.source.CommandRepository;
 import tg.tmye.kaba_i_deliver.data.delivery.KabaShippingMan;
 import tg.tmye.kaba_i_deliver.data.delivery.source.DeliveryManRepository;
+import tg.tmye.kaba_i_deliver.service.TrackingService;
+import tg.tmye.kaba_i_deliver.syscore.ILog;
+import tg.tmye.kaba_i_deliver.syscore.MyKabaDeliverApp;
 
 import static tg.tmye.kaba_i_deliver.activity.command.CommandDetailsActivity.COMMAND_ITEM;
 
@@ -88,6 +93,8 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_commands);
+        FirebaseApp.initializeApp(this);
+
         mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         initViews();
@@ -118,6 +125,23 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
             viewpager_commands.setCurrentItem(lastPosition);
             animateAppAndStatusBar(R.color.command_state_3, R.color.command_state_3, 0);
         }
+        // start tracking service
+        Intent mServiceIntent = new Intent(this, TrackingService.class);
+        if (!isMyServiceRunning(TrackingService.class)) {
+            startService(mServiceIntent);
+        }
+    }
+
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                ILog.print ("isMyServiceRunning? "+true+"");
+                return true;
+            }
+        }
+        ILog.print ("isMyServiceRunning? "+false+"");
+        return false;
     }
 
     private void initViews() {
@@ -198,17 +222,32 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
     public void inflateCommands(final List<Command> preorders,final List<Command> wait_for_me, final List<Command> yet_to_ship, final List<Command> shipping_done) {
 
         todayMoney = 0;
+        ILog.print("==== orders ==== ");
         for (int i = 0; i < shipping_done.size(); i++) {
-            if (shipping_done.get(i).is_email_account)
-                todayMoney += (Integer.valueOf(shipping_done.get(i).shipping_pricing_minus_extra));
-            else
+            if (shipping_done.get(i).is_email_account) {
+                todayMoney += (Integer.valueOf(shipping_done.get(i).phoneNumber_shipping_pricing));
+                ILog.print("add + "+(Integer.valueOf(shipping_done.get(i).phoneNumber_shipping_pricing)));
+            } else {
                 todayMoney += (Integer.valueOf(shipping_done.get(i).shipping_pricing));
+                ILog.print("add + "+(Integer.valueOf(shipping_done.get(i).shipping_pricing)));
+            }
         }
 
+        ILog.print("==== preorder ==== ");
+
         for (int i = 0; i < preorders.size(); i++) {
-            if (preorders.get(i).state == 3)
-                todayMoney += (Integer.valueOf(preorders.get(i).shipping_pricing));
+            if (preorders.get(i).state == 3) {
+                if (preorders.get(i).is_email_account) {
+                    todayMoney += (Integer.valueOf(preorders.get(i).phoneNumber_shipping_pricing));
+                    ILog.print("add + " + (Integer.valueOf(shipping_done.get(i).phoneNumber_shipping_pricing)));
+                } else {
+                    todayMoney += (Integer.valueOf(preorders.get(i).shipping_pricing));
+                    ILog.print("add + " + (Integer.valueOf(shipping_done.get(i).shipping_pricing)));
+                }
+            }
         }
+
+        ILog.print("==== finish ==== ");
 
         runOnUiThread(new Runnable() {
             @Override
@@ -449,13 +488,25 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
 //                break;
             case R.id.action_logout:
                 /* clear logout and start the task bottom activity */
+                exitDeliveryMode();// if successful, logout as well
                 logout();
                 break;
             case R.id.action_restaurants:
                 jumpToRestaurants();
                 break;
+            case R.id.action_exit_delivery_mode:
+                exitDeliveryMode();
+                break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void exitDeliveryMode() {
+        ((MyKabaDeliverApp)getApplicationContext()).setDeliveryModeOff();
+        // kill location service
+        stopService(new Intent(MyCommandsActivity.this, TrackingService.class));
+        startActivity(new Intent(MyCommandsActivity.this, DeliverManLoginActivity.class));
+
     }
 
     private void jumpToRestaurants() {
