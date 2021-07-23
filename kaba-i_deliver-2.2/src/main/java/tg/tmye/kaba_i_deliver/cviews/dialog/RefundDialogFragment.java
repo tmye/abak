@@ -1,6 +1,7 @@
 package tg.tmye.kaba_i_deliver.cviews.dialog;
 
 import android.app.Dialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
@@ -61,12 +63,15 @@ public class RefundDialogFragment extends BottomSheetDialogFragment implements V
 
 
     EditText ed_order_amount, ed_customer_giving, ed_customer_left;
-
+    LinearLayoutCompat lny_bg;
+    TextView tv_end_action;
 
     private void initViews(View view) {
         ed_order_amount = view.findViewById(R.id.ed_order_amount);
         ed_customer_giving = view.findViewById(R.id.ed_customer_giving);
         ed_customer_left = view.findViewById(R.id.ed_customer_left);
+        lny_bg = view.findViewById(R.id.lny_bg);
+        tv_end_action = view.findViewById(R.id.tv_end_action);
     }
 
     @Nullable
@@ -85,9 +90,9 @@ public class RefundDialogFragment extends BottomSheetDialogFragment implements V
 
         view.setOnClickListener(this);
         Button bt_confirm_home = view.findViewById(R.id.tv_confirm_home);
-        bt_confirm_home.setCompoundDrawablesWithIntrinsicBounds(
-                VectorDrawableCompat.create(getResources(), R.drawable.ic_arrow_back_green_upward_navigation_24dp, null),
-                null, null, null);
+     /*   bt_confirm_home.setCompoundDrawablesWithIntrinsicBounds(
+                VectorDrawableCompat.create(getResources(), R.drawable.common_full_open_on_phone, null),
+                null, null, null);*/
         bt_confirm_home.setOnClickListener(this);
         ed_customer_giving.addTextChangedListener(new TextWatcher() {
 
@@ -113,7 +118,16 @@ public class RefundDialogFragment extends BottomSheetDialogFragment implements V
                         e.printStackTrace();
                     }
                     leftAmount = value - orderAmount;
-                    ed_customer_left.setText(String.valueOf(leftAmount));
+                    ed_customer_left.setText(String.valueOf(Math.abs(leftAmount)));
+                    if (leftAmount > 0) {
+                        lny_bg.setBackgroundColor(Color.argb(255,156,240,255)); // blue
+                        tv_end_action.setText(getContext().getString(R.string.to_credit_amount));
+                    } else if (leftAmount < 0) {
+                        lny_bg.setBackgroundColor(Color.argb(255,255,112,151)); // red
+                        tv_end_action.setText(getContext().getString(R.string.to_debit_amount));
+                    } else {
+                        lny_bg.setBackgroundColor(Color.WHITE);
+                    }
                 }
             }
         });
@@ -123,13 +137,8 @@ public class RefundDialogFragment extends BottomSheetDialogFragment implements V
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tv_confirm_home:
-                // check if the value left is workable, then send it it to the activity
-                if (leftAmount < 0)
-                    Toast.makeText(getContext(), getString(R.string.left_amount_error), Toast.LENGTH_SHORT).show();
-                else {
-                    ((CommandDetailsActivity) getActivity()).confirmRefund(orderAmount, givenAmount, leftAmount);
+                ((CommandDetailsActivity) getActivity()).confirmRefund(orderAmount, givenAmount, leftAmount);
                 dismiss();
-                }
                 break;
         }
     }

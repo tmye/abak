@@ -4,6 +4,7 @@ import tg.tmye.kaba_i_deliver.BasePresenter;
 import tg.tmye.kaba_i_deliver.BaseView;
 import tg.tmye.kaba_i_deliver.data.command.Command;
 import tg.tmye.kaba_i_deliver.data.delivery.DeliveryAddress;
+import tg.tmye.kaba_i_deliver.data.hsn.HSN;
 
 
 /**
@@ -11,7 +12,7 @@ import tg.tmye.kaba_i_deliver.data.delivery.DeliveryAddress;
  * email: 2597434002@qq.com
  */
 
-public interface CommandDetailsContract {
+public interface HsnDetailsContract {
 
     public interface View extends BaseView {
 
@@ -19,26 +20,19 @@ public interface CommandDetailsContract {
         /* in case there is a network error */
         void networkError();
 
-        void inflateCommandDetails(Command command, DeliveryAddress deliveryAddress);
-
-        void syserror();
+        void inflateHsnDetails();
 
         void success(boolean succesfull, int newState);
 
         void setShippingDoneSuccess(boolean isSuccess);
 
-        void startShippingSuccess(boolean isSuccessfull);
-        /* inflate data */
     }
 
 
     public interface Presenter extends BasePresenter {
 
-        void loadCommandItems();
+        void setHsnDelivered(HSN hsn);
 
-        void loadCommandDetails(String command_id);
-
-        void launchRefund(int command_id, int orderAmount, int givenAmount, int leftAmount);
     }
 
 }

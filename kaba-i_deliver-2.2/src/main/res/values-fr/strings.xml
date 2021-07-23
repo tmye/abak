@@ -26,7 +26,7 @@
     <string name="sys_error">Sorry for the disconvenience, The server is encountering an Error.</string>
     <string name="title_activity_web">WEBACTIVITY</string>
     <string name="title_activity_geo">GEOACTIVITY</string>
-    <string name="total">TOTAL:</string>
+    <string name="total">TOTAL</string>
     <string name="article_title_sample">Comment faire une bonne tisane?</string>
     <string name="article_details_sample">2 tubercules de Gingembre + Kpatima, when a user tries to pick up one of cards... 2 tubercules de Gingembre + Kpatima, when a user tries to pick up one of cards</string>
     <string name="scanner_activity">Scan</string>
@@ -249,11 +249,17 @@
     <string name="customer_amount">Montant du Client</string>
     <string name="left_amount">Montant à rembourser</string>
     <string name="refund">Rembourser</string>
-    <string name="refund_amount_confirmation">Remboursement:\nVous être en train de recharger %d FCFA à ce client. Voulez vous confimer ?</string>
+    <string name="refund_amount_confirmation">Vous être en train de recharger %d FCFA à ce client. Voulez vous confimer ?</string>
     <string name="left_amount_error">Erreur montant à rembourser</string>
     <string name="app_name">KIRIKOU</string>
     <string name="title_shopping_card">Panier</string>
     <string name="go_online">Activer Mode livraison</string>
     <string name="you_are_currently_offline">Vous être hors ligne</string>
+    <string name="to_credit_amount">Montant à créditer</string>
+    <string name="to_debit_amount">Montant à débiter</string>
+    <string name="debit_amount_confirmation">Vous vous préparez à débiter ce client de %d pour cette commande. Voulez vous confirmer?</string>
+    <string name="refund_or_debit_error">Une erreur s\'est produite. Veuillez réessayer !</string>
+    <string name="title_credit">Rembourser</string>
+    <string name="title_debit">Débiter</string>
 
 </resources>

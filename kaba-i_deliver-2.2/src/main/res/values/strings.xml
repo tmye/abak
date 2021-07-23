@@ -39,7 +39,7 @@
     <string name="sys_error">Sorry for the disconvenience, The server is encountering an Error.</string>
     <string name="title_activity_web">WEBACTIVITY</string>
     <string name="title_activity_geo">GEOACTIVITY</string>
-    <string name="total">TOTAL:</string>
+    <string name="total">TOTAL</string>
     <string name="article_title_sample">Comment faire une bonne tisane?</string>
     <string name="article_details_sample">2 tubercules de Gingembre + Kpatima, when a user tries to pick up one of cards... 2 tubercules de Gingembre + Kpatima, when a user tries to pick up one of cards</string>
     <string name="scanner_activity">Scan</string>
@@ -239,10 +239,21 @@
     <string name="customer_amount">Customer amount</string>
     <string name="left_amount">Left amount</string>
     <string name="refund">Refund</string>
-    <string name="refund_amount_confirmation">Refund:\nYou are about to top up the customer %d for this order. Do you want to confirm refunding?</string>
+    <string name="refund_amount_confirmation">Refund:\n\nYou are about to top up the customer %d for this order. Do you want to confirm refunding?</string>
     <string name="left_amount_error">LEFT AMOUNT ERROR</string>
     <string name="go_online">Go Online</string>
     <string name="you_are_currently_offline">You are currently offline</string>
+    <string name="to_credit_amount">Amount to Credit</string>
+    <string name="to_debit_amount">Amount to Debit</string>
+    <string name="debit_amount_confirmation">Debit:\n\nYou are about to debit the customer %d for this order. Do you want to confirm the debit?</string>
+    <string name="refund_or_debit_error">There was an error on the request. Please try again</string>
+    <string name="title_credit">Credit</string>
+    <string name="title_debit">Debit</string>
+    <string name="there_is_no_order">Sorry, there is no order to deliver yet</string>
+    <string name="customer_adress_label">Address</string>
+    <string name="hsn_details">HSN Details</string>
+    <string name="waiting">WAITING</string>
+    <string name="delivered">DELIVERED</string>
     <string-array name="days_of_week">
         <item>Sunday</item>
         <item>Monday</item>

@@ -5,6 +5,7 @@
     <color name="colorAccent">#ffffff</color>
 
     <color name="colorPrimary_yellow">#f8bf00</color>
+    <color name="pink_color">#EF37C1</color>
     <color name="transparent">#00000000</color>
     <color name="restaurant_name_color">#001199</color>
     <color name="circular_view_border_yellow">@color/kaba_red_color</color>

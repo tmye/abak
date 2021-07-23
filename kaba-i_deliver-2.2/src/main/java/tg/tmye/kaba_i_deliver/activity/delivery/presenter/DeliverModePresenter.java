@@ -1,7 +1,5 @@
 package tg.tmye.kaba_i_deliver.activity.delivery.presenter;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -12,11 +10,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import tg.tmye.kaba_i_deliver._commons.MultiThreading.NetworkRequestThreadBase;
-import tg.tmye.kaba_i_deliver.activity.delivery.DeliveryModeActivity;
 import tg.tmye.kaba_i_deliver.activity.delivery.contract.DeliveryModeContract;
 import tg.tmye.kaba_i_deliver.data.command.Command;
 import tg.tmye.kaba_i_deliver.data.delivery.source.DeliveryManRepository;
-import tg.tmye.kaba_i_deliver.syscore.Constant;
 import tg.tmye.kaba_i_deliver.syscore.ILog;
 
 /**

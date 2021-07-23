@@ -4,7 +4,6 @@ import java.util.List;
 
 import tg.tmye.kaba_i_deliver.BasePresenter;
 import tg.tmye.kaba_i_deliver.BaseView;
-import tg.tmye.kaba_i_deliver.activity.login.contract.LoginContract;
 import tg.tmye.kaba_i_deliver.data.command.Command;
 
 /**

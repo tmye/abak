@@ -3,6 +3,7 @@ package tg.tmye.kaba_i_deliver.activity.readygo;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.content.Intent;
@@ -10,14 +11,23 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import tg.tmye.kaba_i_deliver.R;
 import tg.tmye.kaba_i_deliver.activity.command.MyCommandsActivity;
+import tg.tmye.kaba_i_deliver.activity.readygo.contract.DeliveryReadyModeContract;
+import tg.tmye.kaba_i_deliver.activity.readygo.presenter.DeliveryReadyModePresenter;
+import tg.tmye.kaba_i_deliver.cviews.dialog.LoadingDialogFragment;
+import tg.tmye.kaba_i_deliver.data.command.source.CommandRepository;
 import tg.tmye.kaba_i_deliver.syscore.MyKabaDeliverApp;
 
-public class DeliveryReadyActivity extends AppCompatActivity {
+public class DeliveryReadyActivity extends AppCompatActivity implements DeliveryReadyModeContract.View {
 
     private static final int MY_PERMISSION_REQUEST_GPS_LOCATION = 3000;
+
+    CommandRepository repository;
+    DeliveryReadyModePresenter presenter;
+    private LoadingDialogFragment loadingDialogFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,16 +39,17 @@ public class DeliveryReadyActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 /* update shared preferences and go to command activity */
-
                 // check if you have geoloc permission
                 if (ActivityCompat.checkSelfPermission(DeliveryReadyActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(DeliveryReadyActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                    ((MyKabaDeliverApp)getApplicationContext()).setDeliveryModeOn();
-                    startActivity(new Intent(DeliveryReadyActivity.this, MyCommandsActivity.class));
+                    presenter.startDeliveryMode();
                 } else {
                     requestGpsLocationPermission();
                 }
             }
         });
+
+        repository = new CommandRepository(this);
+        presenter = new DeliveryReadyModePresenter(this, repository);
     }
 
     private void requestGpsLocationPermission() {
@@ -57,10 +68,82 @@ public class DeliveryReadyActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (ActivityCompat.checkSelfPermission(DeliveryReadyActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(DeliveryReadyActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            ((MyKabaDeliverApp)getApplicationContext()).setDeliveryModeOn();
-            startActivity(new Intent(DeliveryReadyActivity.this, MyCommandsActivity.class));
+            presenter.startDeliveryMode();
         } else {
            finish();
         }
+    }
+
+
+    @Override
+    public void networkError() {
+        mToast(getResources().getString(R.string.network_error));
+    }
+
+    @Override
+    public void syserror() {
+        mToast(getString(R.string.sys_error));
+        showLoading(false);
+    }
+
+    private void mToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    public void showLoading(boolean isLoading) {
+
+        /* get a loading box on the top */
+        if (loadingDialogFragment == null) {
+            if (isLoading) {
+                loadingDialogFragment = LoadingDialogFragment.newInstance(getString(R.string.content_on_loading));
+                showFragment(loadingDialogFragment, "loadingbox", true);
+            }
+        } else {
+            if (isLoading) {
+                showFragment(loadingDialogFragment, "loadingbox",false);
+            } else {
+                /*remove fragment */
+                hideFragment();
+            }
+        }
+    }
+
+
+    @Override
+    public void enterDeliveryModeSuccess(boolean isSuccessfull) {
+        if(isSuccessfull) {
+            ((MyKabaDeliverApp)getApplicationContext()).setDeliveryModeOn();
+            startActivity(new Intent(DeliveryReadyActivity.this, MyCommandsActivity.class));
+        } else {
+            mToast(getString(R.string.sys_error));
+        }
+    }
+
+
+
+    private void hideFragment() {
+        if (loadingDialogFragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.remove(loadingDialogFragment);
+            loadingDialogFragment = null;
+            ft.commitAllowingStateLoss();
+        }
+    }
+
+    private void showFragment(LoadingDialogFragment loadingDialogFragment, String tag, boolean justCreated) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        if (justCreated == true)
+            ft.add(loadingDialogFragment, tag);
+        else
+            ft.show(loadingDialogFragment);
+        ft.commitAllowingStateLoss();
+    }
+
+
+    @Override
+    public void setPresenter(Object presenter) {
+
     }
 }

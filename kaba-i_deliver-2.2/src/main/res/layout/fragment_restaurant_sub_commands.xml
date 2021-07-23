@@ -14,7 +14,7 @@
 
     <TextView
         android:id="@+id/tv_no_food_message"
-        android:text="@string/there_is_no_food"
+        android:text="@string/there_is_no_order"
       android:layout_gravity="center"
         android:gravity="center"
         android:layout_width="wrap_content"

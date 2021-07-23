@@ -1,13 +1,10 @@
 package tg.tmye.kaba_i_deliver.activity.command;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,9 +13,6 @@ import tg.tmye.kaba_i_deliver.activity.command.contract.CommandDetailsContract;
 import tg.tmye.kaba_i_deliver.data.command.Command;
 import tg.tmye.kaba_i_deliver.data.command.source.CommandRepository;
 import tg.tmye.kaba_i_deliver.data.delivery.DeliveryAddress;
-import tg.tmye.kaba_i_deliver.data.delivery.KabaShippingMan;
-import tg.tmye.kaba_i_deliver.data.delivery.source.DeliveryManRepository;
-import tg.tmye.kaba_i_deliver.syscore.Constant;
 import tg.tmye.kaba_i_deliver.syscore.ILog;
 
 /**
@@ -114,6 +108,38 @@ public class CommandDetailsPresenter implements CommandDetailsContract.Presenter
                         DeliveryAddress deliveryAddress = gson.fromJson(data.get("command").getAsJsonObject().get("shipping_address"), new TypeToken<DeliveryAddress>(){}.getType());
                         view.inflateCommandDetails(command, deliveryAddress);
                         view.showLoading(false);
+                    }
+                }
+        );
+    }
+
+    @Override
+    public void launchRefund(int command_id, int orderAmount, int givenAmount, int leftAmount) {
+        view.showLoading(true);
+        commandRepository.launchDebitOrRefund (command_id, orderAmount, givenAmount, leftAmount, new NetworkRequestThreadBase.NetRequestIntf<String>() {
+                    @Override
+                    public void onNetworkError() {
+                        view.networkError();
+                    }
+
+                    @Override
+                    public void onSysError() {
+                        view.networkError();
+                    }
+
+                    @Override
+                    public void onSuccess(String jsonResponse) {
+
+                        ILog.print(jsonResponse);
+                        /* retrieve the object */
+                        JsonObject obj = new JsonParser().parse(jsonResponse).getAsJsonObject();
+                        int error = obj.get("error").getAsInt();
+                        view.showLoading(false);
+                        if (error == 0) {
+                            view.setShippingDoneSuccess(true);
+                        } else {
+                            view.setShippingDoneSuccess(false);
+                        }
                     }
                 }
         );

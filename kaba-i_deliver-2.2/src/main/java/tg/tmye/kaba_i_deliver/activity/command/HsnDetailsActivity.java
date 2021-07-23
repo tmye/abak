@@ -24,7 +24,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
@@ -34,77 +33,58 @@ import java.util.List;
 
 import tg.tmye.kaba_i_deliver.R;
 import tg.tmye.kaba_i_deliver._commons.utils.UtilFunctions;
-import tg.tmye.kaba_i_deliver.activity.command.contract.CommandDetailsContract;
-import tg.tmye.kaba_i_deliver.cviews.OffRecyclerview;
-import tg.tmye.kaba_i_deliver.cviews.command_details_view.CommandProgressView;
+import tg.tmye.kaba_i_deliver.activity.command.contract.HsnDetailsContract;
+import tg.tmye.kaba_i_deliver.activity.command.presenter.MyHsnPresenter;
 import tg.tmye.kaba_i_deliver.cviews.dialog.InfoDialogFragment;
 import tg.tmye.kaba_i_deliver.cviews.dialog.LoadingDialogFragment;
-import tg.tmye.kaba_i_deliver.cviews.dialog.RefundConfirmationDialog;
-import tg.tmye.kaba_i_deliver.cviews.dialog.RefundDialogFragment;
 import tg.tmye.kaba_i_deliver.data.command.Command;
 import tg.tmye.kaba_i_deliver.data.command.source.CommandRepository;
-import tg.tmye.kaba_i_deliver.data.delivery.DeliveryAddress;
-import tg.tmye.kaba_i_deliver.data.delivery.KabaShippingMan;
-import tg.tmye.kaba_i_deliver.data.delivery.source.DeliveryManRepository;
+import tg.tmye.kaba_i_deliver.data.hsn.HSN;
 import tg.tmye.kaba_i_deliver.data.shoppingcart.BasketInItem;
 
+public class HsnDetailsActivity  extends AppCompatActivity implements HsnDetailsContract.View, View.OnClickListener {
 
-public class CommandDetailsActivity extends AppCompatActivity implements CommandDetailsContract.View, View.OnClickListener {
-
-    public static final String ID = "CommandDetailsActivity.ID";
-    public static final String COMMAND_ITEM = "CommandDetailsActivity.COMMAND_ITEM";
+    public static final String ID = "HsnDetailsActivity.ID";
+    public static final String COMMAND_ITEM = "HsnDetailsActivity.COMMAND_ITEM";
     private static final int PERMISSIONS_REQUEST_CODE = 90;
 
-    CommandDetailsPresenter presenter;
-
-    CommandProgressView commandProgressView;
-
-    private DeliveryManRepository deliverRepo;
     private CommandRepository commandRepo;
-
-    private OffRecyclerview recyclerview_items_bought;
 
     NestedScrollView nestedscrollview;
 
-
-    TextView tv_bottom_explain;
-
     /* static data */
-    private TextView tv_contact_description_preview, tv_contact_district_preview, tv_address_description_preview;
-    private TextView tv_password_delivery_key;
-    private TextView tv_last_update;
+    private TextView tv_contact_description_preview, tv_address_description_preview;
 
-    RelativeLayout rel_contact;
-    RelativeLayout rel_district;
-
-    private Command main_command_item;
-    private List<KabaShippingMan> shippingMen = null;
     private ImageButton ib_action_shipping_done;
     private ImageButton ib_action_postpone_shipping;
-    private ImageButton ib_action_start_shipping;
-    private TextView tv_shipping_man_code;
-    private TextView tv_address_near;
+    private TextView tv_shipping_address;
 
     private Button bt_location_overview, bt_contact_call;
 
     private LoadingDialogFragment loadingDialogFragment;
 
     /* ask for the permission once we get in this activity */
-    TextView tv_additionnal_infos, tv_additionnal_infos_title, tv_delivery_day, tv_delivery_time;
-    LinearLayout  lny_additionnal_infos, lny_preorder_infos;
+    TextView tv_additionnal_infos;
+    LinearLayout lny_additionnal_infos, lny_preorder_infos;
+    RelativeLayout rel_location;
 
-    Command command;
+    //    Command command;
+    public static String HSN = "hsn";
+    HSN hsn;
+
+    MyHsnPresenter hsnPresenter;
+
+    TextView tv_status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_command_details);
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.activity_hsn_details);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_upward_navigation_24dp);
+
+        setTitle(R.string.hsn_details);
 
         initViews();
 
@@ -116,72 +96,44 @@ public class CommandDetailsActivity extends AppCompatActivity implements Command
         Drawable drawable_phone = VectorDrawableCompat.create(getResources(),
                 R.drawable.ic_phone_forwarded_white_24dp, null);
 
-        /*Drawable drawable_location = VectorDrawableCompat.create(getResources(),
-                R.drawable.ic_my_location_white_24dp, null);*/
-
         Drawable drawable_location = VectorDrawableCompat.create(getResources(),
                 R.drawable.ic_my_location_white_24dp, null);
 
         bt_contact_call.setCompoundDrawablesWithIntrinsicBounds (drawable_phone, null, null, null);
         bt_location_overview.setCompoundDrawablesWithIntrinsicBounds (drawable_location, null, null, null);
 
+        hsn = getIntent().getParcelableExtra(HSN);
 
-        if (!getIntent().getExtras().containsKey(COMMAND_ITEM)) {
-            int command_id_int = getIntent().getIntExtra(ID, -1);
-
-            if (command_id_int == -1) {
-                mToast(getResources().getString(R.string.sys_error));
-                finish();
-            }
-
-            //content
-            String command_id = "" + command_id_int;
-
-            commandRepo = new CommandRepository(this);
-            presenter = new CommandDetailsPresenter(commandRepo, this);
-
-            // init content details
-            presenter.loadCommandDetails(command_id);
-
+        if (hsn == null) {
+            mToast(getResources().getString(R.string.sys_error));
+            finish();
         } else {
-            commandRepo = new CommandRepository(this);
-            presenter = new CommandDetailsPresenter(commandRepo, this);
-            command = getIntent().getParcelableExtra(COMMAND_ITEM);
-            inflateCommandDetails(command, command.shipping_address);
+            inflateHsnDetails();
         }
+
+        commandRepo = new CommandRepository(this);
+          hsnPresenter = new MyHsnPresenter(this, commandRepo);
 
     }
 
     private void initViews() {
-        commandProgressView = findViewById(R.id.command_progress_view);
-        recyclerview_items_bought = findViewById(R.id.recyclerview_items_bought);
         nestedscrollview = findViewById(R.id.nestedscrollview);
         tv_contact_description_preview = findViewById(R.id.tv_contact_description_preview);
         tv_address_description_preview = findViewById(R.id.tv_address_description_preview);
-        tv_contact_district_preview = findViewById(R.id.tv_contact_district_preview);
-        tv_last_update = findViewById(R.id.tv_last_update);
-        tv_address_near = findViewById(R.id.tv_contact_near_preview);
+        tv_shipping_address = findViewById(R.id.tv_shipping_address);
 
-        tv_bottom_explain = findViewById(R.id.tv_explain_content);
         ib_action_shipping_done = findViewById(R.id.ib_action_shipping_done);
         ib_action_postpone_shipping = findViewById(R.id.ib_action_postpone_shipping);
-        ib_action_start_shipping = findViewById(R.id.ib_action_start_shipping);
-        tv_shipping_man_code = findViewById(R.id.tv_shipping_man_code);
-        tv_password_delivery_key = findViewById(R.id.tv_password_delivery_key);
-        rel_contact = findViewById(R.id.rel_contact);
-        rel_district = findViewById(R.id.rel_district);
 
         bt_location_overview = findViewById(R.id.bt_location_overview);
         bt_contact_call = findViewById(R.id.bt_contact_call);
 
-
-
         tv_additionnal_infos = findViewById(R.id.tv_additionnal_infos);
-        tv_additionnal_infos_title = findViewById(R.id.tv_additionnal_infos_title);
         lny_additionnal_infos = findViewById(R.id.lny_additionnal_infos);
         lny_preorder_infos = findViewById(R.id.lny_preorder_infos);
-        tv_delivery_day = findViewById(R.id.tv_delivery_day);
-        tv_delivery_time = findViewById(R.id.tv_delivery_time);
+
+        rel_location = findViewById(R.id.rel_location);
+        tv_status = findViewById(R.id.tv_status);
     }
 
 
@@ -231,79 +183,64 @@ public class CommandDetailsActivity extends AppCompatActivity implements Command
 
     }
 
-
-    private void mToast(String message) {
-//        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
-
     @Override
-    public void inflateCommandDetails(final Command command, final DeliveryAddress deliveryAddress) {
-
+    public void inflateHsnDetails() {
         /* inflate the commands into the view */
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
 
                 /* inflate shipping man informations */
-                KabaShippingMan theShippingMan = DeliveryManRepository.getShippingMan(CommandDetailsActivity.this);
-                tv_address_near.setText(deliveryAddress.near);
-                tv_shipping_man_code.setText(command.state > 1 && command.state < 4 ?  theShippingMan.name : "");
-                bt_contact_call.setOnClickListener(new OnContactViewClickListener(CommandDetailsActivity.this, command.shipping_address.phone_number));
-                bt_location_overview.setOnClickListener(new OnLocationOverviewClickListener(command.shipping_address.phone_number, command.shipping_address.location));
+                bt_contact_call.setText(getString(R.string.call)+(hsn.phone_number != null ? (" "+hsn.phone_number) : ""));
+                bt_contact_call.setOnClickListener(new HsnDetailsActivity.OnContactViewClickListener(HsnDetailsActivity.this, hsn.phone_number));
+                tv_shipping_address.setText(hsn.shipping_address);
+                tv_status.setText(hsn.state == 0? getString(R.string.waiting) : getString(R.string.delivered));
+                tv_status.setBackgroundResource(hsn.state == 0? R.drawable.bg_green_rounded : R.drawable.bg_already_paid_rounded);
+                if ("".equals(hsn.shipping_location_link)) {
+                    rel_location.setVisibility(View.GONE);
+                } else {
+                    rel_location.setVisibility(View.VISIBLE);
+                    bt_location_overview.setOnClickListener(new HsnDetailsActivity.OnLocationOverviewClickListener(hsn.phone_number, hsn.shipping_location_link));
+                }
                 /* according to command state, put in the background that we need. */
-                ib_action_start_shipping.setOnClickListener(new OnActionButtonClickListener(command));
-                ib_action_start_shipping.setVisibility(View.GONE);
-                switch (command.state) {
-                    case 2:
+                switch (hsn.state) {
+                    case 0:
                         /* deliverying state*/
                         ib_action_postpone_shipping.setBackgroundResource(R.drawable.icon_red_circle);
                         ib_action_shipping_done.setBackgroundResource(R.drawable.icon_green_circle);
 
                         /* set up color of the background of the button */
-                        tv_bottom_explain.setVisibility(View.VISIBLE);
                         ib_action_shipping_done.setVisibility(View.VISIBLE);
                         ib_action_postpone_shipping.setVisibility(View.VISIBLE);
                         /* customer contact */
-                        tv_contact_description_preview.setText(command.shipping_address.phone_number);
-                        tv_contact_district_preview.setText(command.shipping_address.quartier);
-                        ib_action_postpone_shipping.setOnClickListener(new OnActionButtonClickListener(command));
-                        ib_action_shipping_done.setOnClickListener(new OnActionButtonClickListener(command));
-                        bt_location_overview.setOnClickListener(new OnLocationOverviewClickListener(command.shipping_address.phone_number, command.shipping_address.location));
+//                        tv_contact_description_preview.setText(command.shipping_address.phone_number);
+                        ib_action_postpone_shipping.setOnClickListener(new HsnDetailsActivity.OnActionButtonClickListener(hsn));
+                        ib_action_shipping_done.setOnClickListener(new HsnDetailsActivity.OnActionButtonClickListener(hsn));
+                        bt_location_overview.setOnClickListener(new HsnDetailsActivity.OnLocationOverviewClickListener(hsn.phone_number, hsn.shipping_location_link));
                         break;
                     case 1:
-                        ib_action_start_shipping.setVisibility(View.VISIBLE);
+                        ib_action_shipping_done.setVisibility(View.GONE);
+                        ib_action_postpone_shipping.setVisibility(View.GONE);
                     default:
-                        tv_bottom_explain.setVisibility(View.GONE);
                         ib_action_shipping_done.setVisibility(View.GONE);
                         ib_action_postpone_shipping.setVisibility(View.GONE);
                         break;
                 }
-
-                tv_password_delivery_key.setText(command.passphrase);
-                CommandDetailsActivity.this.main_command_item = command;
-                commandProgressView.setCommandState(command.state);
-                inflateCommandFood(command.food_list);
-                inflateShippingAddress(deliveryAddress, command.last_update);
-
-                if (!(command.infos == null || "".equals(command.infos))) {
+                if (!(hsn.infos == null || "".equals(hsn.infos))) {
                     lny_additionnal_infos.setVisibility(View.VISIBLE);
-                    tv_additionnal_infos.setText(command.infos);
+                    tv_additionnal_infos.setText(hsn.infos);
                 } else {
                     lny_additionnal_infos.setVisibility(View.GONE);
-                }
-
-                lny_preorder_infos.setVisibility(command.is_preorder == 0 ? View.GONE : View.VISIBLE);
-                if (command.is_preorder != 0) {
-                    tv_delivery_day.setText(UtilFunctions.timeStampToDayDate(CommandDetailsActivity.this, command.preorder_hour.start));
-                    tv_delivery_time.setText(UtilFunctions.timeStampToHourMinute(CommandDetailsActivity.this, command.preorder_hour.start)+" à "+UtilFunctions.timeStampToHourMinute(CommandDetailsActivity.this, command.preorder_hour.end));
                 }
             }
         });
     }
 
-    @Override
-    public void syserror() {
+
+    private void mToast(String message) {
+//        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
+
 
 
     @Override
@@ -318,7 +255,6 @@ public class CommandDetailsActivity extends AppCompatActivity implements Command
                 if (succesfull) {
                     ib_action_shipping_done.setVisibility(View.GONE);
                     ib_action_postpone_shipping.setVisibility(View.GONE);
-                    tv_bottom_explain.setVisibility(View.GONE);
                     /* icon for be cooking */
                     if (newState == 1) {
                         infoDialogFragment = InfoDialogFragment.newInstance(R.drawable.ic_sent_to_cooking, getResources().getString(R.string.sent_to_cooking), succesfull);
@@ -353,71 +289,17 @@ public class CommandDetailsActivity extends AppCompatActivity implements Command
     }
 
 
-    @Override
-    public void startShippingSuccess(final boolean isSuccessfull) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                /* not easy */
-                if (isSuccessfull) {
-                    /* send to an activity */
-                    ib_action_start_shipping.setVisibility(View.GONE);
-                    InfoDialogFragment infoDialogFragment = InfoDialogFragment.newInstance(R.drawable.rocket_start, getResources().getString(R.string.start_shipping_success), InfoDialogFragment.CONFIRM_DELIVERING_SUCCESS);
-                    infoDialogFragment.show(getSupportFragmentManager(), "infodialog");
-                } else {
-                    showLoading(false);
-                }
-            }
-        });
-    }
-
-    private void inflateShippingAddress(DeliveryAddress deliveryAddress, String last_update) {
-
-        tv_address_description_preview.setText(deliveryAddress.description);
-        tv_contact_description_preview.setText(deliveryAddress.phone_number);
-        tv_last_update.setText(UtilFunctions.timeStampToDate(this, last_update));
-    }
-
-    private void inflateCommandFood(List<BasketInItem> food_list) {
-
-        SelectedFoodsAdapter adapter = new  SelectedFoodsAdapter(this, food_list);
-        recyclerview_items_bought.setLayoutManager(new LinearLayoutManager(this));
-        recyclerview_items_bought.setAdapter(adapter);
-    }
-
-    @Override
-    public void onClick(View view) {
-
-
-        if (main_command_item != null) {
-
-            mToast("IN TO CONSTRUCTION!");
-        } else {
-            mToast(getResources().getString(R.string.sys_error));
-        }
-    }
-
-    public void confirmRefund(int orderAmount, int givenAmount, int leftAmount) {
-        /* refund confirmation dialog and then get out of here. */
-        if (leftAmount > 0) {
-            RefundConfirmationDialog refundDialogFragment = RefundConfirmationDialog.newInstance(orderAmount, givenAmount, leftAmount);
-            showFragment(refundDialogFragment, "RefundConfirmationDialog+", true);
-        } else if (leftAmount < 0){
-            // remove money from the customer
-            RefundConfirmationDialog refundDialogFragment = RefundConfirmationDialog.newInstance(orderAmount, givenAmount, leftAmount);
-            showFragment(refundDialogFragment, "RefundConfirmationDialog-", true);
-        } else {
-            // wolo waaa
-            presenter.setShippingToDone(command);
-        }
-    }
-
     public void lanchRefund(int orderAmount, int givenAmount, int leftAmount) {
         // launch request
-        presenter.launchRefund(this.command.id, orderAmount, givenAmount, leftAmount);
+//        presenter.launchRefund(this.command.id, orderAmount, givenAmount, leftAmount);
     }
 
-    class SelectedFoodsAdapter extends RecyclerView.Adapter<SelectedFoodsAdapter.ViewHolder> {
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    class SelectedFoodsAdapter extends RecyclerView.Adapter<HsnDetailsActivity.SelectedFoodsAdapter.ViewHolder> {
 
         private final List<BasketInItem> food_list;
         private final Context context;
@@ -428,12 +310,12 @@ public class CommandDetailsActivity extends AppCompatActivity implements Command
         }
 
         @Override
-        public  SelectedFoodsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new SelectedFoodsAdapter.ViewHolder(LayoutInflater.from(context).inflate(R.layout.selected_food_item, parent, false));
+        public  HsnDetailsActivity.SelectedFoodsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            return new HsnDetailsActivity.SelectedFoodsAdapter.ViewHolder(LayoutInflater.from(context).inflate(R.layout.selected_food_item, parent, false));
         }
 
         @Override
-        public void onBindViewHolder(SelectedFoodsAdapter.ViewHolder holder, int position) {
+        public void onBindViewHolder(HsnDetailsActivity.SelectedFoodsAdapter.ViewHolder holder, int position) {
 
             /* food idz */
             BasketInItem entity = food_list.get(position);
@@ -497,7 +379,7 @@ public class CommandDetailsActivity extends AppCompatActivity implements Command
         public void onClick(View view) {
             Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone_number));
             if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(CommandDetailsActivity.this, new String[]{
+                ActivityCompat.requestPermissions(HsnDetailsActivity.this, new String[]{
                         Manifest.permission.CALL_PHONE
                 }, PERMISSIONS_REQUEST_CODE);
                 return;
@@ -518,10 +400,10 @@ public class CommandDetailsActivity extends AppCompatActivity implements Command
 
     private class OnActionButtonClickListener implements View.OnClickListener {
 
-        private final Command command;
+        private final HSN hsn;
 
-        public OnActionButtonClickListener(Command command) {
-            this.command = command;
+        public OnActionButtonClickListener(HSN hsn) {
+            this.hsn = hsn;
         }
 
         @Override
@@ -532,16 +414,14 @@ public class CommandDetailsActivity extends AppCompatActivity implements Command
                     /* ask if shipping done, is there change to give back to the user
                      * - if yes, show a page that ask how much the customer given you
                      * */
-                    RefundDialogFragment refundDialogFragment = RefundDialogFragment.newInstance(getOrderAmount(command), command.id);
-                    refundDialogFragment.show(getSupportFragmentManager(), "refund_dialog");
-//                    presenter.setShippingToDone(command);
+                    hsnPresenter.setHsnDelivered(hsn);
                     break;
                 case R.id.ib_action_postpone_shipping:
                     /* */
-                    presenter.setPostponeCommand(command);
+                    finish();
+//                    presenter.setPostponeCommand(command);
                     break;
                 case R.id.ib_action_start_shipping:
-                    presenter.startShipping(command);
                     break;
             }
         }
@@ -564,48 +444,26 @@ public class CommandDetailsActivity extends AppCompatActivity implements Command
 
     private class OnLocationOverviewClickListener implements View.OnClickListener {
 
-        private boolean isOk = true;
-        String longitude, latitude;
+        private final String location;
         String customer_name;
 
         public OnLocationOverviewClickListener(String customer_name, String location) {
             /* split it and put in the array */
             this.customer_name = customer_name;
-            try {
-                String[] splitted_location = location.split(":");
-                latitude = splitted_location[0];
-                longitude = splitted_location[1];
-            } catch (Exception e) {
-                e.printStackTrace();
-                isOk = false;
-            }
+            this.location = location;
         }
 
         @Override
         public void onClick(View view) {
-            if (!isOk) {
-                mToast(getResources().getString(R.string.sys_error));
-            } else {
-                openInMap();
+            // launch link for view
+            try {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(location));
+                startActivity(browserIntent);
+            } catch (Exception e){
+                e.printStackTrace();
+                mToast(getString(R.string.sys_error));
             }
         }
-
-        void openInMap () {
-
-            // Create a Uri from an intent string. Use the result to create an Intent.
-            Uri gmmIntentUri = Uri.parse("geo:0,0?q="+latitude+","+longitude+"("+customer_name+")");
-            // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
-            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-            // Make the Intent explicit by setting the Google Maps package
-            mapIntent.setPackage("com.google.android.apps.maps");
-
-            if (mapIntent.resolveActivity(getPackageManager()) != null) {
-                // Attempt to start an activity that can handle the Intent
-                startActivity(mapIntent);
-            } else {
-                mToast(getResources().getString(R.string.google_maps_not_installed));
-            }
-        }
-
+ 
     }
 }

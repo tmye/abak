@@ -45,10 +45,12 @@ public class RefundConfirmationDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme);
-        builder.setMessage(getString(R.string.refund_amount_confirmation, leftAmount))
+        builder
+                .setTitle(leftAmount > 0 ? R.string.title_debit : R.string.title_credit)
+                .setMessage(getString(leftAmount > 0 ? R.string.refund_amount_confirmation : R.string.debit_amount_confirmation, Math.abs(leftAmount)))
                 .setPositiveButton(R.string.refund, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        ( (CommandDetailsActivity)getActivity()).lanchRefund(orderAmount, givenAmount, leftAmount);
+                        ((CommandDetailsActivity)getActivity()).lanchRefund(orderAmount, givenAmount, leftAmount);
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

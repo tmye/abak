@@ -13,7 +13,6 @@ import java.util.Map;
 import tg.tmye.kaba_i_deliver._commons.MultiThreading.DatabaseRequestThreadBase;
 import tg.tmye.kaba_i_deliver._commons.MultiThreading.NetworkRequestThreadBase;
 import tg.tmye.kaba_i_deliver.data.command.Command;
-import tg.tmye.kaba_i_deliver.data.delivery.KabaShippingMan;
 import tg.tmye.kaba_i_deliver.syscore.Config;
 import tg.tmye.kaba_i_deliver.syscore.MyKabaDeliverApp;
 
@@ -112,5 +111,44 @@ public class CommandRepository {
             e.printStackTrace();
         }
         networkRequestBase.postJsonDataWithToken(Config.LINK_START_SHIPPING, command_obj.toString(), authToken, intf);
+    }
+
+    public void launchDebitOrRefund(int command_id, int orderAmount, int givenAmount, int leftAmount, NetworkRequestThreadBase.NetRequestIntf<String> intf) {
+        String authToken = ((MyKabaDeliverApp)context.getApplicationContext()).getAuthToken();
+        JSONObject command_obj = new JSONObject();
+        try {
+            command_obj.put("command_id", command_id);
+            command_obj.put("command_amount", orderAmount);
+            command_obj.put("received_amount", givenAmount);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        networkRequestBase.postJsonDataWithToken(leftAmount > 0 ?  Config.LINK_REFUND :  Config.LINK_DEBIT , command_obj.toString(), authToken, intf);
+    }
+
+    public void setHsnDeliveredSuccess(int hsn_id, NetworkRequestThreadBase.NetRequestIntf<String> netRequestIntf) {
+        String authToken = ((MyKabaDeliverApp)context.getApplicationContext()).getAuthToken();
+        JSONObject command_obj = new JSONObject();
+        try {
+            command_obj.put("id", hsn_id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        networkRequestBase.postJsonDataWithToken(Config.LINK_END_HSN, command_obj.toString(), authToken, netRequestIntf);
+
+    }
+
+    public void startDeliveryMode(NetworkRequestThreadBase.NetRequestIntf<String> netRequestIntf) {
+        String authToken = ((MyKabaDeliverApp)context.getApplicationContext()).getAuthToken();
+        JSONObject obj = new JSONObject();
+
+        networkRequestBase.postJsonDataWithToken(Config.LINK_START_SERVICE, obj.toString(), authToken, netRequestIntf);
+    }
+
+    public void stopDeliveryMode(NetworkRequestThreadBase.NetRequestIntf<String> netRequestIntf) {
+        String authToken = ((MyKabaDeliverApp)context.getApplicationContext()).getAuthToken();
+        JSONObject obj = new JSONObject();
+
+        networkRequestBase.postJsonDataWithToken(Config.LINK_STOP_SERVICE, obj.toString(), authToken, netRequestIntf);
     }
 }

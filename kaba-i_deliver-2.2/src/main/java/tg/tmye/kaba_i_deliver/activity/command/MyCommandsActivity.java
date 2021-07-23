@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,9 +15,9 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,6 +40,7 @@ import java.util.Map;
 import tg.tmye.kaba_i_deliver.R;
 import tg.tmye.kaba_i_deliver._commons.utils.UtilFunctions;
 import tg.tmye.kaba_i_deliver.activity.command.contract.MyCommandContract;
+import tg.tmye.kaba_i_deliver.activity.command.frag.HsnListFragment;
 import tg.tmye.kaba_i_deliver.activity.command.frag.RestaurantSubCommandListFragment;
 import tg.tmye.kaba_i_deliver.activity.command.presenter.MyCommandsPresenter;
 import tg.tmye.kaba_i_deliver.activity.delivery.DeliveryModeActivity;
@@ -50,6 +52,7 @@ import tg.tmye.kaba_i_deliver.data.command.Command;
 import tg.tmye.kaba_i_deliver.data.command.source.CommandRepository;
 import tg.tmye.kaba_i_deliver.data.delivery.KabaShippingMan;
 import tg.tmye.kaba_i_deliver.data.delivery.source.DeliveryManRepository;
+import tg.tmye.kaba_i_deliver.data.hsn.HSN;
 import tg.tmye.kaba_i_deliver.service.TrackingService;
 import tg.tmye.kaba_i_deliver.syscore.ILog;
 import tg.tmye.kaba_i_deliver.syscore.MyKabaDeliverApp;
@@ -57,7 +60,7 @@ import tg.tmye.kaba_i_deliver.syscore.MyKabaDeliverApp;
 import static tg.tmye.kaba_i_deliver.activity.command.CommandDetailsActivity.COMMAND_ITEM;
 
 
-public class MyCommandsActivity extends AppCompatActivity implements MyCommandContract.View, RestaurantSubCommandListFragment.OnFragmentInteractionListener, SwipeRefreshLayout.OnRefreshListener, ViewPager.OnPageChangeListener {
+public class MyCommandsActivity extends AppCompatActivity implements MyCommandContract.View, RestaurantSubCommandListFragment.OnFragmentInteractionListener, HsnListFragment.OnFragmentInteractionListener, SwipeRefreshLayout.OnRefreshListener, ViewPager.OnPageChangeListener {
 
     CommandRepository commandRepository;
 
@@ -219,7 +222,7 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
     int todayMoney = 0;
 
     @Override
-    public void inflateCommands(final List<Command> preorders,final List<Command> wait_for_me, final List<Command> yet_to_ship, final List<Command> shipping_done) {
+    public void inflateCommands(final List<Command> preorders, List<HSN> hsns, final List<Command> wait_for_me, final List<Command> yet_to_ship, final List<Command> shipping_done) {
 
         todayMoney = 0;
         ILog.print("==== orders ==== ");
@@ -253,19 +256,20 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
             @Override
             public void run() {
                 tablelayout_title_strip.setupWithViewPager(viewpager_commands);
-
                 /* init adapter and create the view */
 //                initMenus();
                 adapter = new CommandsViewpagerAdapter(getSupportFragmentManager());
-                adapter.setData(preorders, wait_for_me, yet_to_ship, shipping_done);
+                adapter.setData(preorders, hsns, wait_for_me, yet_to_ship, shipping_done);
                 viewpager_commands.setOffscreenPageLimit(0);
                 viewpager_commands.setAdapter(adapter);
                 /* set the en livraison tab to default */
                 viewpager_commands.setCurrentItem(1);
                 /* animate from green to green */
-                setUpCustomTabs (tablelayout_title_strip.getTabAt(0), tablelayout_title_strip.getTabAt(1), tablelayout_title_strip.getTabAt(2), tablelayout_title_strip.getTabAt(3));
+                setUpCustomTabs (tablelayout_title_strip.getTabAt(0), tablelayout_title_strip.getTabAt(1), tablelayout_title_strip.getTabAt(2), tablelayout_title_strip.getTabAt(3), tablelayout_title_strip.getTabAt(4));
 
                 tv_tab_preorder_count.setText(""+(preorders != null ? preorders.size() : 0));
+//                tvh.setText(""+(preorders != null ? preorders.size() : 0))
+                tv_hsn_count.setText(""+(hsns != null ? hsns.size() : 0));
                 tv_tab_waiting_count.setText(""+(wait_for_me != null ? wait_for_me.size() : 0));
                 tv_tab_yet_count.setText(""+(yet_to_ship != null ? yet_to_ship.size() : 0));
                 tv_tab_shipping_count.setText(""+(shipping_done != null ? shipping_done.size() : 0));
@@ -277,34 +281,59 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
 
     }
 
-    TextView tv_tab_preorder_count, tv_tab_yet_count, tv_tab_shipping_count, tv_tab_waiting_count;
+    @Override
+    public void exitDeliveryModeSuccess(boolean state, boolean wantToLogout) {
+        if (state){
+            ((MyKabaDeliverApp)getApplicationContext()).setDeliveryModeOff();
+            // kill location service
+            stopService(new Intent(MyCommandsActivity.this, TrackingService.class));
+            startActivity(new Intent(this, DeliverManLoginActivity.class));
+            if (wantToLogout)
+                logout();
+        } else {
+            // failed
+            mToast(getString(R.string.sys_error));
+        }
+    }
 
-    private void setUpCustomTabs(TabLayout.Tab preorder__tab, TabLayout.Tab waiting_tab, TabLayout.Tab yet_to_ship_tab, TabLayout.Tab shipping_done_tab) {
+    private void mToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+
+    TextView tv_tab_preorder_count, tv_hsn_count, tv_tab_yet_count, tv_tab_shipping_count, tv_tab_waiting_count;
+
+    private void setUpCustomTabs(TabLayout.Tab preorder__tab, TabLayout.Tab hsn_tab, TabLayout.Tab waiting_tab, TabLayout.Tab yet_to_ship_tab, TabLayout.Tab shipping_done_tab) {
 
         /* inflate customviews each time */
         View preorder_view = LayoutInflater.from(this).inflate(R.layout.blue_tab_view, null, false);
+        View hsn_view = LayoutInflater.from(this).inflate(R.layout.tab_view, null, false);
         View waiting_count_view = LayoutInflater.from(this).inflate(R.layout.tab_view, null, false);
         View yet_to_view = LayoutInflater.from(this).inflate(R.layout.tab_view, null, false);
         View shipping_done_view = LayoutInflater.from(this).inflate(R.layout.tab_view, null, false);
 
         TextView tv_tab_preorder = preorder_view.findViewById(R.id.tv_tab_name);
+        TextView tv_tab_hsn_name = hsn_view.findViewById(R.id.tv_tab_name);
         TextView tv_tab_waiting_name = waiting_count_view.findViewById(R.id.tv_tab_name);
         TextView tv_tab_yet_name = yet_to_view.findViewById(R.id.tv_tab_name);
         TextView tv_tab_shipping_name = shipping_done_view.findViewById(R.id.tv_tab_name);
 
 
         tv_tab_preorder.setText(command_top_titles[0].toUpperCase());
-        tv_tab_waiting_name.setText(command_top_titles[1].toUpperCase());
-        tv_tab_yet_name.setText(command_top_titles[2].toUpperCase());
-        tv_tab_shipping_name.setText(command_top_titles[3].toUpperCase());
+        tv_tab_hsn_name.setText(command_top_titles[1].toUpperCase());
+        tv_tab_waiting_name.setText(command_top_titles[2].toUpperCase());
+        tv_tab_yet_name.setText(command_top_titles[3].toUpperCase());
+        tv_tab_shipping_name.setText(command_top_titles[4].toUpperCase());
 
 
         tv_tab_preorder_count = preorder_view.findViewById(R.id.tv_tab_count);
+        tv_hsn_count = hsn_view.findViewById(R.id.tv_tab_count);
         tv_tab_waiting_count = waiting_count_view.findViewById(R.id.tv_tab_count);
         tv_tab_yet_count = yet_to_view.findViewById(R.id.tv_tab_count);
         tv_tab_shipping_count = shipping_done_view.findViewById(R.id.tv_tab_count);
 
         preorder__tab.setCustomView(preorder_view);
+        hsn_tab.setCustomView(hsn_view);
         waiting_tab.setCustomView(waiting_count_view);
         yet_to_ship_tab.setCustomView(yet_to_view);
         shipping_done_tab.setCustomView(shipping_done_view);
@@ -318,6 +347,13 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
         Intent intent = new Intent(this, CommandDetailsActivity.class);
 //        intent.putExtra(CommandDetailsActivity.ID, food.id);
         intent.putExtra(COMMAND_ITEM, command);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onHSNInteraction(HSN hsn) {
+        Intent intent = new Intent(this, HsnDetailsActivity.class);
+        intent.putExtra(HsnDetailsActivity.HSN, hsn);
         startActivity(intent);
     }
 
@@ -341,7 +377,13 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
         lastPosition = position;
     }
 
-    int[] colors = {R.color.colorPrimary_yellow, R.color.command_state_4, R.color.command_state_yet, R.color.command_state_done};
+    int[] colors = {
+            R.color.colorPrimary_yellow,
+            R.color.pink_color,
+            R.color.command_state_4,
+            R.color.command_state_yet,
+            R.color.command_state_done
+    };
 
     @Override
     public void onPageScrollStateChanged(int state) {}
@@ -356,6 +398,7 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
     private class CommandsViewpagerAdapter extends FragmentStatePagerAdapter {
 
         private List<Command> yet_to_ship;
+        private List<HSN> hsn;
         private List<Command> shipping_done;
         private List<Command> wait_for_me;
         private List<Command> preorders;
@@ -378,24 +421,29 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
 
             List<Command> data_command_list = null;
             /* according to position, set the data */
+            List<HSN> hsnList = null;
 
             switch (position) {
                 case 0:
                     data_command_list = preorders;
                     break;
                 case 1:
-                    data_command_list = wait_for_me;
+                    hsnList = hsn;
                     break;
                 case 2:
-                    data_command_list = yet_to_ship;
+                    data_command_list = wait_for_me;
                     break;
                 case 3:
+                    data_command_list = yet_to_ship;
+                    break;
+                case 4:
                     data_command_list = shipping_done;
                     break;
             }
 
-            frg_map.put(position, RestaurantSubCommandListFragment.instantiate(MyCommandsActivity.this,
-                    data_command_list));
+            frg_map.put(position, position != 1 ? RestaurantSubCommandListFragment.instantiate(MyCommandsActivity.this,
+                    data_command_list) : HsnListFragment.instantiate(MyCommandsActivity.this, hsnList));
+
             return frg_map.get(position);
         }
 
@@ -409,9 +457,10 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
             return command_top_titles.length;
         }
 
-        public void setData(List<Command> preorders, List<Command> wait_for_me, List<Command> yet_to_ship, List<Command> shipping_done) {
+        public void setData(List<Command> preorders, List<HSN> hsns, List<Command> wait_for_me, List<Command> yet_to_ship, List<Command> shipping_done) {
 
             this.preorders = preorders;
+            this.hsn = hsns;
             this.wait_for_me = wait_for_me;
             this.yet_to_ship = yet_to_ship;
             this.shipping_done = shipping_done;
@@ -488,25 +537,22 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
 //                break;
             case R.id.action_logout:
                 /* clear logout and start the task bottom activity */
-                exitDeliveryMode();// if successful, logout as well
-                logout();
+                exitDeliveryMode(true);// if successful, logout as well
                 break;
             case R.id.action_restaurants:
                 jumpToRestaurants();
                 break;
             case R.id.action_exit_delivery_mode:
-                exitDeliveryMode();
+                exitDeliveryMode(false);
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void exitDeliveryMode() {
-        ((MyKabaDeliverApp)getApplicationContext()).setDeliveryModeOff();
-        // kill location service
-        stopService(new Intent(MyCommandsActivity.this, TrackingService.class));
-        startActivity(new Intent(MyCommandsActivity.this, DeliverManLoginActivity.class));
+    private void exitDeliveryMode(boolean wantToLogout) {
 
+        //
+        presenter.stopDeliveryService(wantToLogout);
     }
 
     private void jumpToRestaurants() {

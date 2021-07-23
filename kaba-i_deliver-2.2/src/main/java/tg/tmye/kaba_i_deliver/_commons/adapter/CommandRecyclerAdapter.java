@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+import tg.tmye.kaba_i_deliver.syscore.GlideApp;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
@@ -29,7 +29,6 @@ import tg.tmye.kaba_i_deliver.activity.command.frag.RestaurantSubCommandListFrag
 import tg.tmye.kaba_i_deliver.data.command.Command;
 import tg.tmye.kaba_i_deliver.data.shoppingcart.BasketInItem;
 import tg.tmye.kaba_i_deliver.syscore.Constant;
-import tg.tmye.kaba_i_deliver.syscore.GlideApp;
 import tg.tmye.kaba_i_deliver.syscore.ILog;
 import tg.tmye.kaba_i_deliver.syscore.MyKabaDeliverApp;
 

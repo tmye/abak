@@ -56,4 +56,14 @@ public class Config {
 
     public static final String LINK_RESTAURANT_LIST =  Constant.SERVER_ADDRESS + "/livreur/api/restaurants/get";
 
+    public static final String LINK_REFUND = Constant.SERVER_ADDRESS + "/livreur/api/credit/customer";
+
+    public static final String LINK_DEBIT = Constant.SERVER_ADDRESS + "/livreur/api/debit/customer";
+
+    public static final String LINK_END_HSN = Constant.SERVER_ADDRESS + "/livreur/api/hsn-command/endShipping";
+
+    public static final String LINK_START_SERVICE = Constant.SERVER_ADDRESS + "/livreur/api/start-service";
+
+    public static final String LINK_STOP_SERVICE = Constant.SERVER_ADDRESS + "/livreur/api/stop-service";
+
 }

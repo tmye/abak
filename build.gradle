@@ -4,8 +4,8 @@ buildscript {
 
     repositories {
         google()
-        jcenter()
-        mavenCentral() // add repository
+        maven { url 'https://repo1.maven.org/maven2/' }
+//        mavenCentral() // add repository
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.2.1'
@@ -23,14 +23,14 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
-        maven {
-            url "https://maven.google.com" // Google's Maven repository
-        }
-
-        maven {
-            url  "http://dl.bintray.com/piasy/maven"
-        }
+        maven { url 'https://repo1.maven.org/maven2/' }
+//        maven {
+//            url "https://maven.google.com" // Google's Maven repository
+//        }
+//
+//        maven {
+//            url  "http://dl.bintray.com/piasy/maven"
+//        }
     }
 
 //    maven { url "https://jitpack.io" }

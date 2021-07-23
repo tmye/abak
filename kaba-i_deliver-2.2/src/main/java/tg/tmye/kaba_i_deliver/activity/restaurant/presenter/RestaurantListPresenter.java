@@ -10,12 +10,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import tg.tmye.kaba_i_deliver._commons.MultiThreading.NetworkRequestThreadBase;
-import tg.tmye.kaba_i_deliver.activity.delivery.contract.DeliveryModeContract;
 import tg.tmye.kaba_i_deliver.activity.restaurant.contract.RestaurantListContract;
 import tg.tmye.kaba_i_deliver.data.Restaurant.RestaurantEntity;
 import tg.tmye.kaba_i_deliver.data.Restaurant.source.RestaurantRepository;
-import tg.tmye.kaba_i_deliver.data.command.Command;
-import tg.tmye.kaba_i_deliver.data.delivery.source.DeliveryManRepository;
 import tg.tmye.kaba_i_deliver.syscore.ILog;
 
 /**
