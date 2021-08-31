@@ -1,7 +1,11 @@
 package tg.tmye.kaba.restaurant.activities.menu.presenter;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import java.util.List;
 
+import tg.tmye.kaba.restaurant.ILog;
 import tg.tmye.kaba.restaurant._commons.MultiThreading.NetworkRequestThreadBase;
 import tg.tmye.kaba.restaurant._commons.utils.SimpleObjectHolder;
 import tg.tmye.kaba.restaurant.activities.menu.contract.EditMenuContract;
@@ -113,8 +117,170 @@ public class EditMenuPresenter implements EditMenuContract.Presenter {
                     view.showIsLoading(false);
                 }
             }
-
         });
     }
+
+    @Override
+    public void hideFood(int food_id) {
+        view.showIsLoading(true);
+        menuDb_onlineRepository.hideFood(food_id, new NetworkRequestThreadBase.NetRequestIntf<String>() {
+
+            @Override
+            public void onNetworkError() {
+                view.showIsLoading(false);
+                view.onNetworkError();
+            }
+
+            @Override
+            public void onSysError() {
+                view.showIsLoading(false);
+                view.onSysError();
+            }
+
+            @Override
+            public void onSuccess(String response) {
+                /* send something around here */
+
+                view.showIsLoading(false);
+                try {
+                    JsonObject obj = new JsonParser().parse(response).getAsJsonObject();
+                    JsonObject data = obj.get("data").getAsJsonObject();
+
+                    // get the error object and make sure it's == 0
+                    int error = data.get("error").getAsInt();
+
+                    if (error == 0)
+                        view.foodHiddenSuccess();
+                    else
+                        view.foodHiddenError();
+
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+    });
+    }
+
+    @Override
+    public void deleteFood(int food_id) {
+        view.showIsLoading(true);
+        menuDb_onlineRepository.deleteFood(food_id, new NetworkRequestThreadBase.NetRequestIntf<String>() {
+
+            @Override
+            public void onNetworkError() {
+                view.showIsLoading(false);
+                view.onNetworkError();
+            }
+
+            @Override
+            public void onSysError() {
+                view.showIsLoading(false);
+                view.onSysError();
+            }
+
+            @Override
+            public void onSuccess(String response) {
+                /* send something around here */
+
+                view.showIsLoading(false);
+                try {
+                    ILog.print(response);
+                    JsonObject obj = new JsonParser().parse(response).getAsJsonObject();
+
+                    // get the error object and make sure it's == 0
+                    int error = obj.get("error").getAsInt();
+
+                    if (error == 0)
+                        view.foodDeletedSuccess();
+                    else
+                        view.foodDeletedError();
+
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void hideMenu(int menu_id) {
+        menuDb_onlineRepository.hideMenu(menu_id, new NetworkRequestThreadBase.NetRequestIntf<String>() {
+
+            @Override
+            public void onNetworkError() {
+                view.showIsLoading(false);
+                view.onNetworkError();
+            }
+
+            @Override
+            public void onSysError() {
+                view.showIsLoading(false);
+                view.onSysError();
+            }
+
+            @Override
+            public void onSuccess(String response) {
+                /* send something around here */
+
+                view.showIsLoading(false);
+                try {
+                    ILog.print(response);
+                    JsonObject obj = new JsonParser().parse(response).getAsJsonObject();
+
+                    // get the error object and make sure it's == 0
+                    int error = obj.get("error").getAsInt();
+
+                    if (error == 0)
+                        view.foodHiddenSuccess();
+                    else
+                        view.foodHiddenError();
+
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void deleteMenu(int menu_id) {
+        menuDb_onlineRepository.deleteMenu(menu_id, new NetworkRequestThreadBase.NetRequestIntf<String>() {
+
+            @Override
+            public void onNetworkError() {
+                view.showIsLoading(false);
+                view.onNetworkError();
+            }
+
+            @Override
+            public void onSysError() {
+                view.showIsLoading(false);
+                view.onSysError();
+            }
+
+            @Override
+            public void onSuccess(String response) {
+                /* send something around here */
+
+                view.showIsLoading(false);
+                try {
+                    JsonObject obj = new JsonParser().parse(response).getAsJsonObject();
+                    JsonObject data = obj.get("data").getAsJsonObject();
+
+                    // get the error object and make sure it's == 0
+                    int error = data.get("error").getAsInt();
+
+                    if (error == 0)
+                        view.menuDeletedSuccess();
+                    else
+                        view.menuDeletedError();
+
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
 
 }

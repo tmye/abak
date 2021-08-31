@@ -169,7 +169,7 @@
                     android:layout_height="wrap_content">
 
                     <RelativeLayout
-                        android:padding="@dimen/activity_horizontal_margin"
+                        android:padding="@dimen/activity_horizontal_margin_half"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -221,7 +221,7 @@
 
 
                     <RelativeLayout
-                        android:padding="@dimen/activity_horizontal_margin"
+                        android:padding="@dimen/activity_horizontal_margin_half"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -422,38 +422,6 @@
 
         </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:background="?selectableItemBackground"
-            android:id="@+id/bt_my_menu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:orientation="vertical"
-                android:layout_gravity="center"
-                android:padding="@dimen/activity_horizontal_margin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:src="@drawable/burger"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="?actionBarSize"
-                    android:layout_height="?actionBarSize" />
-
-                <TextView
-                    android:gravity="center_horizontal"
-                    android:layout_margin="@dimen/activity_horizontal_margin_half"
-                    android:text="@string/my_menu"
-                    android:textColor="@color/black"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-        </androidx.cardview.widget.CardView>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:weightSum="2"
@@ -471,15 +439,15 @@
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:orientation="vertical"
                     android:layout_gravity="center"
-                    android:padding="@dimen/activity_horizontal_margin"
+                    android:padding="@dimen/activity_horizontal_margin_half"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <ImageView
                         android:src="@drawable/burger"
                         android:layout_gravity="center_horizontal"
-                        android:layout_width="?actionBarSize"
-                        android:layout_height="?actionBarSize" />
+                        android:layout_width="@dimen/activity_horizontal_margin_triple"
+                        android:layout_height="@dimen/activity_horizontal_margin_triple" />
 
                     <TextView
                         android:gravity="center_horizontal"
@@ -504,15 +472,15 @@
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:orientation="vertical"
                     android:layout_gravity="center"
-                    android:padding="@dimen/activity_horizontal_margin"
+                    android:padding="@dimen/activity_horizontal_margin_half"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
                     <ImageView
                         android:src="@drawable/pie_chart"
                         android:layout_gravity="center_horizontal"
-                        android:layout_width="?actionBarSize"
-                        android:layout_height="?actionBarSize" />
+                        android:layout_width="@dimen/activity_horizontal_margin_triple"
+                        android:layout_height="@dimen/activity_horizontal_margin_triple" />
 
                     <TextView
                         android:gravity="center_horizontal"
@@ -527,6 +495,53 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
+
+        <androidx.cardview.widget.CardView
+            android:layout_margin="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:padding="@dimen/activity_horizontal_margin"
+                android:orientation="horizontal"
+                android:id="@+id/bt_my_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <ImageView
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/burger"
+                    android:id="@+id/iv_burger"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+
+                <TextView
+                    android:layout_toRightOf="@+id/iv_burger"
+                    android:text="@string/my_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+                    android:layout_centerVertical="true"
+                    android:maxLines="1"
+                    />
+
+                <TextView
+                    android:layout_alignParentRight="true"
+                    android:text="@string/price_sold_value"
+                    android:textStyle="bold"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin_half"
+                    android:maxLines="1"
+                    android:textColor="@color/command_state_3"
+                    android:textSize="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>

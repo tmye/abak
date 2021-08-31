@@ -235,12 +235,33 @@
     <string name="there_is_no_food">There is no food</string>
     <string name="address_location">Address</string>
     <string name="working_hour">Working hour</string>
-    <string name="menu_name">MENU</string>
+    <string name="menu_name">MENU NAME</string>
     <string name="is_pausing">" Breaktime"</string>
     <string name="is_unavailable">Unavailable</string>
     <string name="no_menu_data">No menu data</string>
     <string name="bt_add_to_basket">BASKET</string>
     <string name="my_menu">Menu</string>
+    <string name="is_menu_active">Is Menu Active ?</string>
+    <string name="yes_or_no">YES OR NO</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="ed_menu_priority">MENU PRIORITY</string>
+    <string name="importance_menu_description">Menu are aligned from top to bottom according to their priority. If you want to show a menu at the top of your app, you have to give it a higher PRIORITY.</string>
+    <string name="menu_name_description">Menu name to display</string>
+    <string name="is_menu_active_hint">If checked, the MENU will be available for orders. if NOT checked, menu will be hidden and only visible for the restaurant owner</string>
+    <string name="food_name_hint">Food name to be showed to the customer</string>
+    <string name="food_description_hint">Tell the customer the description of the food. What is it? and eventually the ingredients used to make this food</string>
+    <string name="food_price_hint">What is the normal price of this food? How much are you selling this?</string>
+    <string name="food_promotion_price_hint">If you have an ongoing promotion for this food, Please set up the PROMOTION PRICE here.</string>
+    <string name="is_food_visible">If you want to hide the food for sometime, please do it here. keep this box Unchecked. Otherwise, if you want to keep it visible to the customer, keep it checked !</string>
+    <string name="food_is_promotion_active_hint">Are you having an ongoing promotion/discount for this food ? Please mention it here !</string>
+    <string name="priority">Priority</string>
+    <string name="delete">DELETE</string>
+    <string name="edit">EDIT</string>
+    <string name="hide">HIDE</string>
+    <string name="enter">ENTER</string>
+    <string name="search_menu">Search Menu</string>
+    <string name="search_food">Search food</string>
     <string-array name="days_of_week">
         <item>Sunday</item>
         <item>Monday</item>

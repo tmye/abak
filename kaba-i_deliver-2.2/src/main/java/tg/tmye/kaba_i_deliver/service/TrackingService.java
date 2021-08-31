@@ -54,6 +54,8 @@ public class TrackingService extends Service implements GoogleApiClient.Connecti
         GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private static final int ID_SERVICE = 1001;
+    private static final long POSITION_RETRIEVE_PERIOD = 30000;
+
     Location mLastLocation;
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
@@ -64,7 +66,6 @@ public class TrackingService extends Service implements GoogleApiClient.Connecti
     private TimerTask timerTask;
 
     DatabaseReference mRootRef= FirebaseDatabase.getInstance("https://kaba-livreur.firebaseio.com/").getReference();
-
 
     DatabaseReference locationRef=mRootRef.child("kirikou");
 
@@ -89,6 +90,9 @@ public class TrackingService extends Service implements GoogleApiClient.Connecti
                 .build();
 
         startForeground(ID_SERVICE, notification);
+
+        ILog.print("onCreate TrackingService");
+
 //        startForeground(ID_SERVICE, notification, FOREGROUND_SERVICE_TYPE_LOCATION);
     }
 
@@ -125,7 +129,7 @@ public class TrackingService extends Service implements GoogleApiClient.Connecti
 
         mLocationRequest = LocationRequest.create();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setInterval(30000); // Update location every second
+        mLocationRequest.setInterval(POSITION_RETRIEVE_PERIOD); // Update location every second
 
         if (Build.VERSION.SDK_INT >= 23 &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)

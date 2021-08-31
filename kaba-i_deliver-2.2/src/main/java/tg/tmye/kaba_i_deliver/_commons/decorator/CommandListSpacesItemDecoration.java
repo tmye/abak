@@ -27,7 +27,6 @@ public class CommandListSpacesItemDecoration extends RecyclerView.ItemDecoration
 
         outRect.top = top;
 
-
         if (parent.getChildAdapterPosition(view) == parent.getAdapter().getItemCount()-1) {
             outRect.bottom = bottom;
         }

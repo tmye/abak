@@ -66,4 +66,6 @@ public class Config {
 
     public static final String LINK_STOP_SERVICE = Constant.SERVER_ADDRESS + "/livreur/api/stop-service";
 
+    public static final String LINK_SEARCH_STATS = Constant.SERVER_ADDRESS + "/livreur/api/command/history/get";
+
 }

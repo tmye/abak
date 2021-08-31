@@ -10,6 +10,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.Arrays;
 import java.util.List;
 
+import tg.tmye.kaba.restaurant.ILog;
 import tg.tmye.kaba.restaurant._commons.MultiThreading.NetworkRequestThreadBase;
 import tg.tmye.kaba.restaurant.activities.stats.contract.RestaurantStatsContract;
 import tg.tmye.kaba.restaurant.data._OtherEntities.StatsEntity;
@@ -67,7 +68,7 @@ public class StatsPresenter implements RestaurantStatsContract.Presenter {
                 /* parse the json obj */
                 try {
 
-                    Log.d(Constant.APP_TAG, jsonResponse);
+                    ILog.print(jsonResponse);
 
                     JsonObject obj = new JsonParser().parse(jsonResponse).getAsJsonObject();
 

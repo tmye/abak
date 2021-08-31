@@ -17,6 +17,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
+import tg.tmye.kaba.restaurant.ILog;
 import tg.tmye.kaba.restaurant._commons.notification.NotificationItem;
 import tg.tmye.kaba.restaurant._commons.notification.RestaurantKabaNotificationJobService;
 import tg.tmye.kaba.restaurant.syscore.Constant;
@@ -41,20 +42,20 @@ public class MyRestoFirebaseMessagingService extends FirebaseMessagingService {
 
         /*
         * */
-        Log.d(Constant.APP_TAG, "here we are boss");
+        ILog.print("here we are boss");
 
         // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
-        Log.d(Constant.APP_TAG, "From: " + remoteMessage.getFrom());
+        ILog.print("From: " + remoteMessage.getFrom());
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
-            Log.d(Constant.APP_TAG, "Message data payload: " + remoteMessage.getData());
+            ILog.print("Message data payload: " + remoteMessage.getData());
         }
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
-            Log.d(Constant.APP_TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
+            ILog.print("Message Notification Body: " + remoteMessage.getNotification().getBody());
         }
 
         String body = remoteMessage.getData().get("data");

@@ -36,6 +36,18 @@ public interface EditMenuContract {
         void onNetworkError();
 
         void inflateFoods(RestaurantEntity restaurantEntity, List<Restaurant_Menu_FoodEntity> menu_food);
+
+        void foodHiddenError();
+
+        void foodHiddenSuccess();
+
+        void menuDeletedSuccess();
+
+        void menuDeletedError();
+
+        void foodDeletedSuccess();
+
+        void foodDeletedError();
     }
 
     public interface Presenter extends BasePresenter {
@@ -43,6 +55,14 @@ public interface EditMenuContract {
         void populateViews();
 
         void populateFoodFromMenudId(int menu_id);
+
+        void hideFood(int food_id);
+
+        void deleteFood(int food_id);
+
+        void hideMenu(int menu_id);
+
+        void deleteMenu(int menu_id);
     }
 
 }

@@ -39,7 +39,7 @@ public class DeliveryReadyActivity extends AppCompatActivity implements Delivery
             @Override
             public void onClick(View v) {
                 /* update shared preferences and go to command activity */
-                // check if you have geoloc permission
+                // check if you have geo-loc permission
                 if (ActivityCompat.checkSelfPermission(DeliveryReadyActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(DeliveryReadyActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                     presenter.startDeliveryMode();
                 } else {

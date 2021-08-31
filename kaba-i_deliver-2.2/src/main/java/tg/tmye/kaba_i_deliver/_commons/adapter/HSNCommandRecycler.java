@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
@@ -61,8 +62,11 @@ public class HSNCommandRecycler extends RecyclerView.Adapter<HSNCommandRecycler.
         holder.tv_shipping_price.setText(hsn.shipping_pricing);
         holder.tv_total.setText(hsn.total);
         holder.tv_hsn_id.setText(""+hsn.id);
-        holder.root_card.setCardBackgroundColor(hsn.state == 0 ?
-                ctx.getColor(R.color.white) : Color.parseColor("#FFEB3B"));
+//        holder.root_card.setCardBackgroundColor(hsn.state == 0 ?
+//                ctx.getColor(R.color.white) : Color.parseColor("#FFEB3B"));
+        holder.rel_top.setBackgroundColor(hsn.state == 0 ?
+                ctx.getColor(R.color.facebook_blue) : ctx.getColor(R.color.black));
+        holder.tv_hsn_state.setText(hsn.state == 1 ? ctx.getString(R.string.delivered) : ctx.getString(R.string.waiting));
 
         holder.itemView.setOnClickListener(new OnHSNClickListener(hsn));
 //        holder.tv_date_time.setText(UtilFunctions.timeStampToDate(ctx, hsn.last_update));
@@ -96,7 +100,9 @@ public class HSNCommandRecycler extends RecyclerView.Adapter<HSNCommandRecycler.
         public TextView tv_shipping_price;
         public TextView tv_total;
         public TextView tv_hsn_id;
-        public CardView root_card;
+        public TextView tv_hsn_state;
+//        public CardView root_card;
+public RelativeLayout rel_top;
 
         // make the recyclerview show his total elements
 
@@ -110,7 +116,9 @@ public class HSNCommandRecycler extends RecyclerView.Adapter<HSNCommandRecycler.
             this.tv_shipping_price = view.findViewById(R.id.tv_shipping_price);
             this.tv_total = view.findViewById(R.id.tv_total);
             this.tv_hsn_id = view.findViewById(R.id.tv_hsn_id);
-            this.root_card = view.findViewById(R.id.root_card);
+//            this.root_card = view.findViewById(R.id.root_card);
+            this.rel_top = view.findViewById(R.id.rel_top);
+            this.tv_hsn_state = view.findViewById(R.id.tv_hsn_state);
         }
 
     }

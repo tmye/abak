@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import tg.tmye.kaba.restaurant.ILog;
 import tg.tmye.kaba.restaurant._commons.MultiThreading.NetworkRequestThreadBase;
 import tg.tmye.kaba.restaurant.activities.commands.contract.CommandDetailsContract;
 import tg.tmye.kaba.restaurant.data.command.Command;
@@ -107,7 +108,7 @@ public class CommandDetailsPresenter implements CommandDetailsContract.Presenter
 
                         view.showLoading(false);
 
-                        Log.d(Constant.APP_TAG, jsonResponse);
+                        ILog.print(jsonResponse);
 
                         /* retrieve the object */
                         JsonObject obj = new JsonParser().parse(jsonResponse).getAsJsonObject();
@@ -156,7 +157,7 @@ public class CommandDetailsPresenter implements CommandDetailsContract.Presenter
 
                 view.showLoading(false);
 
-                Log.d(Constant.APP_TAG, jsonResponse);
+                ILog.print(jsonResponse);
 
                 JsonObject obj = new JsonParser().parse(jsonResponse).getAsJsonObject();
                 // get daily restaurants

@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import tg.tmye.kaba.restaurant.ILog;
 import tg.tmye.kaba.restaurant.R;
 import tg.tmye.kaba.restaurant.data.advert.AdsBanner;
 import tg.tmye.kaba.restaurant.syscore.Constant;
@@ -308,9 +309,9 @@ public class UtilFunctions {
             }
         }
         catch (FileNotFoundException e) {
-            Log.e(Constant.APP_TAG, "File not found: " + e.toString());
+            ILog.e("File not found: " + e.toString());
         } catch (IOException e) {
-            Log.e(Constant.APP_TAG, "Can not read file: " + e.toString());
+            ILog.e("Can not read file: " + e.toString());
         }
         return ret;
     }
@@ -332,7 +333,7 @@ public class UtilFunctions {
         try {
 
             String path = "android.resource://" + context.getPackageName() + "/" + R.raw.operation_success;
-            Log.d(Constant.APP_TAG, path);
+            ILog.print(path);
             Uri soundUri = Uri.parse(path);
 
             MediaPlayer mp = new MediaPlayer();
@@ -370,7 +371,7 @@ public class UtilFunctions {
 
         String mbalance = reverseString(balance);
         try {
-            Log.d(Constant.APP_TAG, balance);
+            ILog.print(balance);
             String res = "";
 
             for (int cx = 0; cx < mbalance.length(); cx++) {
@@ -380,7 +381,7 @@ public class UtilFunctions {
                 }
             }
 
-            Log.d(Constant.APP_TAG, reverseString(mbalance));
+ILog.print(reverseString(mbalance));
 
             return reverseString(res);
         } catch (Exception e) {

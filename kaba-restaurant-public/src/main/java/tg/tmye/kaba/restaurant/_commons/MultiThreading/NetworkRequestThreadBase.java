@@ -19,6 +19,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import tg.tmye.kaba.restaurant.ILog;
 import tg.tmye.kaba.restaurant.syscore.Config;
 import tg.tmye.kaba.restaurant.syscore.Constant;
 
@@ -319,7 +320,7 @@ public class NetworkRequestThreadBase {
                               try {
                                   Response response = okHttpClient.newCall(request).execute();
                                   String bodyString = response.body().string();
-                                  Log.d(Constant.APP_TAG, bodyString);
+                                  ILog.print(bodyString);
                                   inft.onSuccess(bodyString);
                               } catch (Exception e) {
                                   e.printStackTrace();
@@ -356,7 +357,7 @@ public class NetworkRequestThreadBase {
         try {
             Response response = okHttpClient.newCall(request).execute();
             String bodyString = response.body().string();
-            Log.d(Constant.APP_TAG, bodyString);
+            ILog.print(bodyString);
             return bodyString;
         } catch (Exception e) {
             e.printStackTrace();

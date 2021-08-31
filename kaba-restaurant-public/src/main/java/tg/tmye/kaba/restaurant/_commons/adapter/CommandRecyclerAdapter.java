@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import tg.tmye.kaba.restaurant.ILog;
 import tg.tmye.kaba.restaurant.R;
 import tg.tmye.kaba.restaurant._commons.decorator.CommandInnerFoodLineDecorator;
 import tg.tmye.kaba.restaurant._commons.utils.UtilFunctions;
@@ -194,7 +195,7 @@ class CommandInnerFoodViewAdapter extends RecyclerView.Adapter<CommandInnerFoodV
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        Log.d(Constant.APP_TAG, "binding inner objects -- position : "+position);
+       ILog.print("binding inner objects -- position : "+position);
 //        initFoodAdapter (command_list.get(position).etags, holder.rc_food_tags);
 
         BasketInItem basketInItem = this.command_list.get(position);

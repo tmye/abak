@@ -39,7 +39,6 @@
                         android:textColor="@color/white"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:layout_toLeftOf="@+id/iv_edit_menu"
                         android:layout_marginRight="@dimen/activity_horizontal_margin_half"
                         android:layout_alignParentRight="true"
                         android:layout_width="wrap_content"
@@ -81,6 +80,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:id="@+id/lny_error_box"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -110,6 +110,7 @@
         <!-- loading frame -->
         <LinearLayout
             android:id="@+id/lny_loading"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"

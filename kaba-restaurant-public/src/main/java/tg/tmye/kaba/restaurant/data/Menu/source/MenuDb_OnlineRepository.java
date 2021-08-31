@@ -9,11 +9,15 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import tg.tmye.kaba.restaurant.ILog;
 import tg.tmye.kaba.restaurant._commons.MultiThreading.DatabaseRequestThreadBase;
 import tg.tmye.kaba.restaurant._commons.MultiThreading.NetworkRequestThreadBase;
 import tg.tmye.kaba.restaurant._commons.utils.SimpleObjectHolder;
@@ -48,7 +52,7 @@ public class MenuDb_OnlineRepository {
         this.restaurantEntity = restaurantEntity;
     }
 
-     public void loadAllSubMenusOfRestaurant(final NetworkRequestThreadBase.NetRequestIntf intf) {
+    public void loadAllSubMenusOfRestaurant(final NetworkRequestThreadBase.NetRequestIntf intf) {
 
         /* also get the serial of the restaurant database right now */
         Map<String, Object> data = new HashMap<>();
@@ -70,7 +74,7 @@ public class MenuDb_OnlineRepository {
             @Override
             public void onSuccess(String jsonResponse) {
 
-                Log.d(Constant.APP_TAG, jsonResponse);
+                ILog.print(jsonResponse);
                 /* conver to json objects */
 
                 Gson gson = new Gson();
@@ -99,7 +103,7 @@ public class MenuDb_OnlineRepository {
                     subMenuEntities.add(subMenuEntity);
                 }
 
-                  /* get drinks */
+                /* get drinks */
                 JsonArray drinksJsonArray = data.get("drinks").getAsJsonArray();
                 List<Restaurant_Menu_FoodEntity> drinks =
                         gson.fromJson(
@@ -140,12 +144,12 @@ public class MenuDb_OnlineRepository {
             @Override
             public void onSuccess(String jsonResponse) {
 
-                Log.d(Constant.APP_TAG, jsonResponse);
+                ILog.print(jsonResponse);
                 /* conver to json objects */
 
                 Gson gson = new Gson();
                 JsonArray menuJsonArray = new JsonParser().parse(jsonResponse).getAsJsonObject().get("data").getAsJsonArray();
-//                Jsono data = data.get("data").getAsJsonArray();
+//                Json data = data.get("data").getAsJsonArray();
 
                 /* get submenus and -- drinks */
 
@@ -210,7 +214,7 @@ public class MenuDb_OnlineRepository {
             @Override
             public void onSuccess(String jsonResponse) {
 
-                Log.d(Constant.APP_TAG, jsonResponse);
+                ILog.print(jsonResponse);
                 /* conver to json objects */
 
                 Gson gson = new Gson();
@@ -232,4 +236,88 @@ public class MenuDb_OnlineRepository {
         });
     }
 
+    public void updateSubMenuEntity(Restaurant_SubMenuEntity subMenuEntity, NetworkRequestThreadBase.NetRequestIntf<String> intf) {
+
+        String authToken = ((MyRestaurantApp)context.getApplicationContext()).getAuthToken();
+        JSONObject params = new JSONObject();
+        try {
+            params.put("id", subMenuEntity.id);
+            params.put("name",subMenuEntity.name);
+            params.put("is_hidden", ""+subMenuEntity.is_hidden);
+            params.put("priority", subMenuEntity.priority);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        // if no id, use create/add
+        // if has id, use edit
+
+        networkRequestThreadBase.postJsonDataWithToken((subMenuEntity.id != 0 && subMenuEntity.id > 1)? Config.LINK_MENU_EDIT : Config.LINK_MENU_ADD, params.toString(), authToken, intf);
+    }
+
+
+    public void updateFoodEntity(Restaurant_Menu_FoodEntity foodEntity, NetworkRequestThreadBase.NetRequestIntf<String> intf) {
+
+        String authToken = ((MyRestaurantApp)context.getApplicationContext()).getAuthToken();
+        JSONObject params = new JSONObject();
+        try {
+            params.put("id",foodEntity.id);
+            params.put("name",foodEntity.name);
+            params.put("description", foodEntity.description);
+            params.put("price", foodEntity.price);
+            params.put("priority", foodEntity.priority);
+            params.put("promotion_price", foodEntity.promotion_price);
+            params.put("is_hidden", String.valueOf(foodEntity.is_hidden));
+            params.put("promotion", foodEntity.promotion); // 0 or 1
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        networkRequestThreadBase.postJsonDataWithToken((foodEntity.id != 0 && foodEntity.id > 1)? Config.LINK_FOOD_EDIT : Config.LINK_FOOD_ADD, params.toString(), authToken, intf);
+    }
+
+    public void hideFood(int foodId, NetworkRequestThreadBase.NetRequestIntf<String> intf) {
+        String authToken = ((MyRestaurantApp)context.getApplicationContext()).getAuthToken();
+        JSONObject params = new JSONObject();
+        try {
+            params.put("id",foodId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+//        networkRequestThreadBase.postJsonDataWithToken(Config.LINK_MENU_DELETE, params.toString(), authToken, intf);
+    }
+
+    public void deleteFood(int food_id, NetworkRequestThreadBase.NetRequestIntf<String> intf) {
+
+        String authToken = ((MyRestaurantApp)context.getApplicationContext()).getAuthToken();
+        JSONObject params = new JSONObject();
+        try {
+            params.put("id",food_id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        networkRequestThreadBase.postJsonDataWithToken(Config.LINK_FOOD_DELETE, params.toString(), authToken, intf);
+    }
+
+    public void hideMenu(int menu_id, NetworkRequestThreadBase.NetRequestIntf<String> intf) {
+        String authToken = ((MyRestaurantApp)context.getApplicationContext()).getAuthToken();
+        JSONObject params = new JSONObject();
+        try {
+            params.put("id",menu_id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+//        networkRequestThreadBase.postJsonDataWithToken(Config.LINK_MENU_DELETE, params.toString(), authToken, intf);
+    }
+
+    public void deleteMenu(int menu_id, NetworkRequestThreadBase.NetRequestIntf<String> intf) {
+        String authToken = ((MyRestaurantApp)context.getApplicationContext()).getAuthToken();
+        JSONObject params = new JSONObject();
+        try {
+            params.put("id",menu_id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        networkRequestThreadBase.postJsonDataWithToken(Config.LINK_MENU_DELETE, params.toString(), authToken, intf);
+    }
 }

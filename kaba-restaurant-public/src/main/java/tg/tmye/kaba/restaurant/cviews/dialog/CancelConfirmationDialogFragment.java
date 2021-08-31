@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
+import tg.tmye.kaba.restaurant.ILog;
 import tg.tmye.kaba.restaurant.R;
 import tg.tmye.kaba.restaurant.activities.commands.CommandDetailsActivity;
 import tg.tmye.kaba.restaurant.syscore.Constant;
@@ -104,7 +105,8 @@ public class CancelConfirmationDialogFragment extends DialogFragment implements 
     private void launchCancelling() {
         int radioButtonId = radioGroup_motive.getCheckedRadioButtonId();
 
-        Log.d(Constant.APP_TAG, "" + radioButtonId);
+        ILog.print("" + radioButtonId);
+
 
 //        String motif = motives[radioButtonId-1000];
 

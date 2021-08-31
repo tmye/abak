@@ -1,22 +1,29 @@
 package tg.tmye.kaba.restaurant.activities.menu;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -29,6 +36,7 @@ import tg.tmye.kaba.restaurant.activities.menu.Fragmentz.RestaurantSubMenuFragme
 import tg.tmye.kaba.restaurant.activities.menu.contract.EditMenuContract;
 import tg.tmye.kaba.restaurant.activities.menu.presenter.EditMenuPresenter;
 import tg.tmye.kaba.restaurant.cviews.CustomProgressbar;
+import tg.tmye.kaba.restaurant.cviews.dialog.LoadingDialogFragment;
 import tg.tmye.kaba.restaurant.data.Food.Restaurant_Menu_FoodEntity;
 import tg.tmye.kaba.restaurant.data.Menu.Restaurant_SubMenuEntity;
 import tg.tmye.kaba.restaurant.data.Menu.source.MenuDb_OnlineRepository;
@@ -37,7 +45,7 @@ import tg.tmye.kaba.restaurant.data.Restaurant.source.RestaurantOnlineRepository
 
 public class EditFoodActivity extends AppCompatActivity implements
         EditMenuContract.View , RestaurantSubMenuFragment.OnFragmentInteractionListener,
-        View.OnClickListener {
+        View.OnClickListener, OnFoodInteractionListener {
 
     // constants
     public static final String RESTAURANT = "RESTAURANT";
@@ -66,6 +74,10 @@ public class EditFoodActivity extends AppCompatActivity implements
     int sub_menu_id = -1;
 
     TextView tv_choosed_food_count;
+
+    private LoadingDialogFragment loadingDialogFragment;
+
+    EditFoodListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +108,7 @@ public class EditFoodActivity extends AppCompatActivity implements
         presenter.populateFoodFromMenudId(sub_menu_id);
     }
 
+
     @Override
     public void inflateFoods(RestaurantEntity restaurantEntity, List<Restaurant_Menu_FoodEntity> menu_food) {
 
@@ -116,6 +129,41 @@ public class EditFoodActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void foodHiddenError() {
+        mToast("Please try again, there a system error");
+    }
+
+    @Override
+    public void foodHiddenSuccess() {
+
+    }
+
+    @Override
+    public void menuDeletedSuccess() {
+        presenter.populateViews();
+    }
+
+    @Override
+    public void menuDeletedError() {
+        mToast("Please try again, there a system error");
+    }
+
+    @Override
+    public void foodDeletedSuccess() {
+        presenter.populateViews();
+    }
+
+    @Override
+    public void foodDeletedError() {
+        mToast("Please try again, there a system error");
+    }
+
+
+    private void mToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
     public void inflateMenus(RestaurantEntity entity, final List<Restaurant_SubMenuEntity> menu_food, List<Restaurant_Menu_FoodEntity> drinks) {
 
 
@@ -132,9 +180,22 @@ public class EditFoodActivity extends AppCompatActivity implements
 
     private void inflateRecyclerView(List<Restaurant_Menu_FoodEntity> menu_food) {
 
+        /* make sure hidden food is below all */
+        menu_food.sort(new Comparator<Restaurant_Menu_FoodEntity>() {
+            @Override
+            public int compare(Restaurant_Menu_FoodEntity o1, Restaurant_Menu_FoodEntity o2) {
+                return Integer.parseInt(o2.priority) - Integer.parseInt(o1.priority);
+            }
+
+            @Override
+            public boolean equals(Object obj) {
+                return false;
+            }
+        });
+
         recyclerview.setNestedScrollingEnabled(false);
 
-        EditFoodListAdapter adapter = new EditFoodListAdapter(this, getSupportFragmentManager(), menu_food);
+          adapter = new EditFoodListAdapter(this, getSupportFragmentManager(), menu_food);
         recyclerview.setLayoutManager(new LinearLayoutManager(this));
         recyclerview.setAdapter(adapter);
     }
@@ -142,15 +203,43 @@ public class EditFoodActivity extends AppCompatActivity implements
 
     @Override
     public void showIsLoading(final boolean isLoading) {
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                lny_loading_frame.setVisibility(isLoading ? View.VISIBLE : View.GONE);
-                lny_content.setVisibility(isLoading ? View.GONE : View.VISIBLE);
-                lny_error_box.setVisibility(View.GONE);
-//                tv_no_food_message.setVisibility(View.GONE);
+
+                if (loadingDialogFragment == null) {
+                    if (isLoading) {
+                        loadingDialogFragment = LoadingDialogFragment.newInstance(getString(R.string.content_on_loading));
+                        showFragment(loadingDialogFragment, "loadingbox", true);
+                    }
+                } else {
+                    if (isLoading) {
+                        showFragment(loadingDialogFragment, "loadingbox", false);
+                    } else {
+                        hideFragment();
+                    }
+                }
             }
         });
+    }
+
+    private void hideFragment() {
+        if (loadingDialogFragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.remove(loadingDialogFragment);
+            loadingDialogFragment = null;
+            ft.commitAllowingStateLoss();
+        }
+    }
+
+    private void showFragment(LoadingDialogFragment loadingDialogFragment, String tag, boolean justCreated) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        if (justCreated == true)
+            ft.add(loadingDialogFragment, tag);
+        else
+            ft.show(loadingDialogFragment);
+        ft.commitAllowingStateLoss();
     }
 
     @Override
@@ -218,6 +307,11 @@ public class EditFoodActivity extends AppCompatActivity implements
     protected void onResume() {
         super.onResume();
         Glide.with(this).resumeRequestsRecursive();
+        if (presenter != null)
+            presenter.populateFoodFromMenudId(sub_menu_id);
+
+        if(presenter != null && sub_menu_id != 0)
+            presenter.populateFoodFromMenudId(sub_menu_id);
     }
 
     @Override
@@ -249,6 +343,8 @@ public class EditFoodActivity extends AppCompatActivity implements
 
     @Override
     public void onFoodInteraction(Restaurant_Menu_FoodEntity food) {
+
+        presenter.deleteFood((int) food.id);
 
       /*  Intent intent = new Intent(this, FoodDetailsActivity.class);
         intent.putExtra(FoodDetailsActivity.FOOD
@@ -295,9 +391,19 @@ public class EditFoodActivity extends AppCompatActivity implements
         }
     }
 
+
+    @Override
+    public void hide(int food_id) {
+        //
+        presenter.hideFood(food_id);
+    }
+
+    @Override
+    public void delete(int food_id) {
+    presenter.deleteFood(food_id);
+    }
+
     private void _jumpToEditMenuPage() {
-
-
     }
 
 
@@ -326,8 +432,36 @@ public class EditFoodActivity extends AppCompatActivity implements
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        /* check if connected then show another one */
-        return super.onCreateOptionsMenu(menu);
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.food_edit_search, menu);
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                _filterRestaurantList(s);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                _filterRestaurantList(s);
+                return false;
+            }
+        });
+        return true;
+    }
+
+    private void _filterRestaurantList(String hint) {
+        if (adapter!=null)
+            adapter.getFilter().filter(hint.toString());
     }
 
 }

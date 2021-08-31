@@ -11,10 +11,11 @@
         android:roundIcon="@mipmap/kaba_icon_green"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.command.HsnDetailsActivity"></activity>
+        <activity android:name=".activity.statistics.StatisticsActivity">
 
+        </activity>
+        <activity android:name=".activity.command.HsnDetailsActivity" />
         <activity android:name=".activity.readygo.DeliveryReadyActivity" />
-
         <activity
             android:name=".activity.restaurant.RestaurantListActivity"
             android:label=""
@@ -32,7 +33,6 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -46,10 +46,10 @@
             android:label="@string/title_activity_command_details"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/kaba_notification_default" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorPrimary" />
@@ -82,9 +82,9 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- wave lock -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- wave lock -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />

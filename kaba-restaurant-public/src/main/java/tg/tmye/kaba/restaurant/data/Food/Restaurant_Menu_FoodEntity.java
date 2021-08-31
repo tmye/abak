@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Restaurant_Menu_FoodEntity implements Parcelable {
 
-    public long id;
+    public long id = 0;
 
     public String name;
 
@@ -38,9 +38,12 @@ public class Restaurant_Menu_FoodEntity implements Parcelable {
 
     public int is_hidden = 0;
 
+    public String priority;
+
     public Restaurant_Menu_FoodEntity () {
 
     }
+
 
     protected Restaurant_Menu_FoodEntity(Parcel in) {
         id = in.readLong();
@@ -53,19 +56,11 @@ public class Restaurant_Menu_FoodEntity implements Parcelable {
         description = in.readString();
         food_details_pictures = in.createStringArrayList();
         stars = in.readDouble();
+        promotion = in.readInt();
+        promotion_price = in.readString();
+        is_hidden = in.readInt();
+        priority = in.readString();
     }
-
-    public static final Creator<Restaurant_Menu_FoodEntity> CREATOR = new Creator<Restaurant_Menu_FoodEntity>() {
-        @Override
-        public Restaurant_Menu_FoodEntity createFromParcel(Parcel in) {
-            return new Restaurant_Menu_FoodEntity(in);
-        }
-
-        @Override
-        public Restaurant_Menu_FoodEntity[] newArray(int size) {
-            return new Restaurant_Menu_FoodEntity[size];
-        }
-    };
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
@@ -79,7 +74,23 @@ public class Restaurant_Menu_FoodEntity implements Parcelable {
         dest.writeString(description);
         dest.writeStringList(food_details_pictures);
         dest.writeDouble(stars);
+        dest.writeInt(promotion);
+        dest.writeString(promotion_price);
+        dest.writeInt(is_hidden);
+        dest.writeString(priority);
     }
+
+    public static final Creator<Restaurant_Menu_FoodEntity> CREATOR = new Creator<Restaurant_Menu_FoodEntity>() {
+        @Override
+        public Restaurant_Menu_FoodEntity createFromParcel(Parcel in) {
+            return new Restaurant_Menu_FoodEntity(in);
+        }
+
+        @Override
+        public Restaurant_Menu_FoodEntity[] newArray(int size) {
+            return new Restaurant_Menu_FoodEntity[size];
+        }
+    };
 
     @Override
     public int describeContents() {

@@ -254,6 +254,13 @@
     <string name="hsn_details">HSN Details</string>
     <string name="waiting">WAITING</string>
     <string name="delivered">DELIVERED</string>
+    <string name="action_show_statistics">Statistics</string>
+    <string name="nb_commandes_app">App Orders Count</string>
+    <string name="ca_hsn">C.A. HSN</string>
+    <string name="ca_commandes_app">C.A. Commandes App</string>
+    <string name="nb_total_commandes">Count Total Commandes</string>
+    <string name="c_a_total_commandes">"C.A Order Total "</string>
+    <string name="stats_activity">Statistics</string>
     <string-array name="days_of_week">
         <item>Sunday</item>
         <item>Monday</item>
@@ -277,5 +284,10 @@
         <item>November</item>
         <item>December</item>
     </string-array>
+    <string name="nb_hsn">HSN Count</string>
+    <string name="nb_commandes_app_arrival">Arrival Orders Count</string>
+    <string name="ca_commandes_app_arrival">C.A. Arrival</string>
+    <string name="nb_commandes_app_prepaid">Count Prepaid Orders</string>
+    <string name="ca_commandes_app_prepaid">C.A. Prepaid</string>
 
 </resources>

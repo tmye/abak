@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
+import tg.tmye.kaba.restaurant.ILog;
 import tg.tmye.kaba.restaurant._commons.notification.NotificationItem;
 import tg.tmye.kaba.restaurant._commons.utils.UtilFunctions;
 import tg.tmye.kaba.restaurant.activities.commands.CommandDetailsActivity;
@@ -60,7 +62,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     SwitchCompat switch_compat;
 
-    CardView bt_my_commands, bt_weekly_stats, bt_my_menu;
+    CardView bt_my_commands, bt_weekly_stats;
+
+    RelativeLayout bt_my_menu;
 
     private TextView tv_header_resto_name;
     ImageView header_resto_cic;
@@ -105,10 +109,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         Bundle dead_notification_extras = getIntent().getExtras();
         /* see the direction we are supposed to go and the rest */
-        Log.d(Constant.APP_TAG, "notificatonis extra - dead notifz");
+        ILog.print("notificatonis extra - dead notifz");
         if (dead_notification_extras != null) {
             String notification_data = dead_notification_extras.getString("data", "");
-            Log.d(Constant.APP_TAG, notification_data);
+            ILog.print(notification_data);
             if (!"".equals(notification_data)) {
                 /* launch the activity that is supposed */
                 Log.d("xxx", notification_data);

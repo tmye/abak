@@ -131,6 +131,7 @@ public class RestaurantMenuActivity extends AppCompatActivity implements
             basketFoods.clear();
     }
 
+
     private void initVectorDrawablesSet() {
     /*    Drawable bgDrawable = VectorDrawableCompat.create(getResources(), R.drawable.ic_circlebackground_white_24dp, null);
         if (bgDrawable != null)
@@ -366,6 +367,9 @@ public class RestaurantMenuActivity extends AppCompatActivity implements
     protected void onResume() {
         super.onResume();
         Glide.with(this).resumeRequestsRecursive();
+
+        if (presenter != null)
+            presenter.start();
     }
 
     @Override

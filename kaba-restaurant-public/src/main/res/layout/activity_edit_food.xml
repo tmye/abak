@@ -77,6 +77,7 @@
 
             <!-- inner page error -->
             <LinearLayout
+                android:visibility="gone"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:id="@+id/lny_error_box"

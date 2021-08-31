@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import tg.tmye.kaba.restaurant.ILog;
 import tg.tmye.kaba.restaurant._commons.MultiThreading.DatabaseRequestThreadBase;
 import tg.tmye.kaba.restaurant._commons.MultiThreading.NetworkRequestThreadBase;
 import tg.tmye.kaba.restaurant.activities.home.HomeActivity;
@@ -140,7 +141,7 @@ public class RestaurantOnlineRepository {
             @Override
             public void onSuccess(String jsonResponse) {
 
-                Log.d(Constant.APP_TAG, jsonResponse);
+                ILog.print(jsonResponse);
                 try {
                     JsonObject obj = new JsonParser().parse(jsonResponse).getAsJsonObject();
                     int errorCode = obj.get("error").getAsInt();

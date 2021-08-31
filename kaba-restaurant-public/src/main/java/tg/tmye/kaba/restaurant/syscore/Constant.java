@@ -17,4 +17,5 @@ public class Constant {
 
 
     public static final boolean IS_RESTAURANT_APP = true;
+    public static final boolean DEBUG = true;
 }

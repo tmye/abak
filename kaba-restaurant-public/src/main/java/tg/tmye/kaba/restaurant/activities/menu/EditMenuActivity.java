@@ -1,22 +1,30 @@
 package tg.tmye.kaba.restaurant.activities.menu;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -27,6 +35,7 @@ import tg.tmye.kaba.restaurant._commons.adapter.SimpleTextAdapter;
 import tg.tmye.kaba.restaurant.activities.menu.contract.EditMenuContract;
 import tg.tmye.kaba.restaurant.activities.menu.presenter.EditMenuPresenter;
 import tg.tmye.kaba.restaurant.cviews.CustomProgressbar;
+import tg.tmye.kaba.restaurant.cviews.dialog.LoadingDialogFragment;
 import tg.tmye.kaba.restaurant.data.Food.Restaurant_Menu_FoodEntity;
 import tg.tmye.kaba.restaurant.data.Menu.Restaurant_SubMenuEntity;
 import tg.tmye.kaba.restaurant.data.Menu.source.MenuDb_OnlineRepository;
@@ -52,7 +61,6 @@ public class EditMenuActivity extends AppCompatActivity implements
 
     RecyclerView recyclerview;
 
-
     static RestaurantEntity restaurantEntity;
     private EditMenuContract.Presenter presenter;
     private MenuDb_OnlineRepository menu_repository;
@@ -66,6 +74,9 @@ public class EditMenuActivity extends AppCompatActivity implements
     Button bt_tryagain;
 
     TextView tv_menu_count;
+    private LoadingDialogFragment loadingDialogFragment;
+
+    EditMenuListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +102,6 @@ public class EditMenuActivity extends AppCompatActivity implements
         menu_repository = new MenuDb_OnlineRepository(this, resto);
         presenter = new EditMenuPresenter(menu_repository, this);
         presenter.start();
-
     }
 
 
@@ -103,6 +113,18 @@ public class EditMenuActivity extends AppCompatActivity implements
         /* send list of menus and foods list */
         this.drinks = drinks;
         /* init pages */
+        // usor menu food with priority
+        menu_food.sort(new Comparator<Restaurant_SubMenuEntity>() {
+            @Override
+            public int compare(Restaurant_SubMenuEntity o1, Restaurant_SubMenuEntity o2) {
+                return Integer.parseInt(o2.priority) - Integer.parseInt(o1.priority);
+            }
+
+            @Override
+            public boolean equals(Object obj) {
+                return false;
+            }
+        });
         this.menu_food = menu_food;
 
         /* set strip together with viewpager */
@@ -123,11 +145,11 @@ public class EditMenuActivity extends AppCompatActivity implements
 
         // set the count
 
-        tv_menu_count.setText("Menu: "+getNonHiddenMenuCount(menu_food));
+        tv_menu_count.setText("Menus available: "+getNonHiddenMenuCount(menu_food));
 
         recyclerview.setNestedScrollingEnabled(false);
 
-        EditMenuListAdapter adapter = new EditMenuListAdapter(this, menu_food);
+          adapter = new EditMenuListAdapter(this, menu_food);
         recyclerview.setLayoutManager(new LinearLayoutManager(this));
         recyclerview.setAdapter(adapter);
 
@@ -144,15 +166,44 @@ public class EditMenuActivity extends AppCompatActivity implements
 
     @Override
     public void showIsLoading(final boolean isLoading) {
+
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                lny_loading_frame.setVisibility(isLoading ? View.VISIBLE : View.GONE);
-                lny_content.setVisibility(isLoading ? View.GONE : View.VISIBLE);
-                lny_error_box.setVisibility(View.GONE);
-//                tv_no_food_message.setVisibility(View.GONE);
+
+                if (loadingDialogFragment == null) {
+                    if (isLoading) {
+                        loadingDialogFragment = LoadingDialogFragment.newInstance(getString(R.string.content_on_loading));
+                        showFragment(loadingDialogFragment, "loadingbox", true);
+                    }
+                } else {
+                    if (isLoading) {
+                        showFragment(loadingDialogFragment, "loadingbox", false);
+                    } else {
+                        hideFragment();
+                    }
+                }
             }
         });
+    }
+
+    private void hideFragment() {
+        if (loadingDialogFragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.remove(loadingDialogFragment);
+            loadingDialogFragment = null;
+            ft.commitAllowingStateLoss();
+        }
+    }
+
+    private void showFragment(LoadingDialogFragment loadingDialogFragment, String tag, boolean justCreated) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        if (justCreated == true)
+            ft.add(loadingDialogFragment, tag);
+        else
+            ft.show(loadingDialogFragment);
+        ft.commitAllowingStateLoss();
     }
 
     @Override
@@ -181,6 +232,36 @@ public class EditMenuActivity extends AppCompatActivity implements
 
     @Override
     public void inflateFoods(RestaurantEntity restaurantEntity, List<Restaurant_Menu_FoodEntity> menu_food) {
+
+    }
+
+    @Override
+    public void foodHiddenError() {
+
+    }
+
+    @Override
+    public void foodHiddenSuccess() {
+
+    }
+
+    @Override
+    public void menuDeletedSuccess() {
+
+    }
+
+    @Override
+    public void menuDeletedError() {
+
+    }
+
+    @Override
+    public void foodDeletedSuccess() {
+
+    }
+
+    @Override
+    public void foodDeletedError() {
 
     }
 
@@ -223,6 +304,8 @@ public class EditMenuActivity extends AppCompatActivity implements
     protected void onResume() {
         super.onResume();
         Glide.with(this).resumeRequestsRecursive();
+        if (presenter != null)
+            presenter.start();
     }
 
     @Override
@@ -287,8 +370,6 @@ public class EditMenuActivity extends AppCompatActivity implements
         }
     }
 
-
-
     @Override
     protected void onDestroy() {
         if (basketFoods != null)
@@ -326,12 +407,51 @@ public class EditMenuActivity extends AppCompatActivity implements
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        /* check if connected then show another one */
-        return super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_edit_search, menu);
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                _filterRestaurantList(s);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                _filterRestaurantList(s);
+                return false;
+            }
+        });
+
+        return true;
+    }
+
+    private void _filterRestaurantList(String hint) {
+        if (adapter!=null)
+            adapter.getFilter().filter(hint.toString());
     }
 
     @Override
     public void enterSubMenuFoodList(int sub_menu_id) {
         jumpToFoodList(sub_menu_id);
     }
+
+    @Override
+    public void hideSubMenu(int menu_id) {
+        presenter.hideMenu(menu_id);
+    }
+
+    @Override
+    public void deleteSubMenu(int menu_id) {
+        presenter.deleteMenu(menu_id);
+    }
+
 }

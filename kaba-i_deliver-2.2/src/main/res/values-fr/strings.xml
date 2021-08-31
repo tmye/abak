@@ -248,7 +248,6 @@
     <string name="order_amount">Montant commande</string>
     <string name="customer_amount">Montant du Client</string>
     <string name="left_amount">Montant à rembourser</string>
-    <string name="refund">Rembourser</string>
     <string name="refund_amount_confirmation">Vous être en train de recharger %d FCFA à ce client. Voulez vous confimer ?</string>
     <string name="left_amount_error">Erreur montant à rembourser</string>
     <string name="app_name">KIRIKOU</string>
@@ -261,5 +260,18 @@
     <string name="refund_or_debit_error">Une erreur s\'est produite. Veuillez réessayer !</string>
     <string name="title_credit">Rembourser</string>
     <string name="title_debit">Débiter</string>
+    <string name="there_is_no_order">Désolé, il n\'y pas de livraisons disponibles actuellement</string>
+    <string name="customer_adress_label">Adresse</string>
+    <string name="hsn_details">Détails HSN</string>
+    <string name="waiting">En attente</string>
+    <string name="delivered">Livrée</string>
+    <string name="action_show_statistics">Statistiques</string>
+    <string name="nb_hsn">Nb. HSN</string>
+    <string name="nb_commandes_app">"Nb. App "</string>
+    <string name="ca_hsn">C.A. HSN</string>
+    <string name="ca_commandes_app">C.A. Commandes App</string>
+    <string name="nb_total_commandes">Nb. Total Commandes</string>
+    <string name="c_a_total_commandes">C.A. Total commandes</string>
+    <string name="stats_activity">Statistiques</string>
 
 </resources>

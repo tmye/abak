@@ -151,4 +151,22 @@ public class CommandRepository {
 
         networkRequestBase.postJsonDataWithToken(Config.LINK_STOP_SERVICE, obj.toString(), authToken, netRequestIntf);
     }
+
+    public void searchStaticsFromToDate(String fromDate, String toDate, NetworkRequestThreadBase.NetRequestIntf<String> netRequestIntf) {
+
+        String authToken = ((MyKabaDeliverApp)context.getApplicationContext()).getAuthToken();
+        JSONObject obj = new JSONObject();
+
+        try {
+            if (fromDate != null)
+                obj.put("start_date", fromDate);
+            if (toDate != null)
+                obj.put("end_date", toDate);
+            obj.put("search", 1);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        networkRequestBase.postJsonDataWithToken(Config.LINK_SEARCH_STATS, obj.toString(), authToken, netRequestIntf);
+    }
 }

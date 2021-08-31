@@ -224,8 +224,12 @@ public class CommandDetailsActivity extends LoadingIsOkActivtity implements Comm
                 /* according to command state, put in the background that we need. */
                 switch (command.state) {
                     case WAITING:
-                        ib_action_cancel.setVisibility(View.VISIBLE);
-                        ib_action_button.setVisibility(View.VISIBLE);
+                        ib_action_cancel.setVisibility(View.VISIBLE); // CORRECT
+                        ib_action_button.setVisibility(View.VISIBLE); // CORRECT
+
+                        ib_action_cancel.setVisibility(View.GONE); // PATCH
+                        ib_action_button.setVisibility(View.GONE); // PATCH
+
                         ib_action_button.setBackgroundResource(R.drawable.icon_orange_circle);
                         tv_select_shipping_man.setVisibility(View.GONE);
                         recycler_kabaman_list.setVisibility(View.GONE);

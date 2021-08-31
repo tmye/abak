@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
+import tg.tmye.kaba.restaurant.ILog;
 import tg.tmye.kaba.restaurant._commons.MultiThreading.NetworkRequestThreadBase;
 import tg.tmye.kaba.restaurant.activities.login.contract.LoginContract;
 import tg.tmye.kaba.restaurant.data.Restaurant.RestaurantEntity;
@@ -49,7 +50,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
             @Override
             public void onSuccess(String jsonResponse) {
-                Log.d(Constant.APP_TAG, jsonResponse);
+                ILog.print(jsonResponse);
                 JsonObject obj = new JsonParser().parse(jsonResponse).getAsJsonObject();
                 int errorCode = obj.get("error").getAsInt();
                 if (errorCode == 0) {

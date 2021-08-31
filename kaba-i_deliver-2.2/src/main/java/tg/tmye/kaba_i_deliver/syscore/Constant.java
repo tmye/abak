@@ -7,7 +7,7 @@ package tg.tmye.kaba_i_deliver.syscore;
 
 public class Constant {
 
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
     public static final String APP_TAG = "XXX_KIRIKOU_KB";
 
 //        public static final String ip_address = "app.kaba-delivery.com"; // prod server

@@ -196,7 +196,7 @@ public class HsnDetailsActivity  extends AppCompatActivity implements HsnDetails
                 tv_shipping_address.setText(hsn.shipping_address);
                 tv_status.setText(hsn.state == 0? getString(R.string.waiting) : getString(R.string.delivered));
                 tv_status.setBackgroundResource(hsn.state == 0? R.drawable.bg_green_rounded : R.drawable.bg_already_paid_rounded);
-                if ("".equals(hsn.shipping_location_link)) {
+                if (hsn.shipping_location_link == null || "".equals(hsn.shipping_location_link.trim())) {
                     rel_location.setVisibility(View.GONE);
                 } else {
                     rel_location.setVisibility(View.VISIBLE);
@@ -456,6 +456,7 @@ public class HsnDetailsActivity  extends AppCompatActivity implements HsnDetails
         @Override
         public void onClick(View view) {
             // launch link for view
+
             try {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(location));
                 startActivity(browserIntent);

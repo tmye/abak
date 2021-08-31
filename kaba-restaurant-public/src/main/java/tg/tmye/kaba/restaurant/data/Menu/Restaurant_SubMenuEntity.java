@@ -32,16 +32,7 @@ public class Restaurant_SubMenuEntity implements Parcelable {
 
     public int is_hidden = 0;
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public List<Restaurant_Menu_FoodEntity> foods;
-
+    public String priority;
 
     protected Restaurant_SubMenuEntity(Parcel in) {
         id = in.readLong();
@@ -51,7 +42,11 @@ public class Restaurant_SubMenuEntity implements Parcelable {
         } else {
             restaurant_id = in.readLong();
         }
-
+        description = in.readString();
+        promotion = in.readInt();
+        is_hidden = in.readInt();
+        priority = in.readString();
+        foods = in.createTypedArrayList(Restaurant_Menu_FoodEntity.CREATOR);
     }
 
     @Override
@@ -64,7 +59,11 @@ public class Restaurant_SubMenuEntity implements Parcelable {
             dest.writeByte((byte) 1);
             dest.writeLong(restaurant_id);
         }
-
+        dest.writeString(description);
+        dest.writeInt(promotion);
+        dest.writeInt(is_hidden);
+        dest.writeString(priority);
+        dest.writeTypedList(foods);
     }
 
     @Override
@@ -83,6 +82,16 @@ public class Restaurant_SubMenuEntity implements Parcelable {
             return new Restaurant_SubMenuEntity[size];
         }
     };
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Restaurant_Menu_FoodEntity> foods;
 
 
     public long getId() {

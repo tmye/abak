@@ -42,6 +42,7 @@ public class MyHsnPresenter implements HsnDetailsContract.Presenter {
         if (isLoading)
             return;
         isLoading = true;
+
         /* get the informations of the restaurant, and retrieve the list of commands that have to
          * be retrieven */
         view.showLoading(true);

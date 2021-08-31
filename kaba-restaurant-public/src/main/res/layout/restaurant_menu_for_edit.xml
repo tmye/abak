@@ -17,15 +17,63 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_menu_name"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@color/green_"
-            android:text="pizza"
-            android:textAllCaps="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_hidden"
+                android:src="@drawable/hide"
+                android:alpha="0.3"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:id="@+id/tv_menu_name"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/green_"
+                android:text="pizza"
+                android:layout_below="@+id/lny_priority"
+                android:layout_margin="@dimen/activity_horizontal_margin_quarter"
+                android:textAllCaps="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/lny_priority"
+                android:background="@drawable/bg_blue_rounded"
+                android:orientation="horizontal"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin_half"
+                android:paddingLeft="@dimen/activity_horizontal_margin_half"
+               android:paddingTop="@dimen/activity_horizontal_margin_quarter"
+                android:paddingBottom="@dimen/activity_horizontal_margin_quarter"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/white"
+                    android:text="@string/priority"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin_half"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_priority"
+                    android:textColor="@color/white"
+                    android:text=""
+                   android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </RelativeLayout>
+
 
         <TextView
             android:id="@+id/tv_description"
@@ -46,23 +94,44 @@
         <Button
             android:layout_weight="1"
             android:id="@+id/bt_hide"
-            android:text="HIDE"
+            android:text="@string/hide"
+            android:visibility="gone"
             android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+            <Button
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:id="@+id/bt_delete"
+                android:background="@drawable/bg_delete_cornered"
+                android:textColor="@color/white"
+                android:text="@string/delete"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
         <Button
             android:layout_weight="1"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:id="@+id/bt_edit_name"
-            android:text="EDIT"
+            android:text="@string/edit"
+            android:background="@drawable/bg_edit_cornered"
+            android:textColor="@color/white"
             android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <Button
             android:layout_weight="1"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:id="@+id/bt_enter"
-            android:text="ENTER"
+            android:text="@string/enter"
+            android:background="@drawable/bg_enter_cornered"
+            android:textColor="@color/white"
             android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -71,13 +140,6 @@
 
     </LinearLayout>
 
-        <ImageView
-            android:id="@+id/iv_hidden"
-            android:src="@drawable/hide"
-            android:alpha="0.3"
-            android:layout_gravity="center"
-            android:layout_width="100dp"
-            android:layout_height="100dp"/>
     </FrameLayout>
 
 </androidx.cardview.widget.CardView>

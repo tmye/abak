@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 
+import tg.tmye.kaba.restaurant.ILog;
 import tg.tmye.kaba.restaurant.syscore.Constant;
 import tg.tmye.kaba.restaurant.R;
 
@@ -50,8 +51,8 @@ public class CommandProgressSingleLine extends LinearLayout {
         width = width/2 + (getResources().getDimensionPixelSize(R.dimen.command_progress_ball_size)/2);
         height =(getResources().getDimensionPixelSize(R.dimen.command_progress_ball_size));
 
-        Log.d(Constant.APP_TAG, "screenwidth "+getResources().getDisplayMetrics().widthPixels);
-        Log.d(Constant.APP_TAG, "timeWidth "+ width);
+        ILog.print("screenwidth "+getResources().getDisplayMetrics().widthPixels);
+        ILog.print("timeWidth "+ width);
     }
 
 

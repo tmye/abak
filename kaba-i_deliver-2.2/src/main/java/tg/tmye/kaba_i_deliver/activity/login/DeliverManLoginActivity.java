@@ -71,8 +71,21 @@ public class DeliverManLoginActivity extends AppCompatActivity implements LoginC
     @Override
     public void loginSuccess(boolean isSuccess) {
         if (isSuccess) {
-            startActivity(new Intent(this, MyCommandsActivity.class));
-            finish();
+
+            String authTOken = ((MyKabaDeliverApp)getApplicationContext()).getAuthToken();
+            if (!"".equals(authTOken)) {
+                // also check if you are delivery ready, if yes, continue, if yes go away
+                String deliveryMode = ((MyKabaDeliverApp)getApplicationContext()).getDeliveryMode();
+                if ("on".equals(deliveryMode)) {
+                    startActivity(new Intent(this, MyCommandsActivity.class));
+                } else {
+                    startActivity(new Intent(this, DeliveryReadyActivity.class));
+                }
+                finish();
+            }
+
+//            startActivity(new Intent(this, MyCommandsActivity.class));
+//            finish();
         }
     }
 

@@ -13,7 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -28,6 +31,8 @@ import java.util.List;
 import tg.tmye.kaba.restaurant.R;
 import tg.tmye.kaba.restaurant.activities.menu.EditSingleFoodActivity;
 import tg.tmye.kaba.restaurant.activities.menu.EditSingleMenuActivity;
+import tg.tmye.kaba.restaurant.activities.menu.OnFoodInteractionListener;
+import tg.tmye.kaba.restaurant.activities.menu.OnMenuInteractionListener;
 import tg.tmye.kaba.restaurant.activities.menu.RestaurantMenuActivity;
 import tg.tmye.kaba.restaurant.cviews.SlidingBanner_LilRound;
 import tg.tmye.kaba.restaurant.data.Food.Restaurant_Menu_FoodEntity;
@@ -39,17 +44,20 @@ import tg.tmye.kaba.restaurant.data.advert.AdsBanner;
  * By abiguime on 17/06/2018.
  * email: 2597434002@qq.com
  */
-public class EditFoodListAdapter extends RecyclerView.Adapter<EditFoodListAdapter.ViewHolder> {
+public class EditFoodListAdapter extends RecyclerView.Adapter<EditFoodListAdapter.ViewHolder> implements Filterable {
 
     private final List<Restaurant_Menu_FoodEntity> data;
     private final Context context;
     private final FragmentManager fragmentManager;
+    private List<Restaurant_Menu_FoodEntity> usedData;
+    private List<Restaurant_Menu_FoodEntity> restaurantListFiltered;
 
     public EditFoodListAdapter(Context context, FragmentManager fragmentManager, List<Restaurant_Menu_FoodEntity> menu_list) {
 
         this.context = context;
         this.fragmentManager = fragmentManager;
         this.data = menu_list;
+        this.usedData = menu_list;
     }
 
     @NonNull
@@ -69,6 +77,8 @@ public class EditFoodListAdapter extends RecyclerView.Adapter<EditFoodListAdapte
         holder.tv_food_price.setText(""+entity.price);
         holder.tv_food_promotion_price.setText(""+(entity.promotion_price == null ? 0 : entity.promotion_price));
         holder.switch_is_promotion.setChecked(entity.promotion == 1);
+        holder.lny_promotion_price.setVisibility(entity.promotion == 1 ? View.VISIBLE : View.GONE);
+
 
         initSlidingBanner(holder.sliding_banner, data.get(position));
 
@@ -92,11 +102,57 @@ public class EditFoodListAdapter extends RecyclerView.Adapter<EditFoodListAdapte
                 context.startActivity(intent);
             }
         });
+
+        holder.bt_hide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                        ((OnFoodInteractionListener)(context)).hide((int)entity.id);
+            }
+        });
+
+        holder.bt_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((OnFoodInteractionListener)(context)).delete((int)entity.id);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return usedData.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    restaurantListFiltered = data;
+                } else {
+                    List<Restaurant_Menu_FoodEntity> filteredList = new ArrayList<>();
+                    for (Restaurant_Menu_FoodEntity row : data) {
+                        // filter the EditText w
+                        if (row.name.toLowerCase().contains(charString.toLowerCase())) {
+                            filteredList.add(row);
+                        }
+                    }
+                    restaurantListFiltered = filteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = restaurantListFiltered;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                usedData = (List<Restaurant_Menu_FoodEntity>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -104,8 +160,9 @@ public class EditFoodListAdapter extends RecyclerView.Adapter<EditFoodListAdapte
         SlidingBanner_LilRound sliding_banner;
         TextView tv_food_name, tv_description, tv_is_food_hidden, tv_food_promotion_price, tv_food_price;
         ImageView iv_hidden;
-        Button/* bt_hide,*/ bt_edit_name;
+        Button/* bt_hide,*/ bt_edit_name, bt_hide, bt_delete;
         Switch switch_is_promotion;
+        LinearLayout lny_promotion_price;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -115,11 +172,13 @@ public class EditFoodListAdapter extends RecyclerView.Adapter<EditFoodListAdapte
             tv_description = itemView.findViewById(R.id.tv_description);
             sliding_banner = itemView.findViewById(R.id.sliding_banner);
             iv_hidden = itemView.findViewById(R.id.iv_hidden);
-//            bt_hide = itemView.findViewById(R.id.bt_hide);
             bt_edit_name = itemView.findViewById(R.id.bt_edit_name);
+            bt_hide = itemView.findViewById(R.id.bt_hide);
+            bt_delete = itemView.findViewById(R.id.bt_delete);
             tv_food_promotion_price = itemView.findViewById(R.id.tv_food_promotion_price);
             tv_food_price = itemView.findViewById(R.id.tv_food_price);
             tv_is_food_hidden = itemView.findViewById(R.id.tv_is_food_hidden);
+            lny_promotion_price = itemView.findViewById(R.id.lny_promotion_price);
         }
     }
 

@@ -61,7 +61,9 @@ public class Config {
 
     public static final String LINK_ACCEPT_COMMAND = Constant.SERVER_ADDRESS + "/resto/api/command/accept";
 
+    // not used recently
     public static final String LINK_SENDTOSHIPPING_COMMAND = Constant.SERVER_ADDRESS + "/resto/api/command/start-shipping";
+
 
     public static final String LINK_GET_RESTAURANT_STATS = Constant.SERVER_ADDRESS + "/resto/api/recipes/get";
 
@@ -74,12 +76,20 @@ public class Config {
 
     public static final String LINK_RESTAURANT_CHECK_OPENED = Constant.SERVER_ADDRESS + "/resto/api/open_close";
 
+
+
     /* menu food*/
     public static final String LINK_MENU_BY_RESTAURANT_ID = Constant.SERVER_ADDRESS+
             "/api/menu/get";
 
-    public static final String LINK_MENU_BY_ID = Constant.SERVER_ADDRESS+
-            "/api/menu/get/id";
+    public static final String LINK_MENU_ADD = Constant.SERVER_ADDRESS+
+            "/resto/api/menu/add";
+
+    public static final String LINK_MENU_EDIT = Constant.SERVER_ADDRESS+
+            "/resto/api/menu/edit";
+
+    public static final String LINK_MENU_DELETE = Constant.SERVER_ADDRESS+
+            "/resto/api/menu/delete";
 
     // restaurant specific interface
     public static final String LINK_GET_MENU_BY_ID_SPECIFIC = Constant.SERVER_ADDRESS+
@@ -88,5 +98,14 @@ public class Config {
     // restaurant specific interface
     public static final String LINK_GET_FOOD_BY_ID_SPECIFIC = Constant.SERVER_ADDRESS+
             "/resto/api/food/get";
+
+    public static final String LINK_FOOD_ADD = Constant.SERVER_ADDRESS+
+            "/resto/api/food/add";
+
+    public static final String LINK_FOOD_EDIT = Constant.SERVER_ADDRESS+
+            "/resto/api/food/edit";
+
+    public static final String LINK_FOOD_DELETE = Constant.SERVER_ADDRESS+
+            "/resto/api/food/delete";
 
 }

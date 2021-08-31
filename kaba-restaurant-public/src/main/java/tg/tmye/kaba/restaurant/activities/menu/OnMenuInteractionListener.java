@@ -7,4 +7,8 @@ package tg.tmye.kaba.restaurant.activities.menu;
 public interface OnMenuInteractionListener {
 
     void enterSubMenuFoodList(int sub_menu_id);
+
+    void hideSubMenu(int menu_id);
+
+    void deleteSubMenu(int id);
 }

@@ -3,6 +3,7 @@ package tg.tmye.kaba_i_deliver.activity.command;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.ActivityManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -46,6 +47,7 @@ import tg.tmye.kaba_i_deliver.activity.command.presenter.MyCommandsPresenter;
 import tg.tmye.kaba_i_deliver.activity.delivery.DeliveryModeActivity;
 import tg.tmye.kaba_i_deliver.activity.login.DeliverManLoginActivity;
 import tg.tmye.kaba_i_deliver.activity.restaurant.RestaurantListActivity;
+import tg.tmye.kaba_i_deliver.activity.statistics.StatisticsActivity;
 import tg.tmye.kaba_i_deliver.cviews.NoScrollViewPager;
 import tg.tmye.kaba_i_deliver.cviews.dialog.LoadingDialogFragment;
 import tg.tmye.kaba_i_deliver.data.command.Command;
@@ -131,7 +133,8 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
         // start tracking service
         Intent mServiceIntent = new Intent(this, TrackingService.class);
         if (!isMyServiceRunning(TrackingService.class)) {
-            startService(mServiceIntent);
+            ComponentName componentName = startService(mServiceIntent);
+            ILog.print(componentName.toString());
         }
     }
 
@@ -236,6 +239,13 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
             }
         }
 
+        // add price of hsn delivery fees to this as well
+        for (int i = 0; i < hsns.size(); i++) {
+            if (hsns.get(i).state == 1)
+                todayMoney += Integer.parseInt(hsns.get(i).shipping_pricing);
+        }
+
+
         ILog.print("==== preorder ==== ");
 
         for (int i = 0; i < preorders.size(); i++) {
@@ -290,6 +300,8 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
             startActivity(new Intent(this, DeliverManLoginActivity.class));
             if (wantToLogout)
                 logout();
+            else
+                finish();
         } else {
             // failed
             mToast(getString(R.string.sys_error));
@@ -379,7 +391,7 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
 
     int[] colors = {
             R.color.colorPrimary_yellow,
-            R.color.pink_color,
+            R.color.facebook_blue,
             R.color.command_state_4,
             R.color.command_state_yet,
             R.color.command_state_done
@@ -532,9 +544,9 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
 
         /*  */
         switch(item.getItemId()) {
-//            case R.id.action_enter_delivery_mode:
-//                enterDeliveryMode();
-//                break;
+            case R.id.action_show_statistics:
+                showStatisticsPage();
+                break;
             case R.id.action_logout:
                 /* clear logout and start the task bottom activity */
                 exitDeliveryMode(true);// if successful, logout as well
@@ -547,6 +559,12 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showStatisticsPage() {
+        //
+        Intent intent = new Intent(this, StatisticsActivity.class);
+        startActivity(intent);
     }
 
     private void exitDeliveryMode(boolean wantToLogout) {
