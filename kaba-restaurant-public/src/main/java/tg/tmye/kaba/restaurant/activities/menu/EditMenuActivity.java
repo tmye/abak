@@ -4,6 +4,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,7 +14,9 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
@@ -21,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -69,6 +73,8 @@ public class EditMenuActivity extends AppCompatActivity implements
 
     private Toolbar toolbar;
 
+    FloatingActionButton fab_add_menu;
+
     private SimpleTextAdapter simpleTextAdapter;
 
     Button bt_tryagain;
@@ -98,6 +104,7 @@ public class EditMenuActivity extends AppCompatActivity implements
         RestaurantEntity resto = restaurantOnlineRepository.getRestaurant();
 
         bt_tryagain.setOnClickListener(this);
+        fab_add_menu.setOnClickListener(this);
 
         menu_repository = new MenuDb_OnlineRepository(this, resto);
         presenter = new EditMenuPresenter(menu_repository, this);
@@ -108,6 +115,7 @@ public class EditMenuActivity extends AppCompatActivity implements
 
     @Override
     public void inflateMenus(RestaurantEntity entity, final List<Restaurant_SubMenuEntity> menu_food, List<Restaurant_Menu_FoodEntity> drinks) {
+
 
         this.restaurantEntity = restaurantEntity;
         /* send list of menus and foods list */
@@ -135,24 +143,47 @@ public class EditMenuActivity extends AppCompatActivity implements
                 lny_error_box.setVisibility(View.GONE);
                 lny_loading_frame.setVisibility(View.GONE);
                 lny_content.setVisibility(View.VISIBLE);
+                recyclerview.setVisibility(View.VISIBLE);
 
                 inflateRecyclerView(menu_food);
             }
         });
     }
 
+    @Override
+    public void showNoDataMessage() {
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                recyclerview.setVisibility(View.GONE);
+
+                String message = getResources().getString(R.string.no_data);
+                tv_messages.setText(message);
+
+                progressBar.setVisibility(View.GONE);
+//                frame_container.setVisibility(View.GONE);
+                lny_error_box.setVisibility(View.VISIBLE);
+                tv_messages.setVisibility(View.VISIBLE);
+                bt_tryagain.setVisibility(View.GONE);
+
+                tv_menu_count.setText(getString(R.string.available_menu)+0);
+
+            }
+        });
+    }
+
+
     private void inflateRecyclerView(List<Restaurant_SubMenuEntity> menu_food) {
 
         // set the count
 
-        tv_menu_count.setText("Menus available: "+getNonHiddenMenuCount(menu_food));
-
+        tv_menu_count.setText(getString(R.string.available_menu)+getNonHiddenMenuCount(menu_food));
         recyclerview.setNestedScrollingEnabled(false);
-
-          adapter = new EditMenuListAdapter(this, menu_food);
+        adapter = new EditMenuListAdapter(this, menu_food);
         recyclerview.setLayoutManager(new LinearLayoutManager(this));
         recyclerview.setAdapter(adapter);
-
     }
 
     private int getNonHiddenMenuCount(List<Restaurant_SubMenuEntity> menu_food) {
@@ -214,6 +245,7 @@ public class EditMenuActivity extends AppCompatActivity implements
                 lny_loading_frame.setVisibility(View.GONE);
                 lny_content.setVisibility(View.GONE);
                 lny_error_box.setVisibility(View.VISIBLE);
+                bt_tryagain.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -226,6 +258,7 @@ public class EditMenuActivity extends AppCompatActivity implements
                 lny_loading_frame.setVisibility(View.GONE);
                 lny_content.setVisibility(View.GONE);
                 lny_error_box.setVisibility(View.VISIBLE);
+                bt_tryagain.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -247,12 +280,16 @@ public class EditMenuActivity extends AppCompatActivity implements
 
     @Override
     public void menuDeletedSuccess() {
-
+        presenter.populateViews();
     }
 
     @Override
     public void menuDeletedError() {
+        mToast(getString(R.string.sys_error));
+    }
 
+    private void mToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -265,28 +302,6 @@ public class EditMenuActivity extends AppCompatActivity implements
 
     }
 
-    @Override
-    public void showNoDataMessage() {
-
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-
-                String message = getResources().getString(R.string.no_data);
-                tv_messages.setText(message);
-
-                progressBar.setVisibility(View.GONE);
-                frame_container.setVisibility(View.GONE);
-                lny_error_box.setVisibility(View.VISIBLE);
-                tv_messages.setVisibility(View.VISIBLE);
-
-//                if (menu_food == null || menu_food.size() == 0) {
-//                    findViewById(R.id.lny_container).setVisibility(View.GONE);
-//                    tv_no_menu.setVisibility(View.VISIBLE);
-//                }
-            }
-        });
-    }
 
     @Override
     public void onMenuInteraction(int position) {
@@ -334,6 +349,7 @@ public class EditMenuActivity extends AppCompatActivity implements
         tv_menu_count = findViewById(R.id.tv_menu_count);
 
         recyclerview = findViewById(R.id.recyclerview);
+        fab_add_menu =  findViewById(R.id.fab_add_menu);
     }
 
     public void jumpToFoodList(int sub_menu_id){
@@ -366,6 +382,11 @@ public class EditMenuActivity extends AppCompatActivity implements
             case R.id.bt_tryagain:
                 if (presenter != null)
                     presenter.populateViews();
+                break;
+            case R.id.fab_add_menu:
+                // create new menu
+                Intent intent = new Intent(this, EditSingleMenuActivity.class);
+                startActivity(intent);
                 break;
         }
     }
@@ -451,7 +472,38 @@ public class EditMenuActivity extends AppCompatActivity implements
 
     @Override
     public void deleteSubMenu(int menu_id) {
-        presenter.deleteMenu(menu_id);
+
+
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        View view = LayoutInflater.from(this).inflate(R.layout.cancel_dialog_info, null, false);
+
+        TextView tv_message = view.findViewById(R.id.tv_message);
+        Button bt_cancel = view.findViewById(R.id.bt_cancel);
+        Button bt_confirm = view.findViewById(R.id.bt_confirm);
+
+        alertDialogBuilder.setView(view);
+        tv_message.setText(R.string.are_you_sure_delete_menu);
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+
+        bt_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+        bt_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.deleteMenu(menu_id);
+                alertDialog.dismiss();
+            }
+        });
+
+        alertDialog.show();
+
     }
 
 }

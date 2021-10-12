@@ -106,7 +106,7 @@ public class StatisticsActivity extends AppCompatActivity implements StatisticsC
 
 
     private String dateToString(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+        DateFormat dateFormat = new SimpleDateFormat("y-M-d");
         return dateFormat.format(date);
     }
 

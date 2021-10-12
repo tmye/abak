@@ -22,6 +22,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.GenericTransitionOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -30,11 +31,14 @@ import com.google.gson.reflect.TypeToken;
 import tg.tmye.kaba.restaurant.ILog;
 import tg.tmye.kaba.restaurant._commons.notification.NotificationItem;
 import tg.tmye.kaba.restaurant._commons.utils.UtilFunctions;
+import tg.tmye.kaba.restaurant.activities.calendar.CalendarActivity;
 import tg.tmye.kaba.restaurant.activities.commands.CommandDetailsActivity;
 import tg.tmye.kaba.restaurant.activities.commands.MyCommandsActivity;
 import tg.tmye.kaba.restaurant.R;
 import tg.tmye.kaba.restaurant.activities.commands.contract.MyCommandContract;
 import tg.tmye.kaba.restaurant.activities.commands.presenter.MyCommandsPresenter;
+import tg.tmye.kaba.restaurant.activities.hsn.CreateHSNActivity;
+import tg.tmye.kaba.restaurant.activities.hsn.MyHSNActivity;
 import tg.tmye.kaba.restaurant.activities.login.RestaurantLoginActivity;
 import tg.tmye.kaba.restaurant.activities.menu.RestaurantMenuActivity;
 import tg.tmye.kaba.restaurant.activities.stats.StatsActivity;
@@ -62,7 +66,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     SwitchCompat switch_compat;
 
-    CardView bt_my_commands, bt_weekly_stats;
+    CardView bt_my_commands, bt_hsn, cardview_calendar;
 
     RelativeLayout bt_my_menu;
 
@@ -79,6 +83,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private Gson gson = new Gson();
 
+    FloatingActionButton fab_create_hsn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,8 +97,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         initViews();
 
         bt_my_commands.setOnClickListener(this);
+        fab_create_hsn.setOnClickListener(this);
         bt_my_menu.setOnClickListener(this);
-        bt_weekly_stats.setOnClickListener(this);
+        bt_hsn.setOnClickListener(this);
+        cardview_calendar.setOnClickListener(this);
 
         lny_1_waiting.setOnClickListener(this);
         lny_2_preparing.setOnClickListener(this);
@@ -151,12 +159,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private void initViews() {
         bt_my_commands = findViewById(R.id.bt_my_commands);
         bt_my_menu = findViewById(R.id.bt_my_menu);
+        cardview_calendar = findViewById(R.id.cardview_calendar);
 
         tv_quantity = findViewById(R.id.tv_quantity);
         tv_money = findViewById(R.id.tv_money);
 
         bt_my_commands = findViewById(R.id.bt_my_commands);
-        bt_weekly_stats = findViewById(R.id.bt_weekly_stats);
+        bt_hsn = findViewById(R.id.bt_hsn);
 
         header_resto_cic = findViewById(R.id.header_resto_cic);
         tv_header_resto_name = findViewById(R.id.tv_header_resto_name);
@@ -174,6 +183,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         tv_opened_closed = findViewById(R.id.tv_closed);
         tv_opened_opened = findViewById(R.id.tv_opened);
+
+        fab_create_hsn = findViewById(R.id.fab_create_hsn);
     }
 
     @Override
@@ -195,8 +206,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_statistics) {
+            showStats();
         } else if (id == R.id.action_logout) {
             logout();
         }
@@ -241,8 +252,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bt_my_menu:
                 showMenu();
                 break;
-            case R.id.bt_weekly_stats:
-                showStats();
+            case R.id.fab_create_hsn:
+              createHSN();
+                break;
+            case R.id.bt_hsn:
+                showHSN();
+//                showStats();
                 break;
             case R.id.lny_2_preparing:
                 showMyCommands(1);
@@ -253,7 +268,27 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.lny_3_shipping:
                 showMyCommands(2);
                 break;
+            case R.id.cardview_calendar:
+             showCalendarActivity();
+                break;
         }
+    }
+
+    private void showHSN() {
+        /* show hsn page */
+        Intent intent = new Intent(HomeActivity.this, MyHSNActivity.class);
+        startActivity(intent);
+
+    }
+
+    private void createHSN() {
+        Intent intent = new Intent(HomeActivity.this, CreateHSNActivity.class);
+        startActivity(intent);
+    }
+
+    private void showCalendarActivity() {
+        Intent intent = new Intent(HomeActivity.this, CalendarActivity.class);
+        startActivity(intent);
     }
 
     private void showMenu() {
@@ -323,39 +358,45 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void inflateStats (final int calendar_open_state, final int manual_open_state, final String head_pic, final String resto_name, final String quantity_count, final String amount_money) {
+    public void inflateStats (final int calendar_open_state, final int manual_open_state, int coming_soon, final String head_pic, final String resto_name, final String quantity_count, final String amount_money) {
 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                tv_money.setText(UtilFunctions.intToMoney(amount_money)+" "+getResources().getString(R.string.devise));
+                tv_money.setText(UtilFunctions.intToMoney(amount_money) + " " + getResources().getString(R.string.devise));
                 tv_quantity.setText(quantity_count);
 
                 tv_header_resto_name.setText(resto_name);
                 GlideApp.with(HomeActivity.this)
-                        .load(Constant.SERVER_ADDRESS+ "/" +head_pic)
-                        .transition(GenericTransitionOptions.with(  ((MyRestaurantApp)getApplicationContext()).getGlideAnimation()  ))
+                        .load(Constant.SERVER_ADDRESS + "/" + head_pic)
+                        .transition(GenericTransitionOptions.with(((MyRestaurantApp) getApplicationContext()).getGlideAnimation()))
                         .placeholder(R.drawable.placeholder_kaba)
                         .centerCrop()
                         .into(header_resto_cic);
 
-                if (calendar_open_state == 1) {
-                    /* open*/
+                if (coming_soon == 1) {
                     tv_state_opend.setTextColor(Color.WHITE);
-                    tv_state_opend.setText(getResources().getText(R.string.is_opened));
-                    tv_state_opend.setBackgroundResource(R.drawable.bg_green_rounded);
-                } else if (calendar_open_state == 2) {
-                    tv_state_opend.setTextColor(Color.WHITE);
-                    tv_state_opend.setText(getResources().getText(R.string.is_pausing));
-                    tv_state_opend.setBackgroundResource(R.drawable.bg_resto_pausing_yellow);
+                    tv_state_opend.setText(getResources().getText(R.string.coming_soon));
+                    tv_state_opend.setBackgroundResource(R.drawable.bg_red_cornered);
                 } else {
-                    /* closed */
-                    tv_state_opend.setTextColor(Color.WHITE);
-                    tv_state_opend.setText(getResources().getText(R.string.is_closed));
-                    tv_state_opend.setBackgroundResource(R.drawable.bg_resto_closed_rounded);
-                }
+                    if (calendar_open_state == 1) {
+                        /* open*/
+                        tv_state_opend.setTextColor(Color.WHITE);
+                        tv_state_opend.setText(getResources().getText(R.string.is_opened));
+                        tv_state_opend.setBackgroundResource(R.drawable.bg_green_rounded);
+                    } else if (calendar_open_state == 2) {
+                        tv_state_opend.setTextColor(Color.WHITE);
+                        tv_state_opend.setText(getResources().getText(R.string.is_pausing));
+                        tv_state_opend.setBackgroundResource(R.drawable.bg_resto_pausing_yellow);
+                    } else {
+                        /* closed */
+                        tv_state_opend.setTextColor(Color.WHITE);
+                        tv_state_opend.setText(getResources().getText(R.string.is_closed));
+                        tv_state_opend.setBackgroundResource(R.drawable.bg_resto_closed_rounded);
+                    }
 
-                presenterSwitchOpened (manual_open_state == 0 ? false : true);
+                    presenterSwitchOpened(manual_open_state == 0 ? false : true);
+                }
             }
         });
     }

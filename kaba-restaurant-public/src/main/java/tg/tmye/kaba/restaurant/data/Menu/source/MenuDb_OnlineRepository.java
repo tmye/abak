@@ -263,15 +263,21 @@ public class MenuDb_OnlineRepository {
         try {
             params.put("id",foodEntity.id);
             params.put("name",foodEntity.name);
+            params.put("menu_id", foodEntity.menu_id);
             params.put("description", foodEntity.description);
             params.put("price", foodEntity.price);
-            params.put("priority", foodEntity.priority);
+            params.put("priority", ""+foodEntity.priority);
+            params.put("category", "0");
             params.put("promotion_price", foodEntity.promotion_price);
             params.put("is_hidden", String.valueOf(foodEntity.is_hidden));
-            params.put("promotion", foodEntity.promotion); // 0 or 1
+            params.put("promotion", ""+foodEntity.promotion); // 0 or 1
+            if (foodEntity.pic != null && foodEntity.pic.length() > 100)
+                params.put("picture", foodEntity.pic);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        ILog.print(params.toString());
 
         networkRequestThreadBase.postJsonDataWithToken((foodEntity.id != 0 && foodEntity.id > 1)? Config.LINK_FOOD_EDIT : Config.LINK_FOOD_ADD, params.toString(), authToken, intf);
     }

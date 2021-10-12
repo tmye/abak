@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.hsn.CreateHSNActivity">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+                android:background="@color/white"
+                android:text="@string/please_insert_delivery_district"
+                android:layout_width="match_parent"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin_half"
+                android:paddingLeft="@dimen/activity_horizontal_margin_half"
+                android:textColor="@color/facebook_blue"
+                android:layout_gravity="left"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <AutoCompleteTextView
+                    android:layout_margin="@dimen/activity_horizontal_margin_half"
+                    android:layout_weight="5"
+                    android:id="@+id/ed_location_filter"
+                    android:background="@drawable/gray_field"
+                    android:layout_width="0dp"
+                    android:hint="@string/delivery_district"
+                    android:paddingLeft="@dimen/activity_horizontal_margin_half"
+                    android:paddingRight="@dimen/activity_horizontal_margin_half"
+                    android:layout_height="50dp"/>
+
+                <Button
+                    android:id="@+id/bt_reset"
+                    android:layout_margin="@dimen/activity_horizontal_margin_half"
+                    android:text="@string/reset"
+                    android:drawableLeft="@drawable/ic_refresh_icon"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <!-- show delivery fees -->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/lny_delivery_fees"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:orientation="horizontal"
+                android:background="@color/white"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="@string/delivery_fees"
+                    android:textSize="20sp"
+                    android:layout_weight="5"
+                    android:layout_width="0dp"
+                    android:gravity="right"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_margin="@dimen/activity_horizontal_margin_half"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_delivery_fees"
+                    android:textSize="20sp"
+                    android:layout_weight="3"
+                    android:layout_width="0dp"
+                    android:gravity="left"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:layout_margin="@dimen/activity_horizontal_margin_half"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/bt_accept_fees"
+                    android:layout_margin="@dimen/activity_horizontal_margin_half"
+                    android:text="@string/confirm"
+                    android:textSize="10sp"
+                    android:layout_weight="3"
+                    android:textColor="@color/white"
+                    android:drawableRight="@drawable/ic_baseline_navigate_next_24"
+                    android:drawableEnd="@drawable/ic_baseline_navigate_next_24"
+                    android:background="@drawable/bg_green_rounded"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:orientation="vertical"
+                android:id="@+id/lny_form"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- numéro du client -->
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:layout_margin="@dimen/activity_horizontal_margin"
+                        android:layout_width="0dp"
+                        android:text="@string/customer_phone_number"
+                        android:layout_height="wrap_content"/>
+
+                    <EditText
+                        android:id="@+id/ed_phone_number"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:inputType="number"
+                        android:maxLength="8"
+                        android:layout_margin="@dimen/activity_horizontal_margin"
+                        android:layout_height="wrap_content"/>
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <!-- montant de la commande -->
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:layout_margin="@dimen/activity_horizontal_margin"
+                        android:layout_width="0dp"
+                        android:text="@string/order_food_amount"
+                        android:layout_height="wrap_content"/>
+
+                    <EditText
+                        android:id="@+id/ed_food_amount"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:inputType="number"
+                        android:maxLength="8"
+                        android:layout_margin="@dimen/activity_horizontal_margin"
+                        android:layout_height="wrap_content"/>
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <!-- description supplementaire -->
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:gravity="right"
+                        android:layout_margin="@dimen/activity_horizontal_margin"
+                        android:layout_width="wrap_content"
+                        android:text="@string/order_more_informations"
+                        android:layout_height="wrap_content"/>
+
+                    <EditText
+                        android:background="@color/white"
+                        android:gravity="top|left"
+                        android:padding="@dimen/activity_horizontal_margin_half"
+                        android:id="@+id/ed_order_description"
+                        android:layout_width="match_parent"
+                        android:inputType="textMultiLine"
+                        android:minLines="3"
+                        android:layout_margin="@dimen/activity_horizontal_margin"
+                        android:layout_height="wrap_content"/>
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                <!-- finaliser -->
+                <Button
+                    android:id="@+id/bt_confirm"
+                    android:background="@drawable/bg_edit_cornered"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/white"
+                    android:text="@string/confirm"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin_half"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    android:layout_height="wrap_content"/>
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

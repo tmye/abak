@@ -32,7 +32,7 @@ public interface MyCommandContract {
     interface HomePageView extends BaseView<Presenter> {
 
         void showLoading(boolean isLoading);
-        void inflateStats (int calendar, int manual_open_state, String head_pic, String resto_name, String quantity_count, String amount_money);
+        void inflateStats (int calendar, int manual_open_state, int coming_soon, String head_pic, String resto_name, String quantity_count, String amount_money);
         void sysError();
         void networkError();
 

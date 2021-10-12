@@ -7,11 +7,6 @@
         android:title="@string/title_waiting" />
 
     <item
-        android:id="@+id/navigation_cooking"
-        android:icon="@drawable/ic_navigation_cooking_24dp"
-        android:title="@string/title_cooking" />
-
-    <item
         android:id="@+id/navigation_shipping"
         android:icon="@drawable/ic_navigation_shipping_24dp"
         android:title="@string/title_shipping" />
@@ -22,8 +17,8 @@
         android:title="@string/title_delivered" />
 
     <item
-        android:id="@+id/navigation_others"
-        android:icon="@drawable/ic_navigation_others_24dp"
-        android:title="@string/title_others" />
+        android:id="@+id/navigation_rejected"
+        android:icon="@drawable/ic_cancel_black_24dp"
+        android:title="@string/title_rejected" />
 
 </menu>

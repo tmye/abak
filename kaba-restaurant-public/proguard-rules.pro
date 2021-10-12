@@ -28,6 +28,13 @@
   public *;
 }
 
+-keep class com.bumptech.glide.load.data.ParcelFileDescriptorRewinder$InternalRewinder {
+  *** rewind();
+}
+
+# Uncomment for DexGuard only
+#-keepresourcexmlelements manifest/application/meta-data@value=GlideModule
+
 # for DexGuard only
 -keepresourcexmlelements manifest/application/meta-data@value=GlideModule
 

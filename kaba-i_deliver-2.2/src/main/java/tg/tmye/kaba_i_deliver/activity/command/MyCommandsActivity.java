@@ -58,7 +58,6 @@ import tg.tmye.kaba_i_deliver.data.hsn.HSN;
 import tg.tmye.kaba_i_deliver.service.TrackingService;
 import tg.tmye.kaba_i_deliver.syscore.ILog;
 import tg.tmye.kaba_i_deliver.syscore.MyKabaDeliverApp;
-
 import static tg.tmye.kaba_i_deliver.activity.command.CommandDetailsActivity.COMMAND_ITEM;
 
 
@@ -163,6 +162,7 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
         // disable viewpager scroll
     }
 
+
     @Override
     public void setPresenter(MyCommandContract.Presenter presenter) {}
 
@@ -252,10 +252,10 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
             if (preorders.get(i).state == 3) {
                 if (preorders.get(i).is_email_account) {
                     todayMoney += (Integer.valueOf(preorders.get(i).phoneNumber_shipping_pricing));
-                    ILog.print("add + " + (Integer.valueOf(shipping_done.get(i).phoneNumber_shipping_pricing)));
+                    ILog.print("add + " + (Integer.valueOf(preorders.get(i).phoneNumber_shipping_pricing)));
                 } else {
                     todayMoney += (Integer.valueOf(preorders.get(i).shipping_pricing));
-                    ILog.print("add + " + (Integer.valueOf(shipping_done.get(i).shipping_pricing)));
+                    ILog.print("add + " + (Integer.valueOf(preorders.get(i).shipping_pricing)));
                 }
             }
         }

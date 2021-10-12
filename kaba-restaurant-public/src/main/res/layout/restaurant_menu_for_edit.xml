@@ -27,15 +27,15 @@
                 android:alpha="0.3"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
-                android:layout_width="40dp"
-                android:layout_height="40dp"/>
+                android:layout_width="30dp"
+                android:layout_height="30dp"/>
 
             <TextView
                 android:layout_centerInParent="true"
                 android:id="@+id/tv_menu_name"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="@color/green_"
+                android:textColor="@color/dark_green"
                 android:text="pizza"
                 android:layout_below="@+id/lny_priority"
                 android:layout_margin="@dimen/activity_horizontal_margin_quarter"
@@ -59,6 +59,7 @@
                 <TextView
                     android:textColor="@color/white"
                     android:text="@string/priority"
+                    android:textSize="11sp"
                     android:layout_marginRight="@dimen/activity_horizontal_margin_half"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -80,7 +81,7 @@
             android:layout_margin="@dimen/activity_horizontal_margin_half"
             style="@style/TextAppearance.Design.Hint"
             android:gravity="center"
-            android:text=""
+            android:text="PIZZA"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -100,11 +101,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-            <Button
+            <TextView
                 android:layout_weight="1"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:id="@+id/bt_delete"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:gravity="center"
+                android:textSize="12sp"
                 android:background="@drawable/bg_delete_cornered"
                 android:textColor="@color/white"
                 android:text="@string/delete"
@@ -112,10 +117,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-        <Button
+        <TextView
             android:layout_weight="1"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:gravity="center"
+            android:textSize="12sp"
             android:id="@+id/bt_edit_name"
             android:text="@string/edit"
             android:background="@drawable/bg_edit_cornered"
@@ -124,10 +133,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <Button
+        <TextView
             android:layout_weight="1"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:gravity="center"
+            android:textSize="12sp"
             android:id="@+id/bt_enter"
             android:text="@string/enter"
             android:background="@drawable/bg_enter_cornered"

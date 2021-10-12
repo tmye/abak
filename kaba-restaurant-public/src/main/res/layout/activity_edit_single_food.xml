@@ -32,9 +32,46 @@
             <TextView
                 android:layout_marginTop="@dimen/activity_horizontal_margin_half"
                 android:background="@color/white"
+                android:text="@string/photo_hint"
+                android:layout_width="match_parent"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin_half"
+                android:paddingLeft="@dimen/activity_horizontal_margin_half"
+                android:textColor="@color/red"
+                android:layout_gravity="left"
+                android:layout_height="wrap_content"/>
+
+            <!-- add photo picker -->
+            <ImageView
+                android:id="@+id/iv_placeholder"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:src="@drawable/food_default"
+                android:layout_gravity="center"
+                android:layout_width="160dp"
+                android:layout_height="90dp" />
+
+            <Button
+                android:id="@+id/bt_pick"
+                android:text="@string/pick_photo"
+                android:layout_gravity="center"
+                android:paddingLeft="@dimen/activity_horizontal_margin_half"
+                android:paddingRight="@dimen/activity_horizontal_margin_half"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_blue_rounded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"/>
+
+            <TextView
+                android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+                android:background="@color/white"
                 android:text="@string/food_name_hint"
                 android:layout_width="match_parent"
-                android:padding="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin_half"
+                android:paddingLeft="@dimen/activity_horizontal_margin_half"
                 android:textColor="@color/red"
                 android:layout_gravity="left"
                 android:layout_height="wrap_content"/>
@@ -50,7 +87,7 @@
 
                 <TextView
                     android:textColor="@color/black"
-                    android:text="Food Name"
+                    android:text="@string/food_name"
                     android:padding="@dimen/activity_horizontal_margin_half"
                     android:layout_weight="2"
                     android:layout_width="0dp"
@@ -87,7 +124,7 @@
                 <TextView
                     android:gravity="top"
                     android:textColor="@color/black"
-                    android:text="Menu Description"
+                    android:text="@string/menu_description"
                     android:padding="@dimen/activity_horizontal_margin_half"
                     android:layout_weight="1"
                     android:layout_width="0dp"
@@ -124,7 +161,7 @@
 
                 <TextView
                     android:textColor="@color/black"
-                    android:text="Price"
+                    android:text="@string/price"
                     android:padding="@dimen/activity_horizontal_margin_half"
                     android:layout_weight="2"
                     android:layout_width="0dp"
@@ -162,7 +199,7 @@
 
                 <TextView
                     android:textColor="@color/black"
-                    android:text="Promotion Price"
+                    android:text="@string/promotion_price"
                     android:padding="@dimen/activity_horizontal_margin_half"
                     android:layout_weight="2"
                     android:layout_width="0dp"
@@ -199,7 +236,7 @@
 
                 <TextView
                     android:textColor="@color/black"
-                    android:text="Is Food Visible ?"
+                    android:text="@string/is_food_visible"
                     android:padding="@dimen/activity_horizontal_margin_half"
                     android:layout_weight="2"
                     android:layout_width="0dp"
@@ -209,7 +246,7 @@
                     android:id="@+id/checkbox_food_active"
                     android:padding="@dimen/activity_horizontal_margin_half"
                     android:layout_weight="2"
-                    android:text="yes"
+                    android:text="@string/yes"
                     android:textAllCaps="true"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"/>
@@ -237,7 +274,7 @@
 
                 <TextView
                     android:textColor="@color/black"
-                    android:text="Is Promotion active ?"
+                    android:text="@string/is_promotion_active"
                     android:padding="@dimen/activity_horizontal_margin_half"
                     android:layout_weight="2"
                     android:layout_width="0dp"
@@ -247,7 +284,7 @@
                     android:id="@+id/checkbox_food_promotion"
                     android:padding="@dimen/activity_horizontal_margin_half"
                     android:layout_weight="2"
-                    android:text="yes"
+                    android:text="@string/yes"
                     android:textAllCaps="true"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"/>
@@ -264,14 +301,14 @@
 
                 <Button
                     android:id="@+id/bt_cancel"
-                    android:text="Cancel"
+                    android:text="@string/cancel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/activity_horizontal_margin_half"/>
 
                 <Button
                     android:id="@+id/bt_confirm"
-                    android:text="Confirm"
+                    android:text="@string/confirm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 

@@ -22,7 +22,7 @@
     <color name="brown">#b1adad</color>
     <color name="confirm_transaction_bt_background_gray">#d0ced1</color>
     <color name="light_gray">#dadada</color>
-    <color name="facebook_blue">#2660b1</color>
+    <color name="facebook_blue">#1780E6</color>
     <color name="green_">#16d457</color>
     <color name="article_details_color">#499</color>
     <color name="mini_list_date_text_color">#acacac</color>
@@ -78,7 +78,9 @@
     <color name="extra_light_gray">#efefef</color>
     <color name="silver_blue">#195e9e</color>
     <color name="grey" />
-    <color name="dark_green">#009688</color> <!-- linkedin blue -->
+    <color name="special_grey">#E1E1E1</color>
+    <color name="dark_green">#10AE4E</color>
+    <color name="transparent_yellow">#F8BF00</color> <!-- linkedin blue -->
 
 
 </resources>

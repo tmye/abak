@@ -16,7 +16,7 @@ public class Restaurant_Menu_FoodEntity implements Parcelable {
 
     public String name;
 
-    public String price;
+    public String price = "0";
 
     public String pic;
 
@@ -34,11 +34,11 @@ public class Restaurant_Menu_FoodEntity implements Parcelable {
 
     public int promotion = 0;
 
-    public String promotion_price;
+    public String promotion_price = "0";
 
     public int is_hidden = 0;
 
-    public String priority;
+    public String priority = "0";
 
     public Restaurant_Menu_FoodEntity () {
 

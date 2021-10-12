@@ -52,8 +52,13 @@ public class EditSingleMenuActivity extends AppCompatActivity implements EditSin
         setTitle("Modify Menu");
 
         menu = getIntent().getParcelableExtra("menu");
+        if (menu == null) {
+            menu = new Restaurant_SubMenuEntity();
+           toolbar.setTitle(getString(R.string.create_menu));
+        } else {
+            toolbar.setTitle(menu.name);
+        }
 
-        toolbar.setTitle(menu.name);
 
         ed_menu_name = findViewById(R.id.ed_menu_name);
         checkBox = findViewById(R.id.checkbox_menu_active);
@@ -65,9 +70,10 @@ public class EditSingleMenuActivity extends AppCompatActivity implements EditSin
 
         //inflate data
         ed_menu_name.setText(menu.name);
+        ed_priority.setText(menu.priority);
 
         checkBox.setChecked(menu.is_hidden == 1);
-        checkBox.setText(menu.is_hidden == 1 ? "NO" : "YES");
+        checkBox.setText(menu.is_hidden == 1 ? "YES" : "NO");
 
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -106,14 +112,14 @@ public class EditSingleMenuActivity extends AppCompatActivity implements EditSin
     private void _launchAndConfirm() {
         String newMenuName = ed_menu_name.getText().toString();
         String priority = ed_priority.getText().toString();
-        boolean isActive = checkBox.isChecked();
+        boolean isHidden = checkBox.isChecked();
 
         /* check all before uploading in the app of course */
 
         // control the fields before
         menu.name = newMenuName;
         menu.priority = priority;
-        menu.is_hidden = (isActive ? 0 : 1);
+        menu.is_hidden = (isHidden ? 1 : 0);
 
         presenter.updateMenu(menu);
     }

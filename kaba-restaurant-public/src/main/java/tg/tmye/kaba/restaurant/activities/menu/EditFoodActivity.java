@@ -4,6 +4,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
@@ -22,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Comparator;
 import java.util.HashMap;
@@ -79,6 +82,8 @@ public class EditFoodActivity extends AppCompatActivity implements
 
     EditFoodListAdapter adapter;
 
+    FloatingActionButton fab_add_food;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -102,10 +107,18 @@ public class EditFoodActivity extends AppCompatActivity implements
         sub_menu_id = getIntent().getIntExtra("SUB_MENU_ID", -1);
 
         bt_tryagain.setOnClickListener(this);
+        fab_add_food.setOnClickListener(this);
 
         menu_repository = new MenuDb_OnlineRepository(this, resto);
         presenter = new EditMenuPresenter(menu_repository, this);
         presenter.populateFoodFromMenudId(sub_menu_id);
+    }
+
+    public void createNewFood () {
+
+        Intent intent = new Intent(this, EditSingleFoodActivity.class);
+        intent.putExtra("menu_id", sub_menu_id);
+  startActivity(intent);
     }
 
 
@@ -122,8 +135,9 @@ public class EditFoodActivity extends AppCompatActivity implements
                 lny_error_box.setVisibility(View.GONE);
                 lny_loading_frame.setVisibility(View.GONE);
                 lny_content.setVisibility(View.VISIBLE);
+                recyclerview.setVisibility(View.VISIBLE);
                 inflateRecyclerView(foods);
-                tv_choosed_food_count.setText("Foods: "+getNonHiddenFoodCount(foods));
+                tv_choosed_food_count.setText(getString(R.string.foods)+": "+getNonHiddenFoodCount(foods));
             }
         });
     }
@@ -140,7 +154,7 @@ public class EditFoodActivity extends AppCompatActivity implements
 
     @Override
     public void menuDeletedSuccess() {
-        presenter.populateViews();
+//        presenter.populateViews();
     }
 
     @Override
@@ -150,12 +164,13 @@ public class EditFoodActivity extends AppCompatActivity implements
 
     @Override
     public void foodDeletedSuccess() {
-        presenter.populateViews();
+//        adapter.clearData();
+        presenter.populateFoodFromMenudId(sub_menu_id);
     }
 
     @Override
     public void foodDeletedError() {
-        mToast("Please try again, there a system error");
+        mToast(getString(R.string.sys_error));
     }
 
 
@@ -195,7 +210,7 @@ public class EditFoodActivity extends AppCompatActivity implements
 
         recyclerview.setNestedScrollingEnabled(false);
 
-          adapter = new EditFoodListAdapter(this, getSupportFragmentManager(), menu_food);
+          adapter = new EditFoodListAdapter(this, getSupportFragmentManager(), menu_food, sub_menu_id);
         recyclerview.setLayoutManager(new LinearLayoutManager(this));
         recyclerview.setAdapter(adapter);
     }
@@ -250,6 +265,7 @@ public class EditFoodActivity extends AppCompatActivity implements
                 lny_loading_frame.setVisibility(View.GONE);
                 lny_content.setVisibility(View.GONE);
                 lny_error_box.setVisibility(View.VISIBLE);
+                bt_tryagain.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -262,6 +278,7 @@ public class EditFoodActivity extends AppCompatActivity implements
                 lny_loading_frame.setVisibility(View.GONE);
                 lny_content.setVisibility(View.GONE);
                 lny_error_box.setVisibility(View.VISIBLE);
+                bt_tryagain.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -279,10 +296,12 @@ public class EditFoodActivity extends AppCompatActivity implements
                 tv_messages.setText(message);
 
                 progressBar.setVisibility(View.GONE);
-                frame_container.setVisibility(View.GONE);
+//                frame_container.setVisibility(View.GONE);
                 lny_error_box.setVisibility(View.VISIBLE);
+                bt_tryagain.setVisibility(View.GONE);
                 tv_messages.setVisibility(View.VISIBLE);
-
+                recyclerview.setVisibility(View.GONE);
+                tv_choosed_food_count.setText(getString(R.string.foods)+": "+0);
 //                if (menu_food == null || menu_food.size() == 0) {
 //                    findViewById(R.id.lny_container).setVisibility(View.GONE);
 //                    tv_no_menu.setVisibility(View.VISIBLE);
@@ -339,6 +358,8 @@ public class EditFoodActivity extends AppCompatActivity implements
 
         recyclerview = findViewById(R.id.recyclerview);
         tv_choosed_food_count = findViewById(R.id.tv_choosed_food_count);
+
+        fab_add_food = findViewById(R.id.fab_add_food);
     }
 
     @Override
@@ -388,6 +409,9 @@ public class EditFoodActivity extends AppCompatActivity implements
             case R.id.iv_edit_menu:
                 _jumpToEditMenuPage();
                 break;
+            case R.id.fab_add_food:
+              createNewFood();
+                break;
         }
     }
 
@@ -400,7 +424,35 @@ public class EditFoodActivity extends AppCompatActivity implements
 
     @Override
     public void delete(int food_id) {
-    presenter.deleteFood(food_id);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        View view = LayoutInflater.from(this).inflate(R.layout.cancel_dialog_info, null, false);
+
+        TextView tv_message = view.findViewById(R.id.tv_message);
+        Button bt_cancel = view.findViewById(R.id.bt_cancel);
+        Button bt_confirm = view.findViewById(R.id.bt_confirm);
+
+        alertDialogBuilder.setView(view);
+        tv_message.setText(R.string.are_you_sure_delete_food);
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+
+        bt_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            alertDialog.dismiss();
+            }
+        });
+        bt_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.deleteFood(food_id);
+                alertDialog.dismiss();
+            }
+        });
+
+       alertDialog.show();
     }
 
     private void _jumpToEditMenuPage() {

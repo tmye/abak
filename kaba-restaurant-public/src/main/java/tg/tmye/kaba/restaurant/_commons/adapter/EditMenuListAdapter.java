@@ -148,11 +148,10 @@ public class EditMenuListAdapter extends RecyclerView.Adapter<EditMenuListAdapte
 
         private final ImageView iv_hidden;
         TextView tv_menu_name, tv_description, tv_priority;
-        Button bt_hide, bt_edit_name, bt_enter_menu, bt_delete;
+        TextView bt_hide, bt_edit_name, bt_enter_menu, bt_delete;
 
         public ViewHolder(View itemView) {
             super(itemView);
-
             tv_menu_name = itemView.findViewById(R.id.tv_menu_name);
             tv_description = itemView.findViewById(R.id.tv_description);
             tv_priority = itemView.findViewById(R.id.tv_priority);
@@ -161,7 +160,6 @@ public class EditMenuListAdapter extends RecyclerView.Adapter<EditMenuListAdapte
             bt_enter_menu = itemView.findViewById(R.id.bt_enter);
             bt_delete = itemView.findViewById(R.id.bt_delete);
             iv_hidden = itemView.findViewById(R.id.iv_hidden);
-
         }
     }
 

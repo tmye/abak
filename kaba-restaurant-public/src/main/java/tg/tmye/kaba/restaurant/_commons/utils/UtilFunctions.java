@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
@@ -11,6 +13,8 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Base64;
 import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -138,6 +142,94 @@ public class UtilFunctions {
     public static String superTrim(String restaurant_name) {
         return arrayToString(restaurant_name.split(" "));
     }
+
+
+    private static Bitmap rotateBitmap(Bitmap bitmap, int orientation) {
+
+        Matrix matrix = new Matrix();
+        switch (orientation) {
+            case ExifInterface.ORIENTATION_NORMAL:
+                return bitmap;
+            case ExifInterface.ORIENTATION_FLIP_HORIZONTAL:
+                matrix.setScale(-1, 1);
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                matrix.setRotate(180);
+                break;
+            case ExifInterface.ORIENTATION_FLIP_VERTICAL:
+                matrix.setRotate(180);
+                matrix.postScale(-1, 1);
+                break;
+            case ExifInterface.ORIENTATION_TRANSPOSE:
+                matrix.setRotate(90);
+                matrix.postScale(-1, 1);
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                matrix.setRotate(90);
+                break;
+            case ExifInterface.ORIENTATION_TRANSVERSE:
+                matrix.setRotate(-90);
+                matrix.postScale(-1, 1);
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                matrix.setRotate(-90);
+                break;
+            default:
+                return bitmap;
+        }
+        try {
+            Bitmap bmRotated = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+            bitmap.recycle();
+
+            return bmRotated;
+        } catch (OutOfMemoryError e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.ECLAIR)
+    public static String changeAndRotatePathToBase64(String path) {
+        double DESIREDWIDTH = 480;
+        double DESIREDHEIGHT = 0;
+
+        try {
+
+            /* rotate if we need */
+            ExifInterface exif = new ExifInterface(path);
+            int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
+            Bitmap bitmap =  BitmapFactory.decodeFile(path);
+            Bitmap unscaledBitmap = rotateBitmap(bitmap, orientation);
+
+            double width = unscaledBitmap.getWidth();
+
+            if (width > 480) {
+                double ratio = width/480;
+                DESIREDHEIGHT = unscaledBitmap.getHeight()/ratio;
+            } else {
+                DESIREDHEIGHT = unscaledBitmap.getHeight();
+            }
+
+
+            /* turn image if there is to turn it */
+
+            Bitmap scaledBitmap = ScalingUtilities.createScaledBitmap(unscaledBitmap, (int)DESIREDWIDTH, (int)DESIREDHEIGHT, ScalingUtilities.ScalingLogic.FIT);
+
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+
+
+            byte[] byteFormat = stream.toByteArray();
+            // get the base 64 string
+            String imgString = Base64.encodeToString(byteFormat, Base64.NO_WRAP);
+            return imgString;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
 
     public static String changePathToBase64(String path) {
 

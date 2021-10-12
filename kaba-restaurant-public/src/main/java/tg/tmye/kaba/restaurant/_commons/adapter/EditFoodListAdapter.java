@@ -7,6 +7,7 @@ package tg.tmye.kaba.restaurant._commons.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.GenericTransitionOptions;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +41,9 @@ import tg.tmye.kaba.restaurant.cviews.SlidingBanner_LilRound;
 import tg.tmye.kaba.restaurant.data.Food.Restaurant_Menu_FoodEntity;
 import tg.tmye.kaba.restaurant.data.Menu.Restaurant_SubMenuEntity;
 import tg.tmye.kaba.restaurant.data.advert.AdsBanner;
+import tg.tmye.kaba.restaurant.syscore.Constant;
+import tg.tmye.kaba.restaurant.syscore.GlideApp;
+import tg.tmye.kaba.restaurant.syscore.MyRestaurantApp;
 
 
 /**
@@ -49,15 +55,17 @@ public class EditFoodListAdapter extends RecyclerView.Adapter<EditFoodListAdapte
     private final List<Restaurant_Menu_FoodEntity> data;
     private final Context context;
     private final FragmentManager fragmentManager;
+    private final int sub_menu_id;
     private List<Restaurant_Menu_FoodEntity> usedData;
     private List<Restaurant_Menu_FoodEntity> restaurantListFiltered;
 
-    public EditFoodListAdapter(Context context, FragmentManager fragmentManager, List<Restaurant_Menu_FoodEntity> menu_list) {
+    public EditFoodListAdapter(Context context, FragmentManager fragmentManager, List<Restaurant_Menu_FoodEntity> menu_list, int sub_menu_id) {
 
         this.context = context;
         this.fragmentManager = fragmentManager;
         this.data = menu_list;
         this.usedData = menu_list;
+        this.sub_menu_id = sub_menu_id;
     }
 
     @NonNull
@@ -79,26 +87,46 @@ public class EditFoodListAdapter extends RecyclerView.Adapter<EditFoodListAdapte
         holder.switch_is_promotion.setChecked(entity.promotion == 1);
         holder.lny_promotion_price.setVisibility(entity.promotion == 1 ? View.VISIBLE : View.GONE);
 
+//        iv_food_picture
+        GlideApp.with(context)
+                .load(Constant.SERVER_ADDRESS + "/" + entity.pic)
+                .transition(GenericTransitionOptions.with(((MyRestaurantApp) context.getApplicationContext()).getGlideAnimation()))
+                .centerCrop()
+                .into(holder.iv_food_picture);
 
-        initSlidingBanner(holder.sliding_banner, data.get(position));
+//        initSlidingBanner(holder.sliding_banner, entity);
 
         if (entity.is_hidden == 0){
+           holder.iv_hidden.setVisibility(View.GONE);
+            holder.tv_is_food_hidden.setVisibility(View.GONE);
+        } else {
+            holder.iv_hidden.setVisibility(View.VISIBLE);
+            holder.tv_is_food_hidden.setVisibility(View.VISIBLE);
+        }
+
+        if (entity.promotion == 0) {
             holder.tv_food_price.setPaintFlags(Paint.ANTI_ALIAS_FLAG);
             holder.tv_food_promotion_price.setPaintFlags(holder.tv_food_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            holder.iv_hidden.setVisibility(View.GONE);
-            holder.tv_is_food_hidden.setVisibility(View.GONE);
+
+            holder.tv_food_promotion_price.setTextColor(context.getResources().getColor(R.color.black));
+            holder.tv_food_price.setTextColor(context.getResources().getColor(R.color.colorPrimary_yellow));
+
         } else {
             holder.tv_food_price.setPaintFlags(holder.tv_food_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             holder.tv_food_promotion_price.setPaintFlags(Paint.ANTI_ALIAS_FLAG);
-            holder.iv_hidden.setVisibility(View.VISIBLE);
-            holder.tv_is_food_hidden.setVisibility(View.VISIBLE);
+
+            holder.tv_food_promotion_price.setTextColor(context.getResources().getColor(R.color.colorPrimary_yellow));
+            holder.tv_food_price.setTextColor(context.getResources().getColor(R.color.black));
+
         }
 
         holder.bt_edit_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(context, EditSingleFoodActivity.class);
                 intent.putExtra("food", entity);
+                intent.putExtra("menu_id", sub_menu_id);
                 context.startActivity(intent);
             }
         });
@@ -155,12 +183,17 @@ public class EditFoodListAdapter extends RecyclerView.Adapter<EditFoodListAdapte
         };
     }
 
+    public void clearData() {
+        data.clear();
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        SlidingBanner_LilRound sliding_banner;
+//        SlidingBanner_LilRound sliding_banner;
         TextView tv_food_name, tv_description, tv_is_food_hidden, tv_food_promotion_price, tv_food_price;
-        ImageView iv_hidden;
-        Button/* bt_hide,*/ bt_edit_name, bt_hide, bt_delete;
+        ImageView iv_hidden, iv_food_picture;
+        TextView/* bt_hide,*/ bt_edit_name, bt_hide, bt_delete;
         Switch switch_is_promotion;
         LinearLayout lny_promotion_price;
 
@@ -170,7 +203,8 @@ public class EditFoodListAdapter extends RecyclerView.Adapter<EditFoodListAdapte
             tv_food_name = itemView.findViewById(R.id.tv_food_name);
             switch_is_promotion = itemView.findViewById(R.id.switch_is_promotion);
             tv_description = itemView.findViewById(R.id.tv_description);
-            sliding_banner = itemView.findViewById(R.id.sliding_banner);
+//            sliding_banner = itemView.findViewById(R.id.sliding_banner);
+            iv_food_picture = itemView.findViewById(R.id.iv_food_picture);
             iv_hidden = itemView.findViewById(R.id.iv_hidden);
             bt_edit_name = itemView.findViewById(R.id.bt_edit_name);
             bt_hide = itemView.findViewById(R.id.bt_hide);
@@ -187,8 +221,13 @@ public class EditFoodListAdapter extends RecyclerView.Adapter<EditFoodListAdapte
         /* transform image items into kabashowpics */
         List<AdsBanner> adsBanners = new ArrayList<>();
         try {
+            // add front image also
+            AdsBanner adsBanner = new AdsBanner();
+            adsBanner.pic = foodEntity.pic;
+            adsBanners.add(adsBanner);
+
             for (int i = 0; i < foodEntity.food_details_pictures.size(); i++) {
-                AdsBanner adsBanner = new AdsBanner();
+                  adsBanner = new AdsBanner();
                 adsBanner.pic = foodEntity.food_details_pictures.get(i);
                 adsBanners.add(adsBanner);
             }

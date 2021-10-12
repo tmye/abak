@@ -31,6 +31,8 @@ public class Config {
     public static final String GLIDE_CACHE_FOLDER = "restaurantCache";
     public static final String RESTAURANT_SHARED_PREFS = "RESTAURANT_SHARED_PREFS";
 
+
+
     public static String USER_SHARED_PREFS = "kb.user";
     public static final String RESTAURANT_LIST_SP_VAL = "RESTAURANT_LIST_SP_VAL";
     public static final String DAILY_RESTAURANTS_SP_VAL = "DAILY_RESTAURANTS_SP_VAL";
@@ -76,8 +78,6 @@ public class Config {
 
     public static final String LINK_RESTAURANT_CHECK_OPENED = Constant.SERVER_ADDRESS + "/resto/api/open_close";
 
-
-
     /* menu food*/
     public static final String LINK_MENU_BY_RESTAURANT_ID = Constant.SERVER_ADDRESS+
             "/api/menu/get";
@@ -107,5 +107,25 @@ public class Config {
 
     public static final String LINK_FOOD_DELETE = Constant.SERVER_ADDRESS+
             "/resto/api/food/delete";
+
+    // get delivery districts
+    public static final String LINK_GET_DELIVERY_DISTRICTS = Constant.SERVER_ADDRESS+ "/resto/api/hsn/district/list";
+
+    // compute delivery fees
+    public static final String LINK_COMPUTE_DELIVERY_FEES = Constant.SERVER_ADDRESS+ "/resto/api/hsn/billing";
+
+    // create hsn
+    public static final String LINK_CREATE_HSN = Constant.SERVER_ADDRESS+ "/resto/api/hsn/create";
+
+    public static final String LINK_RESTAURANT_GET_MY_HSN = Constant.SERVER_ADDRESS+"/resto/api/hsn/daily"; ;
+
+    // get restaurant stats on a range
+    public static final String LINK_GET_RESTAURANT_STATS_FROM_TO_DATE = Constant.SERVER_ADDRESS + "/resto/api/command/history";
+
+    // update restaurant calendar
+    public static final String LINK_UPDATE_RESTAURANT_CALENDAR = Constant.SERVER_ADDRESS + "/resto/api/schedule/update";
+
+    // get restaurant calendar
+    public static final String LINK_GET_RESTAURANT_CALENDAR =  Constant.SERVER_ADDRESS + "/resto/api/schedule/get";
 
 }

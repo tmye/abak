@@ -14,7 +14,15 @@
             android:layout_width="match_parent"
             android:gravity="center"
             android:layout_height="wrap_content">
-            <tg.tmye.kaba.restaurant.cviews.SlidingBanner_LilRound
+
+            <ImageView
+                android:id="@+id/iv_food_picture"
+                android:layout_width="match_parent"
+                android:background="@color/brown"
+                android:layout_height="@dimen/food_details_sliding_banner_height"
+                android:layout_gravity="center_vertical"
+                />
+        <!--    <tg.tmye.kaba.restaurant.cviews.SlidingBanner_LilRound
                 android:id="@+id/sliding_banner"
                 android:layout_width="match_parent"
                 android:background="@color/brown"
@@ -38,7 +46,7 @@
                     android:orientation="horizontal">
 
                 </LinearLayout>
-            </tg.tmye.kaba.restaurant.cviews.SlidingBanner_LilRound>
+            </tg.tmye.kaba.restaurant.cviews.SlidingBanner_LilRound>-->
 
             <TextView
                 android:id="@+id/tv_food_name"
@@ -68,7 +76,7 @@
                     <TextView
                         android:textSize="14sp"
                         android:textColor="@color/black"
-                        android:text="Normal price"
+                        android:text="@string/normal_price"
                         android:layout_marginRight="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
@@ -93,7 +101,7 @@
                     <TextView
                         android:textSize="14sp"
                         android:textColor="@color/black"
-                        android:text="Promotion price"
+                        android:text="@string/promotion_price"
                         android:layout_marginRight="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
@@ -121,7 +129,7 @@
                 <TextView
                     android:layout_centerHorizontal="true"
                     android:id="@+id/tv_is_food_hidden"
-                    android:text="HIDDEN"
+                    android:text="@string/hidden"
                     android:padding="@dimen/activity_horizontal_margin_quarter"
                     android:textSize="@dimen/restaurant_distance_text_size"
                     android:textColor="@color/white"
@@ -165,22 +173,31 @@
                     android:layout_height="wrap_content"/>
 
                 <!-- delete -->
-                <Button
+                <TextView
                     android:layout_weight="1"
                     android:layout_margin="@dimen/activity_horizontal_margin_half"
                     android:id="@+id/bt_delete"
+                    android:textStyle="bold"
                     android:text="@string/delete"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:gravity="center"
+                    android:textSize="14sp"
                     android:textColor="@color/white"
                     android:background="@drawable/bg_delete_cornered"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
 
-                <Button
+                <TextView
                     android:layout_weight="1"
                     android:id="@+id/bt_edit_name"
                     android:layout_margin="@dimen/activity_horizontal_margin_half"
                     android:text="@string/edit"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:gravity="center"
+                    android:textSize="14sp"
                     android:textColor="@color/white"
                     android:background="@drawable/bg_edit_cornered"
                     android:layout_marginBottom="@dimen/activity_horizontal_margin_half"

@@ -116,7 +116,12 @@ public class DeliverManLoginActivity extends AppCompatActivity implements LoginC
                 hideFragment();
             }
         }
-        bt_login.setEnabled(!isLoading);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                bt_login.setEnabled(!isLoading);
+            }
+        });
     }
 
     @Override

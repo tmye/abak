@@ -1,0 +1,1119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.calendar.CalendarActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:background="@color/colorPrimary">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
+            app:contentScrim="@color/colorPrimary"
+            app:statusBarScrim="@android:color/transparent"
+            app:titleEnabled="false">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <FrameLayout
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/lny_error_box"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_messages"
+                android:gravity="center_horizontal"
+                android:textColor="@color/dark_gray"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:text="@string/calendar_load_error"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+            <Button
+                android:id="@+id/bt_tryagain"
+                android:text="@string/retry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_red_cornered"
+                android:textColor="@color/white"
+                android:padding="@dimen/activity_horizontal_margin_half"
+                />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+<androidx.core.widget.NestedScrollView
+    android:id="@+id/nested_scroll_view"
+    android:visibility="visible"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.calendar.CalendarActivity">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="10dp"/>
+
+    <!-- monday -->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_margin="@dimen/activity_horizontal_margin_quarter"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- name of the day -->
+        <TextView
+                android:inputType="none"
+            android:text="@string/monday"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_margin="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!-- im i opened to day -->
+            <CheckBox
+                android:id="@+id/cb_opened_1"
+                android:text="@string/is_open_today"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <!-- do i need a rest in between ? -->
+            <CheckBox
+                android:id="@+id/cb_pause_1"
+                android:text="@string/has_pause"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!-- working time -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lny_1_1"
+            android:visibility="gone"
+            android:layout_margin="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:inputType="none"
+                android:text="@string/working_time"
+                android:layout_weight="2"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <!-- start working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_start_work_1"
+                android:text="06:30"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <!-- end working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_end_work_1"
+                android:text="16:30"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!-- pause time -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lny_1_2"
+            android:visibility="gone"
+            android:layout_margin="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- pause time label -->
+            <TextView
+                android:inputType="none"
+                android:text="@string/break_time"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+
+                android:layout_height="wrap_content" />
+
+            <!-- pause start working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_start_pause_work_1"
+                android:text="13:00"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <!-- pause end working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_end_pause_work_1"
+                android:text="13:30"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <!-- tuesday -->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_margin="@dimen/activity_horizontal_margin_quarter"
+        android:visibility="visible"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- name of the day -->
+        <TextView
+                android:inputType="none"
+            android:text="@string/tuesday"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_margin="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!-- im i opened to day -->
+            <CheckBox
+                android:id="@+id/cb_opened_2"
+                android:text="@string/is_open_today"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <!-- do i need a rest in between ? -->
+            <CheckBox
+                android:id="@+id/cb_pause_2"
+                android:text="@string/has_pause"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!-- working time -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lny_2_1"
+            android:layout_margin="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:inputType="none"
+                android:text="@string/working_time"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <!-- start working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_start_work_2"
+                android:text="06:30"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <!-- end working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_end_work_2"
+                android:text="16:30"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!-- pause time -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lny_2_2"
+            android:layout_margin="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- pause time label -->
+            <TextView
+                android:inputType="none"
+                android:text="@string/break_time"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content" />
+
+            <!-- pause start working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_start_pause_work_2"
+                android:text="13:00"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <!-- pause end working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_end_pause_work_2"
+                android:text="13:30"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    
+    
+    <!-- wednesday -->
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_margin="@dimen/activity_horizontal_margin_quarter"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- name of the day -->
+        <TextView
+                android:inputType="none"
+            android:text="@string/wednesday"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_margin="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!-- im i opened to day -->
+            <CheckBox
+                android:id="@+id/cb_opened_3"
+                android:text="@string/is_open_today"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <!-- do i need a rest in between ? -->
+            <CheckBox
+                android:id="@+id/cb_pause_3"
+                android:text="@string/has_pause"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!-- working time -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lny_3_1"
+            android:visibility="gone"
+            android:layout_margin="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:inputType="none"
+                android:text="@string/working_time"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <!-- start working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_start_work_3"
+                android:text="06:30"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <!-- end working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_end_work_3"
+                android:text="16:30"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!-- pause time -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lny_3_2"
+            android:visibility="gone"
+            android:layout_margin="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- pause time label -->
+            <TextView
+                android:inputType="none"
+                android:text="@string/break_time"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content" />
+
+            <!-- pause start working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_start_pause_work_3"
+                android:text="13:00"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <!-- pause end working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_end_pause_work_3"
+                android:text="13:30"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    
+    <!-- thursday -->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_margin="@dimen/activity_horizontal_margin_quarter"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- name of the day -->
+        <TextView
+                android:inputType="none"
+            android:text="@string/thursday"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_margin="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!-- im i opened to day -->
+            <CheckBox
+                android:id="@+id/cb_opened_4"
+                android:text="@string/is_open_today"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <!-- do i need a rest in between ? -->
+            <CheckBox
+                android:id="@+id/cb_pause_4"
+                android:text="@string/has_pause"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!-- working time -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lny_4_1"
+            android:layout_margin="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:inputType="none"
+                android:text="@string/working_time"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <!-- start working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_start_work_4"
+                android:text="06:30"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <!-- end working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_end_work_4"
+                android:text="16:30"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!-- pause time -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lny_4_2"
+            android:visibility="gone"
+            android:layout_margin="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- pause time label -->
+            <TextView
+                android:inputType="none"
+                android:text="@string/break_time"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content" />
+
+            <!-- pause start working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_start_pause_work_4"
+                android:text="13:00"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <!-- pause end working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_end_pause_work_4"
+                android:text="13:30"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    
+    <!-- friday -->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_margin="@dimen/activity_horizontal_margin_quarter"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- name of the day -->
+        <TextView
+                android:inputType="none"
+            android:text="@string/friday"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_margin="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!-- im i opened to day -->
+            <CheckBox
+                android:id="@+id/cb_opened_5"
+                android:text="@string/is_open_today"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <!-- do i need a rest in between ? -->
+            <CheckBox
+                android:id="@+id/cb_pause_5"
+                android:text="@string/has_pause"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!-- working time -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lny_5_1"
+            android:layout_margin="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:inputType="none"
+                android:text="@string/working_time"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <!-- start working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_start_work_5"
+                android:text="06:30"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <!-- end working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_end_work_5"
+                android:text="16:30"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!-- pause time -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lny_5_2"
+            android:layout_margin="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- pause time label -->
+            <TextView
+                android:inputType="none"
+                android:text="@string/break_time"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+
+                android:layout_height="wrap_content" />
+
+            <!-- pause start working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_start_pause_work_5"
+                android:text="13:00"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <!-- pause end working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_end_pause_work_5"
+                android:text="13:30"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    
+    <!-- saturday -->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_margin="@dimen/activity_horizontal_margin_quarter"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- name of the day -->
+        <TextView
+                android:inputType="none"
+            android:text="@string/saturday"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_margin="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!-- im i opened to day -->
+            <CheckBox
+                android:id="@+id/cb_opened_6"
+                android:text="@string/is_open_today"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <!-- do i need a rest in between ? -->
+            <CheckBox
+                android:id="@+id/cb_pause_6"
+                android:text="@string/has_pause"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!-- working time -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lny_6_1"
+            android:layout_margin="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:inputType="none"
+                android:text="@string/working_time"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <!-- start working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_start_work_6"
+                android:text="06:30"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <!-- end working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_end_work_6"
+                android:text="16:30"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!-- pause time -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lny_6_2"
+            android:layout_margin="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- pause time label -->
+            <TextView
+                android:inputType="none"
+                android:text="@string/break_time"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content" />
+
+            <!-- pause start working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_start_pause_work_6"
+                android:text="13:00"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <!-- pause end working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_end_pause_work_6"
+                android:text="13:30"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    
+    <!-- sunday -->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_margin="@dimen/activity_horizontal_margin_quarter"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- name of the day -->
+        <TextView
+                android:inputType="none"
+            android:text="@string/sunday"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_margin="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!-- im i opened to day -->
+            <CheckBox
+                android:id="@+id/cb_opened_7"
+                android:text="@string/is_open_today"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <!-- do i need a rest in between ? -->
+            <CheckBox
+                android:id="@+id/cb_pause_7"
+                android:text="@string/has_pause"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!-- working time -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lny_7_1"
+            android:layout_margin="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:inputType="none"
+                android:text="@string/working_time"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <!-- start working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_start_work_7"
+                android:text="06:30"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <!-- end working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_end_work_7"
+                android:text="16:30"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!-- pause time -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lny_7_2"
+            android:layout_margin="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- pause time label -->
+            <TextView
+                android:inputType="none"
+                android:text="@string/break_time"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content" />
+
+            <!-- pause start working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_start_pause_work_7"
+                android:text="13:00"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <!-- pause end working time -->
+            <TextView
+                android:inputType="none"
+                android:id="@+id/tv_end_pause_work_7"
+                android:text="13:30"
+                android:gravity="center"
+                android:background="@drawable/bg_from_time"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_double"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="40dp"/>
+
+        <!-- button to validate -->
+
+        <Button
+            android:id="@+id/bt_confirm"
+            android:text="@string/confirm"
+            android:textSize="17sp"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_green_rounded"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    
+</androidx.core.widget.NestedScrollView>
+    </FrameLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

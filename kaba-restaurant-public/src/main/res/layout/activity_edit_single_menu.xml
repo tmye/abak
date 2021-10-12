@@ -141,7 +141,7 @@
 
                 <TextView
                     android:textColor="@color/black"
-                    android:text="@string/is_menu_active"
+                    android:text="@string/is_menu_hidden"
                     android:padding="@dimen/activity_horizontal_margin_half"
                     android:layout_weight="2"
                     android:layout_width="0dp"
@@ -151,7 +151,6 @@
                     android:id="@+id/checkbox_menu_active"
                     android:padding="@dimen/activity_horizontal_margin_half"
                     android:layout_weight="2"
-                    android:text="@string/yes_or_no"
                     android:textAllCaps="true"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"/>

@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="@dimen/activity_horizontal_margin_half"
+    android:id="@+id/root_card"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rel_top"
+            android:background="@color/black"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/command_item_header_height">
+
+            <TextView
+                android:id="@+id/tv_resto_name"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:text="Restaurant toto"
+                android:textAllCaps="true"
+                android:textSize="20sp"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <!-- id -->
+            <TextView
+                android:id="@+id/tv_hsn_id"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_half"
+                android:text="2251"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:padding="@dimen/activity_horizontal_margin_half"
+                android:background="@drawable/bg_already_paid_rounded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_header_customer_contact"
+                    android:text=""
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/food_details_tag_padding_horizontal"
+                    android:paddingRight="@dimen/food_details_tag_padding_horizontal"
+                    android:paddingTop="@dimen/food_details_tag_padding_vertical"
+                    android:paddingBottom="@dimen/food_details_tag_padding_vertical"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:maxLines="1"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="6sp"
+                    app:autoSizeMaxTextSize="18sp"
+                    app:autoSizeStepGranularity="1sp"
+                    />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- body -->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/lny_top"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/activity_horizontal_margin_half"
+                android:paddingBottom="@dimen/activity_horizontal_margin_quarter"
+                android:paddingRight="@dimen/activity_horizontal_margin_half"
+                android:paddingLeft="@dimen/activity_horizontal_margin_double"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+                <!-- delivery and food fiews -->
+
+                <TextView
+                    android:id="@+id/tv_delivery_address"
+                    android:text="Adresse: Non loin de la pharmacie djidjolé, Premier vont avant la pharmacie Djidjolé, arrveé dans ce vont, tourner à gauche au rond point, puis ensuite à droite. Merci"
+                    android:textSize="14sp"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin_quarter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <!--   <TextView
+                       android:id="@+id/tv_delivery_info"
+                       android:text="Info: J'ai un billet de 10.000F, merci d'en prendre connaissance, merci."
+                       android:textSize="14sp"
+                       android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"/>-->
+
+                <!-- <TextView
+                     android:id="@+id/tv_food_amount"
+                     android:fontFamily="@font/roboto_regular"
+                     android:text="Food amount: 1000"
+                     android:textSize="16sp"
+                     android:layout_marginTop="@dimen/activity_horizontal_margin_quarter"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"/>
+
+                 <TextView
+                     android:id="@+id/tv_delivery_amount"
+                     android:fontFamily="@font/googlesans_bold"
+                     android:text="Delivery amount: 500"
+                     android:layout_marginTop="@dimen/activity_horizontal_margin_quarter"
+                     android:textSize="16sp"
+                     android:textColor="@color/kaba_red_color"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"/>
+
+                 <TextView
+                     android:id="@+id/tv_total_amount"
+                     android:text="Total amount: 500"
+                     android:fontFamily="@font/roboto_regular"
+                     android:layout_marginTop="@dimen/activity_horizontal_margin_quarter"
+                     android:textSize="22sp"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"/>
+     -->
+                <!-- <TextView
+                     android:id="@+id/tv_when_to_pay"
+                     android:text="PAY AT ARRIVAL"
+                     android:textSize="16sp"
+                     android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+                     android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
+                     android:padding="@dimen/activity_horizontal_margin_half"
+                     android:background="@drawable/bg_already_paid_rounded"
+                     android:textColor="@color/white"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"/>-->
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_below="@+id/lny_top"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                    <!-- food fees -->
+                    <!-- delivery fees  -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+                        android:layout_marginTop="@dimen/activity_horizontal_margin_half">
+
+                        <ImageView
+                            android:layout_width="@dimen/shippingman_height"
+                            android:layout_height="@dimen/shippingman_height"
+                            android:layout_alignParentLeft="true"
+                            android:src="@drawable/box"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="@string/order_amount"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_food_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:padding="@dimen/command_total_padding"
+                            android:text="25.500F"
+                            android:background="@color/selected_yellow"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+
+                    <!-- delivery fees  -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+                        android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+                        android:layout_marginBottom="@dimen/activity_horizontal_margin_half">
+
+                        <ImageView
+                            android:layout_width="@dimen/shippingman_height"
+                            android:layout_height="@dimen/shippingman_height"
+                            android:layout_alignParentLeft="true"
+                            android:src="@drawable/food_delivery" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="@string/shipping_price_label"
+                            android:textAllCaps="true"
+                            android:textColor="@color/kaba_red_color"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/tv_shipping_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:background="@color/kaba_red_color"
+                            android:gravity="center"
+                            android:padding="@dimen/command_total_padding"
+                            android:text="25.500F"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+                        android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/command_list_total_part_height">
+
+                        <!-- id -->
+                        <TextView
+                            android:id="@+id/tv_hsn_state"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="@dimen/activity_horizontal_margin_half"
+                            android:textSize="14sp"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:textAllCaps="true"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:padding="@dimen/activity_horizontal_margin_half"
+                            android:background="@drawable/transparent_yellow_rounded"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:layout_centerInParent="true"
+                            android:text="@string/total"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+                        <TextView
+                            android:layout_alignParentRight="true"
+                            android:id="@+id/tv_total"
+                            android:text="29.500F"
+                            android:background="@color/colorPrimary"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:padding="@dimen/command_total_padding"
+                            android:textColor="@color/white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+
+                    </RelativeLayout>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</androidx.cardview.widget.CardView>

@@ -139,4 +139,6 @@
     <dimen name="rc_shippingman_no_text_size">16sp</dimen>
     <dimen name="preview_commands_list_icons">40dp</dimen>
     <dimen name="lil_round_margin_bottom">4dp</dimen>
+    <dimen name="transaction_pwd_bt_stroke_width">0.8px</dimen>
+    <dimen name="shippingman_height">40dp</dimen>
 </resources>

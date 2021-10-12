@@ -23,13 +23,15 @@ public interface RestaurantStatsContract {
 
         void syserror();
 
-        void inflate7LastDaysStats(List<StatsEntity> statsEntities);
+        void inflateStats(List<StatsEntity> statsEntities);
     }
 
 
     public interface Presenter extends BasePresenter {
 
         void load7LastDaysStats();
+
+        void searchStaticsFromToDate(String fromDate, String toDate);
     }
 
 }

@@ -172,6 +172,8 @@ public class MyCommandsPresenter implements MyCommandContract.Presenter {
                     String head_pic = data.get("restaurant").getAsJsonObject().get("pic").getAsString();
                     String resto_name = data.get("restaurant").getAsJsonObject().get("name").getAsString();
 
+                    int coming_soon = data.get("restaurant").getAsJsonObject().get("coming_soon").getAsInt();
+
                     int waiting_count = 0;
                     int shipping_count = 0;
                     int cooking_count = 0;
@@ -187,7 +189,7 @@ public class MyCommandsPresenter implements MyCommandContract.Presenter {
                     int calendar_is_open = data.get("restaurant").getAsJsonObject().get("is_open").getAsInt();
                     int manual_open_state = data.get("restaurant").getAsJsonObject().get("manual_open_state").getAsInt();
 
-                    viewHomePage.inflateStats(calendar_is_open, manual_open_state, head_pic, resto_name, foods_sold, recipes);
+                    viewHomePage.inflateStats(calendar_is_open, manual_open_state, coming_soon, head_pic, resto_name, foods_sold, recipes);
                     viewHomePage.inflateCountStats(waiting_count, shipping_count, cooking_count);
                 } catch (Exception e) {
                     e.printStackTrace();

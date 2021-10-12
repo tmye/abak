@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
 
     lintOptions {
         checkReleaseBuilds false
@@ -14,10 +14,10 @@ android {
 
     defaultConfig {
         applicationId "tg.tmye.kaba_i_deliver"
-        minSdkVersion 26
-        targetSdkVersion 30
-        versionCode 7
-        versionName "1.5"
+        minSdkVersion 23
+        targetSdkVersion 31
+        versionCode 18
+        versionName "1.8"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 

@@ -78,7 +78,7 @@
                     android:layout_centerInParent="true"
                     android:gravity="center"
                     android:textColor="@color/red"
-                    android:text="This is Your Menu as the client sees it ! Please confirm."
+                    android:text="@string/this_is_your_menu_as_the_client_sees_it_please_confirm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 

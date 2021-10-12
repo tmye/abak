@@ -16,7 +16,11 @@ public class StatsEntity {
 //            "foods_sold": string
 
     public String date;
-    public String recipes;
-    public String foods_sold;
+    public int ca_hsn;
+    public int nb_hsn;
+    public int nb_app_command;
+    public int nb_command;
+    public int ca_app;
+    public int ca;
 
 }

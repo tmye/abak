@@ -27,7 +27,7 @@
     <string name="drink_name_sample">COCA</string>
     <string name="action_share">Partager</string>
     <string name="there_is_no_command">Il n\'y pas pas encore de commandes dans cette categorie.</string>
-    <string name="network_error">Prom</string>
+    <string name="network_error">Problème réseau. Veuillez cliquer sur le bouton pour réessayer</string>
     <string name="try_again">Try Again</string>
     <string name="sys_error">Sorry for the disconvenience, The server is encountering an Error.</string>
     <string name="total">TOTAL:</string>
@@ -62,7 +62,7 @@
     <string name="title_activity_login">LOGIN</string>
     <string name="confirm">Confirm</string>
     <string name="password">Password</string>
-    <string name="phone_number">Phone Number</string>
+    <string name="phone_number">Numéro de téléphone</string>
     <string name="login">CONNEXION</string>
     <string name="i_login">Connexion</string>
     <string name="title_activity_service_client">SERVICE CLIENT</string>
@@ -81,7 +81,7 @@
     <string name="add_city">City</string>
     <string name="add_qte">District</string>
     <string name="add_details">Addresses details</string>
-    <string name="add_phone">Phone number</string>
+    <string name="add_phone">Numéro de téléphone</string>
     <string name="cancel">CANCEL</string>
     <string name="save">Save</string>
     <string name="sav_call">CALL</string>
@@ -106,7 +106,7 @@
 
     <!-- home account menu -->
     <string name="myaccount_commands">COMMANDS</string>
-    <string name="myaccount_bon_dachat">VOUCHER</string>
+    <string name="myaccount_bon_dachat">BON</string>
     <string name="myaccount_favorite_plat">FAVORITES</string>
     <string name="myaccount_delivery_address">ADRESSES</string>
     <string name="myaccount_client_service">CUSTOMER</string>
@@ -152,8 +152,8 @@
     <string name="add_remove_favorite">+- Favorite</string>
     <string name="action_cancel">CANCEL</string>
     <string name="no_additionnal_drinks">There is no additionnal drinks</string>
-    <string name="quantity_cannot_less">Quantity cannot go less</string>
-    <string name="quantity_to_much">Quantity Too Much</string>
+    <string name="quantity_cannot_less">Quantité minimale atteinte</string>
+    <string name="quantity_to_much">Quantité maximum atteinte</string>
     <string name="title_activity_confirm_command_details">Confirm</string>
     <string name="details_adress_date">02 Fev 2016</string>
     <string name="delete_before_adding_more">Max Count 5 reached</string>
@@ -218,7 +218,7 @@
     <string name="kaba_man_photo">Photo</string>
     <string name="statistics_of_restaurant">Statistiques</string>
     <string name="quantity_sold">Commandes</string>
-    <string name="price_sold">Prix</string>
+    <string name="price_sold">C.A du jour</string>
     <string name="quantity_sold_value">--</string>
     <string name="price_sold_value">---</string>
     <string name="actions_of_restaurant">Mes Actions</string>
@@ -245,5 +245,59 @@
     <string name="waiting_food">Commande en Attente</string>
     <string name="full_name">Nom complet</string>
     <string name="wait_until_dispatched">Veuillez patienter un moment,\\nNous passerons recupérer la commande.</string>
+    <string name="call">APELLER</string>
+    <string name="failed_in_allowing_permission">Impossible de recuperer une permission</string>
+    <string name="there_is_no_food">Repas non disponibles</string>
+    <string name="address_location">Adresses</string>
+    <string name="working_hour">Heure de travail</string>
+    <string name="menu_name">Nom du Menu</string>
+    <string name="is_pausing">Heure de pause</string>
+    <string name="is_unavailable">Non disponible</string>
+    <string name="no_menu_data">Aucune information de ce menu</string>
+    <string name="bt_add_to_basket">Panier</string>
+    <string name="my_menu">Menu</string>
+    <string name="is_menu_active">Ce Menu est il actif ?</string>
+    <string name="yes_or_no">OUI OU NON</string>
+    <string name="yes">OUI</string>
+    <string name="no">NON</string>
+    <string name="ed_menu_priority">Priorité du menu</string>
+    <string name="importance_menu_description">Les menus sont alignés en fonction de leur priorité de la plus grande vers la plus petite. Si vous voulez par exemple afficher un menu tout au dessus, Donnez lui la priorité la plus élevée.</string>
+    <string name="menu_name_description">Nom du menu</string>
+    <string name="food_name_hint">Nom du repas</string>
+    <string name="food_price_hint">Veuillez entrer le prix normal de vente de ce produit</string>
+    <string name="food_promotion_price_hint">Si vous êtes en promotion sur ce plat, merci d\'insérer le PRIX DE PROMOTION de ce plat ici</string>
+    <string name="is_food_visible">Si vous voulez cacher ou afficher le menu, faites le ici</string>
+    <string name="food_is_promotion_active_hint">Voulez vous activer la promotion sur ce repas?</string>
+    <string name="priority">Priorité</string>
+    <string name="delete">SUPPRIMER</string>
+    <string name="edit">MODIFIER</string>
+    <string name="hide">CACHER</string>
+    <string name="enter">ENTRER</string>
+    <string name="search_menu">Chercher menu</string>
+    <string name="search_food">Chercher food</string>
+    <string name="calendar">Calendrier</string>
+    <string name="your_calendar_says_you_are">Votre calendrier dis que vous êtes </string>
+    <string name="is_menu_hidden">Voulez vous cacher ce menu ?</string>
+    <string name="create_menu">Créer un nouveau menu</string>
+    <string name="create_food">Créer un nouveau repas</string>
+    <string name="photo_hint">Photo du repas</string>
+    <string name="pick_photo">Choisir image</string>
+    <string name="image_picking_error">Erreur récupération image</string>
+    <string name="coming_soon">Bientôt disponible</string>
+    <string name="update">Actualiser</string>
+    <string name="register">Création de compte</string>
+    <string name="food_description_hint">Veuillez mentionnez les ingredients du repas</string>
+    <string name="is_menu_active_hint">Cochez cette case pour rendre le repas disponible aux clients. Pour cacher ce repas, veuillez décocher cette case</string>
+    <string name="promotion_price">Prix de Promotion</string>
+    <string name="normal_price">Prix normal</string>
+    <string name="hidden">Caché</string>
+    <string name="food_name">Nom repas</string>
+    <string name="menu_description">Description repas</string>
+    <string name="price">Prix</string>
+    <string name="is_promotion_active">Activer la promotion?</string>
+
+    <string name="foods">Repas</string>
+    <string name="this_is_your_menu_as_the_client_sees_it_please_confirm">Voici votre menu comme les clients le voit. Confirmez ou modifiez</string>
+
 
 </resources>

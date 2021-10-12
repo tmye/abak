@@ -129,8 +129,8 @@ public class SlidingBanner_LilRound extends FrameLayout implements Runnable  {
     protected void onFinishInflate() {
         super.onFinishInflate();
         // get every items and get them safe
-        autoScrollViewpager = findViewById(R.id.viewpager_sliding_banner);
-        lny_lil_round = findViewById(R.id.lny_lil_round);
+//        autoScrollViewpager = findViewById(R.id.viewpager_sliding_banner);
+//        lny_lil_round = findViewById(R.id.lny_lil_round);
 //        food_details_pictures = new ArrayList<>();
     }
 

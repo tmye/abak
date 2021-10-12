@@ -59,7 +59,7 @@ public class EditMenuPresenter implements EditMenuContract.Presenter {
 
             @Override
             public void onSuccess(Object result) {
-
+                view.showIsLoading(false);
                 List<Restaurant_SubMenuEntity> menu_food = null;
                 List<Restaurant_Menu_FoodEntity> drinks = null;
                 int maxCount = 0;
@@ -78,7 +78,6 @@ public class EditMenuPresenter implements EditMenuContract.Presenter {
                     view.showNoDataMessage();
                 } else {
                     view.inflateMenus(menuDb_onlineRepository.restaurantEntity, menu_food, drinks);
-                    view.showIsLoading(false);
                 }
             }
 
@@ -108,13 +107,14 @@ public class EditMenuPresenter implements EditMenuContract.Presenter {
             @Override
             public void onSuccess(List<Restaurant_Menu_FoodEntity> menu_food) {
 
+                view.showIsLoading(false);
+
                 // send
                 if (menu_food == null || menu_food.size() == 0) {
                     /* show error message*/
                     view.showNoDataMessage();
                 } else {
                     view.inflateFoods(menuDb_onlineRepository.restaurantEntity, menu_food);
-                    view.showIsLoading(false);
                 }
             }
         });
@@ -204,6 +204,7 @@ public class EditMenuPresenter implements EditMenuContract.Presenter {
 
     @Override
     public void hideMenu(int menu_id) {
+        view.showIsLoading(true);
         menuDb_onlineRepository.hideMenu(menu_id, new NetworkRequestThreadBase.NetRequestIntf<String>() {
 
             @Override
@@ -244,6 +245,7 @@ public class EditMenuPresenter implements EditMenuContract.Presenter {
 
     @Override
     public void deleteMenu(int menu_id) {
+        view.showIsLoading(true);
         menuDb_onlineRepository.deleteMenu(menu_id, new NetworkRequestThreadBase.NetRequestIntf<String>() {
 
             @Override
@@ -265,10 +267,9 @@ public class EditMenuPresenter implements EditMenuContract.Presenter {
                 view.showIsLoading(false);
                 try {
                     JsonObject obj = new JsonParser().parse(response).getAsJsonObject();
-                    JsonObject data = obj.get("data").getAsJsonObject();
 
                     // get the error object and make sure it's == 0
-                    int error = data.get("error").getAsInt();
+                    int error = obj.get("error").getAsInt();
 
                     if (error == 0)
                         view.menuDeletedSuccess();

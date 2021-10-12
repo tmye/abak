@@ -26,10 +26,15 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.ActivityRecognitionClient;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -51,15 +56,20 @@ import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION;
 
 
 public class TrackingService extends Service implements GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener, LocationListener {
+        GoogleApiClient.OnConnectionFailedListener, LocationListener, OnSuccessListener<Location> {
 
     private static final int ID_SERVICE = 1001;
-    private static final long POSITION_RETRIEVE_PERIOD = 30000;
+    private static final long SLOWER_POSITION_RETRIEVE_PERIOD = 30000; // 30000;
+    private static final long FASTEST_POSITION_RETRIEVE_PERIOD =  10000; // 10000;
 
     Location mLastLocation;
-    private GoogleApiClient mGoogleApiClient;
+        private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
+    FusedLocationProviderClient fusedLocationClient;
     String lat, lon;
+
+
+    private ActivityRecognitionClient mActivityRecognitionClient;
 
     public int counter = 0;
     private Timer timer;
@@ -68,6 +78,8 @@ public class TrackingService extends Service implements GoogleApiClient.Connecti
     DatabaseReference mRootRef= FirebaseDatabase.getInstance("https://kaba-livreur.firebaseio.com/").getReference();
 
     DatabaseReference locationRef=mRootRef.child("kirikou");
+
+    private LocationCallback locationCallback;
 
     @Override
     public void onCreate() {
@@ -79,7 +91,9 @@ public class TrackingService extends Service implements GoogleApiClient.Connecti
                 PendingIntent.getActivity(this, 0, notificationIntent, 0);
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.createNotificationChannel(new NotificationChannel(Constant.CHANNEL_ID, Constant.CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notificationManager.createNotificationChannel(new NotificationChannel(Constant.CHANNEL_ID, Constant.CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT));
+        }
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, Constant.CHANNEL_ID);
 
@@ -93,7 +107,6 @@ public class TrackingService extends Service implements GoogleApiClient.Connecti
 
         ILog.print("onCreate TrackingService");
 
-//        startForeground(ID_SERVICE, notification, FOREGROUND_SERVICE_TYPE_LOCATION);
     }
 
     @Override
@@ -127,9 +140,13 @@ public class TrackingService extends Service implements GoogleApiClient.Connecti
 
         ILog.print("onConnected TrackingService 1start");
 
-        mLocationRequest = LocationRequest.create();
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setInterval(POSITION_RETRIEVE_PERIOD); // Update location every second
+        mLocationRequest = LocationRequest
+                .create()
+                .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY)
+                .setFastestInterval(FASTEST_POSITION_RETRIEVE_PERIOD)
+                .setInterval(SLOWER_POSITION_RETRIEVE_PERIOD) // Update location every second
+//                .setSmallestDisplacement(10)
+        ;
 
         if (Build.VERSION.SDK_INT >= 23 &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -145,15 +162,38 @@ public class TrackingService extends Service implements GoogleApiClient.Connecti
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, TrackingService.this);
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
-                mGoogleApiClient);
-        if (mLastLocation != null) {
-            lat = String.valueOf(mLastLocation.getLatitude());
-            lon = String.valueOf(mLastLocation.getLongitude());
-        }
-        updateUI();
-        ILog.print("onConnected TrackingService ok");
+//        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, TrackingService.this);
+//        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+//                mGoogleApiClient);
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+//        fusedLocationClient.getLastLocation().addOnSuccessListener(this);
+
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                for (Location location: locationResult.getLocations()){
+                    if (location != null) {
+                        mLastLocation = location;
+                        lat = String.valueOf(mLastLocation.getLatitude());
+                        lon = String.valueOf(mLastLocation.getLongitude());
+                        updateUI();
+                        ILog.print("onConnected TrackingService ok");
+                        /* get tracking state */
+                        if ("off".equals(((MyKabaDeliverApp)getApplicationContext()).getDeliveryMode())) {
+                            fusedLocationClient.removeLocationUpdates(locationCallback);
+                        }
+                    }
+                }
+            }
+        };
+
+        fusedLocationClient.requestLocationUpdates
+                (
+                        mLocationRequest,
+                        locationCallback,
+                        null
+                );
     }
 
     @Override
@@ -192,19 +232,23 @@ public class TrackingService extends Service implements GoogleApiClient.Connecti
         if ("".equals(((MyKabaDeliverApp)getApplicationContext()).getAuthToken()))
             return;
 
-        FirebaseDataModel firebaseDataModel = new FirebaseDataModel(
-                ((MyKabaDeliverApp)getApplicationContext()).getAuthToken(),
-                ((MyKabaDeliverApp)getApplicationContext()).getUsername(),
-                Float.parseFloat(lat),
-                Float.parseFloat(lon),
-                ((MyKabaDeliverApp)getApplicationContext()).getDeliveryMode(),
-                new Date().getTime(),
-                getDateTime()
-        );
-        locationRef
-                .child(((MyKabaDeliverApp)getApplicationContext()).getUsername())
-                .setValue(firebaseDataModel);
-        ILog.print("Update "+firebaseDataModel.toString());
+        try {
+            FirebaseDataModel firebaseDataModel = new FirebaseDataModel(
+                    ((MyKabaDeliverApp) getApplicationContext()).getAuthToken(),
+                    ((MyKabaDeliverApp) getApplicationContext()).getUsername()+"_"+Constant.VERSION,
+                    Float.parseFloat(lat),
+                    Float.parseFloat(lon),
+                    ((MyKabaDeliverApp) getApplicationContext()).getDeliveryMode(),
+                    new Date().getTime(),
+                    getDateTime()
+            );
+            locationRef
+                    .child(((MyKabaDeliverApp) getApplicationContext()).getUsername()+"_"+Constant.VERSION)
+                    .setValue(firebaseDataModel);
+            ILog.print("Update " + firebaseDataModel.toString());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private String getDateTime() {
@@ -238,4 +282,16 @@ public class TrackingService extends Service implements GoogleApiClient.Connecti
             timer = null;
         }
     }
+
+    @Override
+    public void onSuccess(Location location) {
+        if (location != null) {
+            mLastLocation = location;
+            lat = String.valueOf(mLastLocation.getLatitude());
+            lon = String.valueOf(mLastLocation.getLongitude());
+            updateUI();
+            ILog.print("onConnected TrackingService ok");
+        }
+    }
+
 }

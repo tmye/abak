@@ -386,7 +386,11 @@ public class RestaurantMenuActivity extends AppCompatActivity implements
     private void initMenus() {
 
         // menu should be gotten in the json file also
+        if (menuFragmentAdapter != null)
+            this.menuFragmentAdapter.clearFrg();
+
         this.menuFragmentAdapter = new MenuViewpagerAdapter(getSupportFragmentManager());
+        // create fragment cache
         onMenuInteraction(0);
     }
 
@@ -525,6 +529,12 @@ public class RestaurantMenuActivity extends AppCompatActivity implements
             }
             return frg_map.get(position);
         }
+
+        public void clearFrg(){
+            if (frg_map != null)
+                frg_map.clear();
+        }
+
 
         @Override
         public CharSequence getPageTitle(int position) {

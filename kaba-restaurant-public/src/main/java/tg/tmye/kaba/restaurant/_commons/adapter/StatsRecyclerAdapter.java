@@ -51,10 +51,11 @@ public class StatsRecyclerAdapter extends RecyclerView.Adapter<StatsRecyclerAdap
 
         StatsEntity entity = data.get(position);
 
-        holder.tv_command_count.setText(""+entity.recipes);
-        holder.tv_food_count.setText(""+entity.foods_sold);
-        holder.tv_date_day.setText(""+ UtilFunctions.getDay(ctx, entity.date));
-        holder.tv_date_content.setText(""+UtilFunctions.timeStampToDateDayOnly(ctx, entity.date));
+        holder.tv_command_count.setText(""+entity.nb_app_command);
+        holder.tv_command_ca.setText(""+entity.ca_app);
+        holder.tv_hsn_ca.setText(""+entity.ca_hsn);
+        holder.tv_hsn_count.setText(""+entity.nb_hsn);
+        holder.tv_date_content.setText(entity.date);
     }
 
     @Override
@@ -70,15 +71,17 @@ public class StatsRecyclerAdapter extends RecyclerView.Adapter<StatsRecyclerAdap
     public class ViewHolder extends RecyclerView.ViewHolder {
 
 
-        TextView tv_date_content, tv_date_day;
-        TextView tv_command_count, tv_food_count;
+        TextView tv_date_content/*, tv_date_day*/;
+        TextView tv_command_count, tv_command_ca;
+        TextView tv_hsn_count, tv_hsn_ca;
 
         public ViewHolder(View view) {
             super(view);
             this.tv_command_count = view.findViewById(R.id.tv_commands_count);
-            this.tv_food_count = view.findViewById(R.id.tv_foods_count);
+            this.tv_command_ca = view.findViewById(R.id.tv_command_ca);
+            this.tv_hsn_count = view.findViewById(R.id.tv_hsn_count);
+            this.tv_hsn_ca = view.findViewById(R.id.tv_hsn_ca);
             this.tv_date_content = view.findViewById(R.id.tv_date_content);
-            this.tv_date_day = view.findViewById(R.id.tv_date_day);
         }
 
     }

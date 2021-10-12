@@ -64,7 +64,7 @@ public class EditSingleFoodPresenter implements EditSingleFoodContract.Presenter
                 view.showIsLoading(false);
                 try {
                     JsonObject obj = new JsonParser().parse(response).getAsJsonObject();
-//                    JsonObject data = obj.get("data").getAsJsonObject();
+//                    JsonObject data = obj.get("data").getAsJsonObject();p
 
                     // get the error object and make sure it's == 0
                     int error = obj.get("error").getAsInt();

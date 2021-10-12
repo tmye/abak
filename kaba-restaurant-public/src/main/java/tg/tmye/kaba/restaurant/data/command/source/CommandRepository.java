@@ -17,6 +17,7 @@ import tg.tmye.kaba.restaurant._commons.MultiThreading.DatabaseRequestThreadBase
 import tg.tmye.kaba.restaurant._commons.MultiThreading.NetworkRequestThreadBase;
 import tg.tmye.kaba.restaurant.data.command.Command;
 import tg.tmye.kaba.restaurant.data.delivery.KabaShippingMan;
+import tg.tmye.kaba.restaurant.data.district.DeliveryDistrict;
 import tg.tmye.kaba.restaurant.syscore.Config;
 import tg.tmye.kaba.restaurant.syscore.MyRestaurantApp;
 
@@ -65,6 +66,17 @@ public class CommandRepository {
         String token = ((MyRestaurantApp) context.getApplicationContext()).getAuthToken();
         networkRequestBase.postMapDataWithToken(
                 Config.LINK_RESTAURANT_GET_MY_COMMANDS, map, token, intf
+        );
+    }
+
+    public void getRestaurantHSN(NetworkRequestThreadBase.NetRequestIntf<String> intf) {
+
+        /* make the request being aware of id of the restaurant / token */
+
+        Map<String, Object> map = new HashMap<>();
+        String token = ((MyRestaurantApp) context.getApplicationContext()).getAuthToken();
+        networkRequestBase.postMapDataWithToken(
+                Config.LINK_RESTAURANT_GET_MY_HSN, map, token, intf
         );
     }
 
@@ -136,5 +148,41 @@ public class CommandRepository {
             e.printStackTrace();
         }*/
         networkRequestBase.postJsonDataWithToken(Config.LINK_RESTAURANT_CHECK_OPENED, params.toString(), authToken, intf);
+    }
+
+    public void loadDeliveryDistricts(NetworkRequestThreadBase.NetRequestIntf<String> intf) {
+        String authToken = ((MyRestaurantApp)context.getApplicationContext()).getAuthToken();
+        JSONObject params = new JSONObject();
+        networkRequestBase.postJsonDataWithToken(Config.LINK_GET_DELIVERY_DISTRICTS, params.toString(), authToken, intf);
+    }
+
+    public void computeDeliveryBilling(DeliveryDistrict deliveryDistrict, NetworkRequestThreadBase.NetRequestIntf<String> intf) {
+        String authToken = ((MyRestaurantApp)context.getApplicationContext()).getAuthToken();
+        JSONObject params = new JSONObject();
+        try {
+            params.put("shipping_address_id", deliveryDistrict.id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        networkRequestBase.postJsonDataWithToken(Config.LINK_COMPUTE_DELIVERY_FEES, params.toString(), authToken, intf);
+    }
+
+    //    createHSN
+    public void createHSN(String district_id, String phone_number, String food_price, String more_informations, NetworkRequestThreadBase.NetRequestIntf<String> intf) {
+        String authToken = ((MyRestaurantApp)context.getApplicationContext()).getAuthToken();
+        JSONObject params = new JSONObject();
+        try {
+            params.put("phone_number", phone_number);
+            params.put("shipping_address_id", district_id);
+            params.put("food_pricing", food_price);
+            params.put("infos", more_informations);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        networkRequestBase.postJsonDataWithToken(Config.LINK_CREATE_HSN, params.toString(), authToken, intf);
+    }
+
+    public void cancelHSN(int hsn_id, NetworkRequestThreadBase.NetRequestIntf<String> intf) {
+
     }
 }

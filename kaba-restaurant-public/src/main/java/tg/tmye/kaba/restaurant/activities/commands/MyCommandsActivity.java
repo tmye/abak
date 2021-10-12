@@ -90,14 +90,10 @@ public class MyCommandsActivity extends LoadingIsOkActivtity implements MyComman
             switch (item.getItemId()) {
                 case R.id.navigation_waiting:
                     return switchFragment(WAITING);
-                case R.id.navigation_cooking:
-                    return switchFragment(COOKING);
                 case R.id.navigation_shipping:
                     return switchFragment(SHIPPING);
                 case R.id.navigation_delivered:
                     return switchFragment(DELIVERED);
-                case R.id.navigation_others:
-                    return switchFragment(OTHERS);
             }
             return false;
         }
@@ -151,8 +147,8 @@ public class MyCommandsActivity extends LoadingIsOkActivtity implements MyComman
         navigation.setSelectedItemId(dest[destination]);
     }
 
-    int[] dest = new int[]{R.id.navigation_waiting, R.id.navigation_cooking, R.id.navigation_shipping,
-    R.id.navigation_delivered, R.id.navigation_others};
+    int[] dest = new int[]{R.id.navigation_waiting, R.id.navigation_shipping,
+    R.id.navigation_delivered};
 
 
 
@@ -579,7 +575,7 @@ public class MyCommandsActivity extends LoadingIsOkActivtity implements MyComman
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logout) {
             return true;
         } else if (id == R.id.action_logout) {
             logout();

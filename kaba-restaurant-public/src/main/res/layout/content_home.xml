@@ -15,17 +15,27 @@
         android:layout_height="wrap_content">
 
         <!-- restaurant identity -->
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+            android:layout_marginRight="@dimen/activity_horizontal_margin_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <RelativeLayout
             android:id="@+id/rel_top"
             android:background="@color/transparent"
             android:orientation="horizontal"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/header_resto_cic"
                 android:layout_gravity="center_vertical"
-                android:layout_width="@dimen/command_item_header_pic"
+              android:layout_width="@dimen/command_item_header_pic"
                 android:layout_height="@dimen/command_item_header_pic"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:src="@drawable/placeholder_kaba"
@@ -64,10 +74,10 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+
+
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_marginTop="@dimen/activity_horizontal_margin_half"
                 android:orientation="vertical"
@@ -75,25 +85,47 @@
                 android:layout_height="wrap_content">
                 <!-- quantité vendue -->
 
-                <LinearLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardview_calendar"
+                    android:background="?selectableItemBackground"
+                    android:layout_margin="@dimen/activity_horizontal_margin_half"
+                    android:padding="@dimen/activity_horizontal_margin_half"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <RelativeLayout
                     android:padding="@dimen/activity_horizontal_margin"
-                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+                    <ImageView
+                        android:layout_centerVertical="true"
+                        android:id="@+id/iv_calendar"
+                        android:src="@drawable/calendar_"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"/>
+
                     <TextView
-                        android:text="Calendar"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/iv_calendar"
+                        android:id="@+id/tv_calendar_hint"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+                        android:text="@string/your_calendar_says_you_are"
                         android:gravity="left"
+                        android:textSize="11sp"
                         android:textColor="@color/black"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
+                        android:textStyle="bold"
+                        android:textAllCaps="true"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
                     <TextView
+                        android:layout_centerVertical="true"
                         android:gravity="center"
-                        android:layout_below="@id/header_resto_cic"
                         android:layout_centerHorizontal="true"
                         android:id="@+id/tv_state_opend"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+                        android:layout_toRightOf="@+id/tv_calendar_hint"
                         android:padding="@dimen/activity_horizontal_margin_quarter"
                         android:textSize="@dimen/restaurant_distance_text_size"
                         android:textColor="@color/white"
@@ -101,9 +133,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         />
-                </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/ic_edit_calendar" />
+
+                </RelativeLayout>
+                </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <LinearLayout
@@ -160,8 +201,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-
-
+                <!-- orders count -->
                 <androidx.cardview.widget.CardView
                     android:layout_margin="@dimen/activity_horizontal_margin_half"
                     android:padding="@dimen/activity_horizontal_margin_half"
@@ -178,7 +218,7 @@
                         <ImageView
                             android:id="@+id/iv_profiles"
                             android:layout_alignParentLeft="true"
-                            android:src="@drawable/profiles"
+                            android:src="@drawable/order_2"
                             android:layout_width="30dp"
                             android:layout_height="30dp" />
 
@@ -212,6 +252,58 @@
 
                 </androidx.cardview.widget.CardView>
 
+                <!-- hsn count -->
+                <androidx.cardview.widget.CardView
+                    android:layout_margin="@dimen/activity_horizontal_margin_half"
+                    android:padding="@dimen/activity_horizontal_margin_half"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:padding="@dimen/activity_horizontal_margin_half"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+
+                        <ImageView
+                            android:id="@+id/iv_hsn"
+                            android:layout_alignParentLeft="true"
+                            android:src="@drawable/order_1"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp" />
+
+                        <TextView
+                            android:layout_toRightOf="@+id/iv_hsn"
+                            android:text="@string/hsn_created"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+                            android:layout_centerVertical="true"
+                            android:maxLines="1"
+                            />
+
+                        <TextView
+                            android:layout_alignParentRight="true"
+                            android:id="@+id/tv_hsn_quantity"
+                            android:maxLines="1"
+                            android:text="@string/quantity_sold_value"
+                            android:textStyle="bold"
+                            android:layout_marginRight="@dimen/activity_horizontal_margin_half"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="18sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
                 <!-- prix total vendu -->
                 <androidx.cardview.widget.CardView
                     android:layout_margin="@dimen/activity_horizontal_margin_half"
@@ -230,7 +322,7 @@
                         <ImageView
                             android:id="@+id/iv_purse"
                             android:layout_alignParentLeft="true"
-                            android:src="@drawable/purse"
+                            android:src="@drawable/wallet"
                             android:layout_width="30dp"
                             android:layout_height="30dp" />
 
@@ -267,7 +359,7 @@
 
 
             </androidx.appcompat.widget.LinearLayoutCompat>
-        </androidx.cardview.widget.CardView>
+
 
 
         <!-- etats et quantité des commandes a gerer -->
@@ -409,7 +501,7 @@
             android:gravity="center_horizontal"
             android:textColor="@color/dark_gray"
             android:textSize="12sp"
-            android:layout_margin="@dimen/activity_horizontal_margin_half"
+            android:layout_margin="@dimen/activity_horizontal_margin_quarter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -465,7 +557,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:background="?selectableItemBackground"
-                android:id="@+id/bt_weekly_stats"
+                android:id="@+id/bt_hsn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -477,7 +569,7 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:src="@drawable/pie_chart"
+                        android:src="@drawable/icon_my_command"
                         android:layout_gravity="center_horizontal"
                         android:layout_width="@dimen/activity_horizontal_margin_triple"
                         android:layout_height="@dimen/activity_horizontal_margin_triple" />
@@ -485,7 +577,7 @@
                     <TextView
                         android:gravity="center_horizontal"
                         android:layout_margin="@dimen/activity_horizontal_margin_half"
-                        android:text="@string/statistics_of_restaurant"
+                        android:text="@string/my_hsns"
                         android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -544,7 +636,10 @@
         </androidx.cardview.widget.CardView>
 
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="100dp"/>
 
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.core.widget.NestedScrollView>

@@ -32,7 +32,9 @@ public class Restaurant_SubMenuEntity implements Parcelable {
 
     public int is_hidden = 0;
 
-    public String priority;
+    public String priority = "0";
+
+    public Restaurant_SubMenuEntity() {}
 
     protected Restaurant_SubMenuEntity(Parcel in) {
         id = in.readLong();

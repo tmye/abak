@@ -289,5 +289,6 @@
     <string name="ca_commandes_app_arrival">C.A. Arrival</string>
     <string name="nb_commandes_app_prepaid">Count Prepaid Orders</string>
     <string name="ca_commandes_app_prepaid">C.A. Prepaid</string>
+    <string name="version" translatable="false">Version: 05Oct21</string>
 
 </resources>

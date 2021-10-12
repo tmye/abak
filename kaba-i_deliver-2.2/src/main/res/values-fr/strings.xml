@@ -273,5 +273,11 @@
     <string name="nb_total_commandes">Nb. Total Commandes</string>
     <string name="c_a_total_commandes">C.A. Total commandes</string>
     <string name="stats_activity">Statistiques</string>
+    <string name="nb_commandes_app_arrival">Nb. Commandes PA</string>
+    <string name="ca_commandes_app_arrival">C.A commandes PA</string>
+
+    <string name="nb_commandes_app_prepaid">Nb. Commandes PP</string>
+    <string name="ca_commandes_app_prepaid">C.A commandes PP</string>
+    <string name="refund">Rembourser</string>
 
 </resources>

@@ -26,7 +26,6 @@ public class RestaurantLoginActivity extends AppCompatActivity implements LoginC
     LoginPresenter presenter;
     private RestaurantOnlineRepository restaurantRepo;
 
-
     private LoadingDialogFragment loadingDialogFragment;
 
     @Override
