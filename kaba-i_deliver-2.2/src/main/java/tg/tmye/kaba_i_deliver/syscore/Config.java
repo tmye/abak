@@ -68,4 +68,10 @@ public class Config {
 
     public static final String LINK_SEARCH_STATS = Constant.SERVER_ADDRESS + "/livreur/api/command/history/get";
 
+    public static final String LINK_END_DAILY_REPORT = Constant.STAT_SERVER_ADDRESS + "/mobile/api/v2/livreur/end";
+
+    public static final String LINK_UPDATE_DAILY_REPORT = Constant.STAT_SERVER_ADDRESS + "/mobile/api/v2/livreur/update";
+
+    public static final String LINK_DAILY_REPORT_HISTORY = Constant.STAT_SERVER_ADDRESS + "/mobile/api/v2/livreur/points";
+
 }

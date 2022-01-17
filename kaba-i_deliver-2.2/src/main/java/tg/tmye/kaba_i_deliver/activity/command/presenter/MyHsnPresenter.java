@@ -30,7 +30,7 @@ public class MyHsnPresenter implements HsnDetailsContract.Presenter {
     public boolean isLoading = false;
 
     /* repository, and view */
-   public MyHsnPresenter (HsnDetailsContract.View view, CommandRepository commandRepository) {
+    public MyHsnPresenter (HsnDetailsContract.View view, CommandRepository commandRepository) {
 
         this.view = view;
         this.commandRepository = commandRepository;
@@ -69,12 +69,12 @@ public class MyHsnPresenter implements HsnDetailsContract.Presenter {
                 try {
                     JsonObject obj = new JsonParser().parse(jsonResponse).getAsJsonObject();
 //                    JsonObject data = obj.get("data").getAsJsonObject();
-int error = obj.get("error").getAsInt();
-if (error == 0) {
-    view.setShippingDoneSuccess(true);
-} else {
-    view.setShippingDoneSuccess(false);
-}
+                    int error = obj.get("error").getAsInt();
+                    if (error == 0) {
+                        view.setShippingDoneSuccess(true);
+                    } else {
+                        view.setShippingDoneSuccess(false);
+                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();

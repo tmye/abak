@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.hsn.MyHSNDetailsActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <FrameLayout
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedscrollview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/tv_status"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin_double"
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                    android:background="@drawable/bg_already_paid_rounded"
+                    android:text="DELIVERED"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:padding="@dimen/activity_horizontal_margin"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/activity_horizontal_margin_double"
+                    android:padding="@dimen/activity_horizontal_margin_half"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left">
+
+                    <TextView
+                        android:text="@string/last_update"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="12sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin_half"/>
+
+                    <TextView
+                        android:id="@+id/tv_last_update"
+                        android:textColor="@color/black"
+                        android:text=""
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/activity_horizontal_margin_half"
+                    android:id="@+id/lny_additionnal_infos"
+                    android:orientation="vertical"
+                    android:background="@drawable/bg_green_rounded"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_additionnal_infos_title"
+                        android:layout_margin="@dimen/activity_horizontal_margin_half"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:text="@string/infos"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <!--  <Linear  -->
+                    <TextView
+                        android:id="@+id/tv_additionnal_infos"
+                        android:layout_margin="@dimen/activity_horizontal_margin_half"
+                        android:gravity="center_vertical|left"
+                        android:textColor="@color/white"
+                        android:text=""
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+
+                <!-- address -->
+                <LinearLayout
+                    android:id="@+id/rel_address"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+                    android:padding="@dimen/activity_horizontal_margin_half">
+
+                    <TextView
+                        android:layout_gravity="left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/activity_horizontal_margin_half"
+                        android:text="@string/customer_adress_label"
+                        android:textSize="16sp"
+                        android:layout_alignParentLeft="true"
+                        android:textColor="@color/black"
+                        android:layout_alignParentStart="true" />
+
+                    <TextView
+                        android:id="@+id/tv_shipping_address"
+                        android:layout_alignParentRight="true"
+                        android:gravity="bottom"
+                        android:layout_gravity="left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/activity_horizontal_margin_half"
+                        android:text=""
+                        android:textSize="13sp"
+                        android:textColor="@color/dark_gray"
+                        android:layout_alignParentEnd="true" />
+
+                </LinearLayout>
+
+                <!-- contact -->
+                <RelativeLayout
+                    android:id="@+id/rel_contact"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+                    android:padding="@dimen/activity_horizontal_margin_half">
+
+                    <TextView
+                        android:id="@+id/tv_contact_title_preview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/activity_horizontal_margin_half"
+                        android:text="@string/customer_contact"
+                        android:textSize="16sp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:textColor="@color/black"
+                        android:layout_alignParentStart="true" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_alignParentRight="true"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_contact_description_preview"
+                            android:layout_toLeftOf="@id/bt_contact_call"
+                            android:layout_centerVertical="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/activity_horizontal_margin_half"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            />
+
+                        <Button
+                            android:id="@+id/bt_contact_call"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/activity_horizontal_margin_half"
+                            android:text="@string/call"
+                            android:textStyle="bold"
+                            android:paddingLeft="@dimen/activity_horizontal_margin_half"
+                            android:paddingRight="@dimen/activity_horizontal_margin_half"
+                            android:background="@drawable/transparent_green_rounded"
+                            android:textColor="@color/white"
+                            android:textSize="13sp"
+                            />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </RelativeLayout>
+
+                <!-- location -->
+                <RelativeLayout
+                    android:id="@+id/rel_location"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+                    android:padding="@dimen/activity_horizontal_margin_half">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/activity_horizontal_margin_half"
+                        android:text="@string/customer_adress_location"
+                        android:textSize="16sp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:textColor="@color/black" />
+
+                    <Button
+                        android:id="@+id/bt_location_overview"
+                        android:layout_alignParentRight="true"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/activity_horizontal_margin_half"
+                        android:text="@string/open"
+                        android:paddingLeft="@dimen/activity_horizontal_margin_half"
+                        android:paddingRight="@dimen/activity_horizontal_margin_half"
+                        android:layout_centerVertical="true"
+                        android:textStyle="bold"
+                        android:background="@drawable/transparent_green_rounded"
+                        android:textSize="13sp"
+                        android:textColor="@color/white"
+                        android:layout_alignParentEnd="true" />
+
+                </RelativeLayout>
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/menu_food_item_spacing"
+                    android:layout_marginLeft="@dimen/menu_food_item_spacing"
+                    android:layout_marginRight="@dimen/menu_food_item_spacing"
+                    android:layout_marginTop="@dimen/menu_food_item_spacing">
+
+                    <!-- bill information -->
+
+                </androidx.cardview.widget.CardView>
+
+                <!-- action button with a changing name.
+                 1- accepter la commande text
+                 2- button action changing state
+                 3- when there is a shipping man to choose, show the available one.
+                 -->
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin">
+
+
+                    <ImageButton
+                        android:id="@+id/ib_action_postpone_shipping"
+                        android:layout_width="@dimen/ic_command_right_way_size"
+                        android:layout_height="@dimen/ic_command_right_way_size"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:background="@drawable/icon_black_circle"
+                        app:srcCompat="@drawable/ic_arrow_back_white_upward_navigation_24dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/ad_4_height" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </FrameLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

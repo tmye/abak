@@ -11,9 +11,17 @@
         android:roundIcon="@mipmap/kaba_icon_green"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.statistics.StatisticsActivity">
-
+        <activity
+            android:name=".activity.dailyreport.DailyReportChoiceActivity"
+            android:exported="true" >
         </activity>
+        <activity android:name=".activity.dailyreport.DailyReportHistoryActivity" />
+        <activity
+            android:name=".activity.dailyreport.DailyReportActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".activity.statistics.StatisticsActivity" />
         <activity android:name=".activity.command.HsnDetailsActivity" />
         <activity android:name=".activity.readygo.DeliveryReadyActivity" />
         <activity
@@ -29,11 +37,12 @@
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:exported="false"
             android:name=".activity.login.DeliverManLoginActivity"
+            android:exported="true"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -60,7 +69,9 @@
 
         <receiver android:name=".receiver.RestartBroadcastReceiver" />
 
-        <service android:exported="true" android:name=".firebase.MyDeliverManFirebaseMessagingService">
+        <service
+            android:name=".firebase.MyDeliverManFirebaseMessagingService"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -68,7 +79,9 @@
         <service
             android:name=".service.TrackingService"
             android:foregroundServiceType="location" />
-        <service android:exported="true" android:name=".firebase.MyDeliverManFirebaseInstanceIDService">
+        <service
+            android:name=".firebase.MyDeliverManFirebaseInstanceIDService"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
@@ -78,20 +91,38 @@
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
+
+    <queries>
+
+        <!-- Place inside the <queries> element. -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+
+            <category android:name="android.intent.category.BROWSABLE" />
+
+            <data android:scheme="https" />
+        </intent>
+
+        <!-- calling -->
+        <intent>
+            <action android:name="android.intent.action.DIAL" />
+
+            <data android:scheme="tel" />
+        </intent>
+    </queries>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" /> <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- wave lock -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- wave lock -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
-
 
     <uses-permission android:name="android.permission.VIBRATE" />
 

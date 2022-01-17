@@ -10,6 +10,12 @@
         app:showAsAction="always" />
 
     <item
+        android:id="@+id/action_end_point"
+        android:orderInCategory="89"
+        android:title="@string/action_end_point"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_exit_delivery_mode"
         android:orderInCategory="90"
         android:title="@string/action_delivery_mode_exit"

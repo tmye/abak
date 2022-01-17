@@ -44,6 +44,8 @@ import tg.tmye.kaba_i_deliver.activity.command.contract.MyCommandContract;
 import tg.tmye.kaba_i_deliver.activity.command.frag.HsnListFragment;
 import tg.tmye.kaba_i_deliver.activity.command.frag.RestaurantSubCommandListFragment;
 import tg.tmye.kaba_i_deliver.activity.command.presenter.MyCommandsPresenter;
+import tg.tmye.kaba_i_deliver.activity.dailyreport.DailyReportActivity;
+import tg.tmye.kaba_i_deliver.activity.dailyreport.DailyReportChoiceActivity;
 import tg.tmye.kaba_i_deliver.activity.delivery.DeliveryModeActivity;
 import tg.tmye.kaba_i_deliver.activity.login.DeliverManLoginActivity;
 import tg.tmye.kaba_i_deliver.activity.restaurant.RestaurantListActivity;
@@ -557,8 +559,15 @@ public class MyCommandsActivity extends AppCompatActivity implements MyCommandCo
             case R.id.action_exit_delivery_mode:
                 exitDeliveryMode(false);
                 break;
+            case R.id.action_end_point:
+                createPoint();
+                break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void createPoint() {
+        startActivity(new Intent(this, DailyReportChoiceActivity.class));
     }
 
     private void showStatisticsPage() {

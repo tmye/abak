@@ -261,6 +261,34 @@
     <string name="nb_total_commandes">Count Total Commandes</string>
     <string name="c_a_total_commandes">"C.A Order Total "</string>
     <string name="stats_activity">Statistics</string>
+    <string name="nb_hsn">HSN Count</string>
+    <string name="nb_commandes_app_arrival">Arrival Orders Count</string>
+    <string name="ca_commandes_app_arrival">C.A. Arrival</string>
+    <string name="nb_commandes_app_prepaid">Count Prepaid Orders</string>
+    <string name="ca_commandes_app_prepaid">C.A. Prepaid</string>
+    <string name="version" translatable="false">Version: 12Oct21</string>
+    <string name="enter_delivery_mode_warning">This app collects location data to enable order dispatching even when the app is closed or not in use..\n\nDo you accept the conditions ?</string>
+    <string name="fuel_amount_hint">Fuel amount</string>
+    <string name="communication_credit_hint">Credit</string>
+    <string name="reparation_amount_hint">Reparation</string>
+    <string name="balance_loss_hint">Losses</string>
+    <string name="parking_amount_hint">Parking fees</string>
+    <string name="various_fees_hint">Various fees</string>
+    <string name="confirm_daily_report">Confirm</string>
+    <string name="daily_report">Daily Report</string>
+    <string name="please_confirm_daily_report">Please confirm your daily report</string>
+    <string name="point_date">Date of Point</string>
+    <string name="daily_report_history">Daily Report History</string>
+    <string name="report_error">Daily report could not be made. Please verify the data you entered and do it again</string>
+    <string name="create_point">Create Point</string>
+    <string name="edit_created_point">Edit Create point</string>
+    <string name="list_of_point">List of Points</string>
+    <string name="point_action_choice">Choose your action</string>
+    <string name="report_today">Today</string>
+    <string name="action_end_point">End Point</string>
+    <string name="daily_report_question">Are you trying to modify %s report ?</string>
+    <string name="yes">Yes</string>
+    <string name="daily_report_already_confirmed">Sorry, the report of %s has already been accepted. Please contact the administration</string>
     <string-array name="days_of_week">
         <item>Sunday</item>
         <item>Monday</item>
@@ -284,11 +312,5 @@
         <item>November</item>
         <item>December</item>
     </string-array>
-    <string name="nb_hsn">HSN Count</string>
-    <string name="nb_commandes_app_arrival">Arrival Orders Count</string>
-    <string name="ca_commandes_app_arrival">C.A. Arrival</string>
-    <string name="nb_commandes_app_prepaid">Count Prepaid Orders</string>
-    <string name="ca_commandes_app_prepaid">C.A. Prepaid</string>
-    <string name="version" translatable="false">Version: 05Oct21</string>
 
 </resources>

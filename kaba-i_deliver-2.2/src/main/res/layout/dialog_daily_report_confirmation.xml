@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/activity_horizontal_margin_double"
+    >
+
+    <TextView
+        android:text="@string/please_confirm_daily_report"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+        <!-- fuel -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/fuel_amount_hint"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:id="@+id/tv_fuel_amount_hint"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:gravity="center"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:id="@+id/ed_fuel_amount"
+                android:layout_weight="3"
+                android:inputType="number"
+                android:textSize="22sp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <!-- credit -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/communication_credit_hint"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:id="@+id/tv_communication_credit_hint"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:gravity="center"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:id="@+id/ed_communication_credit"
+                android:layout_weight="3"
+                android:inputType="number"
+                android:textSize="22sp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <!-- reparation -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/reparation_amount_hint"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:id="@+id/tv_reparation_amount_hint"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:gravity="center"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:id="@+id/ed_reparation_amount"
+                android:layout_weight="3"
+                android:inputType="number"
+                android:textSize="22sp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <!-- balance loss -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/balance_loss_hint"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:id="@+id/tv_losses_amount_hint"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:gravity="center"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:id="@+id/ed_losses_amount"
+                android:layout_weight="3"
+                android:inputType="number"
+                android:textSize="22sp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <!-- parking fees  -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/parking_amount_hint"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:id="@+id/tv_parking_amount_hint"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:gravity="center"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:id="@+id/ed_parking_amount"
+                android:layout_weight="3"
+                android:inputType="number"
+                android:layout_width="0dp"
+                android:textSize="22sp"
+                android:layout_height="wrap_content"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <!-- various -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/various_fees_hint"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:id="@+id/tv_various_fees_hint"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:gravity="center"
+                android:layout_margin="@dimen/activity_horizontal_margin_half"
+                android:id="@+id/ed_various_fees"
+                android:layout_weight="3"
+                android:inputType="number"
+                android:layout_width="0dp"
+                android:textSize="22sp"
+                android:layout_height="wrap_content"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_horizontal_margin_triple"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/bt_confirm_daily_report"
+                android:textColor="@color/white"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:padding="@dimen/activity_horizontal_margin_half"
+                android:background="@drawable/bg_green_rounded"
+                android:text="@string/ok"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>

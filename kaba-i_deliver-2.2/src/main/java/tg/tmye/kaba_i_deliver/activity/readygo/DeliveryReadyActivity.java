@@ -1,6 +1,7 @@
 package tg.tmye.kaba_i_deliver.activity.readygo;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentTransaction;
@@ -9,8 +10,10 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import tg.tmye.kaba_i_deliver.R;
@@ -38,6 +41,40 @@ public class DeliveryReadyActivity extends AppCompatActivity implements Delivery
         bt_go_online.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                /* tell the user how he is going to be controlled if he press ok on here. */
+                showDialog();
+
+            }
+        });
+
+        repository = new CommandRepository(this);
+        presenter = new DeliveryReadyModePresenter(this, repository);
+    }
+
+    private void showDialog () {
+
+        // show this all the time, no matter what or when
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        View view = LayoutInflater.from(this).inflate(R.layout.tracking_warning, null, false);
+
+        TextView bt_cancel = view.findViewById(R.id.bt_cancel);
+        TextView bt_confirm = view.findViewById(R.id.bt_confirm);
+
+        alertDialogBuilder.setView(view);
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+
+        bt_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+        bt_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 /* update shared preferences and go to command activity */
                 // check if you have geo-loc permission
                 if (ActivityCompat.checkSelfPermission(DeliveryReadyActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(DeliveryReadyActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -45,12 +82,13 @@ public class DeliveryReadyActivity extends AppCompatActivity implements Delivery
                 } else {
                     requestGpsLocationPermission();
                 }
+                alertDialog.dismiss();
             }
         });
-
-        repository = new CommandRepository(this);
-        presenter = new DeliveryReadyModePresenter(this, repository);
+        alertDialog.show();
     }
+
+
 
     private void requestGpsLocationPermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {

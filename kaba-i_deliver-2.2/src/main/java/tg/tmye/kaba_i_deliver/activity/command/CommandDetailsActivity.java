@@ -66,7 +66,6 @@ public class CommandDetailsActivity extends AppCompatActivity implements Command
 
     NestedScrollView nestedscrollview;
 
-
     TextView tv_bottom_explain;
 
     /* static data */

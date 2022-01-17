@@ -279,5 +279,8 @@
     <string name="nb_commandes_app_prepaid">Nb. Commandes PP</string>
     <string name="ca_commandes_app_prepaid">C.A commandes PP</string>
     <string name="refund">Rembourser</string>
+    <string name="enter_delivery_mode_warning">Cette application se sert de la geolocalisation pour améliorer la distribution automatique des commandes. \n\nAcceptez vous les conditions ?</string>
+    <string name="daily_report_question">Essayez vous de modifier le rapport du %s ?</string>
+    <string name="yes">Oui</string>
 
 </resources>

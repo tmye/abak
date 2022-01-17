@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.stats.StatsActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:background="@color/colorPrimary">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
+            app:contentScrim="@color/colorPrimary"
+            app:statusBarScrim="@android:color/transparent"
+            app:titleEnabled="false">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                app:navigationIcon="@drawable/ic_kaba_main_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="@string/stats_activity"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay"/>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lny_date"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_from_date"
+                android:background="@drawable/bg_already_paid_rounded"
+                android:textColor="@color/white"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:padding="@dimen/activity_horizontal_margin_half"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:text="12-07-2021"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_to_date"
+                android:textColor="@color/white"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:padding="@dimen/activity_horizontal_margin_half"
+                android:background="@drawable/bg_green_rounded"
+                android:text="15-07-2021"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/bt_ok"
+                android:text="OK"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_half"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_below="@+id/lny_date"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            >
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <!-- add a resume cardview -->
+                        <androidx.cardview.widget.CardView
+                            android:layout_below="@+id/lny_date"
+                            app:cardBackgroundColor="@color/white"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            >
+
+                            <LinearLayout
+                                android:background="?selectableItemBackground"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/activity_horizontal_margin">
+
+                                <!-- date -->
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+
+                                    <TextView
+                                        android:id="@+id/tv_all_date_content"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_horizontal"
+                                        android:maxLines="2"
+                                        android:textAllCaps="true"
+                                        android:text="@string/total_"
+                                        android:textColor="@color/colorPrimary"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold" />
+                                </RelativeLayout>
+
+                                <!-- stats page -->
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1px"
+                                    android:layout_margin="@dimen/activity_horizontal_margin_half"
+                                    android:background="@color/dark_gray" />
+
+                                <!-- app command -->
+
+                                <androidx.appcompat.widget.LinearLayoutCompat
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:gravity="center_horizontal"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_horizontal"
+                                        android:layout_weight="1"
+                                        android:gravity="center_horizontal"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/tv_commands_label"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textStyle="bold"
+                                            android:textColor="@color/colorPrimary"
+                                            android:text="@string/nb_commands"
+                                            android:textSize="@dimen/best_seller_day_textsize" />
+
+                                        <TextView
+                                            android:id="@+id/tv_commands_count"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="@dimen/activity_horizontal_margin"
+                                            android:text="-"
+                                            android:textColor="@color/green_"
+                                            android:textSize="@dimen/best_seller_day_textsize"
+                                            android:textStyle="bold" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_horizontal"
+                                        android:layout_weight="1"
+                                        android:gravity="center_horizontal"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/tv_foods_label"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="@string/command_c_a"
+                                            android:textStyle="bold"
+                                            android:textColor="@color/colorPrimary"
+                                            android:textSize="@dimen/best_seller_day_textsize" />
+
+                                        <TextView
+                                            android:id="@+id/tv_command_ca"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="@dimen/activity_horizontal_margin"
+                                            android:text="-"
+                                            android:textStyle="bold"
+                                            android:textColor="@color/green_"
+                                            android:textSize="@dimen/best_seller_day_textsize" />
+
+                                    </LinearLayout>
+
+                                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                                <!-- hsn command -->
+
+                                <androidx.appcompat.widget.LinearLayoutCompat
+                                    android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:gravity="center_horizontal"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_horizontal"
+                                        android:layout_weight="1"
+                                        android:gravity="center_horizontal"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/tv_hsn_label"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="@string/nb_hsn"
+                                            android:textStyle="bold"
+                                            android:textColor="@color/colorPrimary"
+                                            android:textSize="@dimen/best_seller_day_textsize" />
+
+                                        <TextView
+                                            android:id="@+id/tv_hsn_count"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="@dimen/activity_horizontal_margin"
+                                            android:text="-"
+                                            android:textStyle="bold"
+                                            android:textColor="@color/green_"
+                                            android:textSize="@dimen/best_seller_day_textsize" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_horizontal"
+                                        android:layout_weight="1"
+                                        android:gravity="center_horizontal"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/tv_hsn_ca_label"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="@string/hsn_c_a"
+                                            android:textStyle="bold"
+                                            android:textColor="@color/colorPrimary"
+                                            android:textSize="@dimen/best_seller_day_textsize" />
+
+                                        <TextView
+                                            android:id="@+id/tv_hsn_ca"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="@dimen/activity_horizontal_margin"
+                                            android:text="-"
+                                            android:textStyle="bold"
+                                            android:textColor="@color/green_"
+                                            android:textSize="@dimen/best_seller_day_textsize" />
+
+                                    </LinearLayout>
+
+                                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <tg.tmye.kaba.partner.cviews.OffRecyclerview
+                        android:id="@+id/recyclerview"
+                       android:layout_marginTop="@dimen/activity_horizontal_margin"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                <TextView
+                    android:id="@+id/tv_no_data_message"
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    android:gravity="center"
+                    android:text="@string/there_is_no_command"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                </FrameLayout>
+        </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

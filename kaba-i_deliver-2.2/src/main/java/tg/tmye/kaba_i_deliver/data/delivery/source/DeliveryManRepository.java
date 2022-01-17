@@ -279,4 +279,60 @@ public class DeliveryManRepository {
         kabaShippingMan.vehicle_serial_code = sp.getString(Config.VEHICULE_SERIAL, "");
         return kabaShippingMan;
     }
+
+    public void uploadDailyReport(int id, int fuel, int credit, int reparation, int losses, int parking, int various, NetworkRequestThreadBase.NetRequestIntf<String> netRequestIntf) {
+
+        String authToken = ((MyKabaDeliverApp)context.getApplicationContext()).getAuthToken();
+        JSONObject obj = new JSONObject();
+        try {
+            if (id > 0)
+                obj.put("id", id);
+            obj.put("various", various);
+            obj.put("fuel_amount", fuel);
+            obj.put("communication_credit", credit);
+            obj.put("reparation_amount", reparation);
+            obj.put("balance_loss", losses);
+            obj.put("parking_amount", parking);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        networkRequestThreadBase.postJsonDataWithToken(
+
+                id > 0 ? Config.LINK_UPDATE_DAILY_REPORT : Config.LINK_END_DAILY_REPORT,
+                obj.toString(), authToken, netRequestIntf);
+    }
+
+    public void updateDailyReport(int point_id, int fuel, int credit, int reparation, int losses, int parking, int various, NetworkRequestThreadBase.NetRequestIntf<String> netRequestIntf) {
+
+        String authToken = ((MyKabaDeliverApp)context.getApplicationContext()).getAuthToken();
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("point_id", point_id);
+            obj.put("various", various);
+            obj.put("fuel_amount", fuel);
+            obj.put("communication_credit", credit);
+            obj.put("reparation_amount", reparation);
+            obj.put("balance_loss", losses);
+            obj.put("parking_amount", parking);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        networkRequestThreadBase.postJsonDataWithToken(Config.LINK_UPDATE_DAILY_REPORT, obj.toString(), authToken, netRequestIntf);
+    }
+
+    public void searchHistoryFromToDate(String fromDate, String toDate, NetworkRequestThreadBase.NetRequestIntf<String> netRequestIntf) {
+        String authToken = ((MyKabaDeliverApp)context.getApplicationContext()).getAuthToken();
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("start_date", fromDate);
+            obj.put("end_date", toDate);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        networkRequestThreadBase.postJsonDataWithToken(Config.LINK_DAILY_REPORT_HISTORY, obj.toString(), authToken, netRequestIntf);
+
+    }
 }

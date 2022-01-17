@@ -1,1 +1,1 @@
-include ':kaba-i_deliver-2.2', ':kaba-restaurant-public'
+include ':kaba-i_deliver-2.2', ':kaba-partner', "filepicker"

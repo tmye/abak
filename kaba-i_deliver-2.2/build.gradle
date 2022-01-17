@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 31
@@ -16,8 +17,8 @@ android {
         applicationId "tg.tmye.kaba_i_deliver"
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 18
-        versionName "1.8"
+        versionCode 20
+        versionName "2.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 

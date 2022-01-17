@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "820158652784",
+    "firebase_url": "https://kaba-restaurant.firebaseio.com",
+    "project_id": "kaba-restaurant",
+    "storage_bucket": "kaba-restaurant.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:820158652784:android:76035593a6219d93",
+        "android_client_info": {
+          "package_name": "tg.tmye.kaba.restaurant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "820158652784-523vdc3qob73h2npa1k7pcga1cn27p5d.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "820158652784-523vdc3qob73h2npa1k7pcga1cn27p5d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaFWPjQDD7rOLW0fbKFNPZmBxzzGgLUX4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
