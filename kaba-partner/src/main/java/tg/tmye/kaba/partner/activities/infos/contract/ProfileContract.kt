@@ -2,6 +2,7 @@ package tg.tmye.kaba.partner.activities.infos.contract
 
 import tg.tmye.kaba.partner.BasePresenter
 import tg.tmye.kaba.partner.BaseView
+import tg.tmye.kaba.partner.data.Restaurant.RestaurantEntity
 import tg.tmye.kaba.partner.data.hsn.HSN
 
 /**
@@ -13,13 +14,14 @@ interface ProfileContract {
     interface View : BaseView<Presenter?> {
         fun showIsLoading(isLoading: Boolean)
         /* different list of hsn */
-        fun inflateRestaurantProfileInfo(hsns: List<HSN?>?)
+        fun inflateRestaurantProfileInfo(restaurant: RestaurantEntity)
         fun sysError()
         fun networkError()
     }
 
     interface Presenter : BasePresenter {
         /* update commands data basically */
-        fun loadRestaurantProfileInfo()
+        fun loadPartnerProfileInfo()
+        fun updatePartnerProfile(restaurant: RestaurantEntity)
     }
 }

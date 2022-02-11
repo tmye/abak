@@ -9,6 +9,8 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import tg.tmye.kaba_i_deliver._commons.MultiThreading.NetworkRequestThreadBase;
@@ -71,12 +73,13 @@ public class DailyReportHistoryPresenter implements DailyReportHistoryContract.P
                     try {
                         ILog.print(jsonResponse);
                         /* deflate all elements and send the commands list to where it should */
-                        JsonArray obj = new JsonParser().parse(jsonResponse).getAsJsonArray();
-//                        JsonObject data = obj; //.get("data").getAsJsonObject();
+                        JsonObject obj = new JsonParser().parse(jsonResponse).getAsJsonObject();
+             //           JsonObject data = obj.get("data").getAsJsonObject();
                         DailyReport[] dailyReports =
-                                gson.fromJson(obj/*.get("daily_report")*/, new TypeToken<DailyReport[]>() {
+                                gson.fromJson(obj.get("data").getAsJsonArray()/*.get("daily_report")*/, new TypeToken<DailyReport[]>() {
                                 }.getType());
                         List<DailyReport> ddailyReport = new ArrayList<>(Arrays.asList(dailyReports));
+                        Collections.reverse(ddailyReport); // reverse result
                         view.showDailyReportHistorysResult(ddailyReport);
                         view.showLoading(false);
                     } catch (Exception e) {

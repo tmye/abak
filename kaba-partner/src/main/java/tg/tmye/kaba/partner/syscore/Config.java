@@ -132,5 +132,8 @@ public class Config {
     // get restaurant calendar
     public static final String LINK_GET_RESTAURANT_CALENDAR =  Constant.SERVER_ADDRESS + "/resto/api/schedule/get";
 
-    public static final String RESTAURANT_PROFILE_ENDPOINT = Constant.SERVER_ADDRESS + "";
+    public static final String RESTAURANT_PROFILE_ENDPOINT_UPDATE = Constant.SERVER_ADDRESS + "/resto/api/profil/update";
+
+    public static final String RESTAURANT_PROFILE_ENDPOINT_GET_INFOS = Constant.SERVER_ADDRESS + "/resto/api/profil";
+
 }

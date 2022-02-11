@@ -282,5 +282,14 @@
     <string name="enter_delivery_mode_warning">Cette application se sert de la geolocalisation pour améliorer la distribution automatique des commandes. \n\nAcceptez vous les conditions ?</string>
     <string name="daily_report_question">Essayez vous de modifier le rapport du %s ?</string>
     <string name="yes">Oui</string>
+    <string name="cooking">PREPARATION</string>
+    <string name="shipping">LIVRAISON</string>
+    <string name="others">AUTRE</string>
+    <string name="title_waiting">ATTENTE</string>
+    <string name="title_others">AUTRE</string>
+    <string name="title_delivered">LIVRER</string>
+    <string name="title_shipping">LIVRAISON</string>
+    <string name="title_cooking">PREPARATION</string>
+    <string name="title_rejected">REJETEE</string>
 
 </resources>

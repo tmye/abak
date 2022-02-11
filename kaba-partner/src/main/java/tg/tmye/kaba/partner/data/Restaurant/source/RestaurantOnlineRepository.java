@@ -5,10 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
@@ -20,12 +18,9 @@ import java.util.Map;
 import tg.tmye.kaba.partner.ILog;
 import tg.tmye.kaba.partner._commons.MultiThreading.DatabaseRequestThreadBase;
 import tg.tmye.kaba.partner._commons.MultiThreading.NetworkRequestThreadBase;
-import tg.tmye.kaba.partner.activities.home.HomeActivity;
 import tg.tmye.kaba.partner.data.Restaurant.RestaurantEntity;
 import tg.tmye.kaba.partner.syscore.Config;
-import tg.tmye.kaba.partner.syscore.Constant;
 import tg.tmye.kaba.partner.syscore.MyRestaurantApp;
-import tg.tmye.kaba.partner.R;
 
 
 /**
@@ -187,9 +182,32 @@ public class RestaurantOnlineRepository {
         JSONObject obj = new JSONObject();
 
         networkRequestThreadBase.postJsonDataWithToken(
-                Config.RESTAURANT_PROFILE_ENDPOINT,
+                Config.RESTAURANT_PROFILE_ENDPOINT_GET_INFOS,
                 obj.toString(), authToken, netRequestIntf);
     }
+
+    public void updatePartnerProfile(RestaurantEntity restaurantEntity,@NotNull NetworkRequestThreadBase.NetRequestIntf<String> netRequestIntf) {
+        String authToken = ((MyRestaurantApp)context.getApplicationContext()).getAuthToken();
+        JSONObject obj = new JSONObject();
+
+        try {
+            obj.put("name", ""+restaurantEntity.name);
+            obj.put("description", ""+restaurantEntity.description);
+            obj.put("address", ""+restaurantEntity.address);
+            obj.put("main_contact", ""+restaurantEntity.main_contact);
+            obj.put("email", ""+restaurantEntity.email);
+            obj.put("pic", ""+restaurantEntity.pic);
+            obj.put("theme_pic", ""+restaurantEntity.theme_pic);
+            obj.put("gps_location", ""+restaurantEntity.location);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        networkRequestThreadBase.postJsonDataWithToken(
+                Config.RESTAURANT_PROFILE_ENDPOINT_UPDATE,
+                obj.toString(), authToken, netRequestIntf);
+    }
+
 }
 
 

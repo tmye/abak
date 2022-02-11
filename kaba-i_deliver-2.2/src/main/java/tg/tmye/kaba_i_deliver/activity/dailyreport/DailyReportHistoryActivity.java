@@ -33,14 +33,11 @@ import java.util.Date;
 import java.util.List;
 
 import tg.tmye.kaba_i_deliver.R;
-import tg.tmye.kaba_i_deliver.activity.command.CommandDetailsActivity;
 import tg.tmye.kaba_i_deliver.activity.dailyreport.contract.DailyReportHistoryContract;
 import tg.tmye.kaba_i_deliver.activity.dailyreport.presenter.DailyReportHistoryPresenter;
 import tg.tmye.kaba_i_deliver.activity.delivery.contract.DeliveryModeContract;
 import tg.tmye.kaba_i_deliver.cviews.dialog.DailyReportEditConfirmationDialog;
 import tg.tmye.kaba_i_deliver.cviews.dialog.LoadingDialogFragment;
-import tg.tmye.kaba_i_deliver.cviews.dialog.RefundConfirmationDialog;
-import tg.tmye.kaba_i_deliver.data.command.source.CommandRepository;
 import tg.tmye.kaba_i_deliver.data.dailyreport.DailyReport;
 import tg.tmye.kaba_i_deliver.data.delivery.source.DeliveryManRepository;
 
@@ -250,9 +247,11 @@ public class DailyReportHistoryActivity extends AppCompatActivity implements Vie
 
     }
 
-    public void editReport(int id) {
+    public void editReport(DailyReport report) {
         // start editing activity
-        startActivity(new Intent(DailyReportHistoryActivity.this, DailyReportActivity.class));
+        Intent intent = new Intent(DailyReportHistoryActivity.this, DailyReportActivity.class);
+        intent.putExtra("report", report);
+        startActivity(intent);
     }
 
     public static class DatePickerFragment extends DialogFragment
@@ -349,12 +348,13 @@ public class DailyReportHistoryActivity extends AppCompatActivity implements Vie
         @Override
         public void onBindViewHolder(@NonNull DailyReportHistoryActivity.DailyReportHistoryAdapter.ViewHolder holder, int position) {
             DailyReport dailyReport = data.get(position);
-            holder.tv_communication_credit.setText(String.valueOf(dailyReport.communication_credit));
-            holder.tv_fuel_amount.setText(String.valueOf(dailyReport.fuel_amount));
-            holder.tv_losses_amount.setText(String.valueOf(dailyReport.balance_loss));
-            holder.tv_parking_amount.setText(String.valueOf(dailyReport.parking_amount));
-            holder.tv_reparation_amount.setText(String.valueOf(dailyReport.reparation_amount));
+            holder.tv_communication_credit.setText(String.valueOf(dailyReport.communicationCredit));
+            holder.tv_fuel_amount.setText(String.valueOf(dailyReport.fuelAmount));
+            holder.tv_losses_amount.setText(String.valueOf(dailyReport.lossAmount));
+            holder.tv_parking_amount.setText(String.valueOf(dailyReport.parkingAmount));
+            holder.tv_reparation_amount.setText(String.valueOf(dailyReport.reparationAmount));
             holder.tv_various_fees.setText(String.valueOf(dailyReport.various));
+            holder.tv_date_content.setText(String.valueOf(dailyReport.makeAt));
 
             holder.itemView.setOnClickListener(new DailyReportHistoryActivity.DailyReportOnclickListener(dailyReport));
         }
@@ -433,7 +433,7 @@ public class DailyReportHistoryActivity extends AppCompatActivity implements Vie
                 AlertDialog.Builder builder = new AlertDialog.Builder(DailyReportHistoryActivity.this, R.style.AlertDialogTheme);
                 builder
                         .setTitle(R.string.daily_report)
-                        .setMessage(getString(R.string.daily_report_already_confirmed, dailyReport.date))
+                        .setMessage(getString(R.string.daily_report_already_confirmed, dailyReport.makeAt))
                         .setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 // User cancelled the dialog

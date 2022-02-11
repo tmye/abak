@@ -287,6 +287,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     /* go to an activity to edit restaurant basic informations */
     private void editRestaurantProfileInformations() {
         startActivity(new Intent(this, ProfileActivity.class));
+//        mToast("This is feature is under construction. Will be available soon.");
     }
 
     private void showHSN() {

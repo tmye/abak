@@ -130,7 +130,7 @@ public class CommandRepository {
         String authToken = ((MyKabaDeliverApp)context.getApplicationContext()).getAuthToken();
         JSONObject command_obj = new JSONObject();
         try {
-            command_obj.put("id", hsn_id);
+            command_obj.put("hsn_id", hsn_id);
         } catch (JSONException e) {
             e.printStackTrace();
         }

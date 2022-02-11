@@ -35,7 +35,6 @@ public interface MyHSNContract {
 
         /* update commands data basically */
         void loadActualHSNList ();
-
         void cancelHSN(int hsn_id);
     }
 

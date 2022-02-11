@@ -34,6 +34,7 @@ public class RestaurantEntity implements Parcelable {
 
     public int open_type;
 
+    public String location;
 
     public RestaurantEntity() {
     }
@@ -50,6 +51,10 @@ public class RestaurantEntity implements Parcelable {
         email = in.readString();
         main_contact = in.readString();
         working_hour = in.readString();
+        is_open = in.readInt();
+        open_type = in.readInt();
+        location = in.readString();
+        location = in.readString();
     }
 
     @Override
@@ -64,6 +69,10 @@ public class RestaurantEntity implements Parcelable {
         dest.writeString(email);
         dest.writeString(main_contact);
         dest.writeString(working_hour);
+        dest.writeInt(is_open);
+        dest.writeInt(open_type);
+        dest.writeString(location);
+        dest.writeString(location);
     }
 
     @Override
@@ -82,56 +91,4 @@ public class RestaurantEntity implements Parcelable {
             return new RestaurantEntity[size];
         }
     };
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getPic() {
-        return pic;
-    }
-
-    public void setPic(String pic) {
-        this.pic = pic;
-    }
-
-    public String getTheme_pic() {
-        return theme_pic;
-    }
-
-    public void setTheme_pic(String theme_pic) {
-        this.theme_pic = theme_pic;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public long getContactId() {
-        return contactId;
-    }
-
-    public void setContactId(long contactId) {
-        this.contactId = contactId;
-    }
-
-
-
-
 }

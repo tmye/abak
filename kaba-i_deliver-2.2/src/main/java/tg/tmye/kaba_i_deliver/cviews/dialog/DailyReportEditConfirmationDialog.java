@@ -42,10 +42,10 @@ public class DailyReportEditConfirmationDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme);
         builder
                 .setTitle(R.string.confirmation)
-                .setMessage(getString(R.string.daily_report_question, report.date))
+                .setMessage(getString(R.string.daily_report_question, report.makeAt))
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        ((DailyReportHistoryActivity)getActivity()).editReport(report.id);
+                        ((DailyReportHistoryActivity)getActivity()).editReport(report);
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

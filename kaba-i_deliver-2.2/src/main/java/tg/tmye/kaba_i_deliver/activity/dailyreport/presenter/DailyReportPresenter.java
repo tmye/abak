@@ -58,8 +58,8 @@ public class DailyReportPresenter implements DailyReportContract.Presenter {
                         ILog.print(jsonResponse);
                         /* deflate all elements and send the commands list to where it should */
                         JsonObject obj = new JsonParser().parse(jsonResponse).getAsJsonObject();
-//                        JsonObject data = obj.get("data").getAsJsonObject();
-                        int id_point = obj.get("id").getAsInt();
+                        JsonObject data = obj.get("data").getAsJsonObject();
+                        int id_point = data.get("id").getAsInt();
                         view.showLoading(false);
                         if (id_point > 0)
                             view.dailyReportSuccess(true);
@@ -76,7 +76,6 @@ public class DailyReportPresenter implements DailyReportContract.Presenter {
 
     @Override
     public void start() {
-
     }
 
 }

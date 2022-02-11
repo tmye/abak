@@ -17,7 +17,6 @@ import tg.tmye.kaba_i_deliver.activity.dailyreport.presenter.DailyReportPresente
 import tg.tmye.kaba_i_deliver.data.delivery.source.DeliveryManRepository
 import tg.tmye.kaba_i_deliver.data.dailyreport.DailyReport
 import tg.tmye.kaba_i_deliver.cviews.dialog.DailyReportConfirmationDialogFragment
-import tg.tmye.kaba_i_deliver.activity.dailyreport.DailyReportHistoryActivity
 import tg.tmye.kaba_i_deliver.activity.delivery.contract.DeliveryModeContract
 import tg.tmye.kaba_i_deliver.cviews.dialog.LoadingDialogFragment
 
@@ -36,6 +35,8 @@ class DailyReportActivity : AppCompatActivity(), View.OnClickListener, DailyRepo
     var loadingDialogFragment: LoadingDialogFragment? = null
     private var data: DailyReport? = null
     private var today = false
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_daily_report)
@@ -45,16 +46,16 @@ class DailyReportActivity : AppCompatActivity(), View.OnClickListener, DailyRepo
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_upward_navigation_24dp)
         initViews()
-        data = DailyReport()
         data = intent.getParcelableExtra("report")
         if (data != null) {
             today = false
             inflateData()
         } else {
+            data = DailyReport()
             today = true
         }
         if (!today) {
-            tv_point_date!!.text = data!!.date.toString()
+            tv_point_date!!.text = data!!.makeAt.toString()
         } else {
             tv_point_date!!.setText(R.string.report_today)
         }
@@ -75,11 +76,11 @@ class DailyReportActivity : AppCompatActivity(), View.OnClickListener, DailyRepo
     }
 
     private fun inflateData() {
-        ed_fuel!!.setText(data!!.fuel_amount.toString())
-        ed_credit!!.setText(data!!.communication_credit.toString())
-        ed_reparation!!.setText(data!!.reparation_amount.toString())
-        ed_losses!!.setText(data!!.balance_loss.toString())
-        ed_parking!!.setText(data!!.parking_amount.toString())
+        ed_fuel!!.setText(data!!.fuelAmount.toString())
+        ed_credit!!.setText(data!!.communicationCredit.toString())
+        ed_reparation!!.setText(data!!.reparationAmount.toString())
+        ed_losses!!.setText(data!!.lossAmount.toString())
+        ed_parking!!.setText(data!!.parkingAmount.toString())
         ed_various!!.setText(data!!.various.toString())
     }
 

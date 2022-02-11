@@ -30,6 +30,13 @@ import tg.tmye.kaba_i_deliver.data.hsn.HSN;
 public class HsnListFragment extends Fragment {
 
 
+    public static final int WAITING = 0;
+    public static final int COOKING = 1;
+    public static final int SHIPPING = 2;
+    public static final int DELIVERED = 3;
+    public static final int REJECTED = 4;
+    public static final int CANCELLED = 5;
+
     private static final String DATA_1 = "subMenu";
     private OnFragmentInteractionListener mListener;
     private CommandListSpacesItemDecoration commandListDecorator;

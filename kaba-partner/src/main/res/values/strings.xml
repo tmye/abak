@@ -61,7 +61,7 @@
     <string name="kaba_man_phone">KabaMan Phone</string>
     <string name="kaba_man_photo">Photo</string>
     <string name="statistics_of_restaurant">Statistics</string>
-    <string name="quantity_sold">Orders</string>
+    <string name="quantity_sold">Sold Items</string>
     <string name="price_sold">TODAY SALES</string>
     <string name="quantity_sold_value">---</string>
     <string name="price_sold_value">---</string>
@@ -343,6 +343,10 @@
     <string name="check">Check</string>
     <string name="your_location">Location: </string>
     <string name="restaurant_profile">Restaurant Profile</string>
+    <string name="partner_address">Address</string>
+    <string name="partner_address_hint">Partner\'s address</string>
+    <string name="google_maps_not_installed">Maps not installed on this device</string>
+
     <string-array name="days_of_week">
         <item>Sunday</item>
         <item>Monday</item>

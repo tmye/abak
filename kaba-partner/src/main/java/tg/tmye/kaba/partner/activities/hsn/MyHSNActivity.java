@@ -254,7 +254,6 @@ public class MyHSNActivity extends LoadingIsOkActivtity implements MyHSNContract
                             rejected_hsn = new ArrayList<>();
                         rejected_hsn.add(hsn);
                         break;
-
                 }
             }
         });

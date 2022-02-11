@@ -34,6 +34,7 @@ import java.util.List;
 import tg.tmye.kaba_i_deliver.R;
 import tg.tmye.kaba_i_deliver._commons.utils.UtilFunctions;
 import tg.tmye.kaba_i_deliver.activity.command.contract.HsnDetailsContract;
+import tg.tmye.kaba_i_deliver.activity.command.frag.HsnListFragment;
 import tg.tmye.kaba_i_deliver.activity.command.presenter.MyHsnPresenter;
 import tg.tmye.kaba_i_deliver.cviews.dialog.InfoDialogFragment;
 import tg.tmye.kaba_i_deliver.cviews.dialog.LoadingDialogFragment;
@@ -194,8 +195,8 @@ public class HsnDetailsActivity  extends AppCompatActivity implements HsnDetails
                 bt_contact_call.setText(getString(R.string.call)+(hsn.phone_number != null ? (" "+hsn.phone_number) : ""));
                 bt_contact_call.setOnClickListener(new HsnDetailsActivity.OnContactViewClickListener(HsnDetailsActivity.this, hsn.phone_number));
                 tv_shipping_address.setText(hsn.shipping_address);
-                tv_status.setText(hsn.state == 0? getString(R.string.waiting) : getString(R.string.delivered));
-                tv_status.setBackgroundResource(hsn.state == 0? R.drawable.bg_green_rounded : R.drawable.bg_already_paid_rounded);
+//                tv_status.setText(hsn.state == 0? getString(R.string.waiting) : getString(R.string.delivered));
+//                tv_status.setBackgroundResource(hsn.state == 0? R.drawable.bg_green_rounded : R.drawable.bg_already_paid_rounded);
                 if (hsn.shipping_location_link == null || "".equals(hsn.shipping_location_link.trim())) {
                     rel_location.setVisibility(View.GONE);
                 } else {
@@ -232,6 +233,41 @@ public class HsnDetailsActivity  extends AppCompatActivity implements HsnDetails
                 } else {
                     lny_additionnal_infos.setVisibility(View.GONE);
                 }
+                
+                //
+
+                switch (hsn.state){
+                    case HsnListFragment.REJECTED: // rejected
+                        tv_status.setText(getString(R.string.hsn_rejected));
+                        tv_status.setBackgroundColor(getResources().getColor(R.color.command_state_4));
+                        break;
+                    case HsnListFragment.WAITING: // waiting
+                        tv_status.setText(getString(R.string.hsn_waiting));
+                        tv_status.setBackgroundColor(getResources().getColor(R.color.command_state_0));
+                        break;
+                    case HsnListFragment.COOKING: // cooking
+                        tv_status.setText(getString(R.string.hsn_cooking));
+                        tv_status.setBackgroundColor(getResources().getColor(R.color.command_state_1));
+                        break;
+                    case HsnListFragment.SHIPPING:  // shipping
+                        tv_status.setText(getString(R.string.hsn_shipping));
+                        tv_status.setBackgroundColor(getResources().getColor(R.color.command_state_2));
+                        ib_action_postpone_shipping.setBackgroundResource(R.drawable.icon_red_circle);
+                        ib_action_shipping_done.setBackgroundResource(R.drawable.icon_green_circle);
+                        /* set up color of the background of the button */
+                        ib_action_shipping_done.setVisibility(View.VISIBLE);
+                        ib_action_postpone_shipping.setVisibility(View.VISIBLE);
+                        /* customer contact */
+//                        tv_contact_description_preview.setText(command.shipping_address.phone_number);
+                        ib_action_postpone_shipping.setOnClickListener(new HsnDetailsActivity.OnActionButtonClickListener(hsn));
+                        ib_action_shipping_done.setOnClickListener(new HsnDetailsActivity.OnActionButtonClickListener(hsn));
+                        break;
+                    case HsnListFragment.DELIVERED: // delivered
+                        tv_status.setText(getString(R.string.hsn_delivered));
+                        tv_status.setBackgroundColor(getResources().getColor(R.color.command_state_3));
+                        break;
+                }
+                
             }
         });
     }

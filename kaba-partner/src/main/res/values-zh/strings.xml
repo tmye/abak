@@ -78,7 +78,7 @@
     <string name="kaba_man">送达员</string>
     <string name="kaba_man_phone">送达员电话</string>
     <string name="kaba_man_photo">图像</string>
-    <string name="quantity_sold">订单</string>
+    <string name="quantity_sold">出售数量</string>
     <string name="price_sold">今日出售</string>
     <string name="is_open">开业</string>
     <string name="is_opened">开业</string>

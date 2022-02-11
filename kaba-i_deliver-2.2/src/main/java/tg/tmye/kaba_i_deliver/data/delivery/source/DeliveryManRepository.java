@@ -285,8 +285,7 @@ public class DeliveryManRepository {
         String authToken = ((MyKabaDeliverApp)context.getApplicationContext()).getAuthToken();
         JSONObject obj = new JSONObject();
         try {
-            if (id > 0)
-                obj.put("id", id);
+            obj.put("point_id", id > 0 ? id : 0);
             obj.put("various", various);
             obj.put("fuel_amount", fuel);
             obj.put("communication_credit", credit);
@@ -298,7 +297,6 @@ public class DeliveryManRepository {
         }
 
         networkRequestThreadBase.postJsonDataWithToken(
-
                 id > 0 ? Config.LINK_UPDATE_DAILY_REPORT : Config.LINK_END_DAILY_REPORT,
                 obj.toString(), authToken, netRequestIntf);
     }

@@ -217,7 +217,7 @@
     <string name="kaba_man_phone">Numéro du Livreur</string>
     <string name="kaba_man_photo">Photo</string>
     <string name="statistics_of_restaurant">Statistiques</string>
-    <string name="quantity_sold">Commandes</string>
+    <string name="quantity_sold">Elements Vendus</string>
     <string name="price_sold">C.A du jour</string>
     <string name="quantity_sold_value">--</string>
     <string name="price_sold_value">---</string>
@@ -300,4 +300,7 @@
     <string name="this_is_your_menu_as_the_client_sees_it_please_confirm">Voici votre menu comme les clients le voit. Confirmez ou modifiez</string>
     <string name="i_delete_hsn_reason">Voulez vous supprimer cette livraison?</string>
     <string name="address_">Adresse</string>
+
+    <string name="partner_address">Adresse</string>
+    <string name="partner_address_hint">Adresse du Partenaire</string>
 </resources>

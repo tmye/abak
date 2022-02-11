@@ -80,6 +80,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+     <!--   <activity
+            android:name=".activities.geo.GeoActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+     -->
         <activity
             android:name=".activities.commands.CommandDetailsActivity"
             android:screenOrientation="portrait" />

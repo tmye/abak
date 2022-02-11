@@ -231,17 +231,16 @@
                             android:layout_height="30dp" />
 
                         <TextView
-                            android:layout_toRightOf="@+id/iv_profiles"
-                            android:text="@string/quantity_sold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+                            android:layout_toRightOf="@+id/iv_profiles"
+                            android:maxLines="1"
+                            android:text="@string/quantity_sold"
                             android:textColor="@color/black"
                             android:textSize="16sp"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
-                            android:layout_centerVertical="true"
-                            android:maxLines="1"
-                            />
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_alignParentRight="true"

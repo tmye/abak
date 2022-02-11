@@ -286,9 +286,9 @@
     <string name="point_action_choice">Choose your action</string>
     <string name="report_today">Today</string>
     <string name="action_end_point">End Point</string>
-    <string name="daily_report_question">Are you trying to modify %s report ?</string>
+    <string name="daily_report_question">Are you trying to modify %1$s report ?</string>
     <string name="yes">Yes</string>
-    <string name="daily_report_already_confirmed">Sorry, the report of %s has already been accepted. Please contact the administration</string>
+    <string name="daily_report_already_confirmed">Sorry, the report of %1$s has already been accepted. Please contact the administration</string>
     <string-array name="days_of_week">
         <item>Sunday</item>
         <item>Monday</item>
@@ -312,5 +312,13 @@
         <item>November</item>
         <item>December</item>
     </string-array>
+
+    <string name="hsn_cooking">WAITING SHIPPER</string>
+    <string name="hsn_shipping">SHIPPING</string>
+    <string name="hsn_waiting">Waiting</string>
+    <string name="hsn_others">Others</string>
+    <string name="hsn_delivered">Delivered</string>
+    <string name="hsn_rejected" >REJECTED</string>
+
 
 </resources>

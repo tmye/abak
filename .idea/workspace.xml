@@ -23,7 +23,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
     <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
   </component>
@@ -36,7 +36,60 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb246aff-a498-4926-95cc-ec65b31aa146" name="Default" comment="c" />
+    <list default="true" id="cb246aff-a498-4926-95cc-ec65b31aa146" name="Default" comment="c">
+      <change afterPath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/geo/GeoActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/..bfg-report/2021-07-16/17-54-50/cache-stats.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/..bfg-report/2021-07-16/17-54-50/deleted-files.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/..bfg-report/2021-07-16/17-54-50/object-id-map.old-new.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kaba.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/_commons/adapter/HSNCommandRecycler.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/_commons/adapter/HSNCommandRecycler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/HsnDetailsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/HsnDetailsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/frag/HsnListFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/frag/HsnListFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/dailyreport/DailyReportActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/dailyreport/DailyReportActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/dailyreport/DailyReportHistoryActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/dailyreport/DailyReportHistoryActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/dailyreport/presenter/DailyReportHistoryPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/dailyreport/presenter/DailyReportHistoryPresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/dailyreport/presenter/DailyReportPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/dailyreport/presenter/DailyReportPresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/cviews/dialog/DailyReportEditConfirmationDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/cviews/dialog/DailyReportEditConfirmationDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/data/command/source/CommandRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/data/command/source/CommandRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/data/dailyreport/DailyReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/data/dailyreport/DailyReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/data/delivery/source/DeliveryManRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/data/delivery/source/DeliveryManRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/syscore/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/syscore/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/syscore/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/syscore/Constant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/values-fr/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/values-fr/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-partner/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/commands/MyCommandsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/commands/MyCommandsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/home/HomeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/home/HomeActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/hsn/MyHSNActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/hsn/MyHSNActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/hsn/contract/MyHSNContract.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/hsn/contract/MyHSNContract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/infos/ProfileActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/infos/ProfileActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/infos/contract/ProfileContract.kt" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/infos/contract/ProfileContract.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/infos/presenter/ProfilePresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/infos/presenter/ProfilePresenter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/data/Restaurant/RestaurantEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/data/Restaurant/RestaurantEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/data/Restaurant/source/RestaurantOnlineRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/data/Restaurant/source/RestaurantOnlineRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/syscore/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/syscore/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/syscore/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/syscore/Constant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/res/layout/activity_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/res/layout/activity_profile.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/res/layout/content_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/res/layout/content_home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/res/values-fr/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/res/values-fr/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/res/values-zh/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/res/values-zh/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,7 +98,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Kaba$Kaba_kaba_brave_2_2__build_.ic" NAME="Kaba:kaba-brave-2.2 [build] Coverage Results" MODIFIED="1555427138257" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[0603937147007006]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -80,17 +133,7 @@
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Kaba" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Kaba" type="f1a62948:ProjectNode" />
-                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Kaba" type="f1a62948:ProjectNode" />
-                <item name="kaba-partner" type="2d1252cf:ModuleNode" />
+                <item name="KabaServiceApps" type="f1a62948:ProjectNode" />
               </path>
             </expand>
             <select />
@@ -106,15 +149,15 @@
         <option value="layoutResourceFile_vertical" />
         <option value="layoutResourceFile" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="resourceFile" />
         <option value="Kotlin Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="GenerateSignedApkSettings">
     <option name="EXPORT_PRIVATE_KEY" value="false" />
-    <option name="KEY_STORE_PATH" value="$USER_HOME$/Dropbox/KABA/DOCUMENTATION/confidentiel/confidential_kaba_it/android/kaba.keystore" />
+    <option name="KEY_STORE_PATH" value="C:\Users\Ulrich Abiguime\Dropbox\KABA\DOCUMENTATION\confidentiel\confidential_kaba_it\android\kaba.keystore" />
     <option name="KEY_ALIAS" value="kaba" />
     <option name="REMEMBER_PASSWORDS" value="true" />
   </component>
@@ -138,13 +181,13 @@
   <component name="PropertiesComponent">
     <property name="AnalyzeApkAction.lastApkPath" value="$PROJECT_DIR$/kaba-brave-2.2/build/outputs/apk/debug/kaba-brave-2.2-debug.apk" />
     <property name="ApkExportedModule" value="Kaba.kaba-i_deliver-2.2" />
-    <property name="BundleExportedModule" value="Kaba.kaba-partner" />
+    <property name="BundleExportedModule" value="KabaServiceApps.kaba-partner" />
     <property name="DEBUGGABLE_DEVICE" value="tecno_mobile_limited-tecno_cf7-192.168.0.101:5555" />
     <property name="DEBUGGABLE_PROCESS" value="tg.tmye.kaba.restaurant" />
     <property name="DEBUGGER_ID" value="Auto" />
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="SerialNumber@03462159B8113076" />
     <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-10-15T15:50:11.200991Z" />
-    <property name="ExportApk.ApkPath" value="$PROJECT_DIR$/deploy_test/release" />
+    <property name="ExportApk.ApkPath" value="G:\StudioProjects\KabaServiceApps\release_app" />
     <property name="ExportApk.BuildType" value="release" />
     <property name="ExportApk.BuildVariants" value="release" />
     <property name="ExportApk.Flavors" value="" />
@@ -152,6 +195,7 @@
     <property name="ExportApk.SignV2" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="ScreenshotViewer.SavePath" value="$USER_HOME$/Desktop" />
@@ -188,6 +232,7 @@
     <property name="android.project.structure.last.selected" value="kaba-brave-2.2" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="android.sdk.path" value="$PROJECT_DIR$/../../../../androidDevSoft/adt-bundle-mac-x86_64-20140702/sdk" />
+    <property name="cidr.known.project.marker" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540201283201" />
     <property name="com.intellij.openapi.externalSystem.service.settings.ExternalSystemGroupConfigurable" value="ALL" />
     <property name="dart.analysis.tool.window.visible" value="false" />
@@ -195,7 +240,7 @@
     <property name="full.screen.before.presentation.mode" value="true" />
     <property name="ignore_missing_gitignore" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/kaba-partner/src/main/res/drawable-xhdpi" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/release_app" />
     <property name="project.structure.last.edited" value="Dependencies" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -297,8 +342,7 @@
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -307,7 +351,7 @@
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
     </configuration>
     <configuration name="kaba-i_deliver-2.2" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
-      <module name="Kaba.kaba-i_deliver-2.2" />
+      <module name="KabaServiceApps.kaba-i_deliver-2.2" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
       <option name="DEPLOY_AS_INSTANT" value="false" />
@@ -322,6 +366,7 @@
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="INSPECTION_WITHOUT_ACTIVITY_RESTART" value="false" />
       <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
       <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
@@ -365,7 +410,7 @@
       </method>
     </configuration>
     <configuration name="kaba-partner" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
-      <module name="Kaba.kaba-partner" />
+      <module name="KabaServiceApps.kaba-partner" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
       <option name="DEPLOY_AS_INSTANT" value="false" />
@@ -380,6 +425,7 @@
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="INSPECTION_WITHOUT_ACTIVITY_RESTART" value="false" />
       <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
       <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
@@ -533,40 +579,7 @@
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
       <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <module name="" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
       <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -3987,11 +4000,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/MyCommandsActivity.java</url>
-          <line>547</line>
-          <option name="timeStamp" value="1904" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/MyCommandsActivity.java</url>
           <line>301</line>
           <option name="timeStamp" value="1905" />
         </line-breakpoint>
@@ -4300,6 +4308,81 @@
           <line>59</line>
           <option name="timeStamp" value="2008" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/dailyreport/presenter/DailyReportHistoryPresenter.java</url>
+          <line>55</line>
+          <option name="timeStamp" value="2013" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/dailyreport/presenter/DailyReportHistoryPresenter.java</url>
+          <line>62</line>
+          <option name="timeStamp" value="2014" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/dailyreport/presenter/DailyReportHistoryPresenter.java</url>
+          <line>75</line>
+          <option name="timeStamp" value="2015" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/dailyreport/presenter/DailyReportHistoryPresenter.java</url>
+          <line>85</line>
+          <option name="timeStamp" value="2016" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/dailyreport/presenter/DailyReportPresenter.java</url>
+          <line>61</line>
+          <option name="timeStamp" value="2017" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/dailyreport/presenter/DailyReportPresenter.java</url>
+          <line>57</line>
+          <option name="timeStamp" value="2018" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/dailyreport/presenter/DailyReportHistoryPresenter.java</url>
+          <line>83</line>
+          <option name="timeStamp" value="2019" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/hsn/presenter/MyHSNPresenter.java</url>
+          <line>70</line>
+          <option name="timeStamp" value="2021" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/hsn/presenter/MyHSNPresenter.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="2022" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/hsn/presenter/MyHSNPresenter.java</url>
+          <line>54</line>
+          <option name="timeStamp" value="2023" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/hsn/presenter/MyHSNPresenter.java</url>
+          <line>61</line>
+          <option name="timeStamp" value="2024" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/hsn/MyHSNActivity.java</url>
+          <line>347</line>
+          <option name="timeStamp" value="2025" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/_commons/adapter/HSNCommandRecycler.java</url>
+          <line>67</line>
+          <option name="timeStamp" value="2026" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/_commons/adapter/HSNCommandRecycler.java</url>
+          <line>55</line>
+          <option name="timeStamp" value="2027" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/_commons/adapter/HSNCommandRecycler.java</url>
+          <line>57</line>
+          <option name="timeStamp" value="2028" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-field">
           <url>file://$PROJECT_DIR$/kaba-brave/src/main/java/tg/tmye/kaba/config/Constant.java</url>
           <line>20</line>
@@ -4351,18 +4434,43 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/infos/ProfileActivity.kt</url>
-          <line>56</line>
+          <line>90</line>
           <option name="timeStamp" value="2009" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/infos/ProfileActivity.kt</url>
-          <line>148</line>
+          <line>251</line>
           <option name="timeStamp" value="2010" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/infos/ProfileActivity.kt</url>
-          <line>136</line>
+          <line>239</line>
           <option name="timeStamp" value="2011" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/dailyreport/DailyReportActivity.kt</url>
+          <line>205</line>
+          <option name="timeStamp" value="2020" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/infos/presenter/ProfilePresenter.kt</url>
+          <line>56</line>
+          <option name="timeStamp" value="2029" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/infos/presenter/ProfilePresenter.kt</url>
+          <line>57</line>
+          <option name="timeStamp" value="2030" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/infos/presenter/ProfilePresenter.kt</url>
+          <line>45</line>
+          <option name="timeStamp" value="2031" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/infos/presenter/ProfilePresenter.kt</url>
+          <line>39</line>
+          <option name="timeStamp" value="2032" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

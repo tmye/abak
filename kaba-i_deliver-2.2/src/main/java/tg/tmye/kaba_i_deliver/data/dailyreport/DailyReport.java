@@ -9,79 +9,76 @@ import android.os.Parcelable;
  */
 public class DailyReport implements Parcelable {
 
-//    {
-//        "id": 2,
-//            "beginAmount": 5000,
-//            "endAmount": -46300,
-//            "prePaySys": 63900,
-//            "prePayHsys": 0,
-//            "nbHsn": 0,
-//            "dayTurnover": 16400,
-//            "communicationCredit": 500,
-//            "fuelAmount": 2000,
-//            "reparationAmount": 0,
-//            "complementAmount": 0,
-//            "refundOrderAmount": 0,
-//            "lossAmount": 1000,
-//            "parkingAmount": 200,
-//            "various": 100,
-//            "lossOnOrder": 0,
-//            "isVerify": false,
-//            "remuneration": 6040,
-//            "isPaid": false,
-//            "createdAt": [],
-//        "livreur": {
-//        "id": 33,
-//                "name": "LIVREUR KABA",
-//                "workcontact": "92109474",
-//                "isActive": true,
-//                "username": "kaba1",
-//                "email": "livreurkaba@kaba-delivery.com",
-//                "enabled": 1,
-//                "deviceId": 27644,
-//                "isAvailable": true
-//    },
-//        "type": 1,
-//            "cnssAmount": null,
-//            "engineOilPrime": null
-//    }
+//    	"id": 11,
+//                "beginAmount": 10000,
+//                "endAmount": 6200,
+//                "prePaySys": 0,
+//                "prePayHsys": 0,
+//                "nbHsn": 0,
+//                "dayTurnover": 0,
+//                "isVerify": false,
+//                "remuneration": -3800,
+//                "isPaid": false,
+//                "createdAt": "2022-02-02",
+//                "makeAt": "2022-02-02",
+//                "type": 1,
+//                "cnssAmount": null,
+//                "engineOilPrime": null
 
-    public int id;
-    public int fuel_amount;
-    public int communication_credit;
-    public int reparation_amount;
-    public int balance_loss;
-    public int parking_amount;
+    public int id = 0;
+    public int dayTurnover, endAmount, beginAmount;
+    public int fuelAmount;
+    public int communicationCredit;
+    public int reparationAmount;
+    public int lossAmount;
+    public int parkingAmount;
     public int various;
-    public String date;
+    public int lossOnOrder;
+    public int complementAmount, refundOrderAmount;
+//    public String date;"createdAt":"2022-02-02","makeAt":"2022-02-02"
+    public String makeAt;
     public boolean isVerify;
+
 
     public DailyReport() {
 
     }
 
-
     protected DailyReport(Parcel in) {
         id = in.readInt();
-        fuel_amount = in.readInt();
-        communication_credit = in.readInt();
-        reparation_amount = in.readInt();
-        balance_loss = in.readInt();
-        parking_amount = in.readInt();
+        dayTurnover = in.readInt();
+        endAmount = in.readInt();
+        beginAmount = in.readInt();
+        fuelAmount = in.readInt();
+        communicationCredit = in.readInt();
+        reparationAmount = in.readInt();
+        lossAmount = in.readInt();
+        parkingAmount = in.readInt();
         various = in.readInt();
-        date = in.readString();
+        lossOnOrder = in.readInt();
+        complementAmount = in.readInt();
+        refundOrderAmount = in.readInt();
+        makeAt = in.readString();
+        isVerify = in.readByte() != 0;
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
-        dest.writeInt(fuel_amount);
-        dest.writeInt(communication_credit);
-        dest.writeInt(reparation_amount);
-        dest.writeInt(balance_loss);
-        dest.writeInt(parking_amount);
+        dest.writeInt(dayTurnover);
+        dest.writeInt(endAmount);
+        dest.writeInt(beginAmount);
+        dest.writeInt(fuelAmount);
+        dest.writeInt(communicationCredit);
+        dest.writeInt(reparationAmount);
+        dest.writeInt(lossAmount);
+        dest.writeInt(parkingAmount);
         dest.writeInt(various);
-        dest.writeString(date);
+        dest.writeInt(lossOnOrder);
+        dest.writeInt(complementAmount);
+        dest.writeInt(refundOrderAmount);
+        dest.writeString(makeAt);
+        dest.writeByte((byte) (isVerify ? 1 : 0));
     }
 
     @Override

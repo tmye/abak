@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Kaba.iml" filepath="$PROJECT_DIR$/Kaba.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/filepicker/Kaba.filepicker.iml" filepath="$PROJECT_DIR$/.idea/modules/filepicker/Kaba.filepicker.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kaba-i_deliver-2.2/Kaba.kaba-i_deliver-2.2.iml" filepath="$PROJECT_DIR$/.idea/modules/kaba-i_deliver-2.2/Kaba.kaba-i_deliver-2.2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kaba-restaurant-public/Kaba.kaba-partner.iml" filepath="$PROJECT_DIR$/.idea/modules/kaba-restaurant-public/Kaba.kaba-partner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/KabaServiceApps.iml" filepath="$PROJECT_DIR$/.idea/KabaServiceApps.iml" />
     </modules>
   </component>
 </project>

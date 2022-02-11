@@ -66,7 +66,31 @@ public class HSNCommandRecycler extends RecyclerView.Adapter<HSNCommandRecycler.
 //                ctx.getColor(R.color.white) : Color.parseColor("#FFEB3B"));
         holder.rel_top.setBackgroundColor(hsn.state == 0 ?
                 ctx.getColor(R.color.facebook_blue) : ctx.getColor(R.color.black));
-        holder.tv_hsn_state.setText(hsn.state == 1 ? ctx.getString(R.string.delivered) : ctx.getString(R.string.waiting));
+
+
+        switch (hsn.state){
+            case HsnListFragment.REJECTED: // rejected
+                holder.tv_hsn_state.setText(ctx.getString(R.string.hsn_rejected));
+                holder.rel_top.setBackgroundColor(ctx.getResources().getColor(R.color.command_state_4));
+                break;
+            case HsnListFragment.WAITING: // waiting
+                holder.tv_hsn_state.setText(ctx.getString(R.string.hsn_waiting));
+                holder.rel_top.setBackgroundColor(ctx.getResources().getColor(R.color.command_state_0));
+                break;
+            case HsnListFragment.COOKING: // waiting
+                holder.tv_hsn_state.setText(ctx.getString(R.string.hsn_cooking));
+                holder.rel_top.setBackgroundColor(ctx.getResources().getColor(R.color.command_state_1));
+                break;
+            case HsnListFragment.SHIPPING:  // shipping
+                holder.tv_hsn_state.setText(ctx.getString(R.string.hsn_shipping));
+                holder.rel_top.setBackgroundColor(ctx.getResources().getColor(R.color.command_state_2));
+                break;
+            case HsnListFragment.DELIVERED: // delivered
+                holder.tv_hsn_state.setText(ctx.getString(R.string.hsn_delivered));
+                holder.rel_top.setBackgroundColor(ctx.getResources().getColor(R.color.command_state_3));
+                break;
+        }
+
 
         holder.itemView.setOnClickListener(new OnHSNClickListener(hsn));
 //        holder.tv_date_time.setText(UtilFunctions.timeStampToDate(ctx, hsn.last_update));
