@@ -23,6 +23,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="9210" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
     <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
@@ -36,59 +37,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb246aff-a498-4926-95cc-ec65b31aa146" name="Default" comment="c">
-      <change afterPath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/geo/GeoActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/..bfg-report/2021-07-16/17-54-50/cache-stats.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/..bfg-report/2021-07-16/17-54-50/deleted-files.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/..bfg-report/2021-07-16/17-54-50/object-id-map.old-new.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="cb246aff-a498-4926-95cc-ec65b31aa146" name="Default" comment="working on it ...">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kaba.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/_commons/adapter/HSNCommandRecycler.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/_commons/adapter/HSNCommandRecycler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/HsnDetailsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/HsnDetailsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/frag/HsnListFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/command/frag/HsnListFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/dailyreport/DailyReportActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/dailyreport/DailyReportActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/dailyreport/DailyReportHistoryActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/dailyreport/DailyReportHistoryActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/dailyreport/presenter/DailyReportHistoryPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/dailyreport/presenter/DailyReportHistoryPresenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/dailyreport/presenter/DailyReportPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/activity/dailyreport/presenter/DailyReportPresenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/cviews/dialog/DailyReportEditConfirmationDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/cviews/dialog/DailyReportEditConfirmationDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/data/command/source/CommandRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/data/command/source/CommandRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/data/dailyreport/DailyReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/data/dailyreport/DailyReport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/data/delivery/source/DeliveryManRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/data/delivery/source/DeliveryManRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/syscore/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/syscore/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/syscore/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/java/tg/tmye/kaba_i_deliver/syscore/Constant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/values-fr/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/values-fr/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-i_deliver-2.2/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-partner/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/commands/MyCommandsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/commands/MyCommandsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/home/HomeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/home/HomeActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/hsn/MyHSNActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/hsn/MyHSNActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/hsn/contract/MyHSNContract.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/hsn/contract/MyHSNContract.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/infos/ProfileActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/infos/ProfileActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/infos/contract/ProfileContract.kt" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/infos/contract/ProfileContract.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/infos/presenter/ProfilePresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/activities/infos/presenter/ProfilePresenter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/data/Restaurant/RestaurantEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/data/Restaurant/RestaurantEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/data/Restaurant/source/RestaurantOnlineRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/data/Restaurant/source/RestaurantOnlineRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/syscore/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/syscore/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/syscore/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/java/tg/tmye/kaba/partner/syscore/Constant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/res/layout/activity_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/res/layout/activity_profile.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/res/layout/content_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/res/layout/content_home.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/res/values-fr/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/res/values-fr/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/res/values-zh/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/res/values-zh/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kaba-partner/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kaba-partner/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -342,7 +292,8 @@
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="VM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -579,8 +530,7 @@
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -626,6 +576,14 @@
       <option name="presentableId" value="Default" />
       <updated>1511449398027</updated>
     </task>
+    <task id="LOCAL-00001" summary="working on it ...">
+      <created>1644599189153</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1644599189153</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -649,6 +607,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="working on it ..." />
+    <option name="LAST_COMMIT_MESSAGE" value="working on it ..." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
